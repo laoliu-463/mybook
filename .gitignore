@@ -1,0 +1,4 @@
+# Obsidian Git Ignore
+.obsidian/workspace.json
+.obsidian/workspaces-mobile.json
+
