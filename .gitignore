@@ -1,4 +1,4 @@
-# Obsidian Git Ignore
-.obsidian/workspace.json
-.obsidian/workspaces-mobile.json
-
+.obsidian/
+**/workspace.json
+**/workspaces-mobile.json
+mybook/
