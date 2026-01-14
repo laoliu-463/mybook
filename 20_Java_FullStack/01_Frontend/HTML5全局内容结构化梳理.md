@@ -1,8 +1,6 @@
-这是一关于 **HTML5 全局内容**的结构化整理。
+﻿这是一份关于 **HTML5 全局内容**的结构化整理，附带**核心代码示例**。
 
 HTML5 不仅仅是“新一代的 HTML”，它实际上是一个**技术集合**，包括了**新标签、新样式支持（CSS3）以及新的 JavaScript API**。对于新手来说，理解 HTML5 是从“写静态页面”向“开发 Web 应用”转变的关键。
-
-我将其分为 **五大核心板块** 进行梳理：
 
 ---
 
@@ -10,22 +8,51 @@ HTML5 不仅仅是“新一代的 HTML”，它实际上是一个**技术集合*
 
 **核心理念：** 用正确的标签做正确的事。机器（搜索引擎、屏幕阅读器）能读懂网页结构。
 
-1. **布局标签 (Layout)：**
-* `<header>`：页眉（Logo、导航）。
-* `<nav>`：导航链接区域。
-* `<section>`：文档中的节/段落（通用容器）。
-* `<article>`：独立的内容块（如一篇博客文章）。
-* `<aside>`：侧边栏（广告、相关链接）。
-* `<footer>`：页脚（版权信息、联系方式）。
-* `<main>`：文档的主要内容（每个页面应只有一个）。
+#### 1. 经典语义化布局
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>语义化页面示例</title>
+</head>
+<body>
+    
+    <!-- 页眉 -->
+    <header>
+        <h1>我的个人博客</h1>
+        <nav>
+            <a href="#">首页</a> | <a href="#">关于我</a>
+        </nav>
+    </header>
 
+    <!-- 主要内容区域 -->
+    <main>
+        <article>
+            <h2>HTML5 学习笔记</h2>
+            <p>这是我的第一篇文章...</p>
+        </article>
 
-2. **文本语义：**
-* `<mark>`：高亮显示（像荧光笔）。
-* `<time>`：定义日期/时间。
-* `<figure>` & `<figcaption>`：图片及其标题的组合。
+        <section>
+            <h3>评论区</h3>
+            <p>这里是评论...</p>
+        </section>
+    </main>
 
+    <!-- 侧边栏 -->
+    <aside>
+        <h3>推荐链接</h3>
+        <ul><li>Google</li></ul>
+    </aside>
 
+    <!-- 页脚 -->
+    <footer>
+        <p>&copy; 2026 My Blog. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
+```
 
 ---
 
@@ -33,29 +60,38 @@ HTML5 不仅仅是“新一代的 HTML”，它实际上是一个**技术集合*
 
 **核心理念：** 减少 JavaScript 的校验工作，移动端体验更佳。
 
-1. **新的 Input 类型 (`type="..."`)：**
-* `email`：自动校验邮箱格式。
-* `url`：自动校验网址。
-* `number`：数字输入（配合 `min`, `max`, `step`）。
-* `range`：滑块选择器。
-* `date` / `time` / `week`：原生日期时间选择器（移动端极其重要）。
-* `search`：搜索框。
-* `color`：颜色拾取器。
+#### 1. 智能输入框示例
+```html
+<form action="/submit" method="post">
+    
+    <!-- 1. 邮箱校验 (手机端会弹出带 @ 的键盘) -->
+    <label>邮箱：</label>
+    <input type="email" name="email" required placeholder="请输入邮箱">
+    
+    <!-- 2. 数字范围 (min/max/step) -->
+    <label>年龄 (18-99)：</label>
+    <input type="number" min="18" max="99" step="1">
 
+    <!-- 3. 日期选择器 (原生弹窗) -->
+    <label>生日：</label>
+    <input type="date" name="birthday">
 
-2. **新的表单属性：**
-* `placeholder`：输入提示文本。
-* `required`：必填项校验。
-* `autofocus`：自动聚焦。
-* `pattern`：使用正则表达式进行校验。
-* `autocomplete`：自动完成提示。
+    <!-- 4. 滑块 -->
+    <label>音量：</label>
+    <input type="range" min="0" max="100" value="50">
 
+    <!-- 5. 搜索建议 (Datalist) -->
+    <label>选择城市：</label>
+    <input list="cities">
+    <datalist id="cities">
+        <option value="Beijing">
+        <option value="Shanghai">
+        <option value="Shenzhen">
+    </datalist>
 
-3. **新表单元素：**
-* `<datalist>`：为输入框提供预定义的选项列表（类似搜索建议）。
-* `<output>`：计算结果的输出容器。
-
-
+    <button type="submit">提交</button>
+</form>
+```
 
 ---
 
@@ -63,27 +99,27 @@ HTML5 不仅仅是“新一代的 HTML”，它实际上是一个**技术集合*
 
 **核心理念：** 摆脱 Flash 插件，原生支持音视频和绘图。
 
-1. **音视频 (Audio & Video)：**
-* `<audio src="...">`：音频播放。
-* `<video src="...">`：视频播放。
-* **关键属性：** `controls` (显示控件), `autoplay` (自动播放), `loop` (循环), `muted` (静音)。
+#### 1. 视频播放
+```html
+<!-- 自动播放(muted静音才行)、循环、显示控件 -->
+<video src="movie.mp4" controls autoplay muted loop width="400">
+    您的浏览器不支持 video 标签。
+</video>
+```
 
+#### 2. Canvas 简单绘图
+```html
+<canvas id="myCanvas" width="200" height="100" style="border:1px solid #000;"></canvas>
 
-2. **绘图 (Graphics)：**
-* **Canvas (`<canvas>`)：**
-* 基于 **位图 (Bitmap)**。
-* 依赖 JavaScript 绘制（`getContext('2d')`）。
-* *应用：* 游戏、数据可视化图表 (ECharts)、图片编辑。
-
-
-* **SVG (`<svg>`)：**
-* 基于 **矢量图 (Vector)**。
-* 基于 XML 标签绘制。
-* *应用：* 图标 (Iconfont)、地图、无论怎么放大都不失真的图形。
-
-
-
-
+<script>
+    var c = document.getElementById("myCanvas");
+    var ctx = c.getContext("2d");
+    
+    // 画一个红色的矩形
+    ctx.fillStyle = "#FF0000";
+    ctx.fillRect(0, 0, 150, 75);
+</script>
+```
 
 ---
 
@@ -93,10 +129,22 @@ HTML5 不仅仅是“新一代的 HTML”，它实际上是一个**技术集合*
 
 | 特性 | Cookie | localStorage | sessionStorage |
 | --- | --- | --- | --- |
-| **数据生命周期** | 可设置过期时间，否则随浏览器关闭 | **永久有效**，除非手动删除 | **仅当前窗口有效**，关闭标签页即失效 |
-| **大小限制** | 很小 (4KB) | 大 (约 5MB) | 大 (约 5MB) |
-| **与服务器交互** | 每次请求都会携带 (浪费带宽) | **不参与服务器通信** (纯本地) | **不参与服务器通信** (纯本地) |
-| **应用场景** | 身份 Token、Session ID | 购物车数据、用户偏好设置 | 表单临时数据、一次性状态 |
+| **数据生命周期** | 可设置过期时间 | **永久有效** | **仅当前窗口有效** |
+| **应用场景** | Session ID | 购物车/配置 | 临时表单数据 |
+
+#### 代码示例
+```javascript
+// 1. 存数据 (键, 值)
+localStorage.setItem("username", "JohnDoe");
+
+// 2. 取数据
+let user = localStorage.getItem("username");
+console.log(user); // 输出: JohnDoe
+
+// 3. 删数据
+localStorage.removeItem("username");
+// localStorage.clear(); // 清空所有
+```
 
 ---
 
@@ -104,26 +152,22 @@ HTML5 不仅仅是“新一代的 HTML”，它实际上是一个**技术集合*
 
 **核心理念：** 让网页拥有“原生 APP”的能力。
 
-1. **地理定位 (Geolocation)：**
-* `navigator.geolocation`：获取用户经纬度（需用户授权）。
+#### 1. 地理定位 (Geolocation)
+```javascript
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+        console.log("纬度: " + position.coords.latitude); 
+        console.log("经度: " + position.coords.longitude);
+    });
+}
+```
 
-
-2. **拖拽 (Drag and Drop)：**
-* 原生 API 支持元素拖放（`draggable="true"`）。
-
-
-3. **Web Worker：**
-* **多线程**支持。允许在后台运行复杂的 JS 脚本，不阻塞主界面的渲染。
-
-
-4. **Web Socket：**
-* 全双工通信协议。服务器可以**主动**向客户端推送消息（聊天室、股票行情的基石）。
-
-
-5. **History API：**
-* `pushState`, `replaceState`。在不刷新页面的情况下改变 URL（单页应用 SPA 的核心原理）。
-
-
+#### 2. 拖拽 (Drag and Drop)
+```html
+<div draggable="true" ondragstart="event.dataTransfer.setData('text/plain', 'This is text')">
+    拖拽我试试
+</div>
+```
 
 ---
 
