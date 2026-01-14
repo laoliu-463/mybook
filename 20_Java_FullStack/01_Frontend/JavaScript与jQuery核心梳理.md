@@ -1,4 +1,4 @@
-﻿这是一份 **JavaScript (ES6+) 与 jQuery** 的核心知识结构化梳理。
+这是一份 **JavaScript (ES6+) 与 jQuery** 的核心知识结构化梳理。
 
 JavaScript 是 Web 的编程语言，而 jQuery 是它的经典类库。
 **现代开发趋势：** 新项目首选原生 ES6+，但维护旧项目或追求极简 DOM 操作时，jQuery 依然好用。
