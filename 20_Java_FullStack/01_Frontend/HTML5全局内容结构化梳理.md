@@ -1,76 +1,97 @@
----
-title: HTML5 全局内容结构化梳理
-date: 2026-01-12
-tags: [HTML5, Frontend, 基础]
-status: 进行中
----
+# HTML5：网页的“骨架” (0基础版)
 
-# HTML5 全局内容结构化梳理（零基础友好版）
-
-> HTML5 是“写网页的语言”，重点是**结构清晰**、**语义正确**、**更少 JS**。
+> **核心心法**：如果把一个网页比作**一栋房子**，HTML 就是它的**钢筋混凝土结构**。
+>
+> 它的任务不是让房子“漂亮”（那是 CSS 的事），也不是让房子“智能”（那是 JS 的事），而是**把房间划分好，把家具摆到位**。
 
 ---
 
-## 学习目标
+## 一、 核心逻辑：标签 (Tags) 是什么？
 
-- 看懂常见 HTML5 标签做什么
-- 能写出一个结构清晰的页面骨架
-- 知道表单/多媒体/本地存储的基本用法
+HTML 代码长得像三明治，由**尖括号**包围。
 
----
-
-## 先理解 3 个概念
-
-- **语义化标签**：标签名字说明它的意义（如 `<header>` 是页眉）。
-- **表单控件**：输入框、按钮、日期选择等。
-- **Web API**：浏览器提供给 JS 的能力（如定位、拖拽）。
+*   **成对标签**：有始有终，夹着内容。
+    *   `<p> 我是一段文字 </p>` —— 就像一个**收纳盒**，里面装着文字。
+*   **自闭合标签**：独行侠，自己就是一个功能。
+    *   `<img src="photo.jpg" />` —— 就像一张**贴纸**，贴上去就完了，不需要里面装东西。
 
 ---
 
-## 第一板块：语义化结构 (Semantics)
+## 二、 房屋结构：语义化标签 (Semantics)
 
-**核心理念**：用正确的标签做正确的事，机器更容易读懂网页结构。
+以前写网页，大家都用 `<div>`（一个通用的空盒子）到处乱套。
+HTML5 引入了**“有名字的房间”**，让机器（搜索引擎）和人都能一眼看懂这是房子的哪一部分。
 
-### 经典语义化布局
+| 标签 | 角色比喻 | 实际含义 |
+| :--- | :--- | :--- |
+| **`<header>`** | **门头/玄关** | 网站的头部（Logo、导航栏）。 |
+| **`<nav>`** | **路标/指引牌** | 导航链接区域（菜单）。 |
+| **`<main>`** | **客厅/主卧** | 网页的核心内容区域（正文）。 |
+| **`<article>`** | **一篇日记** | 独立的文章内容。 |
+| **`<aside>`** | **侧边栏/便利贴** | 与正文无关的补充信息（广告、推荐）。 |
+| **`<footer>`** | **房产证/地基** | 网页底部（版权声明、备案号）。 |
+
+---
+
+## 三、 常用家具：核心元素
+
+把房子盖好了，得往里面放东西。
+
+### 1. 链接与多媒体
+*   **`<a>` (超链接)**：这是互联网的**任意门**。
+    *   `<a href="https://baidu.com">去百度</a>`
+*   **`<img>` (图片)**：墙上的**挂画**。
+    *   `<img src="cat.jpg" alt="一只猫">` (alt 是画掉下来时显示的文字)。
+*   **`<video>` / `<audio>`**：家里的**电视机和音响**。
+    *   HTML5 让你不需要装 Flash 插件就能直接播放视频。
+
+### 2. 智能表单 (Forms)
+这是你跟房子**交互**的地方（比如门口的密码锁，墙上的开关）。
+
+*   **`<input type="...">`**：万能输入框。
+    *   `text`：写字的。
+    *   `password`：写密码的（是黑点）。
+    *   `date`：选日期的（自带日历）。
+    *   `email`：填邮箱的（会自动检查格式）。
+*   **`<button>`**：**开关按钮**。
+    *   `<button>提交</button>`
+
+---
+
+## 四、 实战演练：搭建一个“博客小屋”
+
+把上面的知识串起来，我们来盖一栋最简单的房子：
+
 ```html
-<!DOCTYPE html>
-<html lang="zh-CN">
+<!DOCTYPE html> <!-- 告诉浏览器：我是标准的 HTML5 房子 -->
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>语义化页面示例</title>
+    <meta charset="utf-8">
+    <title>我的小屋</title> <!-- 房子的门牌号 -->
 </head>
 <body>
 
-    <!-- 页眉 -->
+    <!-- 1. 门头 -->
     <header>
-        <h1>我的个人博客</h1>
+        <h1>欢迎来到我的世界</h1>
         <nav>
             <a href="#">首页</a> | <a href="#">关于我</a>
         </nav>
     </header>
 
-    <!-- 主要内容区域 -->
+    <!-- 2. 主体区域 -->
     <main>
+        <!-- 一篇文章 -->
         <article>
-            <h2>HTML5 学习笔记</h2>
-            <p>这是我的第一篇文章...</p>
+            <h2>今天学了 HTML5</h2>
+            <p>原来写网页就像搭积木一样简单！</p>
+            <img src="happy.jpg" alt="开心的脸">
         </article>
-
-        <section>
-            <h3>评论区</h3>
-            <p>这里是评论...</p>
-        </section>
     </main>
 
-    <!-- 侧边栏 -->
-    <aside>
-        <h3>推荐链接</h3>
-        <ul><li>Google</li></ul>
-    </aside>
-
-    <!-- 页脚 -->
+    <!-- 3. 底部 -->
     <footer>
-        <p>&copy; 2026 My Blog. All rights reserved.</p>
+        <p>版权所有 © 2026</p>
     </footer>
 
 </body>
@@ -79,113 +100,8 @@ status: 进行中
 
 ---
 
-## 第二板块：增强型表单 (Smart Forms)
+## 五、 新手避坑指南
 
-**核心理念**：减少 JavaScript 校验，移动端体验更好。
-
-```html
-<form action="/submit" method="post">
-
-    <!-- 邮箱校验 -->
-    <label>邮箱：</label>
-    <input type="email" name="email" required placeholder="请输入邮箱">
-
-    <!-- 数字范围 -->
-    <label>年龄 (18-99)：</label>
-    <input type="number" min="18" max="99" step="1">
-
-    <!-- 日期选择 -->
-    <label>生日：</label>
-    <input type="date" name="birthday">
-
-    <!-- 滑块 -->
-    <label>音量：</label>
-    <input type="range" min="0" max="100" value="50">
-
-    <!-- 搜索建议 -->
-    <label>选择城市：</label>
-    <input list="cities">
-    <datalist id="cities">
-        <option value="Beijing">
-        <option value="Shanghai">
-        <option value="Shenzhen">
-    </datalist>
-
-    <button type="submit">提交</button>
-</form>
-```
-
----
-
-## 第三板块：多媒体与图形 (Multimedia & Graphics)
-
-**核心理念**：不再依赖 Flash，浏览器原生支持音视频和绘图。
-
-### 视频播放
-```html
-<video src="movie.mp4" controls autoplay muted loop width="400">
-    您的浏览器不支持 video 标签。
-</video>
-```
-
-### Canvas 简单绘图
-```html
-<canvas id="myCanvas" width="200" height="100" style="border:1px solid #000;"></canvas>
-
-<script>
-    var c = document.getElementById("myCanvas");
-    var ctx = c.getContext("2d");
-
-    ctx.fillStyle = "#FF0000";
-    ctx.fillRect(0, 0, 150, 75);
-</script>
-```
-
----
-
-## 第四板块：本地存储 (Web Storage)
-
-**核心理念**：比 Cookie 更大、更安全、更易用。
-
-| 特性 | Cookie | localStorage | sessionStorage |
-| --- | --- | --- | --- |
-| 数据生命周期 | 可设置过期时间 | 永久有效 | 仅当前窗口有效 |
-| 应用场景 | Session ID | 购物车/配置 | 临时表单数据 |
-
-```javascript
-localStorage.setItem("username", "JohnDoe");
-let user = localStorage.getItem("username");
-console.log(user);
-localStorage.removeItem("username");
-```
-
----
-
-## 第五板块：核心 API (Web APIs)
-
-**核心理念**：让网页拥有“原生 APP”能力。
-
-### 地理定位
-```javascript
-if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-        console.log("纬度: " + position.coords.latitude);
-        console.log("经度: " + position.coords.longitude);
-    });
-}
-```
-
-### 拖拽
-```html
-<div draggable="true" ondragstart="event.dataTransfer.setData('text/plain', 'This is text')">
-    拖拽我试试
-</div>
-```
-
----
-
-## 新手自测
-
-1. 语义化标签有什么用？说出 3 个例子。
-2. `localStorage` 和 `sessionStorage` 有什么区别？
-3. 你能写出一个包含 `header/main/footer` 的页面结构吗？
+1.  **忘记闭合**：`<p>` 后面忘了写 `</p>`，就像盒子没盖盖子，东西会漏出来影响后面的布局。
+2.  **嵌套错误**：`<a><p>点我</p></a>` 是合法的，但 `<p><a>点我</a></p>` 更常见。**块级元素**（大盒子）通常包着**行内元素**（小东西），反过来有时候会出问题。
+3.  **盲目背诵**：标签有上百个，**只背上面提到的这几个**，剩下的用到再查文档（MDN）。
