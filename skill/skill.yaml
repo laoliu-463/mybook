@@ -1,0 +1,25 @@
+name: "Java 面试八股 Obsidian 笔记生成器"
+version: "1.0.0"
+language: "zh-CN"
+target: ["Obsidian", "Java Interview", "Baguwen"]
+style:
+  tone: ["严谨", "工业术语", "面试导向", "可背诵"]
+output:
+  format: "Markdown"
+  required_sections:
+    - "YAML Frontmatter"
+    - "Mermaid 思维导图"
+    - "概念解析"
+    - "源码机制复盘"
+    - "可运行 Java 示例（逐行关键注释）"
+    - "对比表"
+    - "面试怎么问/坑点/追问"
+    - "一分钟背诵版"
+    - "面试 Checklist"
+placeholders:
+  - "{topic}"
+  - "{level}"
+  - "{scene}"
+defaults:
+  level: "大二/面试冲刺"
+  scene: "Java 后端实习面试"
