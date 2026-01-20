@@ -1,4 +1,4 @@
-﻿---
+---
 tags: [java, 八股, {{topic}}]
 aliases: ["{{topic}}", "Java {{topic}}", "{{topic_zh_alias}}"]
 date: {{date}}
