@@ -1,4 +1,4 @@
-﻿---
+---
 title: MySkill
 type: skill-note
 source: skill/SKILL.md
