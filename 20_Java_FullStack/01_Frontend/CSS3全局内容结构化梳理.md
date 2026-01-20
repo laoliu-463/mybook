@@ -1,172 +1,116 @@
 ---
-title: CSS3 全局内容结构化梳理
-date: 2026-01-12
-tags: [CSS3, Frontend, 基础]
-status: 进行中
+tags: [java, 八股, CSS3]
+aliases: ["CSS3 布局", "选择器与层叠"]
+date: 2026-01-20
+status: draft
 ---
 
-# CSS3 全局内容结构化梳理（零基础友好版）
+# Java 八股｜CSS3
 
-> CSS3 让网页“好看且好布局”，重点是**选择器**、**布局**、**动画**。
-
----
-
-## 学习目标
-
-- 会写常用选择器
-- 会用 Flex/Grid 布局
-- 理解过渡与动画的区别
-
----
-
-## 第一部分：选择器（选中元素的方式）
-
-### 属性选择器
-```css
-input[type="text"] {
-    border: 1px solid #ccc;
-}
-
-a[href^="https"] {
-    color: green;
-}
+```mermaid
+mindmap
+  root((CSS3))
+    底层原理
+      层叠与优先级
+      盒模型
+      渲染与布局
+    核心特性
+      选择器
+      Flex/Grid
+      动画与过渡
+    高频面试题
+      优先级计算
+      BFC/重排重绘
+      Flex vs Grid
+    追问链路
+      复合层与性能
+      动画实现路径
+      样式计算流程
 ```
 
-### 结构伪类
-```css
-tr:nth-child(odd) {
-    background-color: #f9f9f9;
-}
+## 核心概念
 
-li:last-child {
-    border-bottom: none;
-}
-```
+- 层叠规则决定最终样式。
+- 选择器优先级影响覆盖关系。
+- 盒模型决定尺寸与布局边界。
+- Flex 解决一维布局，Grid 解决二维布局。
+- 重排与重绘直接影响性能。
 
-### 状态伪类
-```css
-input:focus {
-    outline: none;
-    border-color: #3498db;
-}
+## 源码/机制复盘（文字流程）
 
-button:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-```
+1) 浏览器解析 CSS 生成 CSSOM。
+2) DOM 与 CSSOM 合成渲染树。
+3) 计算样式与布局，生成几何信息。
+4) 绘制图层并提交合成器。
+5) 动画可走合成层减少重排。
 
-### 伪元素
-```css
-h2::before {
-    content: "";
-    display: inline-block;
-    width: 4px;
-    height: 1em;
-    background-color: red;
-    margin-right: 8px;
-}
-```
+## 对比表
 
----
-
-## 第二部分：盒模型与视觉装饰
-
-### 盒模型调整
-```css
-* {
-    box-sizing: border-box;
-}
-```
-
-### 视觉装饰
-```css
-.card {
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-```
-
----
-
-## 第三部分：现代布局系统
-
-### Flexbox（一维布局）
-```css
-.flex-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-```
-
-### Grid（二维布局）
-```css
-.grid-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 20px;
-}
-```
-
----
-
-## 第四部分：变换与动画
-
-### 过渡
-```css
-.btn {
-    transition: all 0.3s ease;
-}
-.btn:hover {
-    transform: scale(1.1);
-}
-```
-
-### 动画
-```css
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-.loading-icon {
-    animation: spin 2s linear infinite;
-}
-```
-
----
-
-## 第五部分：响应式设计
-
-```css
-@media screen and (max-width: 768px) {
-    .container {
-        flex-direction: column;
-    }
-    .sidebar {
-        display: none;
-    }
-}
-```
-
----
-
-## 易混淆点速查
-
-| 概念 | 作用 | 区别 |
+| 维度 | Flex | Grid |
 | --- | --- | --- |
-| Transform | 变形 | 改变形态，不脱离文档流 |
-| Transition | 过渡 | 只有开始/结束，需要触发 |
-| Animation | 动画 | 多个关键帧，可自动播放 |
-| Display: none | 隐藏 | 元素消失，不占位置 |
-| Visibility: hidden | 隐藏 | 元素不可见，但占位置 |
+| 维度 | 一维 | 二维 |
+| 适用场景 | 行/列对齐 | 网格布局 |
+| 控制粒度 | 容器主轴/交叉轴 | 行列轨道 |
 
----
+## 可运行 Java 示例
 
-## 新手练习
+```java
+public class CssSpecificityDemo {
+    static int specificity(int id, int cls, int tag) {
+        // 为什么：用三元组模拟优先级；底层：优先级按 id>class>标签 比较
+        return id * 100 + cls * 10 + tag;
+    }
 
-1. 用 Flexbox 把一个按钮放到页面正中间。
-2. 用 Grid 排成三列卡片。
-3. 做一个 hover 时放大的按钮。
+    public static void main(String[] args) {
+        int a = specificity(1, 0, 1); // 为什么：#id + tag；底层：id 权重最高
+        int b = specificity(0, 2, 1); // 为什么：.class.class + tag；底层：类权重中等
+        System.out.println(a > b); // true
+    }
+}
+```
+
+## 面试专栏
+
+### ✅ 面试怎么问
+- CSS 优先级怎么计算？
+- Flex 和 Grid 的核心区别？
+- 什么是重排与重绘？
+- 如何减少动画的性能开销？
+
+### ⚠️ 坑点/误区
+- 只记住权重，不理解层叠规则。
+- 把重绘当成重排，忽略布局成本。
+- 过度使用 box-shadow/filter 造成性能问题。
+
+### 追问链路
+- 为什么 transform 更适合做动画？
+- BFC 能解决哪些问题？
+- 复合层如何创建与回收？
+- 选择器性能优化有哪些策略？
+- CSSOM 与渲染树的关系？
+
+## 一分钟背诵版
+
+1. 层叠规则决定最终样式生效。
+2. 优先级比较顺序是 id > class > 标签。
+3. 盒模型决定元素尺寸与边界。
+4. DOM+CSSOM 生成渲染树。
+5. 布局与绘制决定页面呈现。
+6. Flex 适合一维布局，Grid 适合二维。
+7. 重排影响布局，重绘影响像素。
+8. transform/opacity 动画可走合成层。
+9. 复杂阴影与滤镜会增加绘制成本。
+10. 性能优化核心是减少重排与重绘。
+
+## 面试 Checklist
+
+- [ ] 能计算选择器优先级
+- [ ] 能解释层叠覆盖规则
+- [ ] 能区分重排与重绘
+- [ ] 能对比 Flex/Grid
+- [ ] 能说明盒模型差异
+- [ ] 能解释渲染流水线
+- [ ] 能描述合成层优势
+- [ ] 能举例性能优化手段
+
+[[CSS]] [[盒模型]] [[Flex]] [[Grid]] [[重排]] [[重绘]] [[渲染树]]

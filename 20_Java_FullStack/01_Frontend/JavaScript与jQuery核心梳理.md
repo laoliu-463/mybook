@@ -1,138 +1,126 @@
 ---
-title: JavaScript 与 jQuery 核心梳理
-date: 2026-01-12
-tags: [JavaScript, jQuery, Frontend, 基础]
-status: 进行中
+tags: [java, 八股, JavaScript]
+aliases: ["JS 与 jQuery", "事件循环与异步"]
+date: 2026-01-20
+status: draft
 ---
 
-# JavaScript 与 jQuery 核心梳理（零基础友好版）
+# Java 八股｜JavaScript 与 jQuery
 
-> JavaScript 是网页的编程语言；jQuery 是帮助你更快操作 DOM 的经典库。
-
----
-
-## 学习目标
-
-- 理解 ES6+ 常用语法
-- 能用原生 JS 操作页面元素
-- 知道何时使用/不使用 jQuery
-
----
-
-## 第一板块：ES6+ 现代语法核心
-
-### 1. 变量声明
-- `let`：块级作用域，可修改。
-- `const`：常量，不可重新赋值（对象内部属性可改）。
-
-### 2. 箭头函数
-```javascript
-const sum = (a, b) => a + b;
+```mermaid
+mindmap
+  root((JS 与 jQuery))
+    底层原理
+      作用域与闭包
+      事件循环
+      DOM 操作
+    核心特性
+      ES6 语法
+      原生 API
+      jQuery 语法糖
+    高频面试题
+      var/let/const
+      事件委托
+      Promise/async
+    追问链路
+      微任务/宏任务
+      渲染时机
+      性能取舍
 ```
 
-### 3. 模板字符串
-```javascript
-const name = "Alice";
-console.log(`Hello, ${name}!`);
-```
+## 核心概念
 
-### 4. 解构赋值
-```javascript
-const user = { id: 1, name: "Bob", age: 25 };
-const { name, age } = user;
-```
+- JS 是单线程语言，通过事件循环处理异步。
+- 作用域与闭包是函数级核心机制。
+- DOM 操作是 UI 更新入口。
+- jQuery 提供语法糖与兼容封装。
+- 事件委托减少绑定数量。
 
-### 5. 模块化
-- `export`：导出模块
-- `import ... from ...`：导入模块
+## 源码/机制复盘（文字流程）
 
----
+1) JS 执行栈按同步顺序执行。
+2) 异步任务进入任务队列等待。
+3) 事件循环在栈空时取队列执行。
+4) 微任务优先于宏任务。
+5) DOM 变更触发布局与渲染流程。
 
-## 第二板块：DOM 操作（原生 vs jQuery）
+## 对比表
 
-| 操作 | 原生 JavaScript | jQuery |
-| :--- | :--- | :--- |
-| 选取元素 | `document.querySelector('.box')` | `$('.box')` |
-| 选取多个 | `document.querySelectorAll('li')` | `$('li')` |
-| 修改文本 | `el.textContent = 'Hello'` | `el.text('Hello')` |
-| 修改 HTML | `el.innerHTML = '<b>Hi</b>'` | `el.html('<b>Hi</b>')` |
-| 修改样式 | `el.style.color = 'red'` | `el.css('color', 'red')` |
-| 添加类名 | `el.classList.add('active')` | `el.addClass('active')` |
-| 移除类名 | `el.classList.remove('active')` | `el.removeClass('active')` |
-| 事件监听 | `el.addEventListener('click', fn)` | `el.on('click', fn)` |
-| 显示/隐藏 | `el.style.display = 'none'` | `el.hide()` / `el.show()` |
+| 维度 | 原生 JS | jQuery |
+| --- | --- | --- |
+| 选择元素 | querySelector | $() |
+| 事件绑定 | addEventListener | on() |
+| 兼容性 | 需处理 | 封装好 |
+| 体积 | 轻量 | 依赖库 |
 
----
+## 可运行 Java 示例
 
-## 第三板块：jQuery 常用功能
+```java
+import java.util.ArrayDeque;
+import java.util.Deque;
 
-### 动画效果
-```javascript
-$('#msg').fadeIn(500);
-$('#msg').fadeOut(500);
-```
+public class EventLoopDemo {
+    public static void main(String[] args) {
+        Deque<String> microTasks = new ArrayDeque<>();
+        Deque<String> macroTasks = new ArrayDeque<>();
 
-### 文档就绪
-```javascript
-$(function() {
-    console.log("DOM is ready!");
-});
-```
+        // 为什么：用两个队列区分优先级；底层：微任务优先于宏任务
+        microTasks.add("promise-then");
+        macroTasks.add("setTimeout");
 
-### Ajax 请求
-```javascript
-$.ajax({
-    url: '/api/data',
-    type: 'GET',
-    success: function(response) {
-        console.log("Data:", response);
-    },
-    error: function(err) {
-        console.error("Error:", err);
-    }
-});
-```
-
----
-
-## 第四板块：异步编程基础
-
-### Promise
-```javascript
-const fetchData = new Promise((resolve) => {
-    setTimeout(() => {
-        resolve("Data loaded");
-    }, 1000);
-});
-
-fetchData.then(data => console.log(data));
-```
-
-### async / await
-```javascript
-async function getData() {
-    try {
-        let response = await fetch('https://api.example.com/user');
-        let data = await response.json();
-        console.log(data);
-    } catch (error) {
-        console.error("Oops:", error);
+        // 为什么：先清空微任务再执行宏任务；底层：事件循环调度规则
+        while (!microTasks.isEmpty()) {
+            System.out.println(microTasks.poll());
+        }
+        while (!macroTasks.isEmpty()) {
+            System.out.println(macroTasks.poll());
+        }
     }
 }
 ```
 
----
+## 面试专栏
 
-## 新手建议
+### ✅ 面试怎么问
+- var/let/const 有什么区别？
+- 事件循环的流程是什么？
+- 事件委托解决了什么问题？
+- Promise 与 async/await 的关系？
 
-1. 新项目优先用原生 JS（ES6+）。
-2. 老项目或简单页面可以继续用 jQuery。
-3. 先熟悉 `querySelector` / `addEventListener` 再看框架。
+### ⚠️ 坑点/误区
+- 把 JS 的异步当成多线程并行。
+- 忽略闭包导致内存泄漏。
+- 过度依赖 jQuery 忽视原生 API。
 
----
+### 追问链路
+- 微任务和宏任务的执行顺序？
+- DOM 更新何时触发渲染？
+- 事件委托的原理是什么？
+- 为什么 JS 单线程还能高并发？
+- jQuery 在现代项目的取舍？
 
-## 自测问题
+## 一分钟背诵版
 
-1. `let` 和 `const` 有什么区别？
-2. 如何在 JS 中给元素添加类名？
-3. `async/await` 解决了什么问题？
+1. JS 单线程，通过事件循环调度异步。
+2. 执行栈清空后才处理任务队列。
+3. 微任务优先于宏任务。
+4. 作用域决定变量可见性，闭包保留环境。
+5. DOM 操作会触发布局与渲染。
+6. 事件委托减少监听器数量。
+7. Promise 抽象异步流程，async/await 更易读。
+8. 原生 API 足够强大，jQuery 是兼容封装。
+9. 过度 DOM 操作会导致性能问题。
+10. 现代前端更强调性能与可维护性。
+
+## 面试 Checklist
+
+- [ ] 能对比 var/let/const
+- [ ] 能解释事件循环顺序
+- [ ] 能说明微任务/宏任务
+- [ ] 能解释事件委托
+- [ ] 能说明闭包的作用与风险
+- [ ] 能描述 DOM 更新触发点
+- [ ] 能对比原生与 jQuery
+- [ ] 能举例异步处理方案
+
+[[JavaScript]] [[jQuery]] [[DOM]] [[事件循环]] [[Promise]] [[async/await]]
