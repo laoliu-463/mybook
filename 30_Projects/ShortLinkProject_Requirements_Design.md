@@ -1,230 +1,248 @@
-# 短链系统需求分析与设计（第 7-12 步，零基础友好版）
+﻿---
+title: "短链系统需求分析与设计"
+aliases: ["短链系统需求分析与设计 八股", "短链系统需求分析与设计 面试"]
+tags: [DB, 八股, Interview/高频, 系统设计, Redis, HTTP]
+created: 2026-01-21
+level: interview
+status: draft
+---
 
-> 一句话解释：**短链**就是把很长的网址压缩成很短的链接，访问短链时会自动跳转到原始链接。
+# 短链系统需求分析与设计
+
+> [!summary] TL;DR（3-5 行）
+> - 一句话定义：短链系统把长 URL 压缩为短码，并在访问时重定向。
+> - 面试一句话结论：关键在“唯一短码生成 + 高性能跳转 + 统计与风控”。
+> - 关键点：短码生成、缓存与落库、302 跳转链路、统计异步化。
+> - 常见坑：短码冲突、缓存击穿、统计强一致。
+
+> [!tip]
+> **工程师思维自检**：
+> 1. 我能解释“高并发跳转”为何能撑住吗？
+> 2. 我能给出冲突/穿透/雪崩的治理策略吗？
 
 ---
 
-## 适合人群
+## 1. 定义与定位
 
-- 第一次看项目需求文档的人
-- 想知道“短链系统要做什么”的人
-
----
-
-## 术语小抄
-
-- **PV/UV**：访问量/独立访客数。
-- **302 重定向**：浏览器自动跳转到另一个地址。
-- **Redis**：常用的高速缓存。
-- **Bloom Filter**：一种“快速判断不存在”的数据结构。
-- **MQ**：消息队列，用来异步处理耗时任务。
+- **它是什么**：将长 URL 映射为短码，访问短码时 302 跳转到原链接。
+- **解决什么问题**：提升分享可读性、便于统计与风控。
+- **体系中的位置**：Web 系统设计题，涉及 [[HTTP]]、[[Redis]]、[[MySQL]]。
 
 ---
 
-## 最小可行流程（先看这个）
+## 2. 应用场景
 
-1. 用户提交长链接 → 系统生成短码 → 返回短链接  
-2. 访客访问短链接 → 系统查到长链接 → 302 跳转  
-3. 系统记录访问 → 生成统计报表
-
----
-
-## 第 7 步：用例图与用例描述
-
-### 7.1 参与者（Actor）
-
-- **普通用户**：创建/管理自己的短链，查看统计
-- **访客（匿名）**：访问短链并跳转
-- **管理员（可选）**：全局管理短链、封禁、查看全站统计
-
-### 7.2 用例列表（Use Case List）
-
-- UC-01 用户注册/登录
-- UC-02 创建短链
-- UC-03 管理短链（查询/筛选/分页/禁用/删除）
-- UC-04 访问短链并跳转
-- UC-05 查看统计（PV/UV/趋势/按标签聚合）
-- UC-06 管理员审核与封禁（可选）
-
-### 7.3 用例描述模板
-
-#### UC-02 创建短链
-
-- **参与者**：普通用户
-- **前置条件**：用户已登录
-- **触发**：用户输入长链接并点击“生成”
-- **基本流程**：
-  1. 系统校验长链接格式与协议（http/https）
-  2. 用户选择分组/标签，填写过期时间（可选）
-  3. 系统生成唯一短码并写入数据库
-  4. 系统返回短链接并展示复制按钮
-- **异常流程**：
-  - 长链接非法 → 返回参数错误
-  - 短码冲突 → 重新生成并重试（最多 N 次）
-- **后置条件**：短链记录创建成功，可用于跳转
-
-#### UC-04 访问短链并跳转
-
-- **参与者**：访客（匿名）
-- **前置条件**：短链存在且未禁用/未过期
-- **触发**：访客打开短链接
-- **基本流程**：
-  1. 系统根据短码查询映射（优先缓存）
-  2. 系统返回 302 重定向到长链接
-  3. 系统记录一次访问事件（可异步）
-- **异常流程**：
-  - 短链不存在/过期/禁用 → 返回 404 或提示页
-- **后置条件**：访问记录进入统计系统
-
-#### UC-05 查看统计
-
-- **参与者**：普通用户
-- **前置条件**：用户已登录且拥有该短链权限
-- **基本流程**：
-  1. 用户选择时间范围（7/30 天）
-  2. 系统查询聚合数据（按天 PV/UV）
-  3. 系统返回趋势图数据与渠道/标签占比
-- **异常流程**：
-  - 数据延迟 → 提示“统计可能存在延迟”，但仍返回现有数据
+- 场景 1：社交分享与营销落地页追踪。
+- 场景 2：内部系统链接管理与统计。
+- 不适用：不允许重定向或对 URL 完整性要求极高的场景。
 
 ---
 
-## 第 8 步：核心业务流程
+## 3. 核心原理（面试够用版）
 
-### 8.1 创建短链流程
+> [!note] 先给结论，再解释“怎么做到”
 
-1. 用户提交长链接、标签、过期时间
-2. 后端校验参数（格式、长度、协议、黑名单域名可选）
-3. 生成短码（Base62 + ID）
-4. 写入数据库（short_code 唯一索引）
-5. 写入缓存（Redis：short_code → long_url，设置 TTL）
-6. 返回短链接
+- **核心机制**（5-7 条要点）：
+  1) 生成短码（Base62/雪花/自增 ID）。
+  2) 落库建立短码 → 长链映射。
+  3) 缓存命中直接 302 跳转。
+  4) 缓存未命中回源 DB，再回填缓存。
+  5) 访问日志异步化，统计与报表延迟可接受。
+  6) 风控：黑名单、过期控制、访问频控。
 
-### 8.2 跳转流程（高性能路径）
+### 3.1 关键流程（步骤）
 
-1. 访客请求 `/s/{code}`
-2. 先查 Bloom Filter（不存在直接返回 404）
-3. 查 Redis 缓存命中 → 302 跳转
-4. 缓存未命中 → 查 DB → 写回缓存 → 302 跳转
-5. 记录访问事件（异步投递 MQ / 或先写日志队列）
+1. 创建短链：校验 URL → 生成短码 → 写库 → 写缓存。
+2. 访问短链：查缓存 → 302 跳转 → 记录访问事件。
+3. 统计：异步消费访问事件 → 聚合报表。
 
-### 8.3 统计流程（异步）
+### 3.2 关键数据结构/概念
 
-1. 跳转接口生成访问事件（code、time、ip、ua、referer、visitorId）
-2. 生产者写入 MQ
-3. 消费者批量写入 `click_event`（或直接聚合到日表）
-4. 定时任务按天聚合更新 `link_stat_day`
-5. 前端查询 `link_stat_day` 展示趋势图
+- **短码**：短链接 ID（Base62 或哈希）。
+- **访问事件**：用于 PV/UV 统计的事件流。
 
----
+### 3.3 费曼类比
 
-## 第 9 步：数据字典（表结构说明）
-
-### 9.1 表：link（短链主表）
-
-- `id`：主键
-- `user_id`：所属用户
-- `short_code`：短码（唯一）
-- `long_url`：原始链接
-- `group_name`：分组（活动/渠道）
-- `status`：状态（1=启用，0=禁用）
-- `expire_time`：过期时间（可空）
-- `created_at` / `updated_at`
-
-### 9.2 表：click_event（访问明细表，可分区/按天归档）
-
-- `id`
-- `short_code`
-- `access_time`
-- `ip`
-- `ua`
-- `referer`
-- `visitor_id`（用于 UV 的匿名标识）
-
-### 9.3 表：link_stat_day（按天聚合表）
-
-- `id`
-- `short_code`
-- `stat_date`（日期）
-- `pv`
-- `uv`
-- `group_name`（可选，用于维度聚合）
+> [!tip] 用人话解释
+> 像把“长地址”换成“快递取件码”，输入短码就能找到真正地址。
 
 ---
 
-## 第 10 步：数据库 DDL
+## 4. 关键细节清单（高频考点）
 
-```sql
-CREATE TABLE link (
-  id BIGINT PRIMARY KEY AUTO_INCREMENT,
-  user_id BIGINT NOT NULL,
-  short_code VARCHAR(16) NOT NULL,
-  long_url VARCHAR(2048) NOT NULL,
-  group_name VARCHAR(64) DEFAULT NULL,
-  status TINYINT NOT NULL DEFAULT 1,
-  expire_time DATETIME DEFAULT NULL,
-  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  UNIQUE KEY uk_short_code (short_code),
-  KEY idx_user_id (user_id),
-  KEY idx_group_name (group_name)
-);
+- 考点 1：短码冲突策略（重试/随机化）。
+- 考点 2：缓存击穿与穿透治理（Bloom Filter、空值缓存）。
+- 考点 3：统计异步化，避免影响跳转延迟。
+- 考点 4：过期策略与黑名单处理。
 
-CREATE TABLE click_event (
-  id BIGINT PRIMARY KEY AUTO_INCREMENT,
-  short_code VARCHAR(16) NOT NULL,
-  access_time DATETIME NOT NULL,
-  ip VARCHAR(64) DEFAULT NULL,
-  ua VARCHAR(512) DEFAULT NULL,
-  referer VARCHAR(1024) DEFAULT NULL,
-  visitor_id VARCHAR(64) DEFAULT NULL,
-  KEY idx_code_time (short_code, access_time)
-);
+---
 
-CREATE TABLE link_stat_day (
-  id BIGINT PRIMARY KEY AUTO_INCREMENT,
-  short_code VARCHAR(16) NOT NULL,
-  stat_date DATE NOT NULL,
-  pv BIGINT NOT NULL DEFAULT 0,
-  uv BIGINT NOT NULL DEFAULT 0,
-  group_name VARCHAR(64) DEFAULT NULL,
-  UNIQUE KEY uk_code_date (short_code, stat_date),
-  KEY idx_date (stat_date)
-);
+## 5. 源码/实现要点（不装行号，只抓关键）
+
+> [!tip] 目标：回答“实现层面为什么这样设计”
+
+- **关键组件**：短码生成器、缓存层、数据库、统计消费端。
+- **关键流程**：生成短码 → 写库 → 回填缓存 → 跳转。
+- **关键策略**：热路径只读缓存，统计走异步消息队列。
+- **面试话术**：跳转链路是读缓存优先，统计异步化避免阻塞。
+
+---
+
+## 6. 易错点与陷阱（至少 5 条）
+
+1) 短码冲突未处理导致覆盖旧数据。
+2) 缓存穿透导致 DB 被打爆。
+3) 统计强一致要求过高导致延迟变大。
+4) 过期短链未清理，产生脏数据。
+5) 302 跳转链路未考虑 HTTPS/头信息。
+
+---
+
+## 7. 对比与扩展（至少 2 组）
+
+- **302 vs 301**：302 临时跳转更符合短链变更场景。
+- **Base62 vs 哈希**：Base62 可控长度，哈希有冲突风险。
+- 扩展问题：如何做短链风控与防刷？
+
+### 对比表
+
+| 特性 | Base62 | 哈希 |
+| :--- | :--- | :--- |
+| 长度可控 | 强 | 弱 |
+| 冲突概率 | 低 | 中 |
+| 可解码性 | 可 | 不可 |
+
+---
+
+## 8. 标准面试回答（可直接背）
+
+### 8.1 30 秒版本（电梯回答）
+
+> [!quote]
+> 短链系统把长 URL 转成短码并在访问时 302 跳转。核心是短码生成与去重、缓存优先的跳转路径以及异步统计，保障高并发访问下的稳定性。常见治理是 Bloom Filter、防止缓存穿透与冲突重试。
+
+### 8.2 2 分钟版本（结构化展开）
+
+> [!quote]
+> 1) 定义与定位：短链是 URL 映射系统。 
+> 2) 场景：分享与统计。 
+> 3) 原理：短码生成→落库→缓存→跳转，统计异步化。 
+> 4) 易错点：冲突、缓存击穿、统计阻塞。 
+> 5) 扩展：风控与限流。
+
+### 8.3 深挖追问（面试官继续问什么）
+
+- 追问 1：如何保证短码唯一？→ 自增 ID + Base62 或重试。
+- 追问 2：跳转链路如何优化？→ 缓存优先 + 热点预热。
+- 追问 3：统计如何保证性能？→ 异步队列批量写入。
+
+---
+
+## 9. 代码题与代码示例（必须有详注）
+
+> [!important] 要求：注释解释“为什么这样写”，不是解释语法
+
+### 9.1 面试代码题（2-3 题）
+
+- 题 1：实现 Base62 编码，用于短码生成。
+- 题 2：如何设计缓存命中率统计？
+- 题 3：如何做短码冲突重试？
+
+### 9.2 参考代码（Java）
+
+```java
+// 目标：用 Base62 生成短码（示意）
+// 注意：这里只演示编码策略，不含持久化
+public class ShortCodeBase62 {
+    private static final char[] TABLE = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
+
+    public static String encode(long id) {
+        // 为什么用 StringBuilder：高效拼接，避免多次创建字符串
+        StringBuilder sb = new StringBuilder();
+        // 使用除余法将 id 转为 62 进制
+        while (id > 0) {
+            int idx = (int)(id % 62);
+            sb.append(TABLE[idx]);
+            id /= 62;
+        }
+        // 逆序是因为低位先生成
+        return sb.reverse().toString();
+    }
+
+    public static void main(String[] args) {
+        long id = 123456789L;
+        // 输出短码，用于落库或缓存
+        System.out.println(encode(id));
+    }
+}
 ```
 
 ---
 
-## 第 11 步：接口清单（REST API）
+## 10. 复习 Checklist（可勾选）
 
-- `POST /api/auth/register` 注册
-- `POST /api/auth/login` 登录
-- `POST /api/links` 创建短链
-- `GET /api/links` 分页查询短链（支持 group/status 条件）
-- `PUT /api/links/{id}/status` 启用/禁用
-- `DELETE /api/links/{id}` 删除
-- `GET /s/{code}` 跳转（302）
-- `GET /api/stats/link/{code}` 获取该短链 7/30 天 PV/UV 趋势
+- [ ] 我能解释短码生成与冲突处理。
+- [ ] 我能描述缓存跳转链路。
+- [ ] 我能说明统计异步化的价值。
+- [ ] 我能给出防穿透/雪崩策略。
+- [ ] 我能区分 302 与 301。
 
 ---
 
-## 第 12 步：验收标准与测试用例
+## 11. Mermaid 思维导图（Obsidian 可渲染）
 
-### 12.1 验收标准
+```mermaid
+mindmap
+  root((短链系统))
+    定义
+    场景
+    原理
+      流程
+      概念
+    考点
+    实现
+    陷阱
+    对比
+    回答
+      30秒
+      2分钟
+      追问
+    代码
+      题型
+      示例
+    清单
+```
 
-- 能成功创建短链并返回可访问短链接
-- 短链访问能正确 302 跳转到原始链接
-- 不存在/禁用/过期短链能返回正确提示
-- 后台能查看短链列表并支持分页与筛选
-- 能查看 PV/UV 与近 7 天趋势（统计允许延迟）
+### HTTP 请求-响应链路（必须）
 
-### 12.2 测试用例示例
+```mermaid
+sequenceDiagram
+  participant C as Client
+  participant S as ShortLink
+  participant O as Origin
+  C->>S: GET /s/{code}
+  S-->>C: 302 Location: https://origin-url
+  C->>O: GET /origin
+  O-->>C: 200 OK
+```
 
-- TC-01 输入合法长链 → 返回短链并可跳转
-- TC-02 输入非法 URL → 返回参数错误
-- TC-03 禁用短链后访问 → 返回 404/提示页
-- TC-04 创建短链后查看列表 → 列表存在该短链
-- TC-05 连续访问同一短链 → PV 增加，UV 按 visitor_id 去重
-- TC-06 Redis 失效（模拟）→ 仍可查 DB 跳转成功
-- TC-07 缓存未命中后访问 → 写回缓存，下次命中
-- TC-08 统计接口查询 7 天 → 返回 7 个点的趋势数据
+---
+
+## DB 额外要求（事务与并发）
+
+- 事务四特性：ACID（原子性、一致性、隔离性、持久性）。
+- 隔离级别：读未提交/读已提交/可重复读/可串行化。
+- 并发事务例子：
+  - T1：读取短码 → 更新统计
+  - T2：读取短码 → 删除短码
+  - 若隔离级别过低，可能出现读到已删除的记录（不可重复读或幻读）。
+  - 解决：使用可重复读或行锁/MVCC。
+
+---
+
+## 相关笔记（双向链接）
+
+- [[HTTP]]
+- [[Redis]]
+- [[MySQL]]
+- [[系统设计]]
