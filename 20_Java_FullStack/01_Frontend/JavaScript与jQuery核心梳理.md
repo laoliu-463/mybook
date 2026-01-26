@@ -4,7 +4,7 @@ aliases: ["JavaScript 与 jQuery 核心梳理 八股", "JavaScript 与 jQuery �
 tags: [Frontend, 八股, Interview/高频, JavaScript, jQuery]
 created: 2026-01-21
 level: interview
-status: draft
+status: active
 ---
 
 # JavaScript 与 jQuery 核心梳理
@@ -26,7 +26,7 @@ status: draft
 
 - **它是什么**：JS 负责页面交互与逻辑，jQuery 封装 DOM 与 AJAX 操作。
 - **解决什么问题**：简化跨浏览器 DOM 与事件处理。
-- **体系中的位置**：前端交互层核心。[[HTML]] [[CSS]]
+- **体系中的位置**：前端交互层核心。[[HTML5全局内容结构化梳理|HTML]] [[CSS3全局内容结构化梳理|CSS]]
 
 ---
 
@@ -147,32 +147,204 @@ status: draft
 - 题 2：用事件委托处理动态列表。
 - 题 3：封装一个 AJAX 请求并处理异常。
 
-### 9.2 参考代码（Java）
+### 9.2 参考代码（JavaScript）
 
-```java
-// 目标：用 Java 模拟“链式调用”的设计
-// 注意：链式调用的核心是方法返回自身
-public class ChainDemo {
-    static class Query {
-        private String selector;
+#### 闭包的经典应用
 
-        Query select(String s) {
-            // 为什么返回 this：支持连续调用
-            this.selector = s;
-            return this;
+```javascript
+// 目标：用闭包实现计数器
+// 为什么用闭包：保护私有变量，避免全局污染
+function createCounter() {
+    let count = 0; // 私有变量，外部无法直接访问
+
+    return {
+        increment() {
+            return ++count;
+        },
+        decrement() {
+            return --count;
+        },
+        getCount() {
+            return count;
         }
+    };
+}
 
-        Query addClass(String cls) {
-            // 模拟 DOM 操作记录
-            System.out.println("Add class " + cls + " to " + selector);
-            return this;
-        }
+const counter = createCounter();
+console.log(counter.increment()); // 1
+console.log(counter.increment()); // 2
+console.log(counter.getCount()); // 2
+// console.log(count); // 报错：count is not defined
+```
+
+#### this 指向规则
+
+```javascript
+// 目标：理解 this 的四种绑定规则
+const obj = {
+    name: 'obj',
+
+    // 1. 隐式绑定：谁调用指向谁
+    sayName() {
+        console.log(this.name); // 'obj'
+    },
+
+    // 2. 箭头函数：继承外层 this
+    arrowFn: () => {
+        console.log(this); // window（箭头函数无自己的 this）
     }
+};
 
-    public static void main(String[] args) {
-        new Query().select("#btn").addClass("active");
+// 3. 显式绑定：call/apply/bind
+function greet(greeting) {
+    console.log(`${greeting}, ${this.name}`);
+}
+greet.call({ name: 'Alice' }, 'Hello'); // "Hello, Alice"
+greet.apply({ name: 'Bob' }, ['Hi']);   // "Hi, Bob"
+const boundGreet = greet.bind({ name: 'Charlie' });
+boundGreet('Hey'); // "Hey, Charlie"
+
+// 4. new 绑定：指向新创建的实例
+function Person(name) {
+    this.name = name;
+}
+const person = new Person('David');
+console.log(person.name); // 'David'
+```
+
+#### 事件委托
+
+```javascript
+// 目标：用事件委托处理动态列表
+// 为什么用事件委托：减少事件绑定数量，支持动态元素
+const list = document.getElementById('list');
+
+// 在父元素上绑定一次，而非每个 li 都绑定
+list.addEventListener('click', function(event) {
+    // 判断点击的是否是 li 元素
+    if (event.target.tagName === 'LI') {
+        console.log('点击了:', event.target.textContent);
+        event.target.classList.toggle('active');
+    }
+});
+
+// 动态添加的元素也能响应点击
+const newItem = document.createElement('li');
+newItem.textContent = '新项目';
+list.appendChild(newItem); // 无需额外绑定事件
+```
+
+#### Promise 与 async/await
+
+```javascript
+// 目标：用 Promise 和 async/await 处理异步
+// 为什么用 Promise：避免回调地狱，链式处理异步
+
+// 模拟异步请求
+function fetchData(url) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (url) {
+                resolve({ data: '请求成功', url });
+            } else {
+                reject(new Error('URL不能为空'));
+            }
+        }, 1000);
+    });
+}
+
+// Promise 链式调用
+fetchData('/api/user')
+    .then(res => {
+        console.log(res.data);
+        return fetchData('/api/posts');
+    })
+    .then(res => console.log(res.data))
+    .catch(err => console.error(err.message));
+
+// async/await 写法（推荐）
+async function loadData() {
+    try {
+        const user = await fetchData('/api/user');
+        console.log(user.data);
+
+        const posts = await fetchData('/api/posts');
+        console.log(posts.data);
+    } catch (err) {
+        console.error(err.message);
     }
 }
+```
+
+#### 防抖与节流
+
+```javascript
+// 目标：实现防抖和节流函数
+// 防抖：连续触发只执行最后一次（搜索输入）
+function debounce(fn, delay) {
+    let timer = null;
+    return function(...args) {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+            fn.apply(this, args);
+        }, delay);
+    };
+}
+
+// 节流：固定间隔执行一次（滚动事件）
+function throttle(fn, interval) {
+    let lastTime = 0;
+    return function(...args) {
+        const now = Date.now();
+        if (now - lastTime >= interval) {
+            fn.apply(this, args);
+            lastTime = now;
+        }
+    };
+}
+
+// 使用示例
+const searchInput = document.getElementById('search');
+searchInput.addEventListener('input', debounce(function(e) {
+    console.log('搜索:', e.target.value);
+}, 300));
+
+window.addEventListener('scroll', throttle(function() {
+    console.log('滚动位置:', window.scrollY);
+}, 100));
+```
+
+#### 链式调用实现
+
+```javascript
+// 目标：实现类似 jQuery 的链式调用
+// 为什么能链式调用：每个方法返回 this
+class Query {
+    constructor(selector) {
+        this.elements = document.querySelectorAll(selector);
+    }
+
+    addClass(className) {
+        this.elements.forEach(el => el.classList.add(className));
+        return this; // 返回自身，支持链式调用
+    }
+
+    removeClass(className) {
+        this.elements.forEach(el => el.classList.remove(className));
+        return this;
+    }
+
+    on(event, handler) {
+        this.elements.forEach(el => el.addEventListener(event, handler));
+        return this;
+    }
+}
+
+// 链式调用示例
+new Query('.btn')
+    .addClass('active')
+    .removeClass('disabled')
+    .on('click', () => console.log('clicked'));
 ```
 
 ---
@@ -192,29 +364,97 @@ public class ChainDemo {
 ```mermaid
 mindmap
   root((JS 与 jQuery))
-    定义
-    场景
-    原理
-      流程
-      概念
-    考点
-    实现
-    陷阱
-    对比
-    回答
-      30秒
-      2分钟
-      追问
-    代码
-      题型
-      示例
-    清单
+    作用域与闭包
+      作用域类型
+        全局作用域
+        函数作用域
+        块级作用域 let/const
+      作用域链
+        变量查找机制
+        词法作用域
+      闭包
+        定义：函数+外部变量
+        应用场景
+          私有变量
+          柯里化
+          模块模式
+        内存泄漏注意
+    this指向
+      默认绑定
+        非严格:window
+        严格:undefined
+      隐式绑定
+        谁调用指向谁
+        隐式丢失问题
+      显式绑定
+        call 立即调用
+        apply 数组传参
+        bind 返回新函数
+      new绑定
+        指向新实例
+      箭头函数
+        继承外层this
+        无法被改变
+    原型链
+      prototype 原型对象
+      __proto__ 原型指针
+      constructor 构造函数
+      原型链查找
+      instanceof 原理
+    事件模型
+      事件流
+        捕获阶段
+        目标阶段
+        冒泡阶段
+      事件委托
+        利用冒泡
+        减少绑定
+        支持动态元素
+      常用方法
+        addEventListener
+        stopPropagation
+        preventDefault
+    异步编程
+      回调函数
+        回调地狱问题
+      Promise
+        三种状态
+        then/catch
+        Promise.all
+        Promise.race
+      async/await
+        同步写法
+        错误处理try/catch
+      事件循环
+        宏任务
+        微任务
+        执行顺序
+    ES6+特性
+      let/const
+      箭头函数
+      解构赋值
+      模板字符串
+      展开运算符
+      可选链?.
+      空值合并??
+    jQuery核心
+      选择器$()
+      链式调用原理
+      DOM操作封装
+      AJAX请求
+      现代替代方案
+    面试要点
+      闭包应用场景
+      this绑定规则
+      防抖节流实现
+      深拷贝浅拷贝
+      数组去重方法
 ```
 
 ---
 
 ## 相关笔记（双向链接）
 
-- [[HTML]]
-- [[CSS]]
-- [[事件模型]]
+- [[前端基础]]
+- [[HTML5全局内容结构化梳理|HTML5]]
+- [[CSS3全局内容结构化梳理|CSS3]]

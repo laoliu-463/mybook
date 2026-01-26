@@ -4,7 +4,7 @@ aliases: ["HTML5 全局内容结构化梳理 八股", "HTML5 全局内容结构�
 tags: [Frontend, 八股, Interview/高频, HTML5, 结构化]
 created: 2026-01-21
 level: interview
-status: draft
+status: active
 ---
 
 # HTML5 全局内容结构化梳理
@@ -26,7 +26,7 @@ status: draft
 
 - **它是什么**：HTML5 提供的语义化结构与内容组织方式。
 - **解决什么问题**：提升结构清晰度、SEO 与可访问性。
-- **体系中的位置**：前端基础层，连接 [[CSS]] 与 [[JavaScript]]。
+- **体系中的位置**：前端基础层，连接 [[CSS3全局内容结构化梳理|CSS]] 与 [[JavaScript与jQuery核心梳理|JavaScript]]。
 
 ---
 
@@ -146,22 +146,102 @@ status: draft
 - 题 2：表单输入如何利用 HTML5 类型校验？
 - 题 3：如何嵌入视频并提供降级方案？
 
-### 9.2 参考代码（Java）
+### 9.2 参考代码（HTML5）
 
-```java
-// 目标：用 Java 拼接一个最小 HTML5 语义结构
-// 注意：这里只演示结构，不涉及样式
-public class HtmlBuilderDemo {
-    public static void main(String[] args) {
-        // 为什么用 StringBuilder：避免多次字符串拼接开销
-        StringBuilder html = new StringBuilder();
-        html.append("<header><h1>Blog</h1></header>");
-        html.append("<main><article><p>Hello</p></article></main>");
-        html.append("<footer>2026</footer>");
+```html
+<!-- 目标：展示完整的 HTML5 语义化页面结构 -->
+<!-- 为什么用语义标签：提升可读性、SEO、可访问性 -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <!-- viewport 用于响应式适配移动端 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>博客页面</title>
+</head>
+<body>
+    <!-- header：页面头部，通常包含 logo 和导航 -->
+    <header>
+        <h1>我的博客</h1>
+        <!-- nav：导航区域，便于屏幕阅读器识别 -->
+        <nav>
+            <ul>
+                <li><a href="#home">首页</a></li>
+                <li><a href="#about">关于</a></li>
+            </ul>
+        </nav>
+    </header>
 
-        System.out.println(html.toString());
-    }
-}
+    <!-- main：主内容区，每个页面只能有一个 -->
+    <main>
+        <!-- article：独立完整的内容块 -->
+        <article>
+            <h2>文章标题</h2>
+            <!-- time 标签便于搜索引擎解析日期 -->
+            <time datetime="2026-01-26">2026年1月26日</time>
+            <p>这是文章内容...</p>
+        </article>
+
+        <!-- aside：侧边栏，与主内容相关但可独立存在 -->
+        <aside>
+            <h3>相关链接</h3>
+        </aside>
+    </main>
+
+    <!-- footer：页脚，通常包含版权信息 -->
+    <footer>
+        <p>&copy; 2026 博客版权所有</p>
+    </footer>
+</body>
+</html>
+```
+
+### 9.3 表单增强示例
+
+```html
+<!-- HTML5 表单：内置校验，无需额外 JS -->
+<form action="/submit" method="post">
+    <!-- required：必填校验 -->
+    <!-- type="email"：自动校验邮箱格式 -->
+    <label for="email">邮箱：</label>
+    <input type="email" id="email" name="email" required
+           placeholder="请输入邮箱">
+
+    <!-- type="number"：限制只能输入数字 -->
+    <label for="age">年龄：</label>
+    <input type="number" id="age" name="age" min="0" max="150">
+
+    <!-- type="date"：调起日期选择器 -->
+    <label for="birthday">生日：</label>
+    <input type="date" id="birthday" name="birthday">
+
+    <!-- pattern：正则校验 -->
+    <label for="phone">手机：</label>
+    <input type="tel" id="phone" name="phone"
+           pattern="1[3-9]\d{9}" placeholder="11位手机号">
+
+    <button type="submit">提交</button>
+</form>
+```
+
+### 9.4 多媒体与降级方案
+
+```html
+<!-- video 标签：原生视频支持 -->
+<video controls width="640" height="360">
+    <!-- 多个 source 提供格式降级 -->
+    <source src="video.mp4" type="video/mp4">
+    <source src="video.webm" type="video/webm">
+    <!-- 不支持 video 标签时的降级文案 -->
+    <p>您的浏览器不支持视频播放，请<a href="video.mp4">下载视频</a></p>
+</video>
+
+<!-- audio 标签：原生音频支持 -->
+<audio controls>
+    <source src="audio.mp3" type="audio/mpeg">
+    <source src="audio.ogg" type="audio/ogg">
+    <p>您的浏览器不支持音频播放</p>
+</audio>
 ```
 
 ---
@@ -181,29 +261,62 @@ public class HtmlBuilderDemo {
 ```mermaid
 mindmap
   root((HTML5 结构))
-    定义
-    场景
-    原理
-      流程
-      概念
-    考点
-    实现
-    陷阱
-    对比
-    回答
-      30秒
-      2分钟
-      追问
-    代码
-      题型
-      示例
-    清单
+    语义化标签
+      文档结构
+        header 页头
+        nav 导航
+        main 主内容
+        footer 页脚
+      内容分组
+        article 文章
+        section 章节
+        aside 侧边栏
+      文本语义
+        figure/figcaption
+        time 时间
+        mark 高亮
+    表单增强
+      新增类型
+        email 邮箱
+        number 数字
+        date 日期
+        tel 电话
+        url 网址
+      校验属性
+        required 必填
+        pattern 正则
+        min/max 范围
+      新元素
+        datalist 下拉建议
+        output 输出
+        progress 进度条
+    多媒体
+      video 视频
+        controls 控件
+        autoplay 自动播放
+        source 多格式
+      audio 音频
+      canvas 画布
+      svg 矢量图
+    Web存储
+      localStorage 持久存储
+      sessionStorage 会话存储
+      IndexedDB 大容量存储
+    面试要点
+      语义化价值
+        SEO优化
+        可访问性
+        代码可读性
+      常见陷阱
+        滥用div
+        忽略aria
+        无降级方案
 ```
 
 ---
 
 ## 相关笔记（双向链接）
 
-- [[CSS]]
-- [[JavaScript]]
-- [[Web 可访问性]]
+- [[前端基础]]
+- [[CSS3全局内容结构化梳理|CSS3]]
+- [[JavaScript与jQuery核心梳理|JavaScript]]

@@ -4,7 +4,7 @@ aliases: ["CSS3 全局内容结构化梳理 八股", "CSS3 全局内容结构化
 tags: [Frontend, 八股, Interview/高频, CSS3, 样式]
 created: 2026-01-21
 level: interview
-status: draft
+status: active
 ---
 
 # CSS3 全局内容结构化梳理
@@ -26,7 +26,7 @@ status: draft
 
 - **它是什么**：用规则描述 HTML 的样式与布局。
 - **解决什么问题**：分离结构与样式，提高复用与维护性。
-- **体系中的位置**：前端表现层核心。[[HTML]] [[JavaScript]]
+- **体系中的位置**：前端表现层核心。[[HTML5全局内容结构化梳理|HTML]] [[JavaScript与jQuery核心梳理|JavaScript]]
 
 ---
 
@@ -147,17 +147,121 @@ status: draft
 - 题 2：解释 BFC 的触发条件。
 - 题 3：如何避免样式覆盖问题？
 
-### 9.2 参考代码（Java）
+### 9.2 参考代码（CSS3）
 
-```java
-// 目标：构造一个简单的 CSS 字符串
-// 注意：示例用于展示“结构化样式输出”思路
-public class CssBuilderDemo {
-    public static void main(String[] args) {
-        // 为什么分行拼接：更清晰便于维护
-        String css = ".container { display: flex; }\n" +
-                     ".item { flex: 1; }";
-        System.out.println(css);
+#### Flex 三栏布局
+
+```css
+/* 目标：实现经典三栏布局（左右固定，中间自适应） */
+/* 为什么用 Flex：一维布局最简洁的方案 */
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.left, .right {
+    /* 固定宽度：不参与伸缩 */
+    width: 200px;
+    flex-shrink: 0;
+    background: #f0f0f0;
+}
+
+.center {
+    /* flex: 1 让中间区域自动填充剩余空间 */
+    flex: 1;
+    background: #fff;
+}
+```
+
+#### Grid 网格布局
+
+```css
+/* 目标：创建响应式网格布局 */
+/* 为什么用 Grid：二维布局的最佳选择 */
+.grid-container {
+    display: grid;
+    /* 自动填充列，最小 200px，最大 1fr */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px; /* 网格间距 */
+}
+
+.grid-item {
+    padding: 20px;
+    background: #e0e0e0;
+}
+```
+
+#### BFC 触发与应用
+
+```css
+/* 目标：解决浮动导致的高度塌陷 */
+/* BFC 触发条件：overflow 非 visible */
+.clearfix {
+    overflow: hidden; /* 触发 BFC，包含浮动子元素 */
+}
+
+/* 或使用伪元素清除浮动 */
+.clearfix::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+/* 其他触发 BFC 的方式 */
+.bfc-example {
+    /* display: flow-root; 最语义化的触发方式 */
+    display: flow-root;
+}
+```
+
+#### 水平垂直居中
+
+```css
+/* 方案一：Flex 居中（推荐） */
+.flex-center {
+    display: flex;
+    justify-content: center; /* 水平居中 */
+    align-items: center;     /* 垂直居中 */
+}
+
+/* 方案二：Grid 居中 */
+.grid-center {
+    display: grid;
+    place-items: center; /* 一行搞定水平垂直居中 */
+}
+
+/* 方案三：绝对定位 + transform */
+.absolute-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* 为什么用 translate：基于自身尺寸偏移，无需知道具体宽高 */
+    transform: translate(-50%, -50%);
+}
+```
+
+#### 响应式媒体查询
+
+```css
+/* 目标：根据屏幕宽度切换布局 */
+/* 移动优先：先写小屏样式，再用 min-width 扩展 */
+.container {
+    padding: 10px;
+}
+
+/* 平板及以上 */
+@media (min-width: 768px) {
+    .container {
+        padding: 20px;
+        max-width: 720px;
+        margin: 0 auto;
+    }
+}
+
+/* 桌面端 */
+@media (min-width: 1024px) {
+    .container {
+        max-width: 960px;
     }
 }
 ```
@@ -179,29 +283,87 @@ public class CssBuilderDemo {
 ```mermaid
 mindmap
   root((CSS3))
-    定义
-    场景
-    原理
-      流程
-      概念
-    考点
-    实现
-    陷阱
-    对比
-    回答
-      30秒
-      2分钟
-      追问
-    代码
-      题型
-      示例
-    清单
+    选择器
+      基础选择器
+        元素 div
+        类 .class
+        ID #id
+        通配 *
+      组合选择器
+        后代 A B
+        子代 A>B
+        相邻 A+B
+        兄弟 A~B
+      伪类选择器
+        :hover
+        :focus
+        :nth-child
+        :first-child
+      伪元素
+        ::before
+        ::after
+        ::placeholder
+      权重计算
+        !important 最高
+        行内 1000
+        ID 100
+        类/伪类 10
+        元素 1
+    盒模型
+      content 内容
+      padding 内边距
+      border 边框
+      margin 外边距
+      box-sizing
+        content-box 标准
+        border-box 怪异
+    布局模型
+      Flex 弹性布局
+        主轴 justify-content
+        交叉轴 align-items
+        flex-grow/shrink
+        flex-wrap 换行
+      Grid 网格布局
+        grid-template
+        grid-gap
+        fr 单位
+        auto-fill/fit
+      定位 position
+        static 默认
+        relative 相对
+        absolute 绝对
+        fixed 固定
+        sticky 粘性
+    BFC
+      定义：块级格式化上下文
+      作用
+        包含浮动
+        阻止外边距折叠
+        隔离布局
+      触发条件
+        overflow非visible
+        display:flow-root
+        float非none
+        position:absolute/fixed
+    响应式
+      媒体查询
+        min-width
+        max-width
+        orientation
+      视口单位
+        vw/vh
+        vmin/vmax
+      移动优先策略
+    面试要点
+      水平垂直居中
+      三栏布局
+      重排重绘优化
 ```
 
 ---
 
 ## 相关笔记（双向链接）
 
-- [[HTML]]
-- [[JavaScript]]
-- [[Web 布局]]
+- [[前端基础]]
+- [[HTML5全局内容结构化梳理|HTML5]]
+- [[JavaScript与jQuery核心梳理|JavaScript]]
