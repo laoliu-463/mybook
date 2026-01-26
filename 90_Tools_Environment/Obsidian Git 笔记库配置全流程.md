@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Obsidian Git 笔记库配置全流程"
 aliases: ["Obsidian Git 笔记库配置全流程 八股", "Obsidian Git 笔记库配置全流程 面试"]
 tags: [Tools, 八股, Interview/高频, Obsidian, Git]
