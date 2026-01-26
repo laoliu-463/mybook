@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find:*)",
+      "Bash(sort:*)",
+      "Skill(java-obsidian-note-generator)"
+    ]
+  }
+}
