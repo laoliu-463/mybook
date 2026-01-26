@@ -1,4 +1,4 @@
-﻿---
+---
 title: "HTML5 全局内容结构化梳理"
 aliases: ["HTML5 全局内容结构化梳理 八股", "HTML5 全局内容结构化梳理 面试"]
 tags: [Frontend, 八股, Interview/高频, HTML5, 结构化]
