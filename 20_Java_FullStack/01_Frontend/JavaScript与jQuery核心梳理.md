@@ -1,4 +1,4 @@
-﻿---
+---
 title: "JavaScript 与 jQuery 核心梳理"
 aliases: ["JavaScript 与 jQuery 核心梳理 八股", "JavaScript 与 jQuery 核心梳理 面试"]
 tags: [Frontend, 八股, Interview/高频, JavaScript, jQuery]
