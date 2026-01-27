@@ -11,13 +11,14 @@ status: active
 
 > [!summary] TL;DR
 > - 一句话定义：Java 集合框架提供统一的数据结构接口与实现，包括 List、Set、Map 三大体系。
-> - 面试一句话结论：ArrayList/HashMap 源码、线程安全集合是高频考点。
-> - 关键点：底层数据结构、扩容机制、线程安全、fail-fast 机制。
->
+> - 面试一句话结论：ArrayList/HashMap 源码与并发集合是高频考点；理解“结构 + 复杂度 + 扩容 + 线程安全”即可通关大部分问题。
+> - 关键点：底层数据结构、扩容机制、时间复杂度、线程安全策略、fail-fast 机制。
+
 > [!tip]
 > **工程师思维自检**：
-> 1. 我能说清楚 HashMap 的 put 流程吗？
-> 2. 我能解释 ConcurrentHashMap 如何保证线程安全吗？
+> 1. 我能清晰描述 HashMap 的 put/get 流程吗？
+> 2. 我能说出 ArrayList 扩容带来的性能影响吗？
+> 3. 我能解释 ConcurrentHashMap 的并发控制思路吗？
 
 > [!ABSTRACT] 体系概览
 > ```mermaid
@@ -77,42 +78,49 @@ status: active
 > ```
 
 > [!INFO] 前世今生
-> - **为什么需要集合框架**：统一接口让上层只关心“抽象类型”，不同实现可替换；同时提供常见数据结构的标准化实现与算法。
-> - **工程关注点**：性能主要由“底层结构 + 扩容机制 + 访问/修改复杂度”决定；并发场景必须关注线程安全与一致性。
-> - **面试关注点**：高频围绕 ArrayList/HashMap 的底层结构与扩容、并发集合的线程安全策略、fail-fast 触发条件。
+> - **为什么需要集合框架**：统一接口（Collection/Map）降低学习与切换成本；多种实现覆盖不同性能需求。
+> - **工程关注点**：关注访问/修改复杂度、内存占用与扩容成本；并发场景关注可见性与一致性。
+> - **面试关注点**：ArrayList/HashMap/ConcurrentHashMap 的结构与扩容、迭代器的 fail-fast 触发条件、红黑树树化/退化条件。
 
 > [!SUCCESS] 核心详解
-> **集合三大体系定位**
-> | 体系 | 典型特征 | 使用场景 |
-> | :-- | :-- | :-- |
-> | List | 有序、可重复、索引访问 | 需要顺序与随机访问 | 
-> | Set | 无序、不重复 | 去重、集合运算 | 
-> | Map | Key-Value 映射 | 快速检索、缓存 | 
+> **总体对比**
+> | 体系 | 结构核心 | 是否有序 | 是否允许重复 | 典型场景 |
+> | :-- | :-- | :-- | :-- | :-- |
+> | List | 数组/链表 | 有序 | 允许 | 顺序存储、按索引访问 |
+> | Set | Hash/Tree | 无序/有序 | 不允许 | 去重、集合运算 |
+> | Map | Hash/Tree | 无序/有序 | Key 不重复 | 快速检索、缓存、映射 |
+>
+> **复杂度速记**
+> | 操作 | ArrayList | LinkedList | HashMap/HashSet | TreeMap/TreeSet |
+> | :-- | :-- | :-- | :-- | :-- |
+> | 随机访问 | O(1) | O(n) | O(1) 平均 | O(log n) |
+> | 插入/删除（中间） | O(n) | O(1) | O(1) 平均 | O(log n) |
+> | 查找 | O(n) | O(n) | O(1) 平均 | O(log n) |
 >
 > **关键机制清单**
-> - **底层结构**：数组/链表/红黑树/散列表组合决定复杂度与空间成本。
-> - **扩容机制**：容量增长与 rehash 会引发性能抖动。
-> - **线程安全**：同步容器与并发容器的策略不同，影响吞吐与一致性。
-> - **fail-fast**：结构性修改导致迭代器快速失败。
+> - **扩容**：触发 rehash/数组复制，带来性能抖动。
+> - **散列冲突**：链表/红黑树处理冲突，影响最坏复杂度。
+> - **线程安全**：同步容器保证安全但牺牲吞吐；并发容器采用更细粒度策略。
+> - **fail-fast**：迭代器检测到结构性修改立即抛异常。
 
 > [!EXAMPLE] 工业实验室
-> 本笔记未提出“源码底层实现”请求，故不提供代码示例。
+> 未请求“源码底层实现”，本笔记不提供源码级示例。
 
 > [!QUESTION] 八股深挖
 > 1. **问题：ArrayList 和 LinkedList 区别？**  
->    **答案：** ArrayList 底层数组，随机访问快；LinkedList 底层双向链表，插入删除快但查找慢。
+>    **答案：** ArrayList 基于数组，随机访问快但中间插入慢；LinkedList 基于双向链表，插入删除快但随机访问慢。
 > 2. **问题：ArrayList 扩容机制？**  
->    **答案：** 扩容为原容量的 1.5 倍，伴随数组复制，频繁扩容会带来性能波动。
+>    **答案：** 新容量为旧容量的 1.5 倍左右，数组复制成本高，频繁扩容会影响性能。
 > 3. **问题：HashMap 底层结构？**  
->    **答案：** 数组 + 链表 + 红黑树（链表过长且数组容量达到阈值时树化）。
-> 4. **问题：HashMap 扩容？**  
->    **答案：** 容量翻倍后重新分配桶位置，影响性能。
+>    **答案：** 数组 + 链表 + 红黑树（冲突严重时树化）。
+> 4. **问题：HashMap 扩容触发条件？**  
+>    **答案：** size 超过阈值（capacity * loadFactor）时触发扩容并 rehash。
 > 5. **问题：HashMap 为什么线程不安全？**  
->    **答案：** 并发修改可能导致数据丢失或覆盖；旧版本还有扩容死循环风险。
-> 6. **问题：ConcurrentHashMap 原理？**  
->    **答案：** 旧版本分段锁；新版本使用 CAS + synchronized 控制节点级并发。
+>    **答案：** 并发修改导致数据覆盖或丢失，旧版本还存在扩容死循环风险。
+> 6. **问题：ConcurrentHashMap 的并发策略？**  
+>    **答案：** JDK 7 分段锁；JDK 8 使用 CAS + synchronized 控制节点级并发。
 > 7. **问题：fail-fast 是什么？**  
->    **答案：** 迭代时检测到结构修改立即抛出 ConcurrentModificationException。
+>    **答案：** 迭代过程中检测到结构性修改就抛 ConcurrentModificationException。
 
 ---
 
@@ -131,15 +139,27 @@ status: active
 | [[ArrayList源码分析]] | 扩容机制/随机访问 | ⭐⭐⭐⭐⭐ |
 | [[LinkedList源码分析]] | 双向链表/队列实现 | ⭐⭐⭐ |
 
-**核心内容补全**：
-- **ArrayList**：顺序存储，尾插通常较快；中间插入/删除需要移动元素；扩容会触发数组复制。
-- **LinkedList**：节点分散存储，插入/删除只改指针；随机访问需遍历，性能随长度下降。
-- **Vector**：线程安全但性能较低，已逐渐被并发集合替代。
+**详细讲解**：
+- **ArrayList**：
+  - 底层为可变长数组，索引访问 O(1)。
+  - 追加元素通常是摊还 O(1)，中间插入/删除需要移动元素，O(n)。
+  - 扩容需要新建数组并复制旧数据，扩容成本集中爆发。
+- **LinkedList**：
+  - 底层双向链表，插入/删除只需调整指针，O(1)。
+  - 查找需要遍历，O(n)；不适合高频随机访问。
+- **Vector**：
+  - 与 ArrayList 类似，但方法同步，线程安全，性能较低。
+  - 多数情况下已被并发集合替代。
+
+**工程建议**：
+- 读多写少、需要随机访问时用 ArrayList。
+- 频繁插入/删除、访问模式偏顺序时用 LinkedList。
+- 并发读多写少可用 CopyOnWriteArrayList。
 
 **高频考点**：
 - ArrayList 和 LinkedList 区别？
-- ArrayList 扩容机制？
-- 如何实现线程安全的 List？
+- ArrayList 扩容策略与性能影响？
+- 线程安全 List 的实现方式？
 
 ### 2. Map
 
@@ -149,16 +169,25 @@ status: active
 | [[ConcurrentHashMap源码分析]] | 线程安全实现 | ⭐⭐⭐⭐⭐ |
 | [[LinkedHashMap与LRU]] | 顺序Map/LRU缓存 | ⭐⭐⭐⭐ |
 
-**核心内容补全**：
-- **HashMap**：散列到桶，碰撞用链表/红黑树处理；扩容带来 rehash 与性能抖动。
-- **LinkedHashMap**：在 HashMap 基础上维护顺序，可用于 LRU。
-- **TreeMap**：有序映射，基于红黑树，适合范围查询。
-- **Hashtable**：同步方法保证线程安全，但性能较差且设计过时。
-- **ConcurrentHashMap**：并发友好，降低锁粒度，提高吞吐。
+**详细讲解**：
+- **HashMap**：
+  - 通过 hash 将 key 映射到桶；冲突时链表/红黑树处理。
+  - 扩容触发 rehash，JDK 8 通过高位判断减少重算。
+  - 负载因子越小冲突越少但空间浪费更多。
+- **LinkedHashMap**：
+  - 在 HashMap 基础上维护双向链表。
+  - 可按插入顺序或访问顺序迭代，适合实现 LRU。
+- **TreeMap**：
+  - 基于红黑树，key 有序，适合范围查询。
+- **Hashtable**：
+  - 全表同步，线程安全但性能差且设计过时。
+- **ConcurrentHashMap**：
+  - 低锁粒度并发控制；高并发下吞吐优于同步 Map。
 
 **高频考点**：
-- HashMap 的 put 过程？
-- HashMap 1.7 和 1.8 的区别？
+- HashMap 的 put/get 流程？
+- HashMap 1.7 与 1.8 区别？
+- LinkedHashMap 如何实现 LRU？
 - ConcurrentHashMap 如何保证线程安全？
 
 ### 3. Set
@@ -168,10 +197,29 @@ status: active
 | [[HashSet实现原理]] | 基于HashMap | ⭐⭐⭐ |
 | [[TreeSet与比较器]] | 红黑树/Comparable | ⭐⭐⭐ |
 
-**核心内容补全**：
-- **HashSet**：底层依赖 HashMap，元素作为 Key；天然去重但无序。
-- **LinkedHashSet**：在 HashSet 基础上保持插入顺序。
-- **TreeSet**：有序集合，基于红黑树，适合排序与范围操作。
+**详细讲解**：
+- **HashSet**：
+  - 基于 HashMap，元素作为 key，天然去重。
+  - 无序，平均查找 O(1)。
+- **LinkedHashSet**：
+  - 保持插入顺序，适合需要“去重 + 维持顺序”的场景。
+- **TreeSet**：
+  - 基于红黑树，有序集合，支持范围操作。
+
+**高频考点**：
+- HashSet 为什么能去重？
+- TreeSet 排序依赖什么？
+
+### 4. Queue
+
+**详细讲解**：
+- **PriorityQueue**：
+  - 基于堆实现，最小/最大优先级出队。
+  - 适合调度、TOP K 等场景。
+- **ArrayDeque**：
+  - 基于循环数组的双端队列，性能优于 LinkedList 作为队列使用。
+- **BlockingQueue**：
+  - 并发场景常用，支持阻塞 put/take。
 
 ---
 
@@ -179,12 +227,13 @@ status: active
 
 | 问题 | 简答 | 细化说明 |
 | :--- | :--- | :--- |
-| ArrayList vs LinkedList？ | 数组 vs 链表，随机访问 vs 增删效率 | ArrayList 适合读多写少；LinkedList 适合频繁插入删除但不适合随机访问 |
-| HashMap 底层结构？ | 数组 + 链表 + 红黑树 | 发生 hash 冲突时用链表/红黑树；树化需满足阈值条件 |
-| HashMap 扩容？ | 容量翻倍，重新 hash 分配位置 | 扩容成本高，适合预估容量避免频繁扩容 |
-| HashMap 为什么线程不安全？ | 并发修改会数据丢失/覆盖 | 旧版本还存在扩容死循环风险 |
-| ConcurrentHashMap 原理？ | 分段锁 / CAS + synchronized | 降低锁粒度，提高并发性能 |
-| fail-fast 是什么？ | 迭代时结构修改抛异常 | 迭代器检测到 modCount 变化即抛异常 |
+| ArrayList vs LinkedList？ | 数组 vs 链表 | ArrayList 适合读多写少；LinkedList 适合频繁插入删除 |
+| ArrayList 扩容？ | 1.5 倍左右 | 扩容会数组复制，建议预估容量 |
+| HashMap 底层结构？ | 数组 + 链表 + 红黑树 | 树化需链表长度与容量条件 |
+| HashMap 扩容？ | 容量翻倍，rehash | 影响性能，频繁扩容不推荐 |
+| HashMap 线程不安全？ | 并发修改导致问题 | 旧版本可能死循环，现版本数据覆盖 |
+| ConcurrentHashMap 原理？ | CAS + synchronized | 锁粒度更细，提高并发吞吐 |
+| fail-fast 是什么？ | 结构修改抛异常 | 迭代器检测 modCount 改变 |
 
 ---
 
