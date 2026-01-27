@@ -187,7 +187,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 473.5
+    "width": 473.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -202,7 +203,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "3044d216e3ecc123",
+  "active": "207e4dd2c0a97409",
   "lastOpenFiles": [
     "05-索引导航/Java后端-MOC.md",
     "01-知识库/计算机/Java与后端/05-测试/JUnit5单元测试-AAA模式示例.md",
