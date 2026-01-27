@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "05-索引导航/PKM流水线v1.0-评估报告.md",
+                "file": "01-知识库/计算机/Java与后端/05-测试/JUnit5单元测试-AAA模式示例.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "PKM流水线v1.0-评估报告"
+              "title": "JUnit5单元测试-AAA模式示例"
             }
           }
         ]
@@ -205,11 +205,14 @@
   },
   "active": "207e4dd2c0a97409",
   "lastOpenFiles": [
+    "01-知识库/计算机/Java与后端/00-面试题库/缓存击穿问题与解决方案.md",
+    "02-学习记录/Dan-Koe-AI使用技巧.canvas",
+    "02-学习记录/Dan-Koe-如何比99%的人更好地使用AI.md",
+    "Prompt工程入门.md",
+    "05-索引导航/PKM流水线v1.0-评估报告.md",
     "05-索引导航/Java后端-MOC.md",
     "01-知识库/计算机/Java与后端/05-测试/JUnit5单元测试-AAA模式示例.md",
-    "01-知识库/计算机/Java与后端/00-面试题库/缓存击穿问题与解决方案.md",
     "00-收集箱/未命名.canvas",
-    "05-索引导航/PKM流水线v1.0-评估报告.md",
     "01-知识库/计算机/Java与后端/06-源码阅读/HashMap-put源码解析.md",
     "04-输出作品/面试回答合集/缓存击穿-面试题速查.md",
     "00-收集箱/Archived/测试skill.md",
@@ -239,8 +242,6 @@
     "10_CS_Basics/计算机网络/OSI 七层.md",
     "10_CS_Basics/计算机网络/TCP-IP 四层.md",
     "10_CS_Basics/数据结构与算法/数据结构与算法.md",
-    "30_Projects/ShortLinkProject_Requirements_Design.md",
-    "20_Java_FullStack/11_Distributed/分布式系统.md",
     "未命名.canvas"
   ]
 }
