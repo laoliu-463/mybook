@@ -171,14 +171,23 @@
               "icon": "git-pull-request",
               "title": "Source Control"
             }
+          },
+          {
+            "id": "3044d216e3ecc123",
+            "type": "leaf",
+            "state": {
+              "type": "claudian-view",
+              "state": {},
+              "icon": "bot",
+              "title": "Claudian"
+            }
           }
         ],
-        "currentTab": 5
+        "currentTab": 6
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 473.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -193,7 +202,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "207e4dd2c0a97409",
+  "active": "3044d216e3ecc123",
   "lastOpenFiles": [
     "05-索引导航/Java后端-MOC.md",
     "01-知识库/计算机/Java与后端/05-测试/JUnit5单元测试-AAA模式示例.md",
