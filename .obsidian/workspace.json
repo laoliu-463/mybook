@@ -1,0 +1,230 @@
+{
+  "main": {
+    "id": "d7f20b3a3dbb1fa2",
+    "type": "split",
+    "children": [
+      {
+        "id": "38f977df7118e80e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "207e4dd2c0a97409",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "新标签页"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "6d6ae25e078d5cea",
+    "type": "split",
+    "children": [
+      {
+        "id": "a7fbffb0982ceb16",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "2067b1c939c41cdc",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "dd08c1fb10fa7fbe",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": true,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "622fd375ab72c923",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "75b922fec596eb3e",
+    "type": "split",
+    "children": [
+      {
+        "id": "c256484c72f1867d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "455b7f34c7d2a791",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "反向链接"
+            }
+          },
+          {
+            "id": "8bcd874103a90f15",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "出链"
+            }
+          },
+          {
+            "id": "01e85001c2a91730",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "f9102cd475914ed4",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "添加笔记属性"
+            }
+          },
+          {
+            "id": "c384455efe47d74c",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "大纲"
+            }
+          },
+          {
+            "id": "e21ee5b23677e5c5",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "git-pull-request",
+              "title": "Source Control"
+            }
+          }
+        ],
+        "currentTab": 5
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "bases:新建数据库": false,
+      "obsidian-git:Open Git source control": false
+    }
+  },
+  "active": "207e4dd2c0a97409",
+  "lastOpenFiles": [
+    "ArrayList源码分析.md",
+    "20_Java_FullStack/04_Collections/Java集合框架.md",
+    "20_Java_FullStack/03_JavaSE/Java基础.md",
+    "java-notes-collector.skill",
+    "tmpclaude-1d52-cwd",
+    "tmpclaude-deab-cwd",
+    "tmpclaude-067c-cwd",
+    "tmpclaude-5876-cwd",
+    "tmpclaude-6ff0-cwd",
+    "20_Java_FullStack/Java后端八股总览.md",
+    "20_Java_FullStack/13_Network/网络协议.md",
+    "20_Java_FullStack/12_DesignPatterns/设计模式.md",
+    "20_Java_FullStack/02_JVM/全局优化.md",
+    "20_Java_FullStack/06_Spring/Spring框架.md",
+    "10_CS_Basics/计算机网络/计算机网络物理媒介和分组交换原理.md",
+    "10_CS_Basics/计算机网络/OSI 七层.md",
+    "10_CS_Basics/计算机网络/TCP-IP 四层.md",
+    "10_CS_Basics/数据结构与算法/数据结构与算法.md",
+    "30_Projects/ShortLinkProject_Requirements_Design.md",
+    "20_Java_FullStack/11_Distributed/分布式系统.md",
+    "20_Java_FullStack/10_MessageQueue/消息队列.md",
+    "20_Java_FullStack/09_Redis/Redis缓存.md",
+    "20_Java_FullStack/08_MySQL/MySQL数据库.md",
+    "20_Java_FullStack/07_MyBatis/MyBatis框架.md",
+    "20_Java_FullStack/05_Concurrency/Java并发编程.md",
+    "tmpclaude-3660-cwd",
+    "20_Java_FullStack/13_Network",
+    "20_Java_FullStack/12_DesignPatterns",
+    "20_Java_FullStack/11_Distributed",
+    "八股项目备战/八股学习计划.md",
+    "java-obsidian-note-generator/SKILL.md",
+    "90_Tools_Environment/Obsidian Git 笔记库配置全流程.md",
+    "20_Java_FullStack/01_Frontend/JavaScript与jQuery核心梳理.md",
+    "20_Java_FullStack/01_Frontend/HTML5全局内容结构化梳理.md",
+    "20_Java_FullStack/01_Frontend/CSS3全局内容结构化梳理.md",
+    "20_Java_FullStack/01_Frontend/前端基础.md",
+    "未命名.canvas"
+  ]
+}
