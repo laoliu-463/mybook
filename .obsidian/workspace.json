@@ -53,7 +53,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "tag:高并发",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -74,7 +74,8 @@
               "title": "书签"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -193,9 +194,12 @@
   },
   "active": "207e4dd2c0a97409",
   "lastOpenFiles": [
+    "01-知识库/计算机/Java与后端/00-面试题库/缓存击穿问题与解决方案.md",
+    "00-收集箱/Archived/测试skill.md",
     "00-收集箱/测试skill.md",
-    "06-模板/PKM规范.md",
     "06-模板/收集箱模板.md",
+    "00-收集箱/Archived",
+    "06-模板/PKM规范.md",
     "99-归档",
     "07-附件资源",
     "06-模板",
@@ -205,7 +209,6 @@
     "04-输出作品/简历项目要点",
     "04-输出作品/面试回答合集",
     "04-输出作品",
-    "03-项目实践",
     "ArrayList源码分析.md",
     "20_Java_FullStack/04_Collections/Java集合框架.md",
     "20_Java_FullStack/03_JavaSE/Java基础.md",
@@ -227,8 +230,6 @@
     "20_Java_FullStack/05_Concurrency/Java并发编程.md",
     "八股项目备战/八股学习计划.md",
     "java-obsidian-note-generator/SKILL.md",
-    "90_Tools_Environment/Obsidian Git 笔记库配置全流程.md",
-    "20_Java_FullStack/01_Frontend/JavaScript与jQuery核心梳理.md",
     "未命名.canvas"
   ]
 }
