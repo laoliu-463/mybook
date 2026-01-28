@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Prompt工程入门.md",
+                "file": "20-Projects/P01-hmdp黑马点评/00-项目看板.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Prompt工程入门"
+              "title": "00-项目看板"
             }
           }
         ]
@@ -205,6 +205,7 @@
   },
   "active": "207e4dd2c0a97409",
   "lastOpenFiles": [
+    "Prompt工程入门.md",
     "10-Areas/编程/数据库/经验库/MySQL8-ROW_FORMAT兼容性问题.md",
     "10-Areas/编程/Java/经验库/JDK版本与pom配置不一致问题.md",
     "04-输出作品/面试回答合集/缓存击穿-面试题速查.md",
@@ -213,7 +214,6 @@
     "20-Projects/P01-hmdp黑马点评/00-项目看板.md",
     "50-Navigation/PKM流水线v1.0-评估报告.md",
     "50-Navigation/Java后端-MOC.md",
-    "Prompt工程入门.md",
     "Redis连接池配置.md",
     "10-Areas/编程/数据库/经验库",
     "10-Areas/编程/数据库",
