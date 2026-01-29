@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "20-Projects/P01-hmdp黑马点评/00-项目看板.md",
+                "file": "Prompt工程入门.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "00-项目看板"
+              "title": "Prompt工程入门"
             }
           }
         ]
@@ -205,26 +205,27 @@
   },
   "active": "207e4dd2c0a97409",
   "lastOpenFiles": [
+    "tmpclaude-8f57-cwd",
+    "20-Projects/P01-hmdp黑马点评/04-交付物",
+    "20-Projects/P01-hmdp黑马点评/03-过程日志",
+    "20-Projects/P01-hmdp黑马点评/02-源码分析",
+    "20-Projects/P01-hmdp黑马点评/01-学习笔记",
+    "tmpclaude-fbbe-cwd",
+    "tmpclaude-c5a4-cwd",
+    "tmpclaude-8d74-cwd",
+    "tmpclaude-c137-cwd",
+    "tmpclaude-e9e6-cwd",
+    "tmpclaude-8fa6-cwd",
+    "20-Projects/P01-hmdp黑马点评/00-项目看板.md",
     "Prompt工程入门.md",
     "10-Areas/编程/数据库/经验库/MySQL8-ROW_FORMAT兼容性问题.md",
     "10-Areas/编程/Java/经验库/JDK版本与pom配置不一致问题.md",
     "04-输出作品/面试回答合集/缓存击穿-面试题速查.md",
     "06-模板/收集箱模板.md",
     "06-模板/PKM规范.md",
-    "20-Projects/P01-hmdp黑马点评/00-项目看板.md",
     "50-Navigation/PKM流水线v1.0-评估报告.md",
     "50-Navigation/Java后端-MOC.md",
     "Redis连接池配置.md",
-    "10-Areas/编程/数据库/经验库",
-    "10-Areas/编程/数据库",
-    "10-Areas/编程/Java/经验库",
-    "10-Areas/编程/Java",
-    "10-Areas/编程",
-    "tmpclaude-5473-cwd",
-    "50-Navigation",
-    "tmpclaude-9cf3-cwd",
-    "40-Resources",
-    "tmpclaude-8270-cwd",
     "10-Areas/计算机/Java与后端/06-源码阅读/HashMap-put源码解析.md",
     "10-Areas/计算机/Java与后端/05-测试/JUnit5单元测试-AAA模式示例.md",
     "10-Areas/计算机/Java与后端/00-面试题库/缓存击穿问题与解决方案.md",
@@ -245,7 +246,6 @@
     "00-收集箱/未命名.canvas",
     "00-收集箱/依旧测试.md",
     "ArrayList源码分析.md",
-    "20_Java_FullStack/04_Collections/Java集合框架.md",
     "未命名.canvas"
   ]
 }
