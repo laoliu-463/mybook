@@ -1,493 +1,58 @@
 {
-  "nodes": [
-    {
-      "id": "group-db-user",
-      "type": "group",
-      "x": -800,
-      "y": -400,
-      "width": 520,
-      "height": 480,
-      "label": "用户模块 (Database)",
-      "color": "5"
-    },
-    {
-      "id": "group-db-shop",
-      "type": "group",
-      "x": -800,
-      "y": 120,
-      "width": 520,
-      "height": 380,
-      "label": "商铺模块 (Database)",
-      "color": "4"
-    },
-    {
-      "id": "group-db-voucher",
-      "type": "group",
-      "x": -800,
-      "y": 540,
-      "width": 520,
-      "height": 480,
-      "label": "优惠券模块 (Database)",
-      "color": "2"
-    },
-    {
-      "id": "group-db-social",
-      "type": "group",
-      "x": -220,
-      "y": -400,
-      "width": 420,
-      "height": 680,
-      "label": "社交模块 (Database)",
-      "color": "6"
-    },
-    {
-      "id": "group-redis-auth",
-      "type": "group",
-      "x": 260,
-      "y": -400,
-      "width": 380,
-      "height": 280,
-      "label": "登录认证层 (Redis)",
-      "color": "5"
-    },
-    {
-      "id": "group-redis-cache",
-      "type": "group",
-      "x": 260,
-      "y": -80,
-      "width": 380,
-      "height": 380,
-      "label": "缓存层 (Redis)",
-      "color": "4"
-    },
-    {
-      "id": "group-redis-seckill",
-      "type": "group",
-      "x": 260,
-      "y": 340,
-      "width": 380,
-      "height": 280,
-      "label": "秒杀层 (Redis)",
-      "color": "2"
-    },
-    {
-      "id": "group-redis-social",
-      "type": "group",
-      "x": 260,
-      "y": 660,
-      "width": 380,
-      "height": 480,
-      "label": "社交层 (Redis)",
-      "color": "6"
-    },
-    {
-      "id": "node-tb-user",
-      "type": "text",
-      "x": -760,
-      "y": -360,
-      "width": 220,
-      "height": 180,
-      "text": "### tb_user\n**用户表**\n\n- id (PK)\n- phone (UK)\n- password\n- nick_name\n- icon",
-      "color": "5"
-    },
-    {
-      "id": "node-tb-user-info",
-      "type": "text",
-      "x": -500,
-      "y": -360,
-      "width": 200,
-      "height": 180,
-      "text": "### tb_user_info\n**用户详情**\n\n- user_id (PK,FK)\n- fans\n- followee\n- credits",
-      "color": "5"
-    },
-    {
-      "id": "node-tb-sign",
-      "type": "text",
-      "x": -760,
-      "y": -140,
-      "width": 200,
-      "height": 140,
-      "text": "### tb_sign\n**签到表**\n\n- id (PK)\n- user_id (FK)\n- year\n- date",
-      "color": "5"
-    },
-    {
-      "id": "node-tb-shop",
-      "type": "text",
-      "x": -760,
-      "y": 160,
-      "width": 220,
-      "height": 200,
-      "text": "### tb_shop\n**商铺表**\n\n- id (PK)\n- name\n- type_id (FK)\n- x, y (坐标)\n- avg_price\n- score",
-      "color": "4"
-    },
-    {
-      "id": "node-tb-shop-type",
-      "type": "text",
-      "x": -500,
-      "y": 160,
-      "width": 200,
-      "height": 160,
-      "text": "### tb_shop_type\n**商铺类型**\n\n- id (PK)\n- name\n- icon\n- sort",
-      "color": "4"
-    },
-    {
-      "id": "node-tb-voucher",
-      "type": "text",
-      "x": -760,
-      "y": 580,
-      "width": 220,
-      "height": 200,
-      "text": "### tb_voucher\n**优惠券表**\n\n- id (PK)\n- shop_id (FK)\n- pay_value\n- actual_value\n- type",
-      "color": "2"
-    },
-    {
-      "id": "node-tb-seckill-voucher",
-      "type": "text",
-      "x": -500,
-      "y": 580,
-      "width": 200,
-      "height": 200,
-      "text": "### tb_seckill_voucher\n**秒杀券**\n\n- voucher_id (PK,FK)\n- stock 🔥\n- begin_time\n- end_time",
-      "color": "2"
-    },
-    {
-      "id": "node-tb-voucher-order",
-      "type": "text",
-      "x": -760,
-      "y": 820,
-      "width": 220,
-      "height": 160,
-      "text": "### tb_voucher_order\n**券订单**\n\n- id (PK)\n- user_id (FK)\n- voucher_id (FK)\n- pay_type",
-      "color": "2"
-    },
-    {
-      "id": "node-tb-blog",
-      "type": "text",
-      "x": -180,
-      "y": -360,
-      "width": 200,
-      "height": 200,
-      "text": "### tb_blog\n**探店笔记**\n\n- id (PK)\n- shop_id (FK)\n- user_id (FK)\n- title\n- images\n- liked",
-      "color": "6"
-    },
-    {
-      "id": "node-tb-blog-comments",
-      "type": "text",
-      "x": -180,
-      "y": -120,
-      "width": 200,
-      "height": 160,
-      "text": "### tb_blog_comments\n**笔记评论**\n\n- id (PK)\n- blog_id (FK)\n- user_id (FK)\n- content",
-      "color": "6"
-    },
-    {
-      "id": "node-tb-follow",
-      "type": "text",
-      "x": -180,
-      "y": 80,
-      "width": 200,
-      "height": 160,
-      "text": "### tb_follow\n**关注表**\n\n- id (PK)\n- user_id (FK)\n- follow_user_id (FK)\n- create_time",
-      "color": "6"
-    },
-    {
-      "id": "node-redis-code",
-      "type": "text",
-      "x": 300,
-      "y": -360,
-      "width": 300,
-      "height": 100,
-      "text": "### login:code:{phone}\n**验证码缓存**\n\n`String` | TTL: 5min",
-      "color": "5"
-    },
-    {
-      "id": "node-redis-token",
-      "type": "text",
-      "x": 300,
-      "y": -220,
-      "width": 300,
-      "height": 100,
-      "text": "### login:token:{token}\n**用户Token**\n\n`Hash` | TTL: 30min (滑动刷新)",
-      "color": "5"
-    },
-    {
-      "id": "node-redis-shop",
-      "type": "text",
-      "x": 300,
-      "y": -40,
-      "width": 300,
-      "height": 120,
-      "text": "### cache:shop:{id}\n**商铺缓存**\n\n`String` (JSON)\n🛡️ 缓存穿透/击穿/雪崩",
-      "color": "4"
-    },
-    {
-      "id": "node-redis-shop-type",
-      "type": "text",
-      "x": 300,
-      "y": 120,
-      "width": 300,
-      "height": 80,
-      "text": "### cache:shop-type\n**商铺类型列表**\n\n`String` (JSON Array)",
-      "color": "4"
-    },
-    {
-      "id": "node-redis-geo",
-      "type": "text",
-      "x": 300,
-      "y": 240,
-      "width": 300,
-      "height": 80,
-      "text": "### shop:geo:{typeId}\n**附近商铺**\n\n`GEO` (经纬度索引)",
-      "color": "4"
-    },
-    {
-      "id": "node-redis-stock",
-      "type": "text",
-      "x": 300,
-      "y": 380,
-      "width": 300,
-      "height": 100,
-      "text": "### seckill:stock:{voucherId}\n**秒杀库存**\n\n`String` | 原子扣减 (DECR)",
-      "color": "2"
-    },
-    {
-      "id": "node-redis-order-set",
-      "type": "text",
-      "x": 300,
-      "y": 520,
-      "width": 300,
-      "height": 100,
-      "text": "### seckill:order:{voucherId}\n**一人一单**\n\n`Set` (userId去重) + Redisson分布式锁",
-      "color": "2"
-    },
-    {
-      "id": "node-redis-liked",
-      "type": "text",
-      "x": 300,
-      "y": 700,
-      "width": 300,
-      "height": 100,
-      "text": "### blog:liked:{blogId}\n**点赞记录**\n\n`ZSet` (score=timestamp)",
-      "color": "6"
-    },
-    {
-      "id": "node-redis-follows",
-      "type": "text",
-      "x": 300,
-      "y": 840,
-      "width": 300,
-      "height": 100,
-      "text": "### follows:{userId}\n**关注列表**\n\n`Set` | 共同关注: SINTER",
-      "color": "6"
-    },
-    {
-      "id": "node-redis-feed",
-      "type": "text",
-      "x": 300,
-      "y": 980,
-      "width": 300,
-      "height": 100,
-      "text": "### feed:{userId}\n**Feed流收件箱**\n\n`ZSet` (score=timestamp) | 推模式",
-      "color": "6"
-    },
-    {
-      "id": "node-redis-sign",
-      "type": "text",
-      "x": 300,
-      "y": 1120,
-      "width": 300,
-      "height": 100,
-      "text": "### sign:{userId}:{yyyyMM}\n**签到BitMap**\n\n`BitMap` (按天bit位)",
-      "color": "5"
-    }
-  ],
-  "edges": [
-    {
-      "id": "edge-user-userinfo",
-      "fromNode": "node-tb-user",
-      "fromSide": "right",
-      "toNode": "node-tb-user-info",
-      "toSide": "left",
-      "label": "1:1"
-    },
-    {
-      "id": "edge-user-sign",
-      "fromNode": "node-tb-user",
-      "fromSide": "bottom",
-      "toNode": "node-tb-sign",
-      "toSide": "top",
-      "label": "1:N"
-    },
-    {
-      "id": "edge-user-blog",
-      "fromNode": "node-tb-user",
-      "fromSide": "right",
-      "toNode": "node-tb-blog",
-      "toSide": "left",
-      "label": "发布"
-    },
-    {
-      "id": "edge-user-follow",
-      "fromNode": "node-tb-user",
-      "fromSide": "right",
-      "toNode": "node-tb-follow",
-      "toSide": "left",
-      "label": "关注"
-    },
-    {
-      "id": "edge-user-order",
-      "fromNode": "node-tb-user",
-      "fromSide": "bottom",
-      "toNode": "node-tb-voucher-order",
-      "toSide": "top",
-      "label": "下单"
-    },
-    {
-      "id": "edge-shop-type",
-      "fromNode": "node-tb-shop",
-      "fromSide": "right",
-      "toNode": "node-tb-shop-type",
-      "toSide": "left",
-      "label": "属于"
-    },
-    {
-      "id": "edge-shop-blog",
-      "fromNode": "node-tb-shop",
-      "fromSide": "right",
-      "toNode": "node-tb-blog",
-      "toSide": "bottom",
-      "label": "被探店"
-    },
-    {
-      "id": "edge-shop-voucher",
-      "fromNode": "node-tb-shop",
-      "fromSide": "bottom",
-      "toNode": "node-tb-voucher",
-      "toSide": "top",
-      "label": "发放"
-    },
-    {
-      "id": "edge-voucher-seckill",
-      "fromNode": "node-tb-voucher",
-      "fromSide": "right",
-      "toNode": "node-tb-seckill-voucher",
-      "toSide": "left",
-      "label": "1:1秒杀"
-    },
-    {
-      "id": "edge-voucher-order",
-      "fromNode": "node-tb-voucher",
-      "fromSide": "bottom",
-      "toNode": "node-tb-voucher-order",
-      "toSide": "top",
-      "label": "被购买"
-    },
-    {
-      "id": "edge-blog-comment",
-      "fromNode": "node-tb-blog",
-      "fromSide": "bottom",
-      "toNode": "node-tb-blog-comments",
-      "toSide": "top",
-      "label": "评论"
-    },
-    {
-      "id": "edge-user-redis-code",
-      "fromNode": "node-tb-user",
-      "fromSide": "right",
-      "toNode": "node-redis-code",
-      "toSide": "left",
-      "label": "验证码",
-      "color": "5"
-    },
-    {
-      "id": "edge-user-redis-token",
-      "fromNode": "node-tb-user",
-      "fromSide": "right",
-      "toNode": "node-redis-token",
-      "toSide": "left",
-      "label": "会话",
-      "color": "5"
-    },
-    {
-      "id": "edge-shop-redis-cache",
-      "fromNode": "node-tb-shop",
-      "fromSide": "right",
-      "toNode": "node-redis-shop",
-      "toSide": "left",
-      "label": "缓存",
-      "color": "4"
-    },
-    {
-      "id": "edge-shoptype-redis-cache",
-      "fromNode": "node-tb-shop-type",
-      "fromSide": "right",
-      "toNode": "node-redis-shop-type",
-      "toSide": "left",
-      "label": "列表缓存",
-      "color": "4"
-    },
-    {
-      "id": "edge-shop-redis-geo",
-      "fromNode": "node-tb-shop",
-      "fromSide": "right",
-      "toNode": "node-redis-geo",
-      "toSide": "left",
-      "label": "GEO索引",
-      "color": "4"
-    },
-    {
-      "id": "edge-seckill-redis-stock",
-      "fromNode": "node-tb-seckill-voucher",
-      "fromSide": "right",
-      "toNode": "node-redis-stock",
-      "toSide": "left",
-      "label": "库存预热",
-      "color": "2"
-    },
-    {
-      "id": "edge-order-redis-set",
-      "fromNode": "node-tb-voucher-order",
-      "fromSide": "right",
-      "toNode": "node-redis-order-set",
-      "toSide": "left",
-      "label": "去重",
-      "color": "2"
-    },
-    {
-      "id": "edge-blog-redis-liked",
-      "fromNode": "node-tb-blog",
-      "fromSide": "right",
-      "toNode": "node-redis-liked",
-      "toSide": "left",
-      "label": "点赞",
-      "color": "6"
-    },
-    {
-      "id": "edge-follow-redis-follows",
-      "fromNode": "node-tb-follow",
-      "fromSide": "right",
-      "toNode": "node-redis-follows",
-      "toSide": "left",
-      "label": "集合",
-      "color": "6"
-    },
-    {
-      "id": "edge-blog-redis-feed",
-      "fromNode": "node-tb-blog",
-      "fromSide": "right",
-      "toNode": "node-redis-feed",
-      "toSide": "left",
-      "label": "推送",
-      "color": "6"
-    },
-    {
-      "id": "edge-sign-redis-bitmap",
-      "fromNode": "node-tb-sign",
-      "fromSide": "right",
-      "toNode": "node-redis-sign",
-      "toSide": "left",
-      "label": "BitMap",
-      "color": "5"
-    }
-  ]
+	"nodes":[
+		{"id":"group-db-user","type":"group","x":-800,"y":-400,"width":520,"height":480,"label":"用户模块 (Database)","color":"5"},
+		{"id":"group-db-shop","type":"group","x":-800,"y":120,"width":520,"height":380,"label":"商铺模块 (Database)","color":"4"},
+		{"id":"group-db-voucher","type":"group","x":-800,"y":540,"width":520,"height":480,"label":"优惠券模块 (Database)","color":"2"},
+		{"id":"group-db-social","type":"group","x":-220,"y":-400,"width":420,"height":680,"label":"社交模块 (Database)","color":"6"},
+		{"id":"group-redis-auth","type":"group","x":260,"y":-400,"width":380,"height":280,"label":"登录认证层 (Redis)","color":"5"},
+		{"id":"group-redis-cache","type":"group","x":260,"y":-80,"width":380,"height":380,"label":"缓存层 (Redis)","color":"4"},
+		{"id":"group-redis-seckill","type":"group","x":260,"y":340,"width":380,"height":280,"label":"秒杀层 (Redis)","color":"2"},
+		{"id":"group-redis-social","type":"group","x":260,"y":660,"width":380,"height":480,"label":"社交层 (Redis)","color":"6"},
+		{"id":"node-tb-user","type":"text","x":-760,"y":-360,"width":220,"height":180,"text":"### tb_user\n**用户表**\n\n- id (PK)\n- phone (UK)\n- password\n- nick_name\n- icon","color":"5"},
+		{"id":"node-tb-user-info","type":"text","x":-500,"y":-360,"width":200,"height":180,"text":"### tb_user_info\n**用户详情**\n\n- user_id (PK,FK)\n- fans\n- followee\n- credits","color":"5"},
+		{"id":"node-tb-sign","type":"text","x":-760,"y":-140,"width":200,"height":140,"text":"### tb_sign\n**签到表**\n\n- id (PK)\n- user_id (FK)\n- year\n- date","color":"5"},
+		{"id":"node-tb-shop","type":"text","x":-760,"y":160,"width":220,"height":200,"text":"### tb_shop\n**商铺表**\n\n- id (PK)\n- name\n- type_id (FK)\n- x, y (坐标)\n- avg_price\n- score","color":"4"},
+		{"id":"node-tb-shop-type","type":"text","x":-500,"y":160,"width":200,"height":160,"text":"### tb_shop_type\n**商铺类型**\n\n- id (PK)\n- name\n- icon\n- sort","color":"4"},
+		{"id":"node-tb-voucher","type":"text","x":-760,"y":580,"width":220,"height":200,"text":"### tb_voucher\n**优惠券表**\n\n- id (PK)\n- shop_id (FK)\n- pay_value\n- actual_value\n- type","color":"2"},
+		{"id":"node-tb-seckill-voucher","type":"text","x":-500,"y":580,"width":200,"height":200,"text":"### tb_seckill_voucher\n**秒杀券**\n\n- voucher_id (PK,FK)\n- stock 🔥\n- begin_time\n- end_time","color":"2"},
+		{"id":"node-tb-voucher-order","type":"text","x":-760,"y":820,"width":220,"height":160,"text":"### tb_voucher_order\n**券订单**\n\n- id (PK)\n- user_id (FK)\n- voucher_id (FK)\n- pay_type","color":"2"},
+		{"id":"node-tb-blog","type":"text","x":-180,"y":-360,"width":200,"height":200,"text":"### tb_blog\n**探店笔记**\n\n- id (PK)\n- shop_id (FK)\n- user_id (FK)\n- title\n- images\n- liked","color":"6"},
+		{"id":"node-tb-blog-comments","type":"text","x":-180,"y":-120,"width":200,"height":160,"text":"### tb_blog_comments\n**笔记评论**\n\n- id (PK)\n- blog_id (FK)\n- user_id (FK)\n- content","color":"6"},
+		{"id":"node-tb-follow","type":"text","x":-180,"y":80,"width":200,"height":160,"text":"### tb_follow\n**关注表**\n\n- id (PK)\n- user_id (FK)\n- follow_user_id (FK)\n- create_time","color":"6"},
+		{"id":"node-redis-code","type":"text","x":300,"y":-360,"width":300,"height":100,"text":"### login:code:{phone}\n**验证码缓存**\n\n`String` | TTL: 5min","color":"5"},
+		{"id":"node-redis-token","type":"text","x":300,"y":-220,"width":300,"height":100,"text":"### login:token:{token}\n**用户Token**\n\n`Hash` | TTL: 30min (滑动刷新)","color":"5"},
+		{"id":"node-redis-shop","type":"text","x":300,"y":-40,"width":300,"height":120,"text":"### cache:shop:{id}\n**商铺缓存**\n\n`String` (JSON)\n🛡️ 缓存穿透/击穿/雪崩","color":"4"},
+		{"id":"node-redis-shop-type","type":"text","x":300,"y":120,"width":300,"height":80,"text":"### cache:shop-type\n**商铺类型列表**\n\n`String` (JSON Array)","color":"4"},
+		{"id":"node-redis-geo","type":"text","x":300,"y":240,"width":300,"height":80,"text":"### shop:geo:{typeId}\n**附近商铺**\n\n`GEO` (经纬度索引)","color":"4"},
+		{"id":"node-redis-stock","type":"text","x":300,"y":380,"width":300,"height":100,"text":"### seckill:stock:{voucherId}\n**秒杀库存**\n\n`String` | 原子扣减 (DECR)","color":"2"},
+		{"id":"node-redis-order-set","type":"text","x":300,"y":520,"width":300,"height":100,"text":"### seckill:order:{voucherId}\n**一人一单**\n\n`Set` (userId去重) + Redisson分布式锁","color":"2"},
+		{"id":"node-redis-liked","type":"text","x":300,"y":700,"width":300,"height":100,"text":"### blog:liked:{blogId}\n**点赞记录**\n\n`ZSet` (score=timestamp)","color":"6"},
+		{"id":"node-redis-follows","type":"text","x":300,"y":840,"width":300,"height":100,"text":"### follows:{userId}\n**关注列表**\n\n`Set` | 共同关注: SINTER","color":"6"},
+		{"id":"node-redis-feed","type":"text","x":300,"y":980,"width":300,"height":100,"text":"### feed:{userId}\n**Feed流收件箱**\n\n`ZSet` (score=timestamp) | 推模式","color":"6"},
+		{"id":"node-redis-sign","type":"text","x":300,"y":1120,"width":300,"height":100,"text":"### sign:{userId}:{yyyyMM}\n**签到BitMap**\n\n`BitMap` (按天bit位)","color":"5"}
+	],
+	"edges":[
+		{"id":"edge-user-userinfo","fromNode":"node-tb-user","fromSide":"right","toNode":"node-tb-user-info","toSide":"left","label":"1:1"},
+		{"id":"edge-user-sign","fromNode":"node-tb-user","fromSide":"bottom","toNode":"node-tb-sign","toSide":"top","label":"1:N"},
+		{"id":"edge-user-blog","fromNode":"node-tb-user","fromSide":"right","toNode":"node-tb-blog","toSide":"left","label":"发布"},
+		{"id":"edge-user-follow","fromNode":"node-tb-user","fromSide":"right","toNode":"node-tb-follow","toSide":"left","label":"关注"},
+		{"id":"edge-user-order","fromNode":"node-tb-user","fromSide":"bottom","toNode":"node-tb-voucher-order","toSide":"top","label":"下单"},
+		{"id":"edge-shop-type","fromNode":"node-tb-shop","fromSide":"right","toNode":"node-tb-shop-type","toSide":"left","label":"属于"},
+		{"id":"edge-shop-blog","fromNode":"node-tb-shop","fromSide":"right","toNode":"node-tb-blog","toSide":"bottom","label":"被探店"},
+		{"id":"edge-shop-voucher","fromNode":"node-tb-shop","fromSide":"bottom","toNode":"node-tb-voucher","toSide":"top","label":"发放"},
+		{"id":"edge-voucher-seckill","fromNode":"node-tb-voucher","fromSide":"right","toNode":"node-tb-seckill-voucher","toSide":"left","label":"1:1秒杀"},
+		{"id":"edge-voucher-order","fromNode":"node-tb-voucher","fromSide":"bottom","toNode":"node-tb-voucher-order","toSide":"top","label":"被购买"},
+		{"id":"edge-blog-comment","fromNode":"node-tb-blog","fromSide":"bottom","toNode":"node-tb-blog-comments","toSide":"top","label":"评论"},
+		{"id":"edge-user-redis-code","fromNode":"node-tb-user","fromSide":"right","toNode":"node-redis-code","toSide":"left","label":"验证码","color":"5"},
+		{"id":"edge-user-redis-token","fromNode":"node-tb-user","fromSide":"right","toNode":"node-redis-token","toSide":"left","label":"会话","color":"5"},
+		{"id":"edge-shop-redis-cache","fromNode":"node-tb-shop","fromSide":"right","toNode":"node-redis-shop","toSide":"left","label":"缓存","color":"4"},
+		{"id":"edge-shoptype-redis-cache","fromNode":"node-tb-shop-type","fromSide":"right","toNode":"node-redis-shop-type","toSide":"left","label":"列表缓存","color":"4"},
+		{"id":"edge-shop-redis-geo","fromNode":"node-tb-shop","fromSide":"right","toNode":"node-redis-geo","toSide":"left","label":"GEO索引","color":"4"},
+		{"id":"edge-seckill-redis-stock","fromNode":"node-tb-seckill-voucher","fromSide":"right","toNode":"node-redis-stock","toSide":"left","label":"库存预热","color":"2"},
+		{"id":"edge-order-redis-set","fromNode":"node-tb-voucher-order","fromSide":"right","toNode":"node-redis-order-set","toSide":"left","label":"去重","color":"2"},
+		{"id":"edge-blog-redis-liked","fromNode":"node-tb-blog","fromSide":"right","toNode":"node-redis-liked","toSide":"left","label":"点赞","color":"6"},
+		{"id":"edge-follow-redis-follows","fromNode":"node-tb-follow","fromSide":"right","toNode":"node-redis-follows","toSide":"left","label":"集合","color":"6"},
+		{"id":"edge-blog-redis-feed","fromNode":"node-tb-blog","fromSide":"right","toNode":"node-redis-feed","toSide":"left","label":"推送","color":"6"},
+		{"id":"edge-sign-redis-bitmap","fromNode":"node-tb-sign","fromSide":"right","toNode":"node-redis-sign","toSide":"left","label":"BitMap","color":"5"}
+	]
 }
