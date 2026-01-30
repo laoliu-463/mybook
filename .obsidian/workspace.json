@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "20-Projects/P01-hmdp黑马点评/02-源码分析/数据库设计分析.md",
+                "file": "20-Projects/P01-hmdp黑马点评/02-源码分析/短信登录注册-Redis+Token方案.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "数据库设计分析"
+              "title": "短信登录注册-Redis+Token方案"
             }
           }
         ]
@@ -205,12 +205,15 @@
   },
   "active": "207e4dd2c0a97409",
   "lastOpenFiles": [
+    "20-Projects/P01-hmdp黑马点评/02-源码分析/短信登录注册-Redis+Token方案.canvas",
+    "20-Projects/P01-hmdp黑马点评/02-源码分析/短信登录注册-Redis+Token方案.md",
+    "10-Areas/计算机/Java与后端/05-测试/JUnit5单元测试-AAA模式示例.md",
     "20-Projects/P01-hmdp黑马点评/02-源码分析/数据流向图.canvas",
+    "20-Projects/P01-hmdp黑马点评/02-源码分析/数据库设计分析.md",
     "20-Projects/P01-hmdp黑马点评/02-源码分析/数据库架构图.canvas",
     "20-Projects/P01-hmdp黑马点评/01-学习笔记/skill使用指南.md",
     "10-Areas/编程/数据库/经验库/MySQL8-ROW_FORMAT兼容性问题.md",
     "Prompt工程入门.md",
-    "20-Projects/P01-hmdp黑马点评/02-源码分析/数据库设计分析.md",
     "00-Inbox/数据库SQL.md",
     "tmpclaude-1d52-cwd",
     "tmpclaude-8f57-cwd",
@@ -231,7 +234,6 @@
     "50-Navigation/Java后端-MOC.md",
     "Redis连接池配置.md",
     "10-Areas/计算机/Java与后端/06-源码阅读/HashMap-put源码解析.md",
-    "10-Areas/计算机/Java与后端/05-测试/JUnit5单元测试-AAA模式示例.md",
     "10-Areas/计算机/Java与后端/00-面试题库/缓存击穿问题与解决方案.md",
     "10-Areas/计算机/Java与后端/00-面试题库/缓存击穿问题与解决方案.canvas",
     "00-Inbox/Archived/测试skill.md",
@@ -245,7 +247,6 @@
     "05-索引导航/Java后端-MOC.md",
     "02-学习记录/Dan-Koe-AI使用技巧.canvas",
     "02-学习记录/Dan-Koe-如何比99%的人更好地使用AI.md",
-    "01-知识库/计算机/Java与后端/06-源码阅读/HashMap-put源码解析.md",
     "00-收集箱/未命名.canvas",
     "未命名.canvas"
   ]

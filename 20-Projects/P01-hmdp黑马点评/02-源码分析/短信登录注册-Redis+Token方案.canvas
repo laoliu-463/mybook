@@ -1,0 +1,30 @@
+{
+	"nodes":[
+		{"id":"group-interceptor","type":"group","x":300,"y":500,"width":600,"height":320,"color":"4","label":"阶段三：双拦截器校验"},
+		{"id":"group-login","type":"group","x":800,"y":0,"width":380,"height":360,"color":"4","label":"阶段二：登录与注册"},
+		{"id":"group-send","type":"group","x":0,"y":0,"width":350,"height":280,"color":"4","label":"阶段一：发送验证码"},
+		{"id":"center","type":"text","text":"# Redis + Token 登录方案\n\n**核心**: 分布式 Session 共享\n**技术**: Redis Hash + UUID Token","x":400,"y":300,"width":320,"height":140,"color":"5"},
+		{"id":"node-validate-phone","type":"text","text":"**1. 校验手机号**\nRegexUtils 正则验证","x":20,"y":50,"width":300,"height":60},
+		{"id":"node-generate-code","type":"text","text":"**2. 生成验证码**\nHutool RandomUtil 6位数字","x":20,"y":130,"width":300,"height":60},
+		{"id":"node-redis-save","type":"text","text":"**3. Redis 存储**\nKey: `login:code:{phone}`\nTTL: 2分钟","x":20,"y":210,"width":300,"height":60,"color":"3"},
+		{"id":"node-verify-code","type":"text","text":"**1. 双重校验**\n校验手机号 + 验证码对比","x":820,"y":50,"width":340,"height":60},
+		{"id":"node-auto-register","type":"text","text":"**2. 查询/自动注册**\ntb_user 表查询，不存在则创建","x":820,"y":130,"width":340,"height":60},
+		{"id":"node-userdto","type":"text","text":"**3. 脱敏处理**\nUser → UserDTO (仅ID/昵称/头像)","x":820,"y":210,"width":340,"height":60,"color":"1"},
+		{"id":"node-token","type":"text","text":"**4. 颁发 Token**\nUUID → Redis Hash\nKey: `login:token:{uuid}`, TTL: 30分钟","x":820,"y":290,"width":340,"height":60,"color":"3"},
+		{"id":"node-refresh-interceptor","type":"text","text":"**RefreshTokenInterceptor**\n- Order: 0 (优先执行)\n- 拦截: /**\n- 职责: 刷新 Token TTL\n- 特性: 永远放行","x":320,"y":550,"width":260,"height":120,"color":"6"},
+		{"id":"node-login-interceptor","type":"text","text":"**LoginInterceptor**\n- Order: 1\n- 拦截: 受保护路径\n- 职责: 鉴权校验\n- 失败: 返回 401","x":620,"y":550,"width":260,"height":120,"color":"6"},
+		{"id":"node-threadlocal","type":"text","text":"**UserHolder (ThreadLocal)**\n存储当前用户 UserDTO，全线程可访问\n⚠ 请求结束需清理防止内存泄漏","x":320,"y":700,"width":560,"height":100,"color":"3"},
+		{"id":"node-pitfall","type":"text","text":"# ⚠ 易错点\n\n1. 单拦截器导致 Token 超时\n2. 验证码泄露给前端\n3. 存储完整 User 对象\n4. ThreadLocal 未清理","x":0,"y":600,"width":280,"height":180,"color":"1"},
+		{"id":"node-why-redis","type":"text","text":"# 为什么用 Redis？\n\nSession 存于单机内存，\n集群环境无法共享。\nRedis 独立存储，\n所有节点可访问。","x":950,"y":500,"width":280,"height":140,"color":"2"}
+	],
+	"edges":[
+		{"id":"e1","fromNode":"center","fromSide":"top","toNode":"group-send","toSide":"right","label":"步骤1"},
+		{"id":"e2","fromNode":"center","fromSide":"top","toNode":"group-login","toSide":"left","label":"步骤2"},
+		{"id":"e3","fromNode":"center","fromSide":"bottom","toNode":"group-interceptor","toSide":"top","label":"步骤3"},
+		{"id":"e4","fromNode":"node-redis-save","fromSide":"right","toNode":"node-verify-code","toSide":"bottom","label":"验证码校验"},
+		{"id":"e5","fromNode":"node-token","fromSide":"bottom","toNode":"node-refresh-interceptor","toSide":"top","label":"Token 续命"},
+		{"id":"e6","fromNode":"node-refresh-interceptor","fromSide":"right","toNode":"node-login-interceptor","toSide":"left","label":"Order 顺序"},
+		{"id":"e7","fromNode":"node-refresh-interceptor","fromSide":"bottom","toNode":"node-threadlocal","toSide":"top"},
+		{"id":"e8","fromNode":"node-login-interceptor","fromSide":"bottom","toNode":"node-threadlocal","toSide":"top"}
+	]
+}
