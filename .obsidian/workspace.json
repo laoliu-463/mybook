@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "20-Projects/P01-hmdp黑马点评/02-源码分析/秒杀系统六步进化-从单机到分布式.md",
+                "file": "00-Inbox/计算机网络概述.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "秒杀系统六步进化-从单机到分布式"
+              "title": "计算机网络概述"
             }
           }
         ]
@@ -205,8 +205,11 @@
   },
   "active": "207e4dd2c0a97409",
   "lastOpenFiles": [
-    "00-Inbox/计算机网络概述.md",
+    "tmpclaude-8dc2-cwd",
+    "tmpclaude-5397-cwd",
+    "10-Areas/计算机/Java与后端/06-源码阅读/HashMap-put源码解析.md",
     "20-Projects/P01-hmdp黑马点评/02-源码分析/秒杀系统六步进化-从单机到分布式.md",
+    "00-Inbox/计算机网络概述.md",
     "20-Projects/P01-hmdp黑马点评/02-源码分析/短信登录注册-Redis+Token方案.canvas",
     "20-Projects/P01-hmdp黑马点评/02-源码分析/短信登录注册-Redis+Token方案.md",
     "20-Projects/P01-hmdp黑马点评/02-源码分析/秒杀系统六步进化-从单机到分布式.canvas",
@@ -227,7 +230,6 @@
     "tmpclaude-8f57-cwd",
     "20-Projects/P01-hmdp黑马点评/04-交付物",
     "20-Projects/P01-hmdp黑马点评/03-过程日志",
-    "20-Projects/P01-hmdp黑马点评/02-源码分析",
     "20-Projects/P01-hmdp黑马点评/00-项目看板.md",
     "10-Areas/编程/Java/经验库/JDK版本与pom配置不一致问题.md",
     "04-输出作品/面试回答合集/缓存击穿-面试题速查.md",
@@ -236,7 +238,6 @@
     "50-Navigation/PKM流水线v1.0-评估报告.md",
     "50-Navigation/Java后端-MOC.md",
     "Redis连接池配置.md",
-    "10-Areas/计算机/Java与后端/06-源码阅读/HashMap-put源码解析.md",
     "10-Areas/计算机/Java与后端/00-面试题库/缓存击穿问题与解决方案.md",
     "10-Areas/计算机/Java与后端/00-面试题库/缓存击穿问题与解决方案.canvas",
     "00-Inbox/Archived/测试skill.md",
@@ -247,7 +248,6 @@
     "01-知识库/计算机/Java与后端/00-面试题库/缓存击穿问题与解决方案.md",
     "01-知识库/计算机/Java与后端/00-面试题库/缓存击穿问题与解决方案.canvas",
     "00-收集箱/Archived/测试skill.md",
-    "05-索引导航/Java后端-MOC.md",
     "02-学习记录/Dan-Koe-AI使用技巧.canvas",
     "00-收集箱/未命名.canvas",
     "未命名.canvas"
