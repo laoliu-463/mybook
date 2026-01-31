@@ -1,0 +1,30 @@
+{
+	"nodes":[
+		{"id":"center","type":"text","x":500,"y":400,"width":340,"height":160,"text":"# 秒杀系统六步进化\n\n**目标**: 从单机到分布式\n**核心**: 并发安全 + 性能优化\n**最终方案**: Redisson分布式锁","color":"5"},
+		{"id":"group-v1-v2","type":"group","x":0,"y":0,"width":380,"height":300,"label":"V1-V2：基础版本","color":"1"},
+		{"id":"node-v1","type":"text","x":20,"y":50,"width":340,"height":100,"text":"### V1: 直接操作数据库\n\n❌ **问题**:\n- 超卖（库存扣成负数）\n- 重复购买（无校验）","color":"1"},
+		{"id":"node-v2","type":"text","x":20,"y":180,"width":340,"height":100,"text":"### V2: 一人一单检查\n\n✅ 防止用户多买\n❌ 并发下检查失效（SELECT→INSERT间隙）","color":"3"},
+		{"id":"group-v3","type":"group","x":420,"y":0,"width":380,"height":300,"label":"V3：单机锁","color":"3"},
+		{"id":"node-v3","type":"text","x":440,"y":50,"width":340,"height":220,"text":"### V3: synchronized 锁\n\n```java\nsynchronized (userId.toString().intern()) {\n  // 一人一单检查 + 创建订单\n}\n```\n\n✅ 单机并发安全\n❌ 集群环境失效（JVM级别锁）","color":"3"},
+		{"id":"group-v4-v5","type":"group","x":840,"y":0,"width":460,"height":300,"label":"V4-V5：分布式优化","color":"4"},
+		{"id":"node-v4","type":"text","x":860,"y":50,"width":200,"height":120,"text":"### V4: Lua脚本\n\n**原子性预检**:\n- 判断库存\n- 判断重复\n- 扣库存\n- 记录userId","color":"4"},
+		{"id":"node-v5","type":"text","x":1080,"y":50,"width":200,"height":120,"text":"### V5: BlockingQueue\n\n**异步解耦**:\n- 快速返回\n- 削峰填谷\n- 后台入库","color":"4"},
+		{"id":"node-v4-code","type":"text","x":860,"y":190,"width":420,"height":100,"text":"**技术栈**: Redis Lua + JDK BlockingQueue\n✅ 减少DB压力 + 提升吞吐量\n❌ 单机队列不可靠（JVM崩溃丢消息）"},
+		{"id":"group-v6","type":"group","x":420,"y":340,"width":480,"height":380,"label":"V6：最终方案（生产级）","color":"6"},
+		{"id":"node-v6-title","type":"text","x":440,"y":390,"width":440,"height":80,"text":"### V6: Redisson 分布式锁\n\n**目标**: 集群环境下的最终一致性","color":"6"},
+		{"id":"node-v6-features","type":"text","x":440,"y":490,"width":200,"height":200,"text":"**核心特性**:\n\n1. 分布式锁（基于Redis）\n2. WatchDog自动续期\n3. 可重入锁\n4. 主从一致性哨兵\n5. 红锁（RedLock）","color":"6"},
+		{"id":"node-v6-code","type":"text","x":660,"y":490,"width":220,"height":200,"text":"```java\nRLock lock = redisson\n  .getLock(\"lock:order:\"\n   + userId + \":\" \n   + voucherId);\ntry {\n  lock.lock();\n  // 创建订单\n} finally {\n  lock.unlock();\n}\n```","color":"6"},
+		{"id":"node-pitfalls","type":"text","x":0,"y":340,"width":380,"height":260,"text":"# ⚠️ 易错点总结\n\n1. **V2**: 检查和插入间隙导致重复\n2. **V3**: synchronized 集群失效\n3. **V4**: Lua后仍需异步处理\n4. **V6**: 锁粒度过大影响性能\n\n💡 **最佳实践**: 锁 `userId:voucherId`","color":"1"},
+		{"id":"node-evolution","type":"text","x":950,"y":340,"width":350,"height":260,"text":"# 📈 进化路径\n\n**裸奔** → **业务校验** → **单机锁**\n↓\n**原子预检** → **异步队列**\n↓\n**分布式锁（最终方案）**\n\n---\n\n**适用场景**:\n- V3: 单体应用\n- V6: 微服务集群","color":"2"}
+	],
+	"edges":[
+		{"id":"e1","fromNode":"node-v1","toNode":"node-v2","fromSide":"bottom","toSide":"top","label":"添加校验"},
+		{"id":"e2","fromNode":"group-v1-v2","toNode":"group-v3","fromSide":"right","toSide":"left","label":"并发问题"},
+		{"id":"e3","fromNode":"group-v3","toNode":"group-v4-v5","fromSide":"right","toSide":"left","label":"分布式演进"},
+		{"id":"e4","fromNode":"node-v4","toNode":"node-v5","fromSide":"right","toSide":"left","label":"串联"},
+		{"id":"e5","fromNode":"group-v4-v5","toNode":"group-v6","fromSide":"bottom","toSide":"top","label":"最终方案"},
+		{"id":"e6","fromNode":"center","toNode":"group-v6","fromSide":"bottom","toSide":"top"},
+		{"id":"e7","fromNode":"node-v6-title","toNode":"node-v6-features","fromSide":"bottom","toSide":"top"},
+		{"id":"e8","fromNode":"node-v6-title","toNode":"node-v6-code","fromSide":"bottom","toSide":"top"}
+	]
+}
