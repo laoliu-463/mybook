@@ -11,14 +11,17 @@
             "id": "207e4dd2c0a97409",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "canvas",
               "state": {
-                "file": "00-Inbox/计算机网络概述.md",
-                "mode": "source",
-                "source": false
+                "file": "10-知识库/计算机基础/计算机网络分层模型-OSI与TCP-IP.canvas",
+                "viewState": {
+                  "x": 670,
+                  "y": 617.0480549199085,
+                  "zoom": -0.3317983389114236
+                }
               },
-              "icon": "lucide-file",
-              "title": "计算机网络概述"
+              "icon": "lucide-layout-dashboard",
+              "title": "计算机网络分层模型-OSI与TCP-IP"
             }
           }
         ]
@@ -205,11 +208,17 @@
   },
   "active": "207e4dd2c0a97409",
   "lastOpenFiles": [
+    "tmpclaude-59d7-cwd",
+    "10-知识库/计算机基础/计算机网络分层模型-OSI与TCP-IP.md",
+    "10-知识库/计算机基础/计算机网络分层模型-OSI与TCP-IP.canvas",
+    "00-Inbox/计算机网络概述.md",
+    "tmpclaude-aa15-cwd",
+    "10-知识库/计算机基础",
+    "10-知识库",
     "tmpclaude-8dc2-cwd",
     "tmpclaude-5397-cwd",
     "10-Areas/计算机/Java与后端/06-源码阅读/HashMap-put源码解析.md",
     "20-Projects/P01-hmdp黑马点评/02-源码分析/秒杀系统六步进化-从单机到分布式.md",
-    "00-Inbox/计算机网络概述.md",
     "20-Projects/P01-hmdp黑马点评/02-源码分析/短信登录注册-Redis+Token方案.canvas",
     "20-Projects/P01-hmdp黑马点评/02-源码分析/短信登录注册-Redis+Token方案.md",
     "20-Projects/P01-hmdp黑马点评/02-源码分析/秒杀系统六步进化-从单机到分布式.canvas",
@@ -226,10 +235,6 @@
     "20-Projects/P01-hmdp黑马点评/01-学习笔记/skill使用指南.md",
     "10-Areas/编程/数据库/经验库/MySQL8-ROW_FORMAT兼容性问题.md",
     "00-Inbox/数据库SQL.md",
-    "tmpclaude-1d52-cwd",
-    "tmpclaude-8f57-cwd",
-    "20-Projects/P01-hmdp黑马点评/04-交付物",
-    "20-Projects/P01-hmdp黑马点评/03-过程日志",
     "20-Projects/P01-hmdp黑马点评/00-项目看板.md",
     "10-Areas/编程/Java/经验库/JDK版本与pom配置不一致问题.md",
     "04-输出作品/面试回答合集/缓存击穿-面试题速查.md",
@@ -247,9 +252,7 @@
     "05-索引导航/PKM流水线v1.0-评估报告.md",
     "01-知识库/计算机/Java与后端/00-面试题库/缓存击穿问题与解决方案.md",
     "01-知识库/计算机/Java与后端/00-面试题库/缓存击穿问题与解决方案.canvas",
-    "00-收集箱/Archived/测试skill.md",
     "02-学习记录/Dan-Koe-AI使用技巧.canvas",
-    "00-收集箱/未命名.canvas",
-    "未命名.canvas"
+    "00-收集箱/未命名.canvas"
   ]
 }
