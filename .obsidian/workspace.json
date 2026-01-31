@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "20-Projects/P01-hmdp黑马点评/02-源码分析/秒杀系统六步进化-从单机到分布式.md",
+                "file": "00-Inbox/计算机网络概述.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "秒杀系统六步进化-从单机到分布式"
+              "title": "计算机网络概述"
             }
           }
         ]
@@ -205,8 +205,9 @@
   },
   "active": "207e4dd2c0a97409",
   "lastOpenFiles": [
-    "20-Projects/P01-hmdp黑马点评/02-源码分析/短信登录注册-Redis+Token方案.canvas",
     "20-Projects/P01-hmdp黑马点评/02-源码分析/秒杀系统六步进化-从单机到分布式.md",
+    "00-Inbox/计算机网络概述.md",
+    "20-Projects/P01-hmdp黑马点评/02-源码分析/短信登录注册-Redis+Token方案.canvas",
     "20-Projects/P01-hmdp黑马点评/02-源码分析/短信登录注册-Redis+Token方案.md",
     "20-Projects/P01-hmdp黑马点评/02-源码分析/秒杀系统六步进化-从单机到分布式.canvas",
     "Prompt工程入门.md",
