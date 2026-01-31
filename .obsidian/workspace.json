@@ -16,8 +16,8 @@
                 "file": "10-知识库/计算机基础/计算机网络分层模型-OSI与TCP-IP.canvas",
                 "viewState": {
                   "x": 670,
-                  "y": 617.0480549199085,
-                  "zoom": -0.3317983389114236
+                  "y": 550,
+                  "zoom": -0.4693018626613586
                 }
               },
               "icon": "lucide-layout-dashboard",
@@ -208,9 +208,12 @@
   },
   "active": "207e4dd2c0a97409",
   "lastOpenFiles": [
-    "tmpclaude-59d7-cwd",
+    "tmpclaude-a883-cwd",
+    "tmpclaude-7b5a-cwd",
     "10-知识库/计算机基础/计算机网络分层模型-OSI与TCP-IP.md",
     "10-知识库/计算机基础/计算机网络分层模型-OSI与TCP-IP.canvas",
+    "tmpclaude-864f-cwd",
+    "tmpclaude-59d7-cwd",
     "00-Inbox/计算机网络概述.md",
     "tmpclaude-aa15-cwd",
     "10-知识库/计算机基础",
@@ -225,9 +228,6 @@
     "Prompt工程入门.md",
     "tmpclaude-c236-cwd",
     "tmpclaude-2151-cwd",
-    "tmpclaude-40a9-cwd",
-    "tmpclaude-be6b-cwd",
-    "tmpclaude-9413-cwd",
     "20-Projects/P01-hmdp黑马点评/02-源码分析/数据库设计分析.md",
     "20-Projects/P01-hmdp黑马点评/02-源码分析/数据流向图.canvas",
     "20-Projects/P01-hmdp黑马点评/02-源码分析/数据库架构图.canvas",
