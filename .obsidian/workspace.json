@@ -11,10 +11,14 @@
             "id": "207e4dd2c0a97409",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "10-领域知识/06-学习方法与效率/Prompt工程入门.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "Prompt工程入门"
             }
           }
         ]
@@ -201,18 +205,23 @@
   },
   "active": "207e4dd2c0a97409",
   "lastOpenFiles": [
-    "tmpclaude-2214-cwd",
+    "10-领域知识/01-计算机/Java/Java-MOC.md",
+    "00-收集箱/90-已处理原始/Archived/测试skill.md",
+    "00-收集箱/未命名.canvas",
+    "00-收集箱/00-待分诊/测试skill.md",
+    "00-收集箱/00-待分诊/计算机网络概述.md",
+    "00-收集箱/00-待分诊/Redis连接池配置.md",
+    "00-收集箱/00-待分诊/数据库SQL.md",
+    "计算机网络分层模型-OSI与TCP-IP.md",
     "02-学习记录/01-课程与书籍/Dan-Koe-AI使用技巧.canvas",
     "02-学习记录/01-课程与书籍/Dan-Koe-如何比99%的人更好地使用AI.md",
+    "tmpclaude-4816-cwd",
+    "tmpclaude-fdf3-cwd",
+    "tmpclaude-2214-cwd",
     "tmpclaude-5e6f-cwd",
-    "00-收集箱/90-已处理原始/Archived/测试skill.md",
     "00-收集箱/90-已处理原始/Archived",
-    "00-收集箱/00-待分诊/计算机网络概述.md",
-    "00-收集箱/00-待分诊/数据库SQL.md",
-    "00-收集箱/00-待分诊/测试skill.md",
     "10-Areas/计算机/计算机网络/计算机网络分层模型-OSI与TCP-IP.canvas",
     "tmpclaude-8444-cwd",
-    "10-领域知识/01-计算机/Java/Java-MOC.md",
     "01-导航索引/03-输出作品总览-MOC.md",
     "01-导航索引/02-项目总览-MOC.md",
     "01-导航索引/01-领域总览-MOC.md",
@@ -225,7 +234,6 @@
     "tmpclaude-0b2f-cwd",
     "Prompt工程入门.md",
     "tmpclaude-c9a4-cwd",
-    "00-收集箱/00-待分诊/Redis连接池配置.md",
     "10-领域知识/06-学习方法与效率/Prompt工程入门.md",
     "tmpclaude-5a05-cwd",
     "tmpclaude-470d-cwd",
@@ -237,13 +245,8 @@
     "20-项目实战/01-在做/hmdp-黑马点评/02-源码分析/数据库设计分析.md",
     "20-项目实战/01-在做/hmdp-黑马点评/02-源码分析/数据库架构图.canvas",
     "20-项目实战/01-在做/hmdp-黑马点评/01-学习笔记/skill使用指南.md",
-    "20-项目实战/01-在做/hmdp-黑马点评/04-交付物",
-    "20-项目实战/01-在做/hmdp-黑马点评/03-过程日志",
-    "20-项目实战/01-在做/hmdp-黑马点评/02-源码分析",
     "20-项目实战/01-在做/hmdp-黑马点评/00-项目看板.md",
     "30-输出作品/01-面试回答/缓存击穿-面试题速查.md",
-    "10-领域知识/01-计算机/Java/01-基础/HashMap-put源码解析.md",
-    "00-收集箱/未命名.canvas",
     "20-项目实战/P01-hmdp黑马点评/02-源码分析/短信登录注册-Redis+Token方案.canvas",
     "20-项目实战/P01-hmdp黑马点评/02-源码分析/秒杀系统六步进化-从单机到分布式.canvas",
     "20-项目实战/P01-hmdp黑马点评/02-源码分析/数据流向图.canvas"
