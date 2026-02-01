@@ -11,17 +11,14 @@
             "id": "207e4dd2c0a97409",
             "type": "leaf",
             "state": {
-              "type": "canvas",
+              "type": "markdown",
               "state": {
-                "file": "10-知识库/计算机基础/计算机网络分层模型-OSI与TCP-IP.canvas",
-                "viewState": {
-                  "x": 670,
-                  "y": 550,
-                  "zoom": -0.4693018626613586
-                }
+                "file": "Prompt工程入门.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-layout-dashboard",
-              "title": "计算机网络分层模型-OSI与TCP-IP"
+              "icon": "lucide-file",
+              "title": "Prompt工程入门"
             }
           }
         ]
@@ -206,22 +203,40 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "2067b1c939c41cdc",
+  "active": "207e4dd2c0a97409",
   "lastOpenFiles": [
-    "tmpclaude-5c29-cwd",
-    "tmpclaude-d2bc-cwd",
-    "tmpclaude-2ed7-cwd",
-    "tmpclaude-7baf-cwd",
-    "tmpclaude-a883-cwd",
-    "tmpclaude-7b5a-cwd",
-    "10-知识库/计算机基础/计算机网络分层模型-OSI与TCP-IP.md",
+    "10-Areas/计算机/计算机网络/计算机网络分层模型-OSI与TCP-IP.canvas",
+    "10-Areas/计算机/计算机网络/计算机网络分层模型-OSI与TCP-IP.md",
+    "tmpclaude-47fd-cwd",
+    "tmpclaude-cdbd-cwd",
+    "tmpclaude-7078-cwd",
+    "10-Areas/编程/Java/经验库/JDK版本与pom配置不一致问题.md",
+    "tmpclaude-cc9d-cwd",
+    "tmpclaude-8f50-cwd",
+    "tmpclaude-fa19-cwd",
+    "tmpclaude-695a-cwd",
+    "tmpclaude-c9dd-cwd",
+    "tmpclaude-abbb-cwd",
+    "tmpclaude-7724-cwd",
+    "10-Areas/编程/数据库/经验库/MySQL8-ROW_FORMAT兼容性问题.md",
+    "06-模板/PKM规范.md",
+    "00-收集箱/Archived/测试skill.md",
+    "00-收集箱/计算机网络概述.md",
+    "00-收集箱/未命名.canvas",
+    "00-收集箱/测试skill.md",
+    "00-收集箱/数据库SQL.md",
+    "20-项目实战/P01-hmdp黑马点评/02-源码分析/短信登录注册-Redis+Token方案.canvas",
+    "20-项目实战/P01-hmdp黑马点评/02-源码分析/秒杀系统六步进化-从单机到分布式.md",
+    "20-项目实战/P01-hmdp黑马点评/02-源码分析/短信登录注册-Redis+Token方案.md",
+    "20-项目实战/P01-hmdp黑马点评/02-源码分析/秒杀系统六步进化-从单机到分布式.canvas",
+    "20-项目实战/P01-hmdp黑马点评/02-源码分析/数据流向图.canvas",
+    "20-项目实战/P01-hmdp黑马点评/02-源码分析/数据库设计分析.md",
+    "20-项目实战/P01-hmdp黑马点评/02-源码分析/数据库架构图.canvas",
+    "20-项目实战/P01-hmdp黑马点评/01-学习笔记/skill使用指南.md",
+    "20-项目实战/P01-hmdp黑马点评/00-项目看板.md",
     "10-知识库/计算机基础/计算机网络分层模型-OSI与TCP-IP.canvas",
-    "tmpclaude-864f-cwd",
-    "tmpclaude-59d7-cwd",
+    "10-知识库/计算机基础/计算机网络分层模型-OSI与TCP-IP.md",
     "00-Inbox/计算机网络概述.md",
-    "tmpclaude-aa15-cwd",
-    "10-知识库/计算机基础",
-    "10-知识库",
     "10-Areas/计算机/Java与后端/06-源码阅读/HashMap-put源码解析.md",
     "20-Projects/P01-hmdp黑马点评/02-源码分析/秒杀系统六步进化-从单机到分布式.md",
     "20-Projects/P01-hmdp黑马点评/02-源码分析/短信登录注册-Redis+Token方案.canvas",
@@ -230,29 +245,10 @@
     "Prompt工程入门.md",
     "20-Projects/P01-hmdp黑马点评/02-源码分析/数据库设计分析.md",
     "20-Projects/P01-hmdp黑马点评/02-源码分析/数据流向图.canvas",
-    "20-Projects/P01-hmdp黑马点评/02-源码分析/数据库架构图.canvas",
     "10-Areas/计算机/Java与后端/05-测试/JUnit5单元测试-AAA模式示例.md",
     "20-Projects/P01-hmdp黑马点评/01-学习笔记/skill使用指南.md",
-    "10-Areas/编程/数据库/经验库/MySQL8-ROW_FORMAT兼容性问题.md",
     "00-Inbox/数据库SQL.md",
     "20-Projects/P01-hmdp黑马点评/00-项目看板.md",
-    "10-Areas/编程/Java/经验库/JDK版本与pom配置不一致问题.md",
-    "04-输出作品/面试回答合集/缓存击穿-面试题速查.md",
-    "06-模板/收集箱模板.md",
-    "06-模板/PKM规范.md",
-    "50-Navigation/PKM流水线v1.0-评估报告.md",
-    "50-Navigation/Java后端-MOC.md",
-    "Redis连接池配置.md",
-    "10-Areas/计算机/Java与后端/00-面试题库/缓存击穿问题与解决方案.md",
-    "10-Areas/计算机/Java与后端/00-面试题库/缓存击穿问题与解决方案.canvas",
-    "00-Inbox/Archived/测试skill.md",
-    "00-Inbox/测试skill.md",
-    "00-Inbox/未命名.canvas",
-    "00-收集箱/测试skill.md",
-    "05-索引导航/PKM流水线v1.0-评估报告.md",
-    "01-知识库/计算机/Java与后端/00-面试题库/缓存击穿问题与解决方案.md",
-    "01-知识库/计算机/Java与后端/00-面试题库/缓存击穿问题与解决方案.canvas",
-    "02-学习记录/Dan-Koe-AI使用技巧.canvas",
-    "00-收集箱/未命名.canvas"
+    "04-输出作品/面试回答合集/缓存击穿-面试题速查.md"
   ]
 }
