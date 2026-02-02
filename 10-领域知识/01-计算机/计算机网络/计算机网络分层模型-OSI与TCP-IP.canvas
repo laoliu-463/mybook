@@ -1,0 +1,33 @@
+{
+	"nodes":[
+		{"id":"central","type":"text","x":400,"y":300,"width":320,"height":140,"color":"5","text":"# 网络分层模型\n\n三种主流模型：\n- TCP/IP 四层（实用）\n- OSI 七层（理论）\n- 五层协议（教学）"},
+		{"id":"group-tcpip","type":"group","x":0,"y":0,"width":350,"height":280,"color":"4","label":"TCP/IP 四层模型"},
+		{"id":"tcpip-app","type":"text","x":20,"y":40,"width":310,"height":50,"color":"4","text":"**应用层**\nHTTP、FTP、DNS"},
+		{"id":"tcpip-transport","type":"text","x":20,"y":100,"width":310,"height":50,"color":"4","text":"**传输层**\nTCP、UDP"},
+		{"id":"tcpip-network","type":"text","x":20,"y":160,"width":310,"height":50,"color":"4","text":"**网络层**\nIP 路由寻址"},
+		{"id":"tcpip-link","type":"text","x":20,"y":220,"width":310,"height":50,"color":"4","text":"**网络接口层**\n以太网、WiFi"},
+		{"id":"group-osi","type":"group","x":770,"y":0,"width":350,"height":460,"color":"6","label":"OSI 七层模型"},
+		{"id":"osi-7","type":"text","x":790,"y":40,"width":310,"height":50,"color":"6","text":"**L7 应用层**\n用户接口"},
+		{"id":"osi-6","type":"text","x":790,"y":100,"width":310,"height":50,"color":"6","text":"**L6 表示层**\n数据格式转换"},
+		{"id":"osi-5","type":"text","x":790,"y":160,"width":310,"height":50,"color":"6","text":"**L5 会话层**\n会话管理"},
+		{"id":"osi-4","type":"text","x":790,"y":220,"width":310,"height":50,"color":"6","text":"**L4 传输层**\nTCP 可靠传输"},
+		{"id":"osi-3","type":"text","x":790,"y":280,"width":310,"height":50,"color":"6","text":"**L3 网络层**\nIP 路由选择"},
+		{"id":"osi-2","type":"text","x":790,"y":340,"width":310,"height":50,"color":"6","text":"**L2 数据链路层**\nMAC 地址"},
+		{"id":"osi-1","type":"text","x":790,"y":400,"width":310,"height":50,"color":"6","text":"**L1 物理层**\n比特流传输"},
+		{"id":"group-5layer","type":"group","x":0,"y":320,"width":350,"height":340,"color":"3","label":"五层协议（教学）"},
+		{"id":"5layer-app","type":"text","x":20,"y":360,"width":310,"height":50,"color":"3","text":"**应用层**"},
+		{"id":"5layer-transport","type":"text","x":20,"y":420,"width":310,"height":50,"color":"3","text":"**传输层**"},
+		{"id":"5layer-network","type":"text","x":20,"y":480,"width":310,"height":50,"color":"3","text":"**网络层**"},
+		{"id":"5layer-datalink","type":"text","x":20,"y":540,"width":310,"height":50,"color":"3","text":"**数据链路层**"},
+		{"id":"5layer-physical","type":"text","x":20,"y":600,"width":310,"height":50,"color":"3","text":"**物理层**"},
+		{"id":"pitfall","type":"text","x":770,"y":500,"width":350,"height":160,"color":"1","text":"# ⚠️ 易错点\n\n1. TCP/IP 是 4 层，不是 5 层\n2. OSI 物理层在最底层（L1）\n3. Internet 大小写有区别\n4. 应用层范围不同"},
+		{"id":"scenario","type":"text","x":400,"y":500,"width":320,"height":160,"color":"2","text":"# 应用场景\n\n- **实际开发**：用 TCP/IP 四层\n- **理论学习**：用 OSI 七层\n- **考试教学**：用五层协议"}
+	],
+	"edges":[
+		{"id":"e1","fromNode":"central","toNode":"group-tcpip","label":"实用标准","fromSide":"top","toSide":"right"},
+		{"id":"e2","fromNode":"central","toNode":"group-osi","label":"理论参考","fromSide":"right","toSide":"left"},
+		{"id":"e3","fromNode":"central","toNode":"group-5layer","label":"教学折中","fromSide":"left","toSide":"right"},
+		{"id":"e4","fromNode":"central","toNode":"scenario","label":"选择依据","fromSide":"bottom","toSide":"top"},
+		{"id":"e5","fromNode":"central","toNode":"pitfall","label":"注意事项","fromSide":"bottom","toSide":"top"}
+	]
+}
