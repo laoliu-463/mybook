@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "10-领域知识/06-学习方法与效率/Prompt工程入门.md",
+                "file": "01-导航索引/PKM系统评估报告.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Prompt工程入门"
+              "title": "PKM系统评估报告"
             }
           }
         ]
@@ -205,9 +205,11 @@
   },
   "active": "207e4dd2c0a97409",
   "lastOpenFiles": [
+    "01-导航索引/00-总仪表盘.md",
+    "10-领域知识/06-学习方法与效率/Prompt工程入门.md",
+    "01-导航索引/PKM系统评估报告.md",
     "00-收集箱/Claude攻略.md",
     "00-收集箱/90-已处理原始/Archived/测试skill.md",
-    "10-领域知识/06-学习方法与效率/Prompt工程入门.md",
     "80-模板/面试题卡-模板.md",
     "80-模板/领域知识卡-模板.md",
     "02-学习记录/01-课程与书籍/Dan-Koe-AI使用技巧.canvas",
@@ -245,11 +247,9 @@
     "10-领域知识/01-计算机/Java/01-基础/JUnit5知识体系-提炼总结.canvas",
     "10-领域知识/01-计算机/Java/01-基础/JUnit5断言方法详解.md",
     "10-领域知识/01-计算机/Java/01-基础/HashMap-put源码解析.md",
-    "10-领域知识/01-计算机/Java/01-基础/AAA测试模式-Arrange-Act-Assert.md",
     "tmpclaude-7b6c-cwd",
     "tmpclaude-95d1-cwd",
     "tmpclaude-a7bb-cwd",
-    "00-收集箱/未命名.canvas",
-    "00-收集箱/00-待分诊/测试skill.md"
+    "00-收集箱/未命名.canvas"
   ]
 }
