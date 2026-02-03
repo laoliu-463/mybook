@@ -28,11 +28,18 @@ def validate_candidate_pack():
     if not inbox.exists():
         return True  # 目录不存在不算错误
 
-    packs = sorted(inbox.glob("*.md"), key=lambda p: p.stat().st_mtime, reverse=True)
+    # 只检查日期格式的候选包文件（YYYY-MM-DD-*.md）
+    import re
+    date_pattern = re.compile(r'^\d{4}-\d{2}-\d{2}-.+\.md$')
+    packs = [p for p in inbox.glob("*.md") if date_pattern.match(p.name)]
+
     if not packs:
         return True  # 没有候选包也不算错误
 
+    # 按修改时间排序，取最新的
+    packs = sorted(packs, key=lambda p: p.stat().st_mtime, reverse=True)
     latest = packs[0]
+    print(f"[news_validate] Checking: {latest.name}", file=sys.stderr)
     text = latest.read_text(encoding="utf-8", errors="ignore")
 
     # 1) URL 白名单检查
@@ -53,11 +60,17 @@ def validate_candidate_pack():
         return False
 
     # 2) Review 复选框检查（Gate0 必备）
+    # 支持两种格式：[ ] approve 和 - [ ] approve
     has_approve = "[ ] approve" in text or "- [ ] approve" in text
-    has_reject = any(x in text for x in ["[ ] skip", "[ ] reject", "[ ] needs-verify"])
+    has_reject = any(x in text for x in [
+        "[ ] skip", "- [ ] skip",
+        "[ ] reject", "- [ ] reject",
+        "[ ] needs-verify", "- [ ] needs-verify"
+    ])
 
     if not (has_approve and has_reject):
         print("❌ [news_validate] FAIL: Review checkboxes missing.", file=sys.stderr)
+        print(f"   Debug: has_approve={has_approve}, has_reject={has_reject}", file=sys.stderr)
         print("   Expected: [ ] approve + ([ ] skip / [ ] reject / [ ] needs-verify)", file=sys.stderr)
         return False
 

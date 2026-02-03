@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "00-收集箱/Claude攻略.md",
+                "file": "00-收集箱/90-已处理原始/Archived/测试skill.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Claude攻略"
+              "title": "测试skill"
             }
           }
         ]
@@ -205,17 +205,18 @@
   },
   "active": "207e4dd2c0a97409",
   "lastOpenFiles": [
+    "00-收集箱/News-Inbox/2026-02-04-候选包.md",
+    "00-收集箱/News-Inbox/2026-02-03/00-candidate-pack.md",
+    "01-导航索引/news-educator-部署报告.md",
+    "00-收集箱/Claude攻略.md",
+    "10-领域知识/06-学习方法与效率/Prompt工程入门.md",
+    "00-收集箱/News-Inbox/2026-02-03-candidates.md",
+    "00-收集箱/News-Inbox/README-Review-Rule.md",
+    "00-收集箱/News-Inbox/2026-02-03/01-candidate-pack-news.md",
     "02-学习记录/验收/2026-02-03-news-educator-验收.md",
     "02-学习记录/验收",
-    "00-收集箱/News-Inbox/README-Review-Rule.md",
-    "00-收集箱/News-Inbox/2026-02-03-candidates.md",
-    "01-导航索引/news-educator-部署报告.md",
-    "00-收集箱/News-Inbox/2026-02-03/01-candidate-pack-news.md",
-    "00-收集箱/News-Inbox/2026-02-03/00-candidate-pack.md",
-    "10-领域知识/06-学习方法与效率/Prompt工程入门.md",
     "00-收集箱/News-Inbox/2026-02-03",
     "01-导航索引/PKM系统最新状态报告v2.1.md",
-    "00-收集箱/Claude攻略.md",
     "01-导航索引/资讯系统快速开始.md",
     "01-导航索引/News-MOC.md",
     "02-学习记录/01-日报",
@@ -243,7 +244,6 @@
     "20-项目实战/01-在做/hmdp-黑马点评/02-源码分析/数据库架构图.canvas",
     "20-项目实战/01-在做/hmdp-黑马点评/02-源码分析/秒杀系统六步进化-从单机到分布式.md",
     "20-项目实战/01-在做/hmdp-黑马点评/02-源码分析/秒杀系统六步进化-从单机到分布式.canvas",
-    "20-项目实战/01-在做/hmdp-黑马点评/02-源码分析/短信登录注册-Redis+Token方案.md",
     "20-项目实战/01-在做/hmdp-黑马点评/02-源码分析/短信登录注册-Redis+Token方案.canvas",
     "10-Areas/计算机/计算机网络",
     "10-Areas/计算机",

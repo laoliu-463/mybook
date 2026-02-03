@@ -1,187 +1,64 @@
-# News Sources Configuration (PKM v2.1)
-# 资讯模式：抓"事件/争议/趋势"，不是"版本流水账"
-
----
-mode: news  # news / releases（资讯模式 vs 版本模式）
-
-settings:
-  window_hours: 24
-  max_items_per_source: 50
-  top_events: 10
-  timezone: "Asia/Shanghai"
-
-# 核心过滤器
 filters:
-  drop_release_notes: true         # 关键：默认丢弃纯版本更新
-  allow_releases_as_evidence: true # 但允许 release 作为证据链接
-  min_signal_score: 6.0            # 信号强度阈值（0-10）
-  youtube_only_whitelist_channels: true
-  youtube_block_video_ids: []      # 防污染视频 ID
+  # 关键：彻底压制"版本更新流水账"
+  drop_release_as_event: true
+  drop_changelog: true
+  drop_version_bump_only: true
 
----
-# GitHub 源配置（资讯模式）
+  # 新手友好：没有可摘录内容就不要
+  require_excerpt: true
+
+  # 信号阈值（越高越严格）
+  min_signal_score: 7.0
+
+whitelist_domains:
+  - github.com
+  - youtube.com
+  - huggingface.co
+
 github:
-  # 关注的仓库（按主题优先级）
-  repositories:
-    # Java 后端
-    - name: "spring-projects/spring-boot"
-      priority: high
-      topics: [Java, Spring]
-
-    - name: "alibaba/arthas"
-      priority: high
-      topics: [Java, JVM, Troubleshooting]
-
-    - name: "redisson/redisson"
-      priority: high
-      topics: [Redis, Java, Distributed]
-
-    # 数据库与中间件
-    - name: "redis/redis"
-      priority: high
-      topics: [Redis, Database]
-
-    - name: "baomidou/mybatis-plus"
-      priority: medium
-      topics: [Java, ORM]
-
-    - name: "apache/rocketmq"
-      priority: medium
-      topics: [MQ, Distributed]
-
-  # 资讯采集策略（从 releases 切换到 issues/discussions/advisories）
   collect:
-    security_advisories: true  # 安全公告（最像新闻）
-    discussions: true          # 架构争论/最佳实践
-    issues: true               # 重大 bug/回归/性能问题
-    prs: false                 # 初期关闭（噪声太大）
-    releases: false            # 默认关闭（只作证据链接）
+    security_advisories: true
+    issues: true
+    discussions: true
+    releases: false
+  query_hints:
+    # 让系统更像"资讯"而不是"更新"
+    - "outage"
+    - "incident"
+    - "regression"
+    - "memory leak"
+    - "deadlock"
+    - "performance"
+    - "security"
+    - "best practice debate"
 
-  # Issue 过滤器（只抓有信号的）
-  issue_filters:
-    labels_any: ["bug", "regression", "security", "performance", "breaking-change", "critical"]
-    min_comments: 10
-    min_reactions: 20
-    state: "open"  # 只抓活跃的
-
-  # Discussion 过滤器
-  discussion_filters:
-    min_comments: 15
-    min_reactions: 30
-    categories: ["General", "Ideas", "Q&A"]
-
-  # Security Advisory 过滤器
-  advisory_filters:
-    severity_min: "moderate"  # moderate / high / critical
-
-  # Trending 抓取（趋势信号）
-  trending:
-    enabled: true
-    language: "java"
-    since: "daily"
-    max_items: 5
-
----
-# YouTube 源配置（只用白名单频道，避免垃圾搜索结果）
 youtube:
-  # 白名单频道（RSS 订阅）
-  channels:
-    - name: "Spring Developer"
-      channel_id: "UC7yfnfvEUlXUIfm8rGLwZdA"
-      priority: high
-      topics: [Java, Spring]
+  mode: "channel_whitelist"
+  require_transcript_or_description: true
 
-    - name: "Java Brains"
-      channel_id: "UCYt1sfh5464XaDBH0oH_o7Q"
-      priority: high
-      topics: [Java, Architecture]
-
-    - name: "Devoxx"
-      channel_id: "UCCBVCTuk6uJrN3iFV_3vurg"
-      priority: high
-      topics: [Java, Conference]
-
-  # 搜索关键词（辅助标签，不做主要抓取）
-  search_keywords:
-    enabled: false  # 初期关闭，避免噪声
-    queries: []
-
-  # 过滤器
-  filters:
-    min_duration: 300       # 最短 5 分钟
-    max_duration: 3600      # 最长 1 小时
-    window_days: 3          # 最近 3 天
-    min_views: 1000         # 最少观看数
-    min_likes: 50           # 最少点赞数
-
----
-# Hugging Face 源配置（趋势与教程）
 huggingface:
-  # 采集策略
   collect:
-    trending: true
-    model_search: true
-    dataset_search: true
-    space_search: true
+    tutorials: true
+    papers: true
+    trending_models: false   # 避免"上新榜"噪音
+  query_hints:
+    - "fine-tuning tutorial"
+    - "evaluation"
+    - "benchmark"
+    - "deployment"
 
-  # 搜索关键词（工程落地相关）
-  search_keywords:
-    models: ["agent", "rag", "tool-use", "code-generation", "java"]
-    datasets: ["code", "java", "software-engineering"]
-    spaces: ["workflow", "automation", "agent"]
+learning_map:
+  cache: "10-领域知识/01-计算机/数据库"
+  db_index: "10-领域知识/01-计算机/数据库"
+  transaction: "10-领域知识/01-计算机/数据库"
+  thread: "10-领域知识/01-计算机/Java/02-并发"
+  jvm: "10-领域知识/01-计算机/Java/03-JVM"
+  spring: "10-领域知识/01-计算机/Java/04-Spring"
+  devops: "10-领域知识/01-计算机/工程化与DevOps"
+  ai_dev: "10-领域知识/06-学习方法与效率"
 
-  # Trending 监控
-  trending:
-    enabled: true
-    categories: ["models", "datasets", "spaces"]
-    max_items_per_category: 5
-
-  # 特定模型监控（可选）
-  watch_models:
-    - name: "Qwen/Qwen2.5-Coder"
-      priority: high
-    - name: "deepseek-ai/deepseek-coder"
-      priority: high
-
-  # 过滤器
-  filters:
-    min_downloads: 1000      # 最少下载数
-    min_likes: 10            # 最少点赞数
-    updated_within_days: 7   # 最近更新天数
-
----
-# 全局配置
-global:
-  # 抓取窗口（小时）
-  window_hours: 24
-
-  # 去重配置
-  deduplication:
-    url_exact_match: true
-    title_similarity_threshold: 0.85
-
-  # 排序权重
-  ranking_weights:
-    topic_relevance: 0.5  # 主题相关性
-    source_count: 0.3     # 多来源覆盖
-    recency: 0.2          # 时效性
-
-  # 输出限制
-  max_events: 10  # 候选包最多事件数
-  max_sources_per_event: 5  # 每个事件最多来源数
-
----
-# 白名单审计（自动校验）
-whitelist:
-  allowed_hosts:
-    - "github.com"
-    - "raw.githubusercontent.com"
-    - "api.github.com"
-    - "youtube.com"
-    - "youtu.be"
-    - "youtube-nocookie.com"
-    - "huggingface.co"
-
-  # 非白名单处理策略
-  reject_non_whitelist: true
-  log_rejected_sources: true
+output_paths:
+  candidate_pack_dir: "00-收集箱/News-Inbox/"
+  daily_dir: "02-学习记录/01-日报/"
+  drafts_dir: "00-收集箱/News-Knowledge-Drafts/"
+  moc_file: "01-导航索引/News-MOC.md"

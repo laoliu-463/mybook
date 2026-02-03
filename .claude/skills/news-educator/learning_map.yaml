@@ -1,0 +1,67 @@
+# Learning Map v2.2: 基础概念 → 中文目录映射
+# 每条资讯必须映射到一个基础点，才算"有学习价值"
+
+# 技术工程类
+tech_engineering:
+  # 数据库
+  cache:
+    name: "缓存"
+    dir: "10-领域知识/01-计算机/数据库"
+    keywords: [cache, redis, 缓存, 击穿, 穿透, 雪崩]
+
+  db_index:
+    name: "索引"
+    dir: "10-领域知识/01-计算机/数据库"
+    keywords: [index, 索引, b+tree, 慢查询, explain]
+
+  transaction:
+    name: "事务"
+    dir: "10-领域知识/01-计算机/数据库"
+    keywords: [transaction, acid, 事务, 隔离级别, mvcc]
+
+  # Java 并发
+  thread:
+    name: "线程"
+    dir: "10-领域知识/01-计算机/Java/02-并发"
+    keywords: [thread, 线程, 线程池, executor]
+
+  concurrency:
+    name: "并发控制"
+    dir: "10-领域知识/01-计算机/Java/02-并发"
+    keywords: [synchronized, lock, volatile, cas, deadlock]
+
+  # JVM
+  gc:
+    name: "垃圾回收"
+    dir: "10-领域知识/01-计算机/Java/03-JVM"
+    keywords: [gc, 垃圾回收, full gc, memory leak, oom]
+
+  jvm_tuning:
+    name: "JVM调优"
+    dir: "10-领域知识/01-计算机/Java/03-JVM"
+    keywords: [jvm, 调优, 参数, 监控, heap]
+
+  # Spring
+  spring:
+    name: "Spring框架"
+    dir: "10-领域知识/01-计算机/Java/04-Spring"
+    keywords: [spring, spring boot, 事务, 自动配置]
+
+# 商业与产品类（可选扩展）
+business_product:
+  product_thinking:
+    name: "产品思维"
+    dir: "10-领域知识/03-产品与商业"
+    keywords: [产品, mvp, 用户需求, 竞品分析]
+
+# 学习方法类（可选扩展）
+learning_methods:
+  learning_strategy:
+    name: "学习策略"
+    dir: "10-领域知识/06-学习方法与效率"
+    keywords: [学习方法, 费曼, 间隔重复, 刻意练习]
+
+  ai_assisted:
+    name: "AI辅助开发"
+    dir: "10-领域知识/06-学习方法与效率"
+    keywords: [copilot, cursor, agent, rag, prompt]

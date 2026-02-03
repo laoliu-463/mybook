@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python .claude/hooks/session_reminder.py",
+            "command": "py .claude/hooks/session_reminder.py",
             "description": "Remind news-educator rules at session start"
           }
         ]
@@ -18,7 +18,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python .claude/hooks/gatekeeper.py",
+            "command": "py .claude/hooks/gatekeeper.py",
             "description": "Block publish if candidate pack not reviewed (gate != gate1_reviewed)"
           }
         ]
@@ -30,7 +30,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python .claude/hooks/news_validate.py",
+            "command": "py .claude/hooks/news_validate.py",
             "description": "Validate news candidate pack: whitelist + review checkboxes + release filter"
           }
         ]
@@ -41,12 +41,12 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python .claude/hooks/quality_scan.py",
+            "command": "py .claude/hooks/quality_scan.py",
             "description": "Block stop if release notes > threshold or missing sources"
           },
           {
             "type": "command",
-            "command": "python .claude/hooks/whitelist_scan.py",
+            "command": "py .claude/hooks/whitelist_scan.py",
             "description": "Block stop if non-whitelist URLs found in outputs"
           }
         ]

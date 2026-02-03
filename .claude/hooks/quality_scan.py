@@ -1,9 +1,16 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 质量扫描器：拦截"版本流水账" + 强制来源可追溯
 """
 import json, sys, os, re, datetime
 from pathlib import Path
+
+# 修复 Windows GBK 编码问题：强制 UTF-8 输出
+if sys.platform == 'win32':
+    import io
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
 
 def load_event():
     try:
