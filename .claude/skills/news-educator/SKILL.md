@@ -16,18 +16,41 @@ invocation: user
 - 用户 Review 后：发布 1 份 **正式日报**（02-学习记录）+ 2~3 张 **知识卡草稿**（00-收集箱）
 - 全程可追溯：每条信息必须有来源链接；禁止脑补
 
+### 资讯定义（系统官方口径）
+
+**资讯 = 满足至少一条**：
+
+1. **安全/风险**：CVE、供应链问题、严重 bug、回滚、事故复盘、漏洞利用方式变化
+2. **范式/趋势**：新的架构方式、工程实践、AI 开发工作流、RAG/Agent 方案演进
+3. **争议/决策点**：社区对某方案的分歧（性能 trade-off、最佳实践更新、弃用/迁移）
+4. **可直接复用**：高质量教程/演示/项目模板/复盘，能直接变成知识卡/项目改造项
+
+**非资讯（默认过滤）**：
+
+- ❌ 纯版本号/小修小补/无实质内容的 changelog
+- ❌ "发布了 xxx"但没有**影响/证据/复盘/争议点**的内容
+- ❌ 来源未提供细节但系统脑补的内容
+
 ---
 
 ## 1) 信息源白名单（硬约束：只允许三平台）
 你只能从以下平台获取信息并输出：
-- GitHub
-- YouTube
-- Hugging Face
+- GitHub（重点：Security Advisories / Discussions / High-Signal Issues）
+- YouTube（重点：白名单频道，不做搜索）
+- Hugging Face（重点：Trending / 工程落地相关）
 
 允许的 host 白名单（或其子域）：
 - github.com / raw.githubusercontent.com / api.github.com
 - youtube.com / youtu.be / youtube-nocookie.com
 - huggingface.co
+
+### 采集策略（资讯模式 vs 版本模式）
+
+**资讯模式（默认）**：
+- GitHub：抓 `security_advisories` / `discussions` / `issues`（高热度、带标签）
+- GitHub：**不抓** `releases`（除非作为证据链接）
+- YouTube：只抓白名单频道 RSS，不做关键词搜索
+- Hugging Face：抓 trending / 工程相关模型/数据集
 
 **凡是不在白名单内的链接/内容：一律丢弃，不得进入候选包、日报、草稿。**
 
