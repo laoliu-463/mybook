@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01-导航索引/news-educator-部署报告.md",
+                "file": "00-收集箱/Claude攻略.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "news-educator-部署报告"
+              "title": "Claude攻略"
             }
           }
         ]
@@ -205,9 +205,13 @@
   },
   "active": "207e4dd2c0a97409",
   "lastOpenFiles": [
+    "02-学习记录/验收/2026-02-03-news-educator-验收.md",
+    "02-学习记录/验收",
+    "00-收集箱/News-Inbox/README-Review-Rule.md",
+    "00-收集箱/News-Inbox/2026-02-03-candidates.md",
+    "01-导航索引/news-educator-部署报告.md",
     "00-收集箱/News-Inbox/2026-02-03/01-candidate-pack-news.md",
     "00-收集箱/News-Inbox/2026-02-03/00-candidate-pack.md",
-    "01-导航索引/news-educator-部署报告.md",
     "10-领域知识/06-学习方法与效率/Prompt工程入门.md",
     "00-收集箱/News-Inbox/2026-02-03",
     "01-导航索引/PKM系统最新状态报告v2.1.md",
@@ -241,15 +245,11 @@
     "20-项目实战/01-在做/hmdp-黑马点评/02-源码分析/秒杀系统六步进化-从单机到分布式.canvas",
     "20-项目实战/01-在做/hmdp-黑马点评/02-源码分析/短信登录注册-Redis+Token方案.md",
     "20-项目实战/01-在做/hmdp-黑马点评/02-源码分析/短信登录注册-Redis+Token方案.canvas",
-    "20-项目实战/01-在做/hmdp-黑马点评/01-学习笔记/skill使用指南.md",
-    "80-模板/日周复盘-模板.md",
-    "80-模板/项目主页-模板.md",
     "10-Areas/计算机/计算机网络",
     "10-Areas/计算机",
     "10-Areas",
     "tmpclaude-b255-cwd",
     "tmpclaude-1d45-cwd",
-    "tmpclaude-57ca-cwd",
     "10-领域知识/01-计算机/Java/01-基础/JUnit5知识体系-提炼总结.canvas"
   ]
 }
