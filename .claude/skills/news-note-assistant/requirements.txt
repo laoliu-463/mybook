@@ -1,0 +1,39 @@
+# PKM v2.1 News Note Assistant - Python Dependencies
+
+# Core
+pyyaml>=6.0.1          # YAML 配置解析
+python-dateutil>=2.8.2 # 日期时间处理
+requests>=2.31.0       # HTTP 请求
+
+# GitHub API
+PyGithub>=2.1.1        # GitHub API 客户端
+
+# YouTube API
+google-api-python-client>=2.108.0  # YouTube Data API v3
+google-auth>=2.25.0
+google-auth-oauthlib>=1.1.0
+google-auth-httplib2>=0.1.1
+
+# Hugging Face API
+huggingface-hub>=0.19.4  # Hugging Face Hub API
+
+# NLP & Text Processing
+python-Levenshtein>=0.23.0  # 字符串相似度计算
+scikit-learn>=1.3.2         # 聚类算法
+sentence-transformers>=2.2.2 # 文本嵌入（可选，用于高级聚类）
+
+# Markdown Processing
+markdown>=3.5.1         # Markdown 解析与生成
+frontmatter>=3.0.0      # YAML Frontmatter 处理
+
+# Utilities
+tqdm>=4.66.1            # 进度条
+colorama>=0.4.6         # 终端彩色输出
+python-dotenv>=1.0.0    # 环境变量管理
+
+# Optional: Rate Limiting
+ratelimit>=2.2.1        # API 速率限制
+
+# Development
+pytest>=7.4.3           # 测试框架（可选）
+black>=23.12.0          # 代码格式化（可选）

@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01-导航索引/PKM系统评估报告.md",
+                "file": "01-导航索引/PKM系统最新状态报告v2.1.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "PKM系统评估报告"
+              "title": "PKM系统最新状态报告v2.1"
             }
           }
         ]
@@ -205,10 +205,17 @@
   },
   "active": "207e4dd2c0a97409",
   "lastOpenFiles": [
-    "01-导航索引/00-总仪表盘.md",
+    "00-收集箱/Claude攻略.md",
+    "01-导航索引/PKM系统最新状态报告v2.1.md",
+    "01-导航索引/资讯系统快速开始.md",
+    "01-导航索引/News-MOC.md",
+    "02-学习记录/01-日报",
+    "00-收集箱/News-Knowledge-Drafts",
+    "00-收集箱/News-Inbox",
+    "00-收集箱/未命名.canvas",
     "10-领域知识/06-学习方法与效率/Prompt工程入门.md",
     "01-导航索引/PKM系统评估报告.md",
-    "00-收集箱/Claude攻略.md",
+    "01-导航索引/00-总仪表盘.md",
     "00-收集箱/90-已处理原始/Archived/测试skill.md",
     "80-模板/面试题卡-模板.md",
     "80-模板/领域知识卡-模板.md",
@@ -243,13 +250,6 @@
     "tmpclaude-57ca-cwd",
     "10-领域知识/01-计算机/Java/01-基础/JUnit5单元测试-AAA模式示例.md",
     "tmpclaude-6265-cwd",
-    "30-输出作品/01-面试回答/单元测试AAA模式-面试题速查.md",
-    "10-领域知识/01-计算机/Java/01-基础/JUnit5知识体系-提炼总结.canvas",
-    "10-领域知识/01-计算机/Java/01-基础/JUnit5断言方法详解.md",
-    "10-领域知识/01-计算机/Java/01-基础/HashMap-put源码解析.md",
-    "tmpclaude-7b6c-cwd",
-    "tmpclaude-95d1-cwd",
-    "tmpclaude-a7bb-cwd",
-    "00-收集箱/未命名.canvas"
+    "10-领域知识/01-计算机/Java/01-基础/JUnit5知识体系-提炼总结.canvas"
   ]
 }

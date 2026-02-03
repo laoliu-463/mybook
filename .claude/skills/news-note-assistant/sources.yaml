@@ -1,0 +1,138 @@
+# News Sources Configuration (PKM v2.1)
+
+# 信息源白名单配置
+# 只允许从 GitHub / YouTube / Hugging Face 抓取
+
+---
+# GitHub 源配置
+github:
+  # 关注的仓库（按主题优先级）
+  repositories:
+    # Java 后端
+    - name: "spring-projects/spring-boot"
+      priority: high
+      topics: [Java, Spring]
+
+    - name: "alibaba/arthas"
+      priority: high
+      topics: [Java, JVM]
+
+    - name: "redisson/redisson"
+      priority: high
+      topics: [Redis, Java]
+
+    # 数据库与中间件
+    - name: "redis/redis"
+      priority: high
+      topics: [Redis, Database]
+
+    - name: "mybatis/mybatis-3"
+      priority: medium
+      topics: [Java, ORM]
+
+  # Trending 抓取配置
+  trending:
+    enabled: true
+    language: "java"
+    since: "daily"  # daily / weekly
+    max_items: 10
+
+  # Release 监控
+  releases:
+    enabled: true
+    include_prereleases: false
+
+---
+# YouTube 源配置
+youtube:
+  # 关注的频道
+  channels:
+    - name: "Spring Developer"
+      channel_id: "UC7yfnfvEUlXUIfm8rGLwZdA"
+      priority: high
+      topics: [Java, Spring]
+
+    - name: "Java Brains"
+      channel_id: "UCYt1sfh5464XaDBH0oH_o7Q"
+      priority: high
+      topics: [Java]
+
+  # 搜索关键词
+  search_keywords:
+    - query: "Java concurrent programming"
+      max_results: 5
+      priority: high
+
+    - query: "Redis cache strategy"
+      max_results: 5
+      priority: high
+
+    - query: "Spring Boot microservices"
+      max_results: 5
+      priority: medium
+
+  # 过滤器
+  filters:
+    min_duration: 300  # 最短5分钟
+    max_duration: 3600  # 最长1小时
+    published_after_hours: 168  # 最近7天
+
+---
+# Hugging Face 源配置
+huggingface:
+  # 关注的模型/数据集标签
+  tags:
+    - "code-generation"
+    - "java"
+    - "software-engineering"
+
+  # Trending 监控
+  trending:
+    enabled: true
+    category: "models"  # models / datasets / spaces
+    max_items: 5
+
+  # 特定模型监控
+  models:
+    - name: "Qwen/Qwen2.5-Coder"
+      priority: high
+
+    - name: "deepseek-ai/deepseek-coder"
+      priority: high
+
+---
+# 全局配置
+global:
+  # 抓取窗口（小时）
+  window_hours: 24
+
+  # 去重配置
+  deduplication:
+    url_exact_match: true
+    title_similarity_threshold: 0.85
+
+  # 排序权重
+  ranking_weights:
+    topic_relevance: 0.5  # 主题相关性
+    source_count: 0.3     # 多来源覆盖
+    recency: 0.2          # 时效性
+
+  # 输出限制
+  max_events: 10  # 候选包最多事件数
+  max_sources_per_event: 5  # 每个事件最多来源数
+
+---
+# 白名单审计（自动校验）
+whitelist:
+  allowed_hosts:
+    - "github.com"
+    - "raw.githubusercontent.com"
+    - "api.github.com"
+    - "youtube.com"
+    - "youtu.be"
+    - "youtube-nocookie.com"
+    - "huggingface.co"
+
+  # 非白名单处理策略
+  reject_non_whitelist: true
+  log_rejected_sources: true
