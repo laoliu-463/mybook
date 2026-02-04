@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "99-归档/旧资料/promot.md",
+                "file": "00-收集箱/未命名 1.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "promot"
+              "title": "未命名 1"
             }
           }
         ]
@@ -205,12 +205,17 @@
   },
   "active": "207e4dd2c0a97409",
   "lastOpenFiles": [
+    "70-NotebookLM导入/2026-02-04-Redis缓存穿透测试.md",
+    "00-收集箱/未命名 1.md",
+    "30-资源/2026-02-04-PARA-CODE-NotebookLM学习.md",
+    "20-领域/学习与成长/2026-02-04-NotebookLM事实校验.md",
+    "20-领域/2026-02-04-Redis缓存穿透.md",
+    "20-领域/2026-02-04-计算机网络-分组交换.md",
+    "99-归档/旧资料/promot.md",
     "00-收集箱/未命名.md",
     "CLAUDE.md",
     "00-收集箱/待处理素材/未命名.md",
-    "20-领域/2026-02-04-计算机网络-分组交换.md",
     "10-项目/00-通用交付物/2026-02-04-面试回答-AI幻觉降低.md",
-    "99-归档/旧资料/promot.md",
     "80-模板/领域知识卡-模板.md",
     "30-资源/Claude攻略.md",
     "00-收集箱/临时记录/README-Review-Rule.md",
@@ -227,13 +232,8 @@
     "PKM迁移-旧目录备份清单.md",
     "迁移报告-PARA.md",
     "80-模板/WebClipper-NotebookLM.md",
-    "10-项目/进行中/hmdp-黑马点评/04-交付物/2026-02-04-面试回答-Redis缓存穿透.md",
-    "70-NotebookLM导入/2026-02-04-Redis缓存穿透测试.md",
-    "20-领域/学习与成长/2026-02-04-NotebookLM事实校验.md",
     "cleanup-pkm.sh",
     "cleanup-pkm.bat",
-    "10-领域知识/06-学习方法与效率/Prompt工程入门.md",
-    "20-领域/2026-02-04-Redis缓存穿透.md",
     "70-NotebookLM导入",
     "10-领域知识/01-计算机/计算机网络/计算机网络分层模型-OSI与TCP-IP.canvas",
     "20-领域/学习与成长",
