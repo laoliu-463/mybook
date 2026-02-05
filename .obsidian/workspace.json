@@ -11,17 +11,14 @@
             "id": "207e4dd2c0a97409",
             "type": "leaf",
             "state": {
-              "type": "canvas",
+              "type": "markdown",
               "state": {
-                "file": "20-领域/2026-02-04-Java核心基础学习地图.canvas",
-                "viewState": {
-                  "x": 615,
-                  "y": 840.495423340961,
-                  "zoom": -0.13088564498542743
-                }
+                "file": "30-资源/提示词.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-layout-dashboard",
-              "title": "2026-02-04-Java核心基础学习地图"
+              "icon": "lucide-file",
+              "title": "提示词"
             }
           }
         ]
@@ -206,10 +203,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "207e4dd2c0a97409",
+  "active": "2067b1c939c41cdc",
   "lastOpenFiles": [
-    "20-领域/2026-02-04-Java核心基础学习地图.md",
     "20-领域/2026-02-04-Java核心基础学习地图.canvas",
+    "20-领域/2026-02-04-Java核心基础学习地图.md",
     "70-NotebookLM导入/2026-02-04-Redis缓存穿透测试.md",
     "00-收集箱/未命名 1.md",
     "30-资源/2026-02-04-PARA-CODE-NotebookLM学习.md",
@@ -230,7 +227,7 @@
     "00-收集箱/90-已处理原始/Archived/测试skill.md",
     "00-收集箱/00-待分诊/未命名.md",
     "00-收集箱/Claude攻略.md",
-    "30-资源/未命名.md",
+    "30-资源/提示词.md",
     "00-收集箱/未命名.canvas",
     "80-模板/PKM规范.md",
     "PKM清理脚本使用说明.md",
