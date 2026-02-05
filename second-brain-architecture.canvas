@@ -1,461 +1,55 @@
 {
-  "nodes": [
-    {
-      "id": "philosophy-node",
-      "type": "text",
-      "x": 300,
-      "y": -200,
-      "width": 600,
-      "height": 120,
-      "text": "# 从捕获到创造的知识转化系统\n\n将碎片化输入转化为结构化知识，最终产出可交付价值",
-      "color": "5"
-    },
-    {
-      "id": "input-group",
-      "type": "group",
-      "x": -50,
-      "y": 0,
-      "width": 500,
-      "height": 400,
-      "label": "📥 输入层",
-      "color": "5"
-    },
-    {
-      "id": "input-notebooklm",
-      "type": "text",
-      "x": 0,
-      "y": 50,
-      "width": 200,
-      "height": 80,
-      "text": "**NotebookLM 导出**\n\n📁 70-NotebookLM导入/"
-    },
-    {
-      "id": "input-notes",
-      "type": "text",
-      "x": 0,
-      "y": 150,
-      "width": 200,
-      "height": 60,
-      "text": "**日常想法/笔记**"
-    },
-    {
-      "id": "input-web",
-      "type": "text",
-      "x": 240,
-      "y": 50,
-      "width": 180,
-      "height": 60,
-      "text": "**网页/文章**"
-    },
-    {
-      "id": "input-meeting",
-      "type": "text",
-      "x": 240,
-      "y": 150,
-      "width": 180,
-      "height": 60,
-      "text": "**对话/会议记录**"
-    },
-    {
-      "id": "workflow-group",
-      "type": "group",
-      "x": 500,
-      "y": 0,
-      "width": 1400,
-      "height": 400,
-      "label": "🔄 核心工作流（自动化流程）",
-      "color": "4"
-    },
-    {
-      "id": "skill-import",
-      "type": "text",
-      "x": 520,
-      "y": 50,
-      "width": 250,
-      "height": 120,
-      "text": "## Capture\n**sb-import-notebooklm**\n\n导入 NotebookLM 内容\n\n💡 支持 --then all 全自动",
-      "color": "4"
-    },
-    {
-      "id": "skill-capture",
-      "type": "text",
-      "x": 520,
-      "y": 200,
-      "width": 250,
-      "height": 120,
-      "text": "## Capture\n**sb-capture**\n\n标准化输入内容\n使用 Capture 模板",
-      "color": "4"
-    },
-    {
-      "id": "inbox-node",
-      "type": "text",
-      "x": 820,
-      "y": 100,
-      "width": 200,
-      "height": 100,
-      "text": "## 📥 收集箱\n**00-收集箱/**\n\n待处理的原始条目",
-      "color": "3"
-    },
-    {
-      "id": "skill-organize",
-      "type": "text",
-      "x": 1070,
-      "y": 50,
-      "width": 280,
-      "height": 150,
-      "text": "## Organize\n**sb-organize**\n\n按 PARA 方法归类\n\n🚀 --auto 自动执行\n📦 --all 批量处理",
-      "color": "4"
-    },
-    {
-      "id": "skill-distill",
-      "type": "text",
-      "x": 1400,
-      "y": 50,
-      "width": 220,
-      "height": 130,
-      "text": "## Distill\n**sb-distill**\n\n提取核心洞见\n生成执行摘要",
-      "color": "4"
-    },
-    {
-      "id": "skill-visualize",
-      "type": "text",
-      "x": 1400,
-      "y": 210,
-      "width": 220,
-      "height": 100,
-      "text": "## Visualize\n**sb-visualize**\n\n自动生成 Canvas",
-      "color": "4"
-    },
-    {
-      "id": "skill-express",
-      "type": "text",
-      "x": 1670,
-      "y": 100,
-      "width": 200,
-      "height": 120,
-      "text": "## Express\n**sb-express**\n\n转化为可交付成果",
-      "color": "4"
-    },
-    {
-      "id": "para-group",
-      "type": "group",
-      "x": 50,
-      "y": 500,
-      "width": 1400,
-      "height": 550,
-      "label": "📂 PARA 目录结构",
-      "color": "2"
-    },
-    {
-      "id": "para-projects",
-      "type": "text",
-      "x": 100,
-      "y": 560,
-      "width": 300,
-      "height": 180,
-      "text": "## 10-项目/ (Projects)\n\n有明确目标和截止日期\n\n**子目录：**\n- 10-项目/00-通用交付物/\n- 各具体项目文件夹",
-      "color": "2"
-    },
-    {
-      "id": "para-areas",
-      "type": "text",
-      "x": 450,
-      "y": 560,
-      "width": 280,
-      "height": 180,
-      "text": "## 20-领域/ (Areas)\n\n持续关注的责任领域\n长期维护的能力\n\n**示例：**\n- 技术栈学习\n- 职业发展",
-      "color": "2"
-    },
-    {
-      "id": "para-resources",
-      "type": "text",
-      "x": 780,
-      "y": 560,
-      "width": 280,
-      "height": 180,
-      "text": "## 30-资源/ (Resources)\n\n参考材料和学习内容\n暂不行动但未来可能用\n\n**示例：**\n- 技术文档\n- 面试资料",
-      "color": "2"
-    },
-    {
-      "id": "para-archive",
-      "type": "text",
-      "x": 1110,
-      "y": 560,
-      "width": 280,
-      "height": 180,
-      "text": "## 99-归档/ (Archive)\n\n已完成或不再活跃\n\n**子目录：**\n- 已完成项目/\n- 旧资料/",
-      "color": "2"
-    },
-    {
-      "id": "special-dirs-group",
-      "type": "group",
-      "x": 100,
-      "y": 800,
-      "width": 1290,
-      "height": 200,
-      "label": "特殊目录"
-    },
-    {
-      "id": "dir-inbox",
-      "type": "text",
-      "x": 130,
-      "y": 850,
-      "width": 180,
-      "height": 100,
-      "text": "**00-收集箱/**\n\n待处理条目",
-      "color": "3"
-    },
-    {
-      "id": "dir-notebooklm",
-      "type": "text",
-      "x": 350,
-      "y": 850,
-      "width": 220,
-      "height": 100,
-      "text": "**70-NotebookLM导入/**\n\nNotebookLM 暂存",
-      "color": "3"
-    },
-    {
-      "id": "dir-templates",
-      "type": "text",
-      "x": 610,
-      "y": 850,
-      "width": 180,
-      "height": 100,
-      "text": "**80-模板/**\n\n模板文件",
-      "color": "3"
-    },
-    {
-      "id": "dir-output",
-      "type": "text",
-      "x": 830,
-      "y": 850,
-      "width": 180,
-      "height": 100,
-      "text": "**40-交付物/**\n\n最终输出",
-      "color": "3"
-    },
-    {
-      "id": "tools-group",
-      "type": "group",
-      "x": 1950,
-      "y": 0,
-      "width": 380,
-      "height": 650,
-      "label": "🛠️ 辅助工具层",
-      "color": "6"
-    },
-    {
-      "id": "tool-visualize",
-      "type": "text",
-      "x": 1980,
-      "y": 60,
-      "width": 320,
-      "height": 100,
-      "text": "**sb-visualize**\n\n生成思维导图和 Canvas\n支持多种可视化类型",
-      "color": "6"
-    },
-    {
-      "id": "tool-markdown",
-      "type": "text",
-      "x": 1980,
-      "y": 190,
-      "width": 320,
-      "height": 100,
-      "text": "**obsidian-markdown**\n\n处理 Markdown 笔记\n支持 Obsidian 特性",
-      "color": "6"
-    },
-    {
-      "id": "tool-canvas",
-      "type": "text",
-      "x": 1980,
-      "y": 320,
-      "width": 320,
-      "height": 100,
-      "text": "**json-canvas**\n\n处理 Canvas 文件\n管理可视化图表",
-      "color": "6"
-    },
-    {
-      "id": "tool-bases",
-      "type": "text",
-      "x": 1980,
-      "y": 450,
-      "width": 320,
-      "height": 100,
-      "text": "**obsidian-bases**\n\n处理数据库视图\n创建表格和卡片视图",
-      "color": "6"
-    },
-    {
-      "id": "automation-tip",
-      "type": "text",
-      "x": 600,
-      "y": 480,
-      "width": 800,
-      "height": 200,
-      "text": "## 🚀 全自动化工作流\n\n**完整自动化命令：**\n- `sb-import-notebooklm --latest --then all`（推荐）\n- `sb-organize --all`（批量处理收集箱）\n- `sb-organize <文件> --auto`（单个文件自动化）\n\n**自动执行链：** Capture → Organize → Distill → Visualize",
-      "color": "1"
-    }
-  ],
-  "edges": [
-    {
-      "id": "edge-philosophy-input",
-      "fromNode": "philosophy-node",
-      "fromSide": "bottom",
-      "toNode": "input-group",
-      "toSide": "top",
-      "label": "输入来源"
-    },
-    {
-      "id": "edge-notebooklm-import",
-      "fromNode": "input-notebooklm",
-      "fromSide": "right",
-      "toNode": "skill-import",
-      "toSide": "left",
-      "color": "4"
-    },
-    {
-      "id": "edge-notes-capture",
-      "fromNode": "input-notes",
-      "fromSide": "right",
-      "toNode": "skill-capture",
-      "toSide": "left",
-      "color": "4"
-    },
-    {
-      "id": "edge-web-capture",
-      "fromNode": "input-web",
-      "fromSide": "right",
-      "toNode": "skill-capture",
-      "toSide": "left",
-      "color": "4"
-    },
-    {
-      "id": "edge-meeting-capture",
-      "fromNode": "input-meeting",
-      "fromSide": "right",
-      "toNode": "skill-capture",
-      "toSide": "left",
-      "color": "4"
-    },
-    {
-      "id": "edge-import-inbox",
-      "fromNode": "skill-import",
-      "fromSide": "right",
-      "toNode": "inbox-node",
-      "toSide": "left",
-      "color": "4"
-    },
-    {
-      "id": "edge-capture-inbox",
-      "fromNode": "skill-capture",
-      "fromSide": "right",
-      "toNode": "inbox-node",
-      "toSide": "left",
-      "color": "4"
-    },
-    {
-      "id": "edge-inbox-organize",
-      "fromNode": "inbox-node",
-      "fromSide": "right",
-      "toNode": "skill-organize",
-      "toSide": "left",
-      "color": "4",
-      "label": "自动归位"
-    },
-    {
-      "id": "edge-organize-distill",
-      "fromNode": "skill-organize",
-      "fromSide": "right",
-      "toNode": "skill-distill",
-      "toSide": "left",
-      "color": "4",
-      "label": "--auto"
-    },
-    {
-      "id": "edge-distill-visualize",
-      "fromNode": "skill-distill",
-      "fromSide": "bottom",
-      "toNode": "skill-visualize",
-      "toSide": "top",
-      "color": "4",
-      "label": "自动调用"
-    },
-    {
-      "id": "edge-organize-para-projects",
-      "fromNode": "skill-organize",
-      "fromSide": "bottom",
-      "toNode": "para-projects",
-      "toSide": "top",
-      "color": "2",
-      "label": "有明确交付"
-    },
-    {
-      "id": "edge-organize-para-areas",
-      "fromNode": "skill-organize",
-      "fromSide": "bottom",
-      "toNode": "para-areas",
-      "toSide": "top",
-      "color": "2",
-      "label": "长期维护"
-    },
-    {
-      "id": "edge-organize-para-resources",
-      "fromNode": "skill-organize",
-      "fromSide": "bottom",
-      "toNode": "para-resources",
-      "toSide": "top",
-      "color": "2",
-      "label": "未来可能用"
-    },
-    {
-      "id": "edge-organize-para-archive",
-      "fromNode": "skill-organize",
-      "fromSide": "bottom",
-      "toNode": "para-archive",
-      "toSide": "top",
-      "color": "2",
-      "label": "已完成/过期"
-    },
-    {
-      "id": "edge-distill-express",
-      "fromNode": "skill-distill",
-      "fromSide": "right",
-      "toNode": "skill-express",
-      "toSide": "left",
-      "color": "4"
-    },
-    {
-      "id": "edge-express-output",
-      "fromNode": "skill-express",
-      "fromSide": "bottom",
-      "toNode": "dir-output",
-      "toSide": "top",
-      "color": "4",
-      "label": "可交付成果"
-    },
-    {
-      "id": "edge-tool-visualize-workflow",
-      "fromNode": "tool-visualize",
-      "fromSide": "left",
-      "toNode": "skill-visualize",
-      "toSide": "right",
-      "color": "6"
-    },
-    {
-      "id": "edge-tool-markdown-workflow",
-      "fromNode": "tool-markdown",
-      "fromSide": "left",
-      "toNode": "workflow-group",
-      "toSide": "right",
-      "color": "6"
-    },
-    {
-      "id": "edge-tool-canvas-workflow",
-      "fromNode": "tool-canvas",
-      "fromSide": "left",
-      "toNode": "skill-visualize",
-      "toSide": "right",
-      "color": "6"
-    }
-  ]
+	"nodes":[
+		{"id":"para-group","type":"group","x":-50,"y":500,"width":1500,"height":550,"color":"2","label":"📂 PARA 目录结构"},
+		{"id":"workflow-group","type":"group","x":500,"y":0,"width":1400,"height":400,"color":"4","label":"🔄 核心工作流（自动化流程）"},
+		{"id":"special-dirs-group","type":"group","x":100,"y":800,"width":1290,"height":200,"label":"特殊目录"},
+		{"id":"tools-group","type":"group","x":1950,"y":0,"width":380,"height":650,"color":"6","label":"🛠️ 辅助工具层"},
+		{"id":"input-group","type":"group","x":-50,"y":0,"width":500,"height":400,"color":"5","label":"📥 输入层"},
+		{"id":"philosophy-node","type":"text","text":"# 从捕获到创造的知识转化系统\n\n将碎片化输入转化为结构化知识，最终产出可交付价值","x":300,"y":-200,"width":600,"height":120,"color":"5"},
+		{"id":"input-notebooklm","type":"text","text":"**NotebookLM 导出**\n\n📁 70-NotebookLM导入/","x":0,"y":50,"width":200,"height":80},
+		{"id":"input-notes","type":"text","text":"**日常想法/笔记**","x":0,"y":150,"width":200,"height":60},
+		{"id":"input-web","type":"text","text":"**网页/文章**","x":240,"y":50,"width":180,"height":60},
+		{"id":"input-meeting","type":"text","text":"**对话/会议记录**","x":240,"y":150,"width":180,"height":60},
+		{"id":"skill-import","type":"text","text":"## Capture\n**sb-import-notebooklm**\n\n导入 NotebookLM 内容\n\n💡 支持 --then all 全自动","x":520,"y":50,"width":250,"height":120,"color":"4"},
+		{"id":"skill-capture","type":"text","text":"## Capture\n**sb-capture**\n\n标准化输入内容\n使用 Capture 模板","x":520,"y":200,"width":250,"height":120,"color":"4"},
+		{"id":"inbox-node","type":"text","text":"## 📥 收集箱\n**00-收集箱/**\n\n待处理的原始条目","x":820,"y":100,"width":200,"height":100,"color":"3"},
+		{"id":"skill-organize","type":"text","text":"## Organize\n**sb-organize**\n\n按 PARA 方法归类\n\n🚀 --auto 自动执行\n📦 --all 批量处理","x":1070,"y":50,"width":280,"height":150,"color":"4"},
+		{"id":"skill-distill","type":"text","text":"## Distill\n**sb-distill**\n\n提取核心洞见\n生成执行摘要","x":1400,"y":50,"width":220,"height":130,"color":"4"},
+		{"id":"skill-visualize","type":"text","text":"## Visualize\n**sb-visualize**\n\n自动生成 Canvas","x":1400,"y":210,"width":220,"height":100,"color":"4"},
+		{"id":"skill-express","type":"text","text":"## Express\n**sb-express**\n\n转化为可交付成果","x":1670,"y":100,"width":200,"height":120,"color":"4"},
+		{"id":"tool-visualize","type":"text","text":"**sb-visualize**\n\n生成思维导图和 Canvas\n支持多种可视化类型","x":1980,"y":60,"width":320,"height":100,"color":"6"},
+		{"id":"tool-markdown","type":"text","text":"**obsidian-markdown**\n\n处理 Markdown 笔记\n支持 Obsidian 特性","x":1980,"y":190,"width":320,"height":100,"color":"6"},
+		{"id":"tool-canvas","type":"text","text":"**json-canvas**\n\n处理 Canvas 文件\n管理可视化图表","x":1980,"y":320,"width":320,"height":100,"color":"6"},
+		{"id":"tool-bases","type":"text","text":"**obsidian-bases**\n\n处理数据库视图\n创建表格和卡片视图","x":1980,"y":450,"width":320,"height":100,"color":"6"},
+		{"id":"para-projects","type":"text","text":"## 10-项目/ (Projects)\n\n有明确目标和截止日期\n\n**子目录：**\n- 10-项目/00-通用交付物/\n- 各具体项目文件夹","x":100,"y":560,"width":300,"height":180,"color":"2"},
+		{"id":"para-areas","type":"text","text":"## 20-领域/ (Areas)\n\n持续关注的责任领域\n长期维护的能力\n\n**示例：**\n- 技术栈学习\n- 职业发展","x":450,"y":560,"width":280,"height":180,"color":"2"},
+		{"id":"para-resources","type":"text","text":"## 30-资源/ (Resources)\n\n参考材料和学习内容\n暂不行动但未来可能用\n\n**示例：**\n- 技术文档\n- 面试资料","x":780,"y":560,"width":280,"height":180,"color":"2"},
+		{"id":"para-archive","type":"text","text":"## 99-归档/ (Archive)\n\n已完成或不再活跃\n\n**子目录：**\n- 已完成项目/\n- 旧资料/","x":1110,"y":560,"width":280,"height":180,"color":"2"},
+		{"id":"dir-inbox","type":"text","text":"**00-收集箱/**\n\n待处理条目","x":130,"y":850,"width":180,"height":100,"color":"3"},
+		{"id":"dir-notebooklm","type":"text","text":"**70-NotebookLM导入/**\n\nNotebookLM 暂存","x":350,"y":850,"width":220,"height":100,"color":"3"},
+		{"id":"dir-templates","type":"text","text":"**80-模板/**\n\n模板文件","x":610,"y":850,"width":180,"height":100,"color":"3"},
+		{"id":"dir-output","type":"text","text":"**40-交付物/**\n\n最终输出","x":830,"y":850,"width":180,"height":100,"color":"3"},
+		{"id":"automation-tip","type":"text","text":"## 🚀 全自动化工作流\n\n**完整自动化命令：**\n- `sb-import-notebooklm --latest --then all`（推荐）\n- `sb-organize --all`（批量处理收集箱）\n- `sb-organize <文件> --auto`（单个文件自动化）\n\n**自动执行链：** Capture → Organize → Distill → Visualize","x":1510,"y":850,"width":800,"height":200,"color":"1"}
+	],
+	"edges":[
+		{"id":"edge-philosophy-input","fromNode":"philosophy-node","fromSide":"bottom","toNode":"input-group","toSide":"top","label":"输入来源"},
+		{"id":"edge-notebooklm-import","fromNode":"input-notebooklm","fromSide":"right","toNode":"skill-import","toSide":"left","color":"4"},
+		{"id":"edge-notes-capture","fromNode":"input-notes","fromSide":"right","toNode":"skill-capture","toSide":"left","color":"4"},
+		{"id":"edge-web-capture","fromNode":"input-web","fromSide":"right","toNode":"skill-capture","toSide":"left","color":"4"},
+		{"id":"edge-meeting-capture","fromNode":"input-meeting","fromSide":"right","toNode":"skill-capture","toSide":"left","color":"4"},
+		{"id":"edge-import-inbox","fromNode":"skill-import","fromSide":"right","toNode":"inbox-node","toSide":"left","color":"4"},
+		{"id":"edge-capture-inbox","fromNode":"skill-capture","fromSide":"right","toNode":"inbox-node","toSide":"left","color":"4"},
+		{"id":"edge-inbox-organize","fromNode":"inbox-node","fromSide":"right","toNode":"skill-organize","toSide":"left","color":"4","label":"自动归位"},
+		{"id":"edge-organize-distill","fromNode":"skill-organize","fromSide":"right","toNode":"skill-distill","toSide":"left","color":"4","label":"--auto"},
+		{"id":"edge-distill-visualize","fromNode":"skill-distill","fromSide":"bottom","toNode":"skill-visualize","toSide":"top","color":"4","label":"自动调用"},
+		{"id":"edge-organize-para-projects","fromNode":"skill-organize","fromSide":"bottom","toNode":"para-projects","toSide":"top","color":"2","label":"有明确交付"},
+		{"id":"edge-organize-para-areas","fromNode":"skill-organize","fromSide":"bottom","toNode":"para-areas","toSide":"top","color":"2","label":"长期维护"},
+		{"id":"edge-organize-para-resources","fromNode":"skill-organize","fromSide":"bottom","toNode":"para-resources","toSide":"top","color":"2","label":"未来可能用"},
+		{"id":"edge-organize-para-archive","fromNode":"skill-organize","fromSide":"bottom","toNode":"para-archive","toSide":"top","color":"2","label":"已完成/过期"},
+		{"id":"edge-distill-express","fromNode":"skill-distill","fromSide":"right","toNode":"skill-express","toSide":"left","color":"4"},
+		{"id":"edge-express-output","fromNode":"skill-express","fromSide":"bottom","toNode":"dir-output","toSide":"top","color":"4","label":"可交付成果"},
+		{"id":"edge-tool-visualize-workflow","fromNode":"tool-visualize","fromSide":"left","toNode":"skill-visualize","toSide":"right","color":"6"},
+		{"id":"edge-tool-markdown-workflow","fromNode":"tool-markdown","fromSide":"left","toNode":"workflow-group","toSide":"right","color":"6"},
+		{"id":"edge-tool-canvas-workflow","fromNode":"tool-canvas","fromSide":"left","toNode":"skill-visualize","toSide":"right","color":"6"}
+	]
 }

@@ -1,0 +1,124 @@
+{
+  "nodes": [
+    {
+      "id": "center-topic",
+      "type": "text",
+      "x": 400,
+      "y": 300,
+      "width": 300,
+      "height": 120,
+      "text": "# 测试自动化工作流\n\n验证第二大脑系统的完整自动化流程",
+      "color": "5"
+    },
+    {
+      "id": "point-1",
+      "type": "text",
+      "x": 100,
+      "y": 100,
+      "width": 250,
+      "height": 100,
+      "text": "## 自动化流程\n\n从收集箱到归位、提取、可视化的全自动处理链",
+      "color": "4"
+    },
+    {
+      "id": "point-2",
+      "type": "text",
+      "x": 750,
+      "y": 100,
+      "width": 250,
+      "height": 100,
+      "text": "## PARA 方法\n\nProjects（项目）\nAreas（领域）\nResources（资源）\nArchive（归档）",
+      "color": "4"
+    },
+    {
+      "id": "point-3",
+      "type": "text",
+      "x": 100,
+      "y": 500,
+      "width": 250,
+      "height": 100,
+      "text": "## 批量处理\n\n/sb-organize --all\n一键处理收集箱所有文件",
+      "color": "4"
+    },
+    {
+      "id": "point-4",
+      "type": "text",
+      "x": 750,
+      "y": 500,
+      "width": 250,
+      "height": 100,
+      "text": "## Skills 调用链\n\nsb-organize →\nsb-distill →\nsb-visualize",
+      "color": "4"
+    },
+    {
+      "id": "checklist",
+      "type": "text",
+      "x": 100,
+      "y": 650,
+      "width": 400,
+      "height": 180,
+      "text": "## 自动化工作流检查清单\n\n1. ✅ 将待处理笔记放入 00-收集箱/\n2. ✅ 运行 /sb-organize --all 批量处理\n3. ✅ 验证文件已归位到正确的 PARA 目录\n4. ✅ 确认已追加 Distill 提取区块\n5. ✅ 检查是否生成 Canvas 可视化文件",
+      "color": "3"
+    },
+    {
+      "id": "warning",
+      "type": "text",
+      "x": 550,
+      "y": 650,
+      "width": 300,
+      "height": 100,
+      "text": "## ⚠️ 注意事项\n\n来源为测试性质\n实际使用时需要真实的知识来源",
+      "color": "1"
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge-1",
+      "fromNode": "center-topic",
+      "fromSide": "top",
+      "toNode": "point-1",
+      "toSide": "bottom",
+      "color": "4"
+    },
+    {
+      "id": "edge-2",
+      "fromNode": "center-topic",
+      "fromSide": "top",
+      "toNode": "point-2",
+      "toSide": "bottom",
+      "color": "4"
+    },
+    {
+      "id": "edge-3",
+      "fromNode": "center-topic",
+      "fromSide": "bottom",
+      "toNode": "point-3",
+      "toSide": "top",
+      "color": "4"
+    },
+    {
+      "id": "edge-4",
+      "fromNode": "center-topic",
+      "fromSide": "bottom",
+      "toNode": "point-4",
+      "toSide": "top",
+      "color": "4"
+    },
+    {
+      "id": "edge-5",
+      "fromNode": "point-3",
+      "fromSide": "bottom",
+      "toNode": "checklist",
+      "toSide": "top",
+      "color": "3"
+    },
+    {
+      "id": "edge-6",
+      "fromNode": "point-4",
+      "fromSide": "bottom",
+      "toNode": "warning",
+      "toSide": "top",
+      "color": "1"
+    }
+  ]
+}

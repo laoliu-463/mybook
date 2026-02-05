@@ -28,11 +28,20 @@ invocation: user
    - 如果原文没有"source/来源/链接/引用"信息，必须在模板中的 WARNING 段写：
      "待确认：来源缺失，建议将原材料导入 NotebookLM 验证后再下结论"
 5. 将生成内容追加到文件末尾
-6. **自动调用 /sb-visualize 生成 Canvas**（除非指定 --no-canvas）
+6. **使用 Skill tool 自动调用下一个 skill**（除非指定 --no-canvas）：
+   ```
+   使用 Skill tool 调用：skill="sb-visualize", args="<目标文件路径>"
+   ```
 7. 终端输出：
    - ✅ 已提取：<文件名>（已追加 Distill 区块）
    - ✅ 已生成 Canvas：<文件名>.canvas
    - 🎉 完整流程已完成
+
+## 自动调用链（重要）
+默认情况下，**必须**使用 Skill tool 调用 `sb-visualize`：
+- 提取完成后 → 使用 `Skill tool` 调用 `sb-visualize`
+- 不要使用文字说明，必须实际调用 Skill tool
+- 除非用户明确指定 `--no-canvas` 参数
 
 ## 严谨性
 - 禁止引入原文不存在的事实细节

@@ -1,0 +1,178 @@
+{
+  "nodes": [
+    {
+      "id": "center-metaprompt",
+      "type": "text",
+      "x": 500,
+      "y": 400,
+      "width": 350,
+      "height": 140,
+      "text": "# Metaprompt 元提示词方法论\n\n生成结构良好、可核验且低幻觉的高质量提示词",
+      "color": "5"
+    },
+    {
+      "id": "point-1",
+      "type": "text",
+      "x": 100,
+      "y": 150,
+      "width": 280,
+      "height": 110,
+      "text": "## 任务分解原则\n\n将复杂需求拆解为更小、更简单的子任务\n分配专门的专家角色独立处理",
+      "color": "4"
+    },
+    {
+      "id": "point-2",
+      "type": "text",
+      "x": 920,
+      "y": 150,
+      "width": 280,
+      "height": 110,
+      "text": "## 新视角验证\n\n引入独立专家交叉审查\n避免同一角色既生成又验证",
+      "color": "4"
+    },
+    {
+      "id": "point-3",
+      "type": "text",
+      "x": 100,
+      "y": 650,
+      "width": 280,
+      "height": 110,
+      "text": "## 反幻觉机制\n\n缺乏数据时声明不确定性\n禁止猜测，鼓励引用数据源",
+      "color": "4"
+    },
+    {
+      "id": "point-4",
+      "type": "text",
+      "x": 920,
+      "y": 650,
+      "width": 280,
+      "height": 110,
+      "text": "## 迭代式核验\n\n对可能产生错误的任务多轮验证\n特别是计算、代码或事实性陈述",
+      "color": "4"
+    },
+    {
+      "id": "point-5",
+      "type": "text",
+      "x": 450,
+      "y": 100,
+      "width": 280,
+      "height": 100,
+      "text": "## 最小化交互\n\n仅在影响准确性时提问\n避免过度来回，保持简洁",
+      "color": "4"
+    },
+    {
+      "id": "point-6",
+      "type": "text",
+      "x": 450,
+      "y": 800,
+      "width": 280,
+      "height": 120,
+      "text": "## 标准化输出结构\n\n角色定义 + 背景 + 指令\n+ 约束 + 输出格式",
+      "color": "4"
+    },
+    {
+      "id": "framework",
+      "type": "text",
+      "x": 100,
+      "y": 950,
+      "width": 400,
+      "height": 180,
+      "text": "## 决策框架\n\n1. 复杂度评估 → 简单/复杂任务分流\n2. 专家分配 → 确定所需领域专家\n3. 验证策略 → 创建者 ≠ 验证者\n4. 不确定性处理 → 声明 + 建议来源",
+      "color": "6"
+    },
+    {
+      "id": "template",
+      "type": "text",
+      "x": 550,
+      "y": 950,
+      "width": 450,
+      "height": 200,
+      "text": "## 提示词标准结构模板\n\n```\n角色定义: [强调核验与声明不确定性]\n背景: [用户任务/目标/情境]\n指令: [分步骤操作 + 数据验证]\n约束: [时间/风格/字数/引用]\n输出格式: [具体结构定义]\n```",
+      "color": "3"
+    },
+    {
+      "id": "warning",
+      "type": "text",
+      "x": 1050,
+      "y": 950,
+      "width": 300,
+      "height": 120,
+      "text": "## ⚠️ 注意事项\n\n来源缺失，建议验证\n需根据场景调整\n平衡准确性与效率",
+      "color": "1"
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge-1",
+      "fromNode": "center-metaprompt",
+      "fromSide": "top",
+      "toNode": "point-1",
+      "toSide": "bottom",
+      "color": "4"
+    },
+    {
+      "id": "edge-2",
+      "fromNode": "center-metaprompt",
+      "fromSide": "top",
+      "toNode": "point-2",
+      "toSide": "bottom",
+      "color": "4"
+    },
+    {
+      "id": "edge-3",
+      "fromNode": "center-metaprompt",
+      "fromSide": "bottom",
+      "toNode": "point-3",
+      "toSide": "top",
+      "color": "4"
+    },
+    {
+      "id": "edge-4",
+      "fromNode": "center-metaprompt",
+      "fromSide": "bottom",
+      "toNode": "point-4",
+      "toSide": "top",
+      "color": "4"
+    },
+    {
+      "id": "edge-5",
+      "fromNode": "center-metaprompt",
+      "fromSide": "top",
+      "toNode": "point-5",
+      "toSide": "bottom",
+      "color": "4"
+    },
+    {
+      "id": "edge-6",
+      "fromNode": "center-metaprompt",
+      "fromSide": "bottom",
+      "toNode": "point-6",
+      "toSide": "top",
+      "color": "4"
+    },
+    {
+      "id": "edge-7",
+      "fromNode": "point-1",
+      "fromSide": "bottom",
+      "toNode": "framework",
+      "toSide": "top",
+      "color": "6"
+    },
+    {
+      "id": "edge-8",
+      "fromNode": "point-6",
+      "fromSide": "bottom",
+      "toNode": "template",
+      "toSide": "top",
+      "color": "3"
+    },
+    {
+      "id": "edge-9",
+      "fromNode": "point-3",
+      "fromSide": "bottom",
+      "toNode": "warning",
+      "toSide": "top",
+      "color": "1"
+    }
+  ]
+}
