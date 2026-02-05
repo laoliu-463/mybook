@@ -1,172 +1,27 @@
 {
-  "nodes": [
-    {
-      "id": "center",
-      "type": "text",
-      "x": 400,
-      "y": 400,
-      "width": 350,
-      "height": 150,
-      "text": "# Java 核心基础\n全栈视角学习地图",
-      "color": "5"
-    },
-    {
-      "id": "l1",
-      "type": "text",
-      "x": 100,
-      "y": 100,
-      "width": 280,
-      "height": 120,
-      "text": "## L1: 面向对象与语法\n- OOP 三大特性\n- 类图关系\n- 泛型、注解、异常",
-      "color": "4"
-    },
-    {
-      "id": "l2",
-      "type": "text",
-      "x": 500,
-      "y": 100,
-      "width": 280,
-      "height": 120,
-      "text": "## L2: 核心机制\n- 反射与代理\n- SPI 机制\n- 序列化",
-      "color": "4"
-    },
-    {
-      "id": "l3",
-      "type": "text",
-      "x": 850,
-      "y": 250,
-      "width": 280,
-      "height": 120,
-      "text": "## L3: 集合框架\n- ArrayList / LinkedList\n- HashMap / ConcurrentHashMap\n- 数组、链表、红黑树",
-      "color": "4"
-    },
-    {
-      "id": "l4",
-      "type": "text",
-      "x": 850,
-      "y": 450,
-      "width": 280,
-      "height": 120,
-      "text": "## L4: 并发与新特性\n- J.U.C / 线程池 / AQS\n- Java 8 Lambda / Stream",
-      "color": "4"
-    },
-    {
-      "id": "l5",
-      "type": "text",
-      "x": 500,
-      "y": 600,
-      "width": 280,
-      "height": 120,
-      "text": "## L5: JVM 底层\n- 内存结构\n- 类加载 / 双亲委派\n- GC 垃圾回收",
-      "color": "4"
-    },
-    {
-      "id": "path",
-      "type": "text",
-      "x": 100,
-      "y": 600,
-      "width": 280,
-      "height": 180,
-      "text": "## 学习路径\n**阶段1**: OOP 思维建模\n**阶段2**: 容器工具掌握\n**阶段3**: 底层原理突破",
-      "color": "3"
-    },
-    {
-      "id": "interview",
-      "type": "text",
-      "x": 100,
-      "y": 300,
-      "width": 280,
-      "height": 200,
-      "text": "## 面试题型 (12类)\n1. OOP 理解\n2. 集合底层 (HashMap)\n3. 并发安全\n4. 类加载\n5. 内存管理\n6. SPI 机制",
-      "color": "2"
-    },
-    {
-      "id": "pitfalls",
-      "type": "text",
-      "x": 100,
-      "y": 820,
-      "width": 280,
-      "height": 150,
-      "text": "## ⚠️ 常见坑点\n- 学习顺序错误\n- 只记结论不理解原理\n- 忽略贯通主线\n- 面试题型准备不系统",
-      "color": "1"
-    },
-    {
-      "id": "key-modules",
-      "type": "text",
-      "x": 500,
-      "y": 820,
-      "width": 280,
-      "height": 150,
-      "text": "## 🎯 重点模块\n- HashMap 源码 (必问)\n- AQS 锁机制\n- JVM GC 调优\n- Java SPI\n- Java 8+ 新特性",
-      "color": "6"
-    }
-  ],
-  "edges": [
-    {
-      "id": "e1",
-      "fromNode": "center",
-      "toNode": "l1",
-      "label": "基础"
-    },
-    {
-      "id": "e2",
-      "fromNode": "center",
-      "toNode": "l2",
-      "label": "进阶"
-    },
-    {
-      "id": "e3",
-      "fromNode": "center",
-      "toNode": "l3",
-      "label": "高频"
-    },
-    {
-      "id": "e4",
-      "fromNode": "center",
-      "toNode": "l4",
-      "label": "高权重"
-    },
-    {
-      "id": "e5",
-      "fromNode": "center",
-      "toNode": "l5",
-      "label": "基石"
-    },
-    {
-      "id": "e6",
-      "fromNode": "l1",
-      "toNode": "l2",
-      "label": "支撑"
-    },
-    {
-      "id": "e7",
-      "fromNode": "l2",
-      "toNode": "l3",
-      "label": "应用"
-    },
-    {
-      "id": "e8",
-      "fromNode": "l3",
-      "toNode": "l4",
-      "label": "并发化"
-    },
-    {
-      "id": "e9",
-      "fromNode": "l4",
-      "toNode": "l5",
-      "label": "运行于"
-    },
-    {
-      "id": "e10",
-      "fromNode": "path",
-      "toNode": "center",
-      "label": "遵循"
-    },
-    {
-      "id": "e11",
-      "fromNode": "interview",
-      "toNode": "center",
-      "label": "检验"
-    }
-  ]
+	"nodes":[
+		{"id":"center","type":"text","x":400,"y":400,"width":350,"height":150,"text":"# Java 核心基础\n全栈视角学习地图","color":"5"},
+		{"id":"l1","type":"text","x":100,"y":100,"width":280,"height":120,"text":"## L1: 面向对象与语法\n- OOP 三大特性\n- 类图关系\n- 泛型、注解、异常","color":"4"},
+		{"id":"l2","type":"text","x":500,"y":100,"width":280,"height":120,"text":"## L2: 核心机制\n- 反射与代理\n- SPI 机制\n- 序列化","color":"4"},
+		{"id":"l3","type":"text","x":850,"y":250,"width":280,"height":120,"text":"## L3: 集合框架\n- ArrayList / LinkedList\n- HashMap / ConcurrentHashMap\n- 数组、链表、红黑树","color":"4"},
+		{"id":"l4","type":"text","x":850,"y":450,"width":280,"height":120,"text":"## L4: 并发与新特性\n- J.U.C / 线程池 / AQS\n- Java 8 Lambda / Stream","color":"4"},
+		{"id":"l5","type":"text","x":500,"y":600,"width":280,"height":120,"text":"## L5: JVM 底层\n- 内存结构\n- 类加载 / 双亲委派\n- GC 垃圾回收","color":"4"},
+		{"id":"path","type":"text","x":100,"y":600,"width":280,"height":180,"text":"## 学习路径\n**阶段1**: OOP 思维建模\n**阶段2**: 容器工具掌握\n**阶段3**: 底层原理突破","color":"3"},
+		{"id":"interview","type":"text","x":100,"y":300,"width":280,"height":200,"text":"## 面试题型 (12类)\n1. OOP 理解\n2. 集合底层 (HashMap)\n3. 并发安全\n4. 类加载\n5. 内存管理\n6. SPI 机制","color":"2"},
+		{"id":"pitfalls","type":"text","x":100,"y":820,"width":280,"height":150,"text":"## ⚠️ 常见坑点\n- 学习顺序错误\n- 只记结论不理解原理\n- 忽略贯通主线\n- 面试题型准备不系统","color":"1"},
+		{"id":"key-modules","type":"text","x":500,"y":820,"width":280,"height":150,"text":"## 🎯 重点模块\n- HashMap 源码 (必问)\n- AQS 锁机制\n- JVM GC 调优\n- Java SPI\n- Java 8+ 新特性","color":"6"}
+	],
+	"edges":[
+		{"id":"e1","fromNode":"center","toNode":"l1","label":"基础","fromSide":"top","toSide":"bottom"},
+		{"id":"e2","fromNode":"center","toNode":"l2","label":"进阶","fromSide":"top","toSide":"bottom"},
+		{"id":"e3","fromNode":"center","toNode":"l3","label":"高频","fromSide":"right","toSide":"left"},
+		{"id":"e4","fromNode":"center","toNode":"l4","label":"高权重","fromSide":"right","toSide":"left"},
+		{"id":"e5","fromNode":"center","toNode":"l5","label":"基石","fromSide":"bottom","toSide":"top"},
+		{"id":"e6","fromNode":"l1","toNode":"l2","label":"支撑","fromSide":"right","toSide":"left"},
+		{"id":"e7","fromNode":"l2","toNode":"l3","label":"应用","fromSide":"right","toSide":"left"},
+		{"id":"e8","fromNode":"l3","toNode":"l4","label":"并发化","fromSide":"bottom","toSide":"top"},
+		{"id":"e9","fromNode":"l4","toNode":"l5","label":"运行于","fromSide":"bottom","toSide":"top"},
+		{"id":"e10","fromNode":"path","toNode":"center","label":"遵循","fromSide":"right","toSide":"bottom"},
+		{"id":"e11","fromNode":"interview","toNode":"center","label":"检验","fromSide":"right","toSide":"left"}
+	]
 }
