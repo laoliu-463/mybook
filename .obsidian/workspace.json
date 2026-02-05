@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "80-模板/面试题卡-模板.md",
+                "file": "20-领域/2026-02-04-计算机网络-分组交换.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "面试题卡-模板"
+              "title": "2026-02-04-计算机网络-分组交换"
             }
           }
         ]
@@ -205,9 +205,21 @@
   },
   "active": "207e4dd2c0a97409",
   "lastOpenFiles": [
-    "99-归档/CLAUDE.md.备份-20260205",
-    "30-资源/Claude攻略.md",
+    "20-领域/学习与成长/2026-02-04-NotebookLM事实校验.md",
+    "80-模板/领域知识卡-模板.md",
+    "80-模板/面试题卡-模板.md",
+    "80-模板/日周复盘-模板.md",
+    "80-模板/项目主页-模板.md",
+    "80-模板/Capture-模板.md",
+    "80-模板/Distill-模板.md",
+    "80-模板/PKM规范.md",
+    "80-模板/WebClipper-NotebookLM.md",
+    "99-归档/旧资料/promot.md",
     "system-overview.canvas",
+    "70-NotebookLM导入/2026-02-04-Redis缓存穿透测试.md",
+    "30-资源/2026-02-04-PARA-CODE-NotebookLM学习.md",
+    "30-资源/Claude攻略.md",
+    "99-归档/CLAUDE.md.备份-20260205",
     "10-Learn/DevOps/_MOC.md",
     "10-Learn/Database/_MOC.md",
     "10-Learn/Vue3/_MOC.md",
@@ -230,19 +242,7 @@
     "10-Learn/Spring",
     "10-Learn/Redis",
     "10-Learn/MyBatis",
-    "10-Learn/Java-SE",
-    "30-资源/提示词.md",
     "20-领域/2026-02-04-Java核心基础学习地图.canvas",
-    "20-领域/2026-02-04-Java核心基础学习地图.md",
-    "70-NotebookLM导入/2026-02-04-Redis缓存穿透测试.md",
-    "00-收集箱/未命名 1.md",
-    "30-资源/2026-02-04-PARA-CODE-NotebookLM学习.md",
-    "20-领域/学习与成长/2026-02-04-NotebookLM事实校验.md",
-    "20-领域/2026-02-04-Redis缓存穿透.md",
-    "20-领域/2026-02-04-计算机网络-分组交换.md",
-    "99-归档/旧资料/promot.md",
-    "00-收集箱/未命名.md",
-    "CLAUDE.md",
     "00-收集箱/未命名.canvas",
     "10-领域知识/01-计算机/计算机网络/计算机网络分层模型-OSI与TCP-IP.canvas",
     "10-项目/进行中/hmdp-黑马点评/02-源码分析/秒杀系统六步进化-从单机到分布式.canvas",
