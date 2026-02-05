@@ -1,0 +1,178 @@
+{
+  "nodes": [
+    {
+      "id": "center-notebooklm",
+      "type": "text",
+      "x": 600,
+      "y": 400,
+      "width": 400,
+      "height": 140,
+      "text": "# NotebookLM 高级提示词模板\n\n信源验证 + 结构化分析 + 内容创作 + 多维学习",
+      "color": "5"
+    },
+    {
+      "id": "dimension-1",
+      "type": "text",
+      "x": 100,
+      "y": 150,
+      "width": 320,
+      "height": 150,
+      "text": "## 1. 信源验证模板\n\n- 信源概览表\n- 识别核心文献\n- 视角/偏见分析\n\n上传文件后首选",
+      "color": "4"
+    },
+    {
+      "id": "dimension-2",
+      "type": "text",
+      "x": 1180,
+      "y": 150,
+      "width": 320,
+      "height": 150,
+      "text": "## 2. 结构化分析模板\n\n- 精准对比（勾选特定文件）\n- 跨格式合成（视频+PDF）\n\n精准打击能力",
+      "color": "4"
+    },
+    {
+      "id": "dimension-3",
+      "type": "text",
+      "x": 100,
+      "y": 650,
+      "width": 320,
+      "height": 180,
+      "text": "## 3. 内容生成模板\n\n- 定制化音频播客\n- 专业技术白皮书\n- 演示文稿\n\nStudio 指令控制",
+      "color": "4"
+    },
+    {
+      "id": "dimension-4",
+      "type": "text",
+      "x": 1180,
+      "y": 650,
+      "width": 320,
+      "height": 180,
+      "text": "## 4. 学习辅助模板\n\n- 苏格拉底式提问\n- 概念关联大纲\n\n面试准备 + 知识内化",
+      "color": "4"
+    },
+    {
+      "id": "best-practice-1",
+      "type": "text",
+      "x": 450,
+      "y": 50,
+      "width": 300,
+      "height": 120,
+      "text": "## 💡 角色设定\n\n对话目标 = Custom\n输入具体身份\n提升回答深度",
+      "color": "6"
+    },
+    {
+      "id": "best-practice-2",
+      "type": "text",
+      "x": 850,
+      "y": 50,
+      "width": 300,
+      "height": 120,
+      "text": "## 💡 动态勾选\n\n只勾选 3-5 个相关文件\n避免信息过载\n提升回答质量",
+      "color": "6"
+    },
+    {
+      "id": "best-practice-3",
+      "type": "text",
+      "x": 650,
+      "y": 880,
+      "width": 300,
+      "height": 120,
+      "text": "## 💡 迭代生成\n\n修改指令 Regenerate\n直到符合标准",
+      "color": "6"
+    },
+    {
+      "id": "checklist",
+      "type": "text",
+      "x": 100,
+      "y": 1050,
+      "width": 550,
+      "height": 200,
+      "text": "## 使用检查清单\n\n1. ✅ 上传文件后先运行信源概览表\n2. ✅ 识别核心文献和偏见\n3. ✅ 自定义角色身份\n4. ✅ 动态勾选 3-5 个文件\n5. ✅ Studio 指令框输入要求\n6. ✅ 不满意时修改指令并 Regenerate",
+      "color": "3"
+    },
+    {
+      "id": "scenarios",
+      "type": "text",
+      "x": 700,
+      "y": 1050,
+      "width": 500,
+      "height": 200,
+      "text": "## 适用场景\n\n✅ 学术研究：文献综述、论文写作\n✅ 技术学习：框架对比、架构分析\n✅ 面试准备：知识深化、模拟面试\n\n❌ 不适合需要实时数据的场景",
+      "color": "2"
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge-1",
+      "fromNode": "center-notebooklm",
+      "fromSide": "top",
+      "toNode": "dimension-1",
+      "toSide": "bottom",
+      "color": "4"
+    },
+    {
+      "id": "edge-2",
+      "fromNode": "center-notebooklm",
+      "fromSide": "top",
+      "toNode": "dimension-2",
+      "toSide": "bottom",
+      "color": "4"
+    },
+    {
+      "id": "edge-3",
+      "fromNode": "center-notebooklm",
+      "fromSide": "bottom",
+      "toNode": "dimension-3",
+      "toSide": "top",
+      "color": "4"
+    },
+    {
+      "id": "edge-4",
+      "fromNode": "center-notebooklm",
+      "fromSide": "bottom",
+      "toNode": "dimension-4",
+      "toSide": "top",
+      "color": "4"
+    },
+    {
+      "id": "edge-5",
+      "fromNode": "center-notebooklm",
+      "fromSide": "top",
+      "toNode": "best-practice-1",
+      "toSide": "bottom",
+      "color": "6"
+    },
+    {
+      "id": "edge-6",
+      "fromNode": "center-notebooklm",
+      "fromSide": "top",
+      "toNode": "best-practice-2",
+      "toSide": "bottom",
+      "color": "6"
+    },
+    {
+      "id": "edge-7",
+      "fromNode": "center-notebooklm",
+      "fromSide": "bottom",
+      "toNode": "best-practice-3",
+      "toSide": "top",
+      "color": "6"
+    },
+    {
+      "id": "edge-8",
+      "fromNode": "dimension-1",
+      "fromSide": "bottom",
+      "toNode": "checklist",
+      "toSide": "top",
+      "color": "3"
+    },
+    {
+      "id": "edge-9",
+      "fromNode": "dimension-3",
+      "fromSide": "bottom",
+      "toNode": "scenarios",
+      "toSide": "top",
+      "color": "2"
+    }
+  ]
+}
