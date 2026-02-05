@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "20-领域/2026-02-04-计算机网络-分组交换.md",
+                "file": "00-收集箱/1.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2026-02-04-计算机网络-分组交换"
+              "title": "1"
             }
           }
         ]
@@ -205,13 +205,29 @@
   },
   "active": "207e4dd2c0a97409",
   "lastOpenFiles": [
+    "80-模板/提示词入门搭建.md",
+    "00-收集箱/1.md",
+    "second-brain-architecture.canvas",
+    "README.md",
+    "80-模板/Distill-模板.md",
+    "80-模板/Capture-模板.md",
+    "99-归档/旧资料",
+    "99-归档/已完成项目",
+    "10-项目/00-通用交付物",
+    "99-归档",
+    "80-模板",
+    "70-NotebookLM导入",
+    "40-交付物",
+    "30-资源",
+    "20-领域",
+    "10-项目",
+    "10-Learn/_Index.md",
+    "20-领域/2026-02-04-计算机网络-分组交换.md",
     "20-领域/学习与成长/2026-02-04-NotebookLM事实校验.md",
     "80-模板/领域知识卡-模板.md",
     "80-模板/面试题卡-模板.md",
     "80-模板/日周复盘-模板.md",
     "80-模板/项目主页-模板.md",
-    "80-模板/Capture-模板.md",
-    "80-模板/Distill-模板.md",
     "80-模板/PKM规范.md",
     "80-模板/WebClipper-NotebookLM.md",
     "99-归档/旧资料/promot.md",
@@ -219,7 +235,6 @@
     "70-NotebookLM导入/2026-02-04-Redis缓存穿透测试.md",
     "30-资源/2026-02-04-PARA-CODE-NotebookLM学习.md",
     "30-资源/Claude攻略.md",
-    "99-归档/CLAUDE.md.备份-20260205",
     "10-Learn/DevOps/_MOC.md",
     "10-Learn/Database/_MOC.md",
     "10-Learn/Vue3/_MOC.md",
@@ -227,21 +242,7 @@
     "10-Learn/MyBatis/_MOC.md",
     "10-Learn/Spring/_MOC.md",
     "10-Learn/Java-SE/_MOC.md",
-    "10-Learn/_Index.md",
     "80-Templates/tpl-project-board.md",
-    "80-Templates/tpl-weekly-review.md",
-    "80-Templates/tpl-interview-card.md",
-    "80-Templates/tpl-project-log.md",
-    "80-Templates/tpl-concept.md",
-    "99-Archive",
-    "80-Templates",
-    "40-Output",
-    "30-Interview",
-    "20-Build",
-    "10-Learn/Vue3",
-    "10-Learn/Spring",
-    "10-Learn/Redis",
-    "10-Learn/MyBatis",
     "20-领域/2026-02-04-Java核心基础学习地图.canvas",
     "00-收集箱/未命名.canvas",
     "10-领域知识/01-计算机/计算机网络/计算机网络分层模型-OSI与TCP-IP.canvas",
@@ -249,7 +250,6 @@
     "10-项目/进行中/hmdp-黑马点评/02-源码分析/短信登录注册-Redis+Token方案.canvas",
     "10-项目/进行中/hmdp-黑马点评/02-源码分析/数据流向图.canvas",
     "10-项目/进行中/hmdp-黑马点评/02-源码分析/数据库架构图.canvas",
-    "02-学习记录/01-课程与书籍/Dan-Koe-AI使用技巧.canvas",
-    "10-领域知识/01-计算机/计算机网络/计算机网络概述-分层模型与端系统.canvas"
+    "02-学习记录/01-课程与书籍/Dan-Koe-AI使用技巧.canvas"
   ]
 }
