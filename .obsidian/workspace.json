@@ -11,14 +11,17 @@
             "id": "207e4dd2c0a97409",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "canvas",
               "state": {
-                "file": "00-收集箱/股票入门.md",
-                "mode": "source",
-                "source": false
+                "file": "second-brain-architecture.canvas",
+                "viewState": {
+                  "x": 1140,
+                  "y": 425,
+                  "zoom": -1.0596286330536138
+                }
               },
-              "icon": "lucide-file",
-              "title": "股票入门"
+              "icon": "lucide-layout-dashboard",
+              "title": "second-brain-architecture"
             }
           }
         ]
@@ -205,20 +208,20 @@
   },
   "active": "207e4dd2c0a97409",
   "lastOpenFiles": [
-    "80-模板/提示词入门搭建.md",
     "00-收集箱/股票入门.md",
-    "80-模板/Distill-模板.md",
-    "80-模板/Capture-模板.md",
-    "README.md",
+    "30-资源/NotebookLM 提示词常用模板.md",
+    "30-资源/测试-自动化流程.md",
+    "30-资源/测试-自动化流程.canvas",
     "30-资源/2026-02-05-NotebookLM高级提示词模板.canvas",
     "30-资源/2026-02-05-NotebookLM高级提示词模板.md",
-    "second-brain-architecture.canvas",
-    "30-资源/NotebookLM 提示词常用模板.md",
-    "00-收集箱/1.md",
     "30-资源/2026-02-05-Metaprompt元提示词方法论.canvas",
     "30-资源/2026-02-05-Metaprompt元提示词方法论.md",
-    "30-资源/测试-自动化流程.canvas",
-    "30-资源/测试-自动化流程.md",
+    "README.md",
+    "second-brain-architecture.canvas",
+    "80-模板/提示词入门搭建.md",
+    "80-模板/Distill-模板.md",
+    "80-模板/Capture-模板.md",
+    "00-收集箱/1.md",
     "00-收集箱/测试-自动化流程.md",
     "99-归档/旧资料",
     "99-归档/已完成项目",
