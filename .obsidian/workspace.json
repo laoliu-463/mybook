@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "80-模板/提示词入门搭建.md",
+                "file": "00-收集箱/股票入门.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "提示词入门搭建"
+              "title": "股票入门"
             }
           }
         ]
@@ -203,16 +203,16 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "2067b1c939c41cdc",
+  "active": "207e4dd2c0a97409",
   "lastOpenFiles": [
+    "80-模板/提示词入门搭建.md",
+    "00-收集箱/股票入门.md",
     "80-模板/Distill-模板.md",
     "80-模板/Capture-模板.md",
-    "80-模板/提示词入门搭建.md",
     "README.md",
     "30-资源/2026-02-05-NotebookLM高级提示词模板.canvas",
     "30-资源/2026-02-05-NotebookLM高级提示词模板.md",
     "second-brain-architecture.canvas",
-    "00-收集箱/未命名.md",
     "30-资源/NotebookLM 提示词常用模板.md",
     "00-收集箱/1.md",
     "30-资源/2026-02-05-Metaprompt元提示词方法论.canvas",
