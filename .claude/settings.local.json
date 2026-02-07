@@ -4,5 +4,11 @@
       "WebFetch(domain:www.xiaolincoding.com)",
       "Skill(note-polish)"
     ]
+  },
+  "mcpServers": {
+    "notebooklm": {
+      "command": "npx",
+      "args": ["-y", "notebooklm-mcp@latest"]
+    }
   }
 }

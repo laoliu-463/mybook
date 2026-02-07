@@ -11,17 +11,14 @@
             "id": "207e4dd2c0a97409",
             "type": "leaf",
             "state": {
-              "type": "canvas",
+              "type": "markdown",
               "state": {
-                "file": "second-brain-architecture.canvas",
-                "viewState": {
-                  "x": 1140,
-                  "y": 425,
-                  "zoom": -1.0596286330536138
-                }
+                "file": "80-模板/提示词入门搭建.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-layout-dashboard",
-              "title": "second-brain-architecture"
+              "icon": "lucide-file",
+              "title": "提示词入门搭建"
             }
           }
         ]
@@ -208,6 +205,9 @@
   },
   "active": "207e4dd2c0a97409",
   "lastOpenFiles": [
+    "30-资源/量化交易/A股自动化交易系统-概览.md",
+    "30-资源/量化交易",
+    "second-brain-architecture.canvas",
     "00-收集箱/股票入门.md",
     "30-资源/NotebookLM 提示词常用模板.md",
     "30-资源/测试-自动化流程.md",
@@ -217,7 +217,6 @@
     "30-资源/2026-02-05-Metaprompt元提示词方法论.canvas",
     "30-资源/2026-02-05-Metaprompt元提示词方法论.md",
     "README.md",
-    "second-brain-architecture.canvas",
     "80-模板/提示词入门搭建.md",
     "80-模板/Distill-模板.md",
     "80-模板/Capture-模板.md",
@@ -232,7 +231,6 @@
     "40-交付物",
     "30-资源",
     "20-领域",
-    "10-项目",
     "10-Learn/_Index.md",
     "20-领域/2026-02-04-计算机网络-分组交换.md",
     "20-领域/学习与成长/2026-02-04-NotebookLM事实校验.md",
