@@ -11,14 +11,17 @@
             "id": "207e4dd2c0a97409",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "canvas",
               "state": {
-                "file": "00-收集箱/股票入门.md",
-                "mode": "source",
-                "source": false
+                "file": "20-知识库/计算机网络/TCP拥塞控制-思维导图.canvas",
+                "viewState": {
+                  "x": 215,
+                  "y": -5,
+                  "zoom": -0.9657107696659751
+                }
               },
-              "icon": "lucide-file",
-              "title": "股票入门"
+              "icon": "lucide-layout-dashboard",
+              "title": "TCP拥塞控制-思维导图"
             }
           }
         ]
@@ -203,9 +206,11 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "2067b1c939c41cdc",
+  "active": "207e4dd2c0a97409",
   "lastOpenFiles": [
     "20-知识库/计算机网络/TCP拥塞控制.md",
+    "20-知识库/计算机网络/TCP拥塞控制-思维导图.canvas",
+    "00-收集箱/股票入门.md",
     "20-知识库/计算机网络",
     "20-知识库",
     "CLAUDE.md",
@@ -224,7 +229,6 @@
     "30-资源/量化交易/分布式架构设计.md",
     "80-模板/提示词入门搭建.md",
     "30-资源/量化交易",
-    "00-收集箱/股票入门.md",
     "30-资源/2026-02-05-NotebookLM高级提示词模板.canvas",
     "30-资源/2026-02-05-Metaprompt元提示词方法论.canvas",
     "80-模板/Distill-模板.md",
@@ -244,12 +248,10 @@
     "80-模板/领域知识卡-模板.md",
     "80-模板/面试题卡-模板.md",
     "80-模板/日周复盘-模板.md",
-    "80-模板/项目主页-模板.md",
     "system-overview.canvas",
     "20-领域/2026-02-04-Java核心基础学习地图.canvas",
     "00-收集箱/未命名.canvas",
     "10-领域知识/01-计算机/计算机网络/计算机网络分层模型-OSI与TCP-IP.canvas",
-    "10-项目/进行中/hmdp-黑马点评/02-源码分析/秒杀系统六步进化-从单机到分布式.canvas",
-    "10-项目/进行中/hmdp-黑马点评/02-源码分析/短信登录注册-Redis+Token方案.canvas"
+    "10-项目/进行中/hmdp-黑马点评/02-源码分析/秒杀系统六步进化-从单机到分布式.canvas"
   ]
 }
