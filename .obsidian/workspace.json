@@ -11,17 +11,14 @@
             "id": "207e4dd2c0a97409",
             "type": "leaf",
             "state": {
-              "type": "canvas",
+              "type": "markdown",
               "state": {
-                "file": "20-知识库/计算机网络/TCP拥塞控制-思维导图.canvas",
-                "viewState": {
-                  "x": 476.3854752616933,
-                  "y": 310.3091747808676,
-                  "zoom": -1.6323774363326415
-                }
+                "file": "20-知识库/计算机网络/TCP拥塞控制.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-layout-dashboard",
-              "title": "TCP拥塞控制-思维导图"
+              "icon": "lucide-file",
+              "title": "TCP拥塞控制"
             }
           }
         ]
@@ -208,9 +205,11 @@
   },
   "active": "207e4dd2c0a97409",
   "lastOpenFiles": [
-    "20-知识库/计算机网络/TCP拥塞控制.md",
-    "20-知识库/计算机网络/TCP拥塞控制-思维导图.canvas",
     "00-收集箱/股票入门.md",
+    "20-知识库/计算机网络/TCP拥塞控制-思维导图.canvas",
+    "20-知识库/计算机网络/TCP协议/00-overview.md",
+    "20-知识库/计算机网络/TCP协议",
+    "20-知识库/计算机网络/TCP拥塞控制.md",
     "20-知识库/计算机网络",
     "20-知识库",
     "CLAUDE.md",
@@ -241,13 +240,11 @@
     "99-归档",
     "80-模板",
     "70-NotebookLM提示词使用",
-    "40-交付物",
     "10-Learn/_Index.md",
     "20-领域/2026-02-04-计算机网络-分组交换.md",
     "20-领域/学习与成长/2026-02-04-NotebookLM事实校验.md",
     "80-模板/领域知识卡-模板.md",
     "80-模板/面试题卡-模板.md",
-    "80-模板/日周复盘-模板.md",
     "system-overview.canvas",
     "20-领域/2026-02-04-Java核心基础学习地图.canvas",
     "00-收集箱/未命名.canvas",
