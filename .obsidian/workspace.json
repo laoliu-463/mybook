@@ -203,8 +203,11 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "207e4dd2c0a97409",
+  "active": "2067b1c939c41cdc",
   "lastOpenFiles": [
+    "20-知识库/计算机网络/TCP拥塞控制.md",
+    "20-知识库/计算机网络",
+    "20-知识库",
     "CLAUDE.md",
     "README.md",
     "second-brain-architecture.canvas",
@@ -235,8 +238,6 @@
     "80-模板",
     "70-NotebookLM提示词使用",
     "40-交付物",
-    "30-资源",
-    "20-领域",
     "10-Learn/_Index.md",
     "20-领域/2026-02-04-计算机网络-分组交换.md",
     "20-领域/学习与成长/2026-02-04-NotebookLM事实校验.md",
