@@ -1,405 +1,52 @@
 {
-  "nodes": [
-    {
-      "id": "root001",
-      "type": "text",
-      "text": "# TCP 拥塞控制\n\n动态调整发送速率，避免网络过载",
-      "x": 0,
-      "y": 0,
-      "width": 280,
-      "height": 120,
-      "color": "6"
-    },
-    {
-      "id": "var001",
-      "type": "text",
-      "text": "## 核心变量",
-      "x": -600,
-      "y": -300,
-      "width": 180,
-      "height": 80,
-      "color": "5"
-    },
-    {
-      "id": "var002",
-      "type": "text",
-      "text": "**cwnd**\n拥塞窗口",
-      "x": -900,
-      "y": -450,
-      "width": 160,
-      "height": 80,
-      "color": "5"
-    },
-    {
-      "id": "var003",
-      "type": "text",
-      "text": "**ssthresh**\n慢启动阈值",
-      "x": -900,
-      "y": -320,
-      "width": 160,
-      "height": 80,
-      "color": "5"
-    },
-    {
-      "id": "var004",
-      "type": "text",
-      "text": "**rwnd**\n接收窗口",
-      "x": -900,
-      "y": -190,
-      "width": 160,
-      "height": 80,
-      "color": "5"
-    },
-    {
-      "id": "var005",
-      "type": "text",
-      "text": "发送窗口 = min(cwnd, rwnd)",
-      "x": -600,
-      "y": -120,
-      "width": 220,
-      "height": 60,
-      "color": "3"
-    },
-    {
-      "id": "algo001",
-      "type": "text",
-      "text": "## 四大核心算法",
-      "x": 500,
-      "y": -300,
-      "width": 200,
-      "height": 80,
-      "color": "4"
-    },
-    {
-      "id": "algo002",
-      "type": "text",
-      "text": "**1. 慢启动**\n\ncwnd 从 1 MSS 开始\n每 RTT 翻倍（指数增长）\n直到 cwnd >= ssthresh",
-      "x": 800,
-      "y": -500,
-      "width": 240,
-      "height": 140,
-      "color": "4"
-    },
-    {
-      "id": "algo003",
-      "type": "text",
-      "text": "**2. 拥塞避免**\n\n每 RTT cwnd +1 MSS\n（线性增长）\nAIMD 策略",
-      "x": 800,
-      "y": -300,
-      "width": 240,
-      "height": 120,
-      "color": "4"
-    },
-    {
-      "id": "algo004",
-      "type": "text",
-      "text": "**3. 快重传**\n\n收到 3 个重复 ACK\n立即重传丢失报文\n不等超时",
-      "x": 800,
-      "y": -120,
-      "width": 240,
-      "height": 120,
-      "color": "4"
-    },
-    {
-      "id": "algo005",
-      "type": "text",
-      "text": "**4. 快恢复**\n\nssthresh = cwnd/2\ncwnd = ssthresh + 3\n进入拥塞避免（不回慢启动）",
-      "x": 800,
-      "y": 60,
-      "width": 260,
-      "height": 120,
-      "color": "4"
-    },
-    {
-      "id": "state001",
-      "type": "text",
-      "text": "## 状态转换触发",
-      "x": -600,
-      "y": 200,
-      "width": 200,
-      "height": 80,
-      "color": "1"
-    },
-    {
-      "id": "state002",
-      "type": "text",
-      "text": "**超时**\n\nssthresh = cwnd/2\ncwnd = 1 MSS\n回到慢启动",
-      "x": -900,
-      "y": 300,
-      "width": 200,
-      "height": 120,
-      "color": "1"
-    },
-    {
-      "id": "state003",
-      "type": "text",
-      "text": "**3x 重复 ACK**\n\n进入快恢复\n不回慢启动",
-      "x": -600,
-      "y": 350,
-      "width": 200,
-      "height": 100,
-      "color": "2"
-    },
-    {
-      "id": "state004",
-      "type": "text",
-      "text": "**新 ACK**\n\n快恢复 -> 拥塞避免",
-      "x": -350,
-      "y": 300,
-      "width": 180,
-      "height": 80,
-      "color": "4"
-    },
-    {
-      "id": "evo001",
-      "type": "text",
-      "text": "## 算法演进",
-      "x": 500,
-      "y": 250,
-      "width": 180,
-      "height": 80,
-      "color": "2"
-    },
-    {
-      "id": "evo002",
-      "type": "text",
-      "text": "**Tahoe**\n无快恢复\n丢包就回慢启动",
-      "x": 750,
-      "y": 250,
-      "width": 180,
-      "height": 100,
-      "color": "2"
-    },
-    {
-      "id": "evo003",
-      "type": "text",
-      "text": "**Reno**\n加入快恢复",
-      "x": 950,
-      "y": 250,
-      "width": 140,
-      "height": 80,
-      "color": "2"
-    },
-    {
-      "id": "evo004",
-      "type": "text",
-      "text": "**NewReno**\n改进多包丢失",
-      "x": 1110,
-      "y": 250,
-      "width": 160,
-      "height": 80,
-      "color": "2"
-    },
-    {
-      "id": "evo005",
-      "type": "text",
-      "text": "**CUBIC**\nLinux 默认\n基于三次函数\n高 BDP 友好",
-      "x": 950,
-      "y": 380,
-      "width": 180,
-      "height": 100,
-      "color": "2"
-    },
-    {
-      "id": "evo006",
-      "type": "text",
-      "text": "**BBR**\n基于带宽+RTT 建模\n非丢包感知",
-      "x": 1150,
-      "y": 380,
-      "width": 180,
-      "height": 100,
-      "color": "2"
-    },
-    {
-      "id": "note001",
-      "type": "text",
-      "text": "## 易混淆点\n\n1. 慢启动其实是指数增长\n2. 超时比 3xACK 更严重\n3. cwnd 单位：RFC 用字节",
-      "x": 0,
-      "y": 350,
-      "width": 260,
-      "height": 140,
-      "color": "3"
-    },
-    {
-      "id": "link001",
-      "type": "file",
-      "file": "20-知识库/计算机网络/TCP拥塞控制.md",
-      "x": 0,
-      "y": -250,
-      "width": 280,
-      "height": 80
-    }
-  ],
-  "edges": [
-    {
-      "id": "edge001",
-      "fromNode": "root001",
-      "toNode": "var001",
-      "fromSide": "left",
-      "toSide": "right",
-      "label": "变量"
-    },
-    {
-      "id": "edge002",
-      "fromNode": "var001",
-      "toNode": "var002",
-      "fromSide": "left",
-      "toSide": "right"
-    },
-    {
-      "id": "edge003",
-      "fromNode": "var001",
-      "toNode": "var003",
-      "fromSide": "left",
-      "toSide": "right"
-    },
-    {
-      "id": "edge004",
-      "fromNode": "var001",
-      "toNode": "var004",
-      "fromSide": "left",
-      "toSide": "right"
-    },
-    {
-      "id": "edge005",
-      "fromNode": "var001",
-      "toNode": "var005",
-      "fromSide": "bottom",
-      "toSide": "top",
-      "label": "公式"
-    },
-    {
-      "id": "edge006",
-      "fromNode": "root001",
-      "toNode": "algo001",
-      "fromSide": "right",
-      "toSide": "left",
-      "label": "算法"
-    },
-    {
-      "id": "edge007",
-      "fromNode": "algo001",
-      "toNode": "algo002",
-      "fromSide": "right",
-      "toSide": "left"
-    },
-    {
-      "id": "edge008",
-      "fromNode": "algo001",
-      "toNode": "algo003",
-      "fromSide": "right",
-      "toSide": "left"
-    },
-    {
-      "id": "edge009",
-      "fromNode": "algo001",
-      "toNode": "algo004",
-      "fromSide": "right",
-      "toSide": "left"
-    },
-    {
-      "id": "edge010",
-      "fromNode": "algo001",
-      "toNode": "algo005",
-      "fromSide": "right",
-      "toSide": "left"
-    },
-    {
-      "id": "edge011",
-      "fromNode": "algo002",
-      "toNode": "algo003",
-      "fromSide": "bottom",
-      "toSide": "top",
-      "label": "达阈值"
-    },
-    {
-      "id": "edge012",
-      "fromNode": "algo004",
-      "toNode": "algo005",
-      "fromSide": "bottom",
-      "toSide": "top",
-      "label": "触发"
-    },
-    {
-      "id": "edge013",
-      "fromNode": "root001",
-      "toNode": "state001",
-      "fromSide": "left",
-      "toSide": "right",
-      "label": "触发"
-    },
-    {
-      "id": "edge014",
-      "fromNode": "state001",
-      "toNode": "state002",
-      "fromSide": "left",
-      "toSide": "right"
-    },
-    {
-      "id": "edge015",
-      "fromNode": "state001",
-      "toNode": "state003",
-      "fromSide": "bottom",
-      "toSide": "top"
-    },
-    {
-      "id": "edge016",
-      "fromNode": "state001",
-      "toNode": "state004",
-      "fromSide": "right",
-      "toSide": "left"
-    },
-    {
-      "id": "edge017",
-      "fromNode": "root001",
-      "toNode": "evo001",
-      "fromSide": "right",
-      "toSide": "left",
-      "label": "演进"
-    },
-    {
-      "id": "edge018",
-      "fromNode": "evo002",
-      "toNode": "evo003",
-      "fromSide": "right",
-      "toSide": "left"
-    },
-    {
-      "id": "edge019",
-      "fromNode": "evo003",
-      "toNode": "evo004",
-      "fromSide": "right",
-      "toSide": "left"
-    },
-    {
-      "id": "edge020",
-      "fromNode": "evo004",
-      "toNode": "evo005",
-      "fromSide": "bottom",
-      "toSide": "top"
-    },
-    {
-      "id": "edge021",
-      "fromNode": "evo005",
-      "toNode": "evo006",
-      "fromSide": "right",
-      "toSide": "left"
-    },
-    {
-      "id": "edge022",
-      "fromNode": "root001",
-      "toNode": "note001",
-      "fromSide": "bottom",
-      "toSide": "top",
-      "label": "注意"
-    },
-    {
-      "id": "edge023",
-      "fromNode": "root001",
-      "toNode": "link001",
-      "fromSide": "top",
-      "toSide": "bottom",
-      "label": "源笔记"
-    }
-  ]
+	"nodes":[
+		{"id":"root001","type":"text","text":"# TCP 拥塞控制\n\n动态调整发送速率，避免网络过载","x":0,"y":0,"width":280,"height":120,"color":"6"},
+		{"id":"var001","type":"text","text":"## 核心变量","x":-600,"y":-300,"width":180,"height":80,"color":"5"},
+		{"id":"var002","type":"text","text":"**cwnd**\n拥塞窗口","x":-900,"y":-450,"width":160,"height":80,"color":"5"},
+		{"id":"var003","type":"text","text":"**ssthresh**\n慢启动阈值","x":-900,"y":-320,"width":160,"height":80,"color":"5"},
+		{"id":"var004","type":"text","text":"**rwnd**\n接收窗口","x":-900,"y":-190,"width":160,"height":80,"color":"5"},
+		{"id":"var005","type":"text","text":"发送窗口 = min(cwnd, rwnd)","x":-600,"y":-120,"width":220,"height":60,"color":"3"},
+		{"id":"algo001","type":"text","text":"## 四大核心算法","x":500,"y":-300,"width":200,"height":80,"color":"4"},
+		{"id":"algo002","type":"text","text":"**1. 慢启动**\n\ncwnd 从 1 MSS 开始\n每 RTT 翻倍（指数增长）\n直到 cwnd >= ssthresh","x":800,"y":-500,"width":240,"height":140,"color":"4"},
+		{"id":"algo003","type":"text","text":"**2. 拥塞避免**\n\n每 RTT cwnd +1 MSS\n（线性增长）\nAIMD 策略","x":800,"y":-300,"width":240,"height":120,"color":"4"},
+		{"id":"algo004","type":"text","text":"**3. 快重传**\n\n收到 3 个重复 ACK\n立即重传丢失报文\n不等超时","x":800,"y":-120,"width":240,"height":120,"color":"4"},
+		{"id":"algo005","type":"text","text":"**4. 快恢复**\n\nssthresh = cwnd/2\ncwnd = ssthresh + 3\n进入拥塞避免（不回慢启动）","x":800,"y":60,"width":260,"height":120,"color":"4"},
+		{"id":"state001","type":"text","text":"## 状态转换触发","x":-600,"y":200,"width":200,"height":80,"color":"1"},
+		{"id":"state002","type":"text","text":"**超时**\n\nssthresh = cwnd/2\ncwnd = 1 MSS\n回到慢启动","x":-900,"y":300,"width":200,"height":120,"color":"1"},
+		{"id":"state003","type":"text","text":"**3x 重复 ACK**\n\n进入快恢复\n不回慢启动","x":-600,"y":350,"width":200,"height":100,"color":"2"},
+		{"id":"state004","type":"text","text":"**新 ACK**\n\n快恢复 -> 拥塞避免","x":-350,"y":300,"width":180,"height":80,"color":"4"},
+		{"id":"evo001","type":"text","text":"## 算法演进","x":500,"y":250,"width":180,"height":80,"color":"2"},
+		{"id":"evo002","type":"text","text":"**Tahoe**\n无快恢复\n丢包就回慢启动","x":750,"y":250,"width":180,"height":100,"color":"2"},
+		{"id":"evo003","type":"text","text":"**Reno**\n加入快恢复","x":950,"y":250,"width":140,"height":80,"color":"2"},
+		{"id":"evo004","type":"text","text":"**NewReno**\n改进多包丢失","x":1110,"y":250,"width":160,"height":80,"color":"2"},
+		{"id":"evo005","type":"text","text":"**CUBIC**\nLinux 默认\n基于三次函数\n高 BDP 友好","x":950,"y":380,"width":180,"height":100,"color":"2"},
+		{"id":"evo006","type":"text","text":"**BBR**\n基于带宽+RTT 建模\n非丢包感知","x":1150,"y":380,"width":180,"height":100,"color":"2"},
+		{"id":"note001","type":"text","text":"## 易混淆点\n\n1. 慢启动其实是指数增长\n2. 超时比 3xACK 更严重\n3. cwnd 单位：RFC 用字节","x":0,"y":350,"width":260,"height":140,"color":"3"},
+		{"id":"link001","type":"file","file":"20-知识库/计算机网络/TCP拥塞控制.md","x":0,"y":-440,"width":280,"height":270}
+	],
+	"edges":[
+		{"id":"edge001","fromNode":"root001","fromSide":"left","toNode":"var001","toSide":"right","label":"变量"},
+		{"id":"edge002","fromNode":"var001","fromSide":"left","toNode":"var002","toSide":"right"},
+		{"id":"edge003","fromNode":"var001","fromSide":"left","toNode":"var003","toSide":"right"},
+		{"id":"edge004","fromNode":"var001","fromSide":"left","toNode":"var004","toSide":"right"},
+		{"id":"edge005","fromNode":"var001","fromSide":"bottom","toNode":"var005","toSide":"top","label":"公式"},
+		{"id":"edge006","fromNode":"root001","fromSide":"right","toNode":"algo001","toSide":"left","label":"算法"},
+		{"id":"edge007","fromNode":"algo001","fromSide":"right","toNode":"algo002","toSide":"left"},
+		{"id":"edge008","fromNode":"algo001","fromSide":"right","toNode":"algo003","toSide":"left"},
+		{"id":"edge009","fromNode":"algo001","fromSide":"right","toNode":"algo004","toSide":"left"},
+		{"id":"edge010","fromNode":"algo001","fromSide":"right","toNode":"algo005","toSide":"left"},
+		{"id":"edge011","fromNode":"algo002","fromSide":"bottom","toNode":"algo003","toSide":"top","label":"达阈值"},
+		{"id":"edge012","fromNode":"algo004","fromSide":"bottom","toNode":"algo005","toSide":"top","label":"触发"},
+		{"id":"edge013","fromNode":"root001","fromSide":"left","toNode":"state001","toSide":"right","label":"触发"},
+		{"id":"edge014","fromNode":"state001","fromSide":"left","toNode":"state002","toSide":"right"},
+		{"id":"edge015","fromNode":"state001","fromSide":"bottom","toNode":"state003","toSide":"top"},
+		{"id":"edge016","fromNode":"state001","fromSide":"right","toNode":"state004","toSide":"left"},
+		{"id":"edge017","fromNode":"root001","fromSide":"right","toNode":"evo001","toSide":"left","label":"演进"},
+		{"id":"edge018","fromNode":"evo002","fromSide":"right","toNode":"evo003","toSide":"left"},
+		{"id":"edge019","fromNode":"evo003","fromSide":"right","toNode":"evo004","toSide":"left"},
+		{"id":"edge020","fromNode":"evo004","fromSide":"bottom","toNode":"evo005","toSide":"top"},
+		{"id":"edge021","fromNode":"evo005","fromSide":"right","toNode":"evo006","toSide":"left"},
+		{"id":"edge022","fromNode":"root001","fromSide":"bottom","toNode":"note001","toSide":"top","label":"注意"},
+		{"id":"edge023","fromNode":"root001","fromSide":"top","toNode":"link001","toSide":"bottom","label":"源笔记"}
+	]
 }
