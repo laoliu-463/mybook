@@ -1,8 +1,11 @@
 ---
-date: 2026-02-05
+title: NotebookLM 高级提示词模板
+type: resource
+domain: [AI-ML, 工程实践]
+tags: [notebooklm, prompt-engineering, learning]
 source: https://www.youtube.com/watch?v=SogSf-1p9t4
-status: organized
-tags: [resources, notebooklm, prompt-engineering, learning]
+created: 2026-02-05
+status: done
 ---
 
 # NotebookLM 高级提示词模板

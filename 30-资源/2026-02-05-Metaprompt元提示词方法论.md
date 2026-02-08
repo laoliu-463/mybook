@@ -1,8 +1,11 @@
 ---
-date: 2026-02-05
-source: 未提供
-status: organized
-tags: [resources, prompt-engineering, metaprompt]
+title: Metaprompt 元提示词方法论
+type: resource
+domain: [AI-ML, 工程实践]
+tags: [prompt-engineering, metaprompt, AI]
+source: note
+created: 2026-02-05
+status: done
 ---
 
 Metaprompt / 元提示词（中英文对照）

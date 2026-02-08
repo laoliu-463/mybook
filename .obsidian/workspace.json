@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "20-知识库/计算机网络/TCP拥塞控制.md",
+                "file": "20-知识库/计算机网络/TCP协议/00-overview.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "TCP拥塞控制"
+              "title": "00-overview"
             }
           }
         ]
@@ -205,11 +205,11 @@
   },
   "active": "207e4dd2c0a97409",
   "lastOpenFiles": [
+    "20-知识库/计算机网络/TCP拥塞控制.md",
     "00-收集箱/股票入门.md",
     "20-知识库/计算机网络/TCP拥塞控制-思维导图.canvas",
     "20-知识库/计算机网络/TCP协议/00-overview.md",
     "20-知识库/计算机网络/TCP协议",
-    "20-知识库/计算机网络/TCP拥塞控制.md",
     "20-知识库/计算机网络",
     "20-知识库",
     "CLAUDE.md",
