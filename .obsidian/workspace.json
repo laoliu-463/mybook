@@ -11,17 +11,26 @@
             "id": "207e4dd2c0a97409",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "关系图谱"
+            }
+          },
+          {
+            "id": "f013c13485b22831",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
               "state": {
-                "file": "20-知识库/计算机网络/TCP协议/00-overview.md",
-                "mode": "source",
-                "source": false
+                "currentVersion": "1.11.7"
               },
-              "icon": "lucide-file",
-              "title": "00-overview"
+              "icon": "lucide-book-up",
+              "title": "版本说明 1.11.7"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -187,8 +196,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 473.5,
-    "collapsed": true
+    "width": 473.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -203,20 +211,21 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "207e4dd2c0a97409",
+  "active": "f013c13485b22831",
   "lastOpenFiles": [
+    "20-知识库/计算机网络/网络基础/04-分组交换-思维导图.canvas",
     "20-知识库/计算机网络/网络基础/04-分组交换.md",
     "20-知识库/计算机网络/网络基础/03-传输媒介.md",
+    "20-知识库/计算机网络/网络基础/00-overview.md",
     "20-知识库/计算机网络/网络基础/01-TCP-IP协议栈.md",
     "20-知识库/计算机网络/网络基础/02-子网划分.md",
-    "20-知识库/计算机网络/网络基础/00-overview.md",
+    "20-知识库/计算机网络/TCP协议/00-overview.md",
     "20-知识库/计算机网络/TCP协议/practice-problems.md",
     "20-知识库/计算机网络/TCP协议/06-超时重传.md",
     "20-知识库/计算机网络/TCP协议/04-滑动窗口.md",
     "20-知识库/计算机网络/TCP协议/03-四次挥手.md",
     "20-知识库/计算机网络/TCP协议/02-三次握手.md",
     "20-知识库/计算机网络/TCP协议/01-报文格式.md",
-    "20-知识库/计算机网络/TCP协议/00-overview.md",
     "20-知识库/计算机网络/网络基础",
     "00-收集箱/股票入门.md",
     "20-知识库/投资理财/股票入门.md",
@@ -238,7 +247,6 @@
     "30-资源/NotebookLM 提示词常用模板.md",
     "30-资源/量化交易/程序化交易监管法规.md",
     "30-资源/2026-02-05-Metaprompt元提示词方法论.md",
-    "30-资源/量化交易/龙虎榜策略.md",
     "30-资源/量化交易",
     "30-资源/2026-02-05-NotebookLM高级提示词模板.canvas",
     "30-资源/2026-02-05-Metaprompt元提示词方法论.canvas",
@@ -249,7 +257,6 @@
     "system-overview.canvas",
     "20-领域/2026-02-04-Java核心基础学习地图.canvas",
     "00-收集箱/未命名.canvas",
-    "10-领域知识/01-计算机/计算机网络/计算机网络分层模型-OSI与TCP-IP.canvas",
-    "10-项目/进行中/hmdp-黑马点评/02-源码分析/秒杀系统六步进化-从单机到分布式.canvas"
+    "10-领域知识/01-计算机/计算机网络/计算机网络分层模型-OSI与TCP-IP.canvas"
   ]
 }
