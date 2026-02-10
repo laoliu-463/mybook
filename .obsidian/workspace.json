@@ -21,12 +21,14 @@
             "id": "f013c13485b22831",
             "type": "leaf",
             "state": {
-              "type": "release-notes",
+              "type": "markdown",
               "state": {
-                "currentVersion": "1.11.7"
+                "file": "30-资源/2026-02-05-Metaprompt元提示词方法论.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-book-up",
-              "title": "版本说明 1.11.7"
+              "icon": "lucide-file",
+              "title": "2026-02-05-Metaprompt元提示词方法论"
             }
           }
         ],
@@ -196,7 +198,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 473.5
+    "width": 473.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
