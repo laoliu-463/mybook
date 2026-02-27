@@ -23,12 +23,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "70-NotebookLM提示词使用/信息验证.md",
+                "file": "CLAUDE.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "信息验证"
+              "title": "CLAUDE"
             }
           }
         ],
@@ -216,6 +216,8 @@
   },
   "active": "f013c13485b22831",
   "lastOpenFiles": [
+    "20-知识库/编程语言/Java/Spring-AOP面向切面编程.md",
+    "70-NotebookLM提示词使用/信息验证.md",
     "40-交付物/second-brain-architecture.canvas",
     "20-知识库/编程语言/Java/volatile关键字.md",
     "20-知识库/编程语言/Java/ThreadLocal原理.md",
@@ -238,7 +240,6 @@
     "20-知识库/Java/ThreadLocal原理.md",
     "80-模板/商业.md",
     "20-知识库/架构与工程实践",
-    "70-NotebookLM提示词使用/信息验证.md",
     "70-NotebookLM提示词使用/播客.md",
     "10-项目/内容创作-Agent-Team/05-Session启动例程.md",
     "10-项目/内容创作-Agent-Team/整体流程.canvas",
@@ -252,7 +253,6 @@
     "20-知识库/计算机网络/TCP拥塞控制-思维导图.canvas",
     "30-资源/2026-02-05-NotebookLM高级提示词模板.canvas",
     "30-资源/2026-02-05-Metaprompt元提示词方法论.canvas",
-    "20-知识库/MOC-编程语言-思维导图.canvas",
     "10-项目/内容创作-Agent-Team/content-progress.json",
     "20-知识库/AI-ML",
     "10-项目/内容创作-Agent-Team/期刊",
