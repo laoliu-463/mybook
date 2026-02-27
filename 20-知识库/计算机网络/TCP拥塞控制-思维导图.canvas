@@ -1,5 +1,6 @@
 {
 	"nodes":[
+		{"id":"0c8257ddc9edeb32","x":28,"y":-43,"width":250,"height":60,"type":"text","text":""},
 		{"id":"root001","type":"text","text":"# TCP 拥塞控制\n\n动态调整发送速率，避免网络过载","x":0,"y":0,"width":280,"height":120,"color":"6"},
 		{"id":"var001","type":"text","text":"## 核心变量","x":-600,"y":-300,"width":180,"height":80,"color":"5"},
 		{"id":"var002","type":"text","text":"**cwnd**\n拥塞窗口","x":-900,"y":-450,"width":160,"height":80,"color":"5"},
@@ -22,7 +23,7 @@
 		{"id":"evo005","type":"text","text":"**CUBIC**\nLinux 默认\n基于三次函数\n高 BDP 友好","x":950,"y":380,"width":180,"height":100,"color":"2"},
 		{"id":"evo006","type":"text","text":"**BBR**\n基于带宽+RTT 建模\n非丢包感知","x":1150,"y":380,"width":180,"height":100,"color":"2"},
 		{"id":"note001","type":"text","text":"## 易混淆点\n\n1. 慢启动其实是指数增长\n2. 超时比 3xACK 更严重\n3. cwnd 单位：RFC 用字节","x":0,"y":350,"width":260,"height":140,"color":"3"},
-		{"id":"link001","type":"file","file":"20-知识库/计算机网络/TCP拥塞控制.md","x":0,"y":-440,"width":280,"height":270}
+		{"id":"link001","type":"file","file":"20-知识库/计算机网络/TCP拥塞控制.md","x":0,"y":-530,"width":280,"height":270}
 	],
 	"edges":[
 		{"id":"edge001","fromNode":"root001","fromSide":"left","toNode":"var001","toSide":"right","label":"变量"},

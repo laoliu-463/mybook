@@ -1,0 +1,13 @@
+{
+	"nodes":[
+		{"id":"ai000001","type":"text","text":"AI-ML","x":-110,"y":-35,"width":220,"height":70,"color":"6"},
+		{"id":"ai000002","type":"text","text":"Agent 工程","x":-700,"y":-35,"width":220,"height":70,"color":"5"},
+		{"id":"ai000003","type":"text","text":"长时运行 Agent Harness 设计","x":-1380,"y":-130,"width":320,"height":60,"color":"5"},
+		{"id":"ai000004","type":"text","text":"Claude Agent Team 使用指南","x":-1380,"y":70,"width":320,"height":60,"color":"5"}
+	],
+	"edges":[
+		{"id":"ea000001","fromNode":"ai000001","toNode":"ai000002","fromSide":"left","toSide":"right"},
+		{"id":"ea000002","fromNode":"ai000002","toNode":"ai000003","fromSide":"left","toSide":"right"},
+		{"id":"ea000003","fromNode":"ai000002","toNode":"ai000004","fromSide":"left","toSide":"right"}
+	]
+}

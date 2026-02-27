@@ -1,0 +1,22 @@
+{
+  "project": "内容创作-Agent-Team",
+  "target": "个人成长认知提升 | 大学生 18-25岁",
+  "episodes": [
+    {
+      "id": "ep01",
+      "topic": "你读了100本书，为什么还是老样子？",
+      "keyword": "认知",
+      "file": "期刊/第01期-读书认知升级.md",
+      "status": "done",
+      "agents": {
+        "A1": { "status": "done", "note": "选题+爆点角度已完成" },
+        "A2": { "status": "done", "note": "5个来源：Adler/Ahrens/Make It Stick/Ericsson/Roediger 2006" },
+        "A3": { "status": "done", "note": "4条结论+证据链+边界条件+5段式播客大纲" },
+        "A4": { "status": "done", "note": "播客脚本大纲已完成" },
+        "A5": { "status": "done", "note": "小红书分镜9张已完成" },
+        "A6": { "status": "done", "note": "私域7天SOP已完成" },
+        "A7": { "status": "done", "note": "质检通过：修复2处99%数字+承诺表述+案例前缀" }
+      }
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "nodes": [
+    {"id": "cn000001", "type": "text", "text": "计算机网络", "x": -110, "y": -35, "width": 220, "height": 70, "color": "6"},
+    {"id": "cn000002", "type": "text", "text": "TCP 协议", "x": -700, "y": -35, "width": 220, "height": 70, "color": "5"},
+    {"id": "cn000003", "type": "text", "text": "网络基础", "x": 480, "y": -35, "width": 220, "height": 70, "color": "4"},
+    {"id": "cn000004", "type": "text", "text": "三次握手", "x": -1380, "y": -630, "width": 220, "height": 60, "color": "5"},
+    {"id": "cn000005", "type": "text", "text": "四次挥手", "x": -1380, "y": -430, "width": 220, "height": 60, "color": "5"},
+    {"id": "cn000006", "type": "text", "text": "报文格式", "x": -1380, "y": -230, "width": 220, "height": 60, "color": "5"},
+    {"id": "cn000007", "type": "text", "text": "滑动窗口", "x": -1380, "y": -30, "width": 220, "height": 60, "color": "5"},
+    {"id": "cn000008", "type": "text", "text": "超时重传", "x": -1380, "y": 170, "width": 220, "height": 60, "color": "5"},
+    {"id": "cn000009", "type": "text", "text": "拥塞控制", "x": -1380, "y": 370, "width": 220, "height": 60, "color": "5"},
+    {"id": "cn000010", "type": "text", "text": "练习题", "x": -1380, "y": 570, "width": 220, "height": 60, "color": "2"},
+    {"id": "cn000011", "type": "text", "text": "TCP/IP 协议栈", "x": 1160, "y": -330, "width": 220, "height": 60, "color": "4"},
+    {"id": "cn000012", "type": "text", "text": "子网划分", "x": 1160, "y": -130, "width": 220, "height": 60, "color": "4"},
+    {"id": "cn000013", "type": "text", "text": "传输媒介", "x": 1160, "y": 70, "width": 220, "height": 60, "color": "4"},
+    {"id": "cn000014", "type": "text", "text": "分组交换", "x": 1160, "y": 270, "width": 220, "height": 60, "color": "4"}
+  ],
+  "edges": [
+    {"id": "ec000001", "fromNode": "cn000001", "toNode": "cn000002"},
+    {"id": "ec000002", "fromNode": "cn000001", "toNode": "cn000003"},
+    {"id": "ec000003", "fromNode": "cn000002", "toNode": "cn000004"},
+    {"id": "ec000004", "fromNode": "cn000002", "toNode": "cn000005"},
+    {"id": "ec000005", "fromNode": "cn000002", "toNode": "cn000006"},
+    {"id": "ec000006", "fromNode": "cn000002", "toNode": "cn000007"},
+    {"id": "ec000007", "fromNode": "cn000002", "toNode": "cn000008"},
+    {"id": "ec000008", "fromNode": "cn000002", "toNode": "cn000009"},
+    {"id": "ec000009", "fromNode": "cn000002", "toNode": "cn000010"},
+    {"id": "ec000010", "fromNode": "cn000003", "toNode": "cn000011"},
+    {"id": "ec000011", "fromNode": "cn000003", "toNode": "cn000012"},
+    {"id": "ec000012", "fromNode": "cn000003", "toNode": "cn000013"},
+    {"id": "ec000013", "fromNode": "cn000003", "toNode": "cn000014"}
+  ]
+}
