@@ -1,0 +1,617 @@
+{
+  "nodes": [
+    {
+      "id": "root",
+      "text": "Spring AOP 面向切面编程",
+      "type": "text",
+      "x": 480,
+      "y": 20,
+      "width": 200,
+      "height": 40,
+      "color": "5"
+    },
+    {
+      "id": "concept",
+      "text": "概念定义",
+      "type": "text",
+      "x": 50,
+      "y": 120,
+      "width": 100,
+      "height": 30,
+      "color": "5"
+    },
+    {
+      "id": "concept_def",
+      "text": "AOP = Aspect Oriented Programming\n面向切面编程\n\n目标：解耦横切关注点\n（日志、事务、权限）",
+      "type": "text",
+      "x": 30,
+      "y": 160,
+      "width": 140,
+      "height": 80,
+      "color": "4"
+    },
+    {
+      "id": "terms",
+      "text": "核心术语",
+      "type": "text",
+      "x": 220,
+      "y": 120,
+      "width": 100,
+      "height": 30,
+      "color": "5"
+    },
+    {
+      "id": "term_jointpoint",
+      "text": "连接点 Jointpoint\n程序中插入横切关注点的\n扩展点（方法执行等）",
+      "type": "text",
+      "x": 200,
+      "y": 160,
+      "width": 140,
+      "height": 60,
+      "color": "4"
+    },
+    {
+      "id": "term_pointcut",
+      "text": "切入点 Pointcut\n选择一组相关连接点的\n模式（连接点集合）",
+      "type": "text",
+      "x": 200,
+      "y": 230,
+      "width": 140,
+      "height": 60,
+      "color": "4"
+    },
+    {
+      "id": "term_advice",
+      "text": "通知 Advice\n在连接点上执行的行为\nBefore/After/Around",
+      "type": "text",
+      "x": 200,
+      "y": 300,
+      "width": 140,
+      "height": 60,
+      "color": "4"
+    },
+    {
+      "id": "term_aspect",
+      "text": "切面 Aspect\n通知+引入+切入点\n横切关注点的模块化",
+      "type": "text",
+      "x": 200,
+      "y": 370,
+      "width": 140,
+      "height": 60,
+      "color": "4"
+    },
+    {
+      "id": "term_weaving",
+      "text": "织入 Weaving\n把切面连接到目标对象\n（编译/类加载/运行时）",
+      "type": "text",
+      "x": 200,
+      "y": 440,
+      "width": 140,
+      "height": 60,
+      "color": "4"
+    },
+    {
+      "id": "term_proxy",
+      "text": "AOP代理\nJDK动态代理 / CGLIB",
+      "type": "text",
+      "x": 200,
+      "y": 510,
+      "width": 140,
+      "height": 40,
+      "color": "4"
+    },
+    {
+      "id": "advice_types",
+      "text": "通知类型",
+      "type": "text",
+      "x": 390,
+      "y": 120,
+      "width": 100,
+      "height": 30,
+      "color": "5"
+    },
+    {
+      "id": "advice_before",
+      "text": "前置通知 @Before\n连接点之前执行\n不能阻止流程",
+      "type": "text",
+      "x": 370,
+      "y": 160,
+      "width": 140,
+      "height": 50,
+      "color": "3"
+    },
+    {
+      "id": "advice_after_return",
+      "text": "后置通知 @AfterReturning\n方法正常完成后执行",
+      "type": "text",
+      "x": 370,
+      "y": 220,
+      "width": 140,
+      "height": 40,
+      "color": "3"
+    },
+    {
+      "id": "advice_after_throw",
+      "text": "异常通知 @AfterThrowing\n方法抛出异常时执行",
+      "type": "text",
+      "x": 370,
+      "y": 270,
+      "width": 140,
+      "height": 40,
+      "color": "1"
+    },
+    {
+      "id": "advice_after",
+      "text": "最终通知 @After\n无论正常/异常都执行",
+      "type": "text",
+      "x": 370,
+      "y": 320,
+      "width": 140,
+      "height": 40,
+      "color": "3"
+    },
+    {
+      "id": "advice_around",
+      "text": "环绕通知 @Around\n最强大\n方法调用前后自定义行为",
+      "type": "text",
+      "x": 370,
+      "y": 370,
+      "width": 140,
+      "height": 50,
+      "color": "2"
+    },
+    {
+      "id": "config",
+      "text": "配置方式",
+      "type": "text",
+      "x": 560,
+      "y": 120,
+      "width": 100,
+      "height": "auto",
+      "color": "5"
+    },
+    {
+      "id": "config_xml",
+      "text": "XML Schema\n\n<aop:config>\n  <aop:aspect>\n    <aop:pointcut>\n    <aop:around/before/after...>\n  </aop:aspect>\n</aop:config>",
+      "type": "text",
+      "x": 540,
+      "y": 160,
+      "width": 140,
+      "height": 100,
+      "color": "3"
+    },
+    {
+      "id": "config_annotation",
+      "text": "AspectJ注解\n\n@Aspect\n@Pointcut\n@Before/@After\n@Around/@AfterReturning",
+      "type": "text",
+      "x": 540,
+      "y": 280,
+      "width": 140,
+      "height": 80,
+      "color": "3"
+    },
+    {
+      "id": "spring_vs_aspectj",
+      "text": "Spring AOP vs AspectJ",
+      "type": "text",
+      "x": 730,
+      "y": 120,
+      "width": 160,
+      "height": 30,
+      "color": "5"
+    },
+    {
+      "id": "spring_aop",
+      "text": "Spring AOP\n- 纯Java实现\n- 运行期动态代理\n- 无侵入性\n- 功能有限",
+      "type": "text",
+      "x": 710,
+      "y": 160,
+      "width": 120,
+      "height": 80,
+      "color": "4"
+    },
+    {
+      "id": "aspectj",
+      "text": "AspectJ\n- AOP标准\n- 编译期织入\n- 功能强大\n- 侵入性高",
+      "type": "text",
+      "x": 850,
+      "y": 160,
+      "width": 120,
+      "height": 80,
+      "color": "4"
+    },
+    {
+      "id": "pointcut_expr",
+      "text": "切入点表达式",
+      "type": "text",
+      "x": 730,
+      "y": 280,
+      "width": 120,
+      "height": 30,
+      "color": "5"
+    },
+    {
+      "id": "expr_execution",
+      "text": "execution(* .*.(..))\n方法执行时触发",
+      "type": "text",
+      "x": 710,
+      "y": 320,
+      "width": 140,
+      "height": 40,
+      "color": "3"
+    },
+    {
+      "id": "expr_within",
+      "text": "within(com.demo.*)\n某包下所有类",
+      "type": "text",
+      "x": 710,
+      "y": 370,
+      "width": 140,
+      "height": 30,
+      "color": "3"
+    },
+    {
+      "id": "expr_args",
+      "text": "args(param)\n参数类型匹配",
+      "type": "text",
+      "x": 710,
+      "y": 410,
+      "width": 140,
+      "height": 30,
+      "color": "3"
+    },
+    {
+      "id": "expr_this",
+      "text": "this/ target\n代理/目标对象匹配",
+      "type": "text",
+      "x": 710,
+      "y": 450,
+      "width": 140,
+      "height": 30,
+      "color": "3"
+    },
+    {
+      "id": "c1",
+      "text": "",
+      "type": "line",
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0,
+      "color": "0"
+    },
+    {
+      "id": "c2",
+      "text": "",
+      "type": "line",
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0,
+      "color": "0"
+    },
+    {
+      "id": "c3",
+      "text": "",
+      "type": "line",
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0,
+      "color": "0"
+    },
+    {
+      "id": "c4",
+      "text": "",
+      "type": "line",
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0,
+      "color": "0"
+    },
+    {
+      "id": "c5",
+      "text": "",
+      "type": "line",
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0,
+      "color": "0"
+    },
+    {
+      "id": "c6",
+      "text": "",
+      "type": "line",
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0,
+      "color": "0"
+    },
+    {
+      "id": "c7",
+      "text": "",
+      "type": "line",
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0,
+      "color": "0"
+    },
+    {
+      "id": "c8",
+      "text": "",
+      "type": "line",
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0,
+      "color": "0"
+    },
+    {
+      "id": "c9",
+      "text": "",
+      "type": "line",
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0,
+      "color": "0"
+    },
+    {
+      "id": "c10",
+      "text": "",
+      "type": "line",
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0,
+      "color": "0"
+    },
+    {
+      "id": "c11",
+      "text": "",
+      "type": "line",
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0,
+      "color": "0"
+    },
+    {
+      "id": "c12",
+      "text": "",
+      "type": "line",
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0,
+      "color": "0"
+    },
+    {
+      "id": "c13",
+      "text": "",
+      "type": "line",
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0,
+      "color": "0"
+    },
+    {
+      "id": "c14",
+      "text": "",
+      "type": "line",
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0,
+      "color": "0"
+    },
+    {
+      "id": "c15",
+      "text": "",
+      "type": "line",
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0,
+      "color": "0"
+    },
+    {
+      "id": "c16",
+      "text": "",
+      "type": "line",
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0,
+      "color": "0"
+    },
+    {
+      "id": "c17",
+      "text": "",
+      "type": "line",
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0,
+      "color": "0"
+    },
+    {
+      "id": "c18",
+      "text": "",
+      "type": "line",
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0,
+      "color": "0"
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "fromNode": "root",
+      "fromSide": "bottom",
+      "toNode": "concept",
+      "toSide": "top"
+    },
+    {
+      "id": "e2",
+      "fromNode": "root",
+      "fromSide": "bottom",
+      "toNode": "terms",
+      "toSide": "top"
+    },
+    {
+      "id": "e3",
+      "fromNode": "root",
+      "fromSide": "bottom",
+      "toNode": "advice_types",
+      "toSide": "top"
+    },
+    {
+      "id": "e4",
+      "fromNode": "root",
+      "fromSide": "bottom",
+      "toNode": "config",
+      "toSide": "top"
+    },
+    {
+      "id": "e5",
+      "fromNode": "root",
+      "fromSide": "bottom",
+      "toNode": "spring_vs_aspectj",
+      "toSide": "top"
+    },
+    {
+      "id": "e6",
+      "fromNode": "root",
+      "fromSide": "bottom",
+      "toNode": "pointcut_expr",
+      "toSide": "top"
+    },
+    {
+      "id": "e7",
+      "fromNode": "terms",
+      "fromSide": "bottom",
+      "toNode": "term_jointpoint",
+      "toSide": "top"
+    },
+    {
+      "id": "e8",
+      "fromNode": "terms",
+      "fromSide": "bottom",
+      "toNode": "term_pointcut",
+      "toSide": "top"
+    },
+    {
+      "id": "e9",
+      "fromNode": "terms",
+      "fromSide": "bottom",
+      "toNode": "term_advice",
+      "toSide": "top"
+    },
+    {
+      "id": "e10",
+      "fromNode": "terms",
+      "fromSide": "bottom",
+      "toNode": "term_aspect",
+      "toSide": "top"
+    },
+    {
+      "id": "e11",
+      "fromNode": "terms",
+      "fromSide": "bottom",
+      "toNode": "term_weaving",
+      "toSide": "top"
+    },
+    {
+      "id": "e12",
+      "fromNode": "terms",
+      "fromSide": "bottom",
+      "toNode": "term_proxy",
+      "toSide": "top"
+    },
+    {
+      "id": "e13",
+      "fromNode": "advice_types",
+      "fromSide": "bottom",
+      "toNode": "advice_before",
+      "toSide": "top"
+    },
+    {
+      "id": "e14",
+      "fromNode": "advice_types",
+      "fromSide": "bottom",
+      "toNode": "advice_after_return",
+      "toSide": "top"
+    },
+    {
+      "id": "e15",
+      "fromNode": "advice_types",
+      "fromSide": "bottom",
+      "toNode": "advice_after_throw",
+      "toSide": "top"
+    },
+    {
+      "id": "e16",
+      "fromNode": "advice_types",
+      "fromSide": "bottom",
+      "toNode": "advice_after",
+      "toSide": "top"
+    },
+    {
+      "id": "e17",
+      "fromNode": "advice_types",
+      "fromSide": "bottom",
+      "toNode": "advice_around",
+      "toSide": "top"
+    },
+    {
+      "id": "e18",
+      "fromNode": "spring_vs_aspectj",
+      "fromSide": "bottom",
+      "toNode": "spring_aop",
+      "toSide": "top"
+    },
+    {
+      "id": "e19",
+      "fromNode": "spring_vs_aspectj",
+      "fromSide": "bottom",
+      "toNode": "aspectj",
+      "toSide": "top"
+    },
+    {
+      "id": "e20",
+      "fromNode": "pointcut_expr",
+      "fromSide": "bottom",
+      "toNode": "expr_execution",
+      "toSide": "top"
+    },
+    {
+      "id": "e21",
+      "fromNode": "pointcut_expr",
+      "fromSide": "bottom",
+      "toNode": "expr_within",
+      "toSide": "top"
+    },
+    {
+      "id": "e22",
+      "fromNode": "pointcut_expr",
+      "fromSide": "bottom",
+      "toNode": "expr_args",
+      "toSide": "top"
+    },
+    {
+      "id": "e23",
+      "fromNode": "pointcut_expr",
+      "fromSide": "bottom",
+      "toNode": "expr_this",
+      "toSide": "top"
+    }
+  ]
+}

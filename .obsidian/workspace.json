@@ -23,12 +23,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "CLAUDE.md",
+                "file": "20-知识库/编程语言/Java/Spring-AOP面向切面编程.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "CLAUDE"
+              "title": "Spring-AOP面向切面编程"
             }
           }
         ],
@@ -216,11 +216,13 @@
   },
   "active": "f013c13485b22831",
   "lastOpenFiles": [
-    "20-知识库/编程语言/Java/Spring-AOP面向切面编程.md",
-    "70-NotebookLM提示词使用/信息验证.md",
-    "40-交付物/second-brain-architecture.canvas",
+    "20-知识库/编程语言/Java/Spring-AOP-思维导图.canvas",
     "20-知识库/编程语言/Java/volatile关键字.md",
     "20-知识库/编程语言/Java/ThreadLocal原理.md",
+    "20-知识库/编程语言/Java/Spring-AOP面向切面编程.md",
+    "CLAUDE.md",
+    "70-NotebookLM提示词使用/信息验证.md",
+    "40-交付物/second-brain-architecture.canvas",
     "20-知识库/MOC-计算机网络.md",
     "20-知识库/AI-ML/长时运行Agent的Harness设计.md",
     "20-知识库/AI-ML/Claude Agent Team 使用指南.md",
@@ -248,8 +250,6 @@
     "20-知识库/计算机网络/网络基础/04-分组交换-思维导图.canvas",
     "20-知识库/计算机网络/TCP协议/03-四次挥手.md",
     "20-知识库/计算机网络/TCP协议/06-超时重传.md",
-    "20-知识库/计算机网络/TCP协议/practice-problems.md",
-    "20-知识库/计算机网络/TCP拥塞控制.md",
     "20-知识库/计算机网络/TCP拥塞控制-思维导图.canvas",
     "30-资源/2026-02-05-NotebookLM高级提示词模板.canvas",
     "30-资源/2026-02-05-Metaprompt元提示词方法论.canvas",
