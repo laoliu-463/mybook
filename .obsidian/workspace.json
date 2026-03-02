@@ -35,12 +35,14 @@
             "id": "974e3ceabb3d0f3e",
             "type": "leaf",
             "state": {
-              "type": "release-notes",
+              "type": "markdown",
               "state": {
-                "currentVersion": "1.12.4"
+                "file": "80-模板/提示词入门搭建.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-book-up",
-              "title": "版本说明 1.12.4"
+              "icon": "lucide-file",
+              "title": "提示词入门搭建"
             }
           }
         ],
