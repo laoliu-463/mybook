@@ -1,13 +1,19 @@
 {
 	"nodes":[
-		{"id":"9c06d43cf450ea5b","x":-180,"y":-280,"width":250,"height":60,"type":"text","text":"        笔记管理系统"},
-		{"id":"15ade92c0633a03f","x":-179,"y":-85,"width":250,"height":60,"type":"text","text":"笔记内容管理表"},
-		{"id":"61d1fd9bf89fb486","x":140,"y":-85,"width":250,"height":60,"type":"text","text":"学生登录表"},
-		{"id":"e0841dfa5c0ba136","x":-520,"y":-132,"width":250,"height":60,"type":"text","text":"标签表"}
+		{"id":"61d1fd9bf89fb486","type":"text","text":"学生登录表","x":290,"y":-120,"width":130,"height":50},
+		{"id":"15ade92c0633a03f","type":"text","text":"笔记内容管理表","x":40,"y":-120,"width":130,"height":50},
+		{"id":"eebc7993c9ca1ace","type":"text","text":"标签笔记对照表","x":-165,"y":-120,"width":110,"height":50},
+		{"id":"e0841dfa5c0ba136","type":"text","text":"标签表","x":-600,"y":-120,"width":130,"height":50},
+		{"id":"63a297ed1ab45e18","type":"text","text":"日志表","x":-360,"y":-120,"width":110,"height":50},
+		{"id":"9c06d43cf450ea5b","type":"text","text":"        笔记管理系统","x":-210,"y":-280,"width":250,"height":60},
+		{"id":"dcd96c49cd14f28b","x":-500,"y":-400,"width":250,"height":60,"type":"text","text":"笔记管理系统"},
+		{"id":"2acb9a157891c09f","x":-500,"y":-500,"width":250,"height":60,"type":"text","text":"课程设计题目"}
 	],
 	"edges":[
 		{"id":"b549ca6be1413a35","fromNode":"9c06d43cf450ea5b","fromSide":"right","toNode":"61d1fd9bf89fb486","toSide":"left"},
 		{"id":"ea5ef30517e8ff72","fromNode":"9c06d43cf450ea5b","fromSide":"bottom","toNode":"15ade92c0633a03f","toSide":"top"},
-		{"id":"5a0a90171354d41b","fromNode":"9c06d43cf450ea5b","fromSide":"left","toNode":"e0841dfa5c0ba136","toSide":"right"}
+		{"id":"5a0a90171354d41b","fromNode":"9c06d43cf450ea5b","fromSide":"left","toNode":"e0841dfa5c0ba136","toSide":"right"},
+		{"id":"099ea9932ca803ae","fromNode":"9c06d43cf450ea5b","fromSide":"bottom","toNode":"eebc7993c9ca1ace","toSide":"top"},
+		{"id":"8bb126029fd33878","fromNode":"9c06d43cf450ea5b","fromSide":"bottom","toNode":"63a297ed1ab45e18","toSide":"top"}
 	]
 }

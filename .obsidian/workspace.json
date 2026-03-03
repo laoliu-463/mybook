@@ -37,15 +37,15 @@
             "state": {
               "type": "canvas",
               "state": {
-                "file": "20-知识库/编程语言/编程语言-思维导图.canvas",
+                "file": "00-收集箱/未命名.canvas",
                 "viewState": {
-                  "x": -635,
-                  "y": 50,
-                  "zoom": -0.38397939020783206
+                  "x": -91,
+                  "y": -121,
+                  "zoom": 0
                 }
               },
               "icon": "lucide-layout-dashboard",
-              "title": "编程语言-思维导图"
+              "title": "未命名"
             }
           }
         ],
@@ -233,9 +233,10 @@
   },
   "active": "974e3ceabb3d0f3e",
   "lastOpenFiles": [
-    "20-知识库/编程语言/Java/Spring-AOP-思维导图.canvas",
-    "20-知识库/编程语言/编程语言-思维导图.canvas",
+    "10-项目/内容创作-Agent-Team/整体流程.canvas",
     "00-收集箱/未命名.canvas",
+    "20-知识库/编程语言/编程语言-思维导图.canvas",
+    "20-知识库/编程语言/Java/Spring-AOP-思维导图.canvas",
     "00-收集箱/未命名 1.md",
     "00-收集箱/LINUX.md",
     "80-模板/提示词入门搭建.md",
@@ -263,7 +264,6 @@
     "20-知识库/架构与工程实践",
     "70-NotebookLM提示词使用/播客.md",
     "10-项目/内容创作-Agent-Team/05-Session启动例程.md",
-    "10-项目/内容创作-Agent-Team/整体流程.canvas",
     "20-知识库/计算机网络/计算机网络-思维导图.canvas",
     "20-知识库/计算机网络/网络基础/04-分组交换-思维导图.canvas",
     "20-知识库/计算机网络/TCP协议/03-四次挥手.md",
