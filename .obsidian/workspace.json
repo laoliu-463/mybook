@@ -35,17 +35,14 @@
             "id": "974e3ceabb3d0f3e",
             "type": "leaf",
             "state": {
-              "type": "canvas",
+              "type": "markdown",
               "state": {
-                "file": "00-收集箱/未命名.canvas",
-                "viewState": {
-                  "x": -91,
-                  "y": -121,
-                  "zoom": 0
-                }
+                "file": "00-收集箱/未命名 1.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-layout-dashboard",
-              "title": "未命名"
+              "icon": "lucide-file",
+              "title": "未命名 1"
             }
           }
         ],
@@ -233,12 +230,13 @@
   },
   "active": "974e3ceabb3d0f3e",
   "lastOpenFiles": [
-    "10-项目/内容创作-Agent-Team/整体流程.canvas",
     "00-收集箱/未命名.canvas",
+    "00-收集箱/LINUX.md",
+    "00-收集箱/未命名.md",
+    "00-收集箱/未命名 1.md",
+    "10-项目/内容创作-Agent-Team/整体流程.canvas",
     "20-知识库/编程语言/编程语言-思维导图.canvas",
     "20-知识库/编程语言/Java/Spring-AOP-思维导图.canvas",
-    "00-收集箱/未命名 1.md",
-    "00-收集箱/LINUX.md",
     "80-模板/提示词入门搭建.md",
     "20-知识库/编程语言/Java/volatile关键字.md",
     "20-知识库/编程语言/Java/ThreadLocal原理.md",
@@ -255,7 +253,6 @@
     "00-收集箱/springIOC.md",
     "00-收集箱/springAOP.md",
     "00-收集箱/设计prompt.md",
-    "00-收集箱/未命名.md",
     "80-模板/Distill-模板.md",
     "80-模板/Capture-模板.md",
     "20-知识库/编程语言/Java/Java网络编程.md",
