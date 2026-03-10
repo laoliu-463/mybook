@@ -187,6 +187,45 @@ System.out.println(response.toString());
 3. **NIO vs BIO**：同步阻塞 vs 同步非阻塞
 4. **TCP 长连接 vs 短连接**：Keep-Alive、HTTP Keep-Alive
 
+---
+
+## Checklist
+
+- [ ] 理解 TCP 三次握手和四次挥手流程
+- [ ] 能手写简单 TCP Server/Client 代码
+- [ ] 了解粘包原因和解决方案（定长/分隔符/消息头+长度）
+- [ ] 了解 NIO 和 BIO 的区别
+- [ ] 理解 TCP Keep-Alive 和 HTTP Keep-Alive
+
+---
+
+## Mermaid 思维导图
+
+```mermaid
+mindmap
+  root((Java 网络编程))
+    TCP 编程
+      ServerSocket
+      Socket
+      三次握手
+      四次挥手
+    UDP 编程
+      DatagramSocket
+      DatagramPacket
+    HTTP 编程
+      HttpURLConnection
+      短连接
+      长连接 Keep-Alive
+    NIO
+      Channel
+      Buffer
+      Selector
+    常见问题
+      粘包拆包
+      半包问题
+      连接池
+```
+
 ## References
 
 - [廖雪峰 Java TCP 编程](https://liaoxuefeng.com/books/java/network/tcp/index.html)

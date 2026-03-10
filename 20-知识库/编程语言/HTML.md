@@ -257,6 +257,48 @@ display: inline-block;
 4. **`<strong>` 和 `<b>` 的区别？** - strong 是语义化强调，b 是纯样式
 5. **如何实现图片懒加载？** - `loading="lazy"` 属性
 
+---
+
+## Checklist
+
+- [ ] 理解 HTML 文档结构（DTD、html、head、body）
+- [ ] 掌握常用语义化标签（header、nav、main、article、section、footer）
+- [ ] 理解块级元素和行内元素的区别
+- [ ] 掌握表单元素用法（input、select、textarea、button）
+- [ ] 了解 HTML5 新增标签和属性
+
+---
+
+## Mermaid 思维导图
+
+```mermaid
+mindmap
+  root((HTML 核心概念))
+    文档结构
+      DOCTYPE
+      html/head/body
+      语义化标签
+    元素分类
+      块级元素
+      行内元素
+      行内块元素
+    常用标签
+      文本标签
+      链接/图片
+      列表
+      表格
+      表单
+    语义化
+      header/footer
+      nav/main
+      article/section
+      aside
+    HTML5 新增
+      video/audio
+      canvas
+      localStorage
+```
+
 ## 知识网络
 
 ### 相关概念

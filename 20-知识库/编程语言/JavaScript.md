@@ -587,6 +587,60 @@ function myPromiseAll(promises) {
 9. **如何实现一个 new 操作符？** - 创建对象、绑定原型、绑定 this、返回对象
 10. **防抖和节流的区别？** - 防抖是延迟执行，节流是间隔执行
 
+---
+
+## Checklist
+
+- [ ] 理解 JavaScript 数据类型（原始类型 vs 对象类型）
+- [ ] 掌握闭包的概念和使用场景
+- [ ] 理解 this 的四种绑定方式
+- [ ] 掌握原型链和继承的实现方式
+- [ ] 理解 Promise 和 async/await 用法
+- [ ] 掌握事件循环机制（宏任务 vs 微任务）
+- [ ] 了解防抖和节流的实现原理
+
+---
+
+## Mermaid 思维导图
+
+```mermaid
+mindmap
+  root((JavaScript 核心概念))
+    数据类型
+      原始类型
+        string/number/boolean
+        null/undefined
+        symbol/bigint
+      对象类型
+        Object/Array/Function
+    作用域
+      全局/函数/块级
+      闭包
+      作用域链
+    this 绑定
+      默认绑定
+      隐式绑定
+      显式绑定
+      new 绑定
+    原型链
+      prototype
+      __proto__
+      原型继承
+    异步编程
+      回调函数
+      Promise
+      async/await
+      事件循环
+        宏任务
+        微任务
+    ES6+ 特性
+      let/const
+      箭头函数
+      解构/展开
+      class
+      模块化
+```
+
 ## 知识网络
 
 ### 前置知识

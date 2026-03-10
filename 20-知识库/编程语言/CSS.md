@@ -492,6 +492,51 @@ const color = getComputedStyle(element).getPropertyValue('--primary-color');
 9. **transition 和 animation 的区别？** - transition 状态变化触发，animation 可自动播放、循环、控制进度
 10. **clamp() 函数的作用？** - 设置最小值、首选值、最大值，实现流体排版
 
+---
+
+## Checklist
+
+- [ ] 掌握 CSS 选择器优先级计算规则
+- [ ] 理解盒模型（content-box vs border-box）
+- [ ] 掌握 Flex 布局核心属性（flex-direction, justify-content, align-items）
+- [ ] 掌握 Grid 布局基本用法
+- [ ] 理解 margin 折叠现象
+- [ ] 掌握常见垂直居中方案
+- [ ] 了解 BEM 命名规范
+
+---
+
+## Mermaid 思维导图
+
+```mermaid
+mindmap
+  root((CSS 核心概念))
+    选择器
+      优先级 ID>class>element
+      组合选择器
+      伪类/伪元素
+    盒模型
+      content-box
+      border-box
+      margin/padding/border
+    布局
+      Flex 一维布局
+      Grid 二维布局
+      定位 absolute/relative/fixed/sticky
+    层叠机制
+      优先级
+      继承
+      层叠上下文
+    动画
+      transition 过渡
+      animation 动画
+      transform
+    响应式
+      media query
+      rem/em
+      clamp 流体排版
+```
+
 ## References
 
 - [MDN: CSS 自定义属性](https://developer.mozilla.org/zh-CN/docs/Web/CSS/--*)
