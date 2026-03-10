@@ -27,3 +27,10 @@ AI/ML 知识库索引。当前聚焦 LLM Agent 工程实践。
 - [ ] RAG — 检索增强生成、向量数据库
 - [ ] Fine-tuning — 微调策略、LoRA
 - [ ] LLM 评估 — 基准测试、幻觉检测
+
+---
+
+## References
+
+- [[AI-ML/长时运行Agent的Harness设计|长时运行 Agent 的 Harness 设计]]
+- [[AI-ML/Claude Agent Team 使用指南|Claude Agent Team 使用指南]]

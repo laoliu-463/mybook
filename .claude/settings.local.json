@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "WebFetch(domain:www.xiaolincoding.com)",
-      "Skill(note-polish)"
-    ]
-  }
-}

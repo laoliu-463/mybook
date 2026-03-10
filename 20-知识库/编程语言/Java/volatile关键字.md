@@ -1,9 +1,11 @@
 ---
 title: "volatile 关键字"
-aliases: ["volatile 八股", "volatile 面试"]
+type: interview
+domain: [编程语言, Java]
 tags: [java, 八股, 并发, JMM]
+source: notebooklm
 created: 2026-02-18
-level: interview
+status: review
 ---
 
 # volatile 关键字
@@ -272,7 +274,9 @@ mindmap
 
 ---
 
-## 参考与建议（可选）
-- 官方/规范：Java Language Specification (JLS) 第 17 章 - Threads and Locks
-- 经典资料：《Java 并发编程实战》第 3 章 - 对象的共享
-- 高质量站点：JavaGuide volatile 详解、美团技术博客 Java 内存模型
+## References
+
+1. [Java Language Specification - Chapter 17](https://docs.oracle.com/javase/specs/jls/se17/html/jls-17.html) - JLS 官方规范
+2. 《Java 并发编程实战》- 书籍引用
+3. [美团技术博客：Java 内存模型](https://tech.meituan.com/2019/09/05/java-memory-model.html) - 外部来源
+4. [JavaGuide volatile 详解](https://javaguide.cn/java/concurrent/volatile.html) - 高质量教程

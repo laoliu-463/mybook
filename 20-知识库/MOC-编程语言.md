@@ -39,3 +39,14 @@ status: review
 - [ ] Java JVM — 内存模型、GC 算法
 - [ ] Python — 基础语法、常用库
 - [ ] Go — goroutine、channel、并发模型
+
+---
+
+## References
+
+- [[编程语言/HTML|HTML 核心概念]]
+- [[编程语言/CSS|CSS 核心概念]]
+- [[编程语言/JavaScript|JavaScript 核心概念]]
+- [[编程语言/Java/volatile关键字|volatile 关键字]]
+- [[编程语言/Java/ThreadLocal原理|ThreadLocal 原理]]
+- [[编程语言/Java/Java网络编程|Java 网络编程]]

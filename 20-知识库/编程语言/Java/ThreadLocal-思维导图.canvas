@@ -1,0 +1,43 @@
+{
+	"nodes":[
+		{"id":"root001","type":"text","text":"# ThreadLocal 原理\n\n为每个线程提供独立变量副本","x":0,"y":0,"width":280,"height":120,"color":"6"},
+		{"id":"def001","type":"text","text":"## 定义","x":-450,"y":-150,"width":160,"height":80,"color":"5"},
+		{"id":"def002","type":"text","text":"为每个线程\n提供独立变量副本\n实现线程隔离","x":-700,"y":-150,"width":180,"height":100,"color":"5"},
+		{"id":"scene001","type":"text","text":"## 应用场景","x":-450,"y":50,"width":160,"height":80,"color":"4"},
+		{"id":"scene002","type":"text","text":"线程上下文传递\n用户ID/请求ID","x":-700,"y":50,"width":180,"height":80,"color":"4"},
+		{"id":"scene003","type":"text","text":"数据库连接管理\n每个线程独立Connection","x":-700,"y":150,"width":180,"height":80,"color":"4"},
+		{"id":"scene004","type":"text","text":"日期格式化\nSimpleDateFormat\n线程安全","x":-700,"y":250,"width":180,"height":80,"color":"4"},
+		{"id":"principle001","type":"text","text":"## 核心原理","x":350,"y":-150,"width":180,"height":80,"color":"6"},
+		{"id":"principle002","type":"text","text":"**ThreadLocalMap**\n\n每个 Thread 对象\n有一个 ThreadLocalMap\nEntry 弱引用 key","x":600,"y":-200,"width":220,"height":100,"color":"6"},
+		{"id":"principle003","type":"text","text":"**set() 流程**\n\n获取当前 Thread\n获取 ThreadLocalMap\n以 this 为 key 存入","x":600,"y":-60,"width":220,"height":100,"color":"6"},
+		{"id":"principle004","type":"text","text":"**get() 流程**\n\n获取当前 Thread\n获取 ThreadLocalMap\n以 this 为 key 读取","x":600,"y":80,"width":220,"height":100,"color":"6"},
+		{"id":"trap001","type":"text","text":"## 内存泄漏","x":-100,"y":180,"width":160,"height":80,"color":"1"},
+		{"id":"trap002","type":"text","text":"**Entry 弱引用**\n\nEntry 继承 WeakReference\nkey 是弱引用指向 ThreadLocal\nvalue 仍是强引用","x":-350,"y":180,"width":220,"height":100,"color":"1"},
+		{"id":"trap003","type":"text","text":"**泄漏原因**\n\nThreadLocal 被回收后\nkey 变为 null\nvalue 无法回收\n导致内存泄漏","x":-350,"y":300,"width":220,"height":100,"color":"1"},
+		{"id":"trap004","type":"text","text":"**解决方案**\n\n使用后调用 remove()\n避免内存泄漏","x":-350,"y":420,"width":220,"height":80,"color":"4"},
+		{"id":"compare001","type":"text","text":"## 对比","x":350,"y":180,"width":160,"height":80,"color":"5"},
+		{"id":"compare002","type":"text","text":"**vs synchronized**\n\nThreadLocal: 空间换时间\nsynchronized: 时间换空间","x":550,"y":180,"width":220,"height":100,"color":"5"},
+		{"id":"compare003","type":"text","text":"**适用场景**\n\nThreadLocal: 线程内共享\nsynchronized: 多线程共享","x":550,"y":300,"width":220,"height":100,"color":"5"},
+		{"id":"link001","type":"file","file":"20-知识库/编程语言/Java/ThreadLocal原理.md","x":0,"y":-250,"width":280,"height":100}
+	],
+	"edges":[
+		{"id":"edge001","fromNode":"root001","fromSide":"left","toNode":"def001","toSide":"right","label":"定义"},
+		{"id":"edge002","fromNode":"def001","fromSide":"left","toNode":"def002","toSide":"right"},
+		{"id":"edge003","fromNode":"root001","fromSide":"left","toNode":"scene001","toSide":"right","label":"场景"},
+		{"id":"edge004","fromNode":"scene001","fromSide":"left","toNode":"scene002","toSide":"right"},
+		{"id":"edge005","fromNode":"scene001","fromSide":"bottom","toNode":"scene003","toSide":"top"},
+		{"id":"edge006","fromNode":"scene001","fromSide":"bottom","toNode":"scene004","toSide":"top"},
+		{"id":"edge007","fromNode":"root001","fromSide":"right","toNode":"principle001","toSide":"left","label":"原理"},
+		{"id":"edge008","fromNode":"principle001","fromSide":"right","toNode":"principle002","toSide":"left"},
+		{"id":"edge009","fromNode":"principle001","fromSide":"bottom","toNode":"principle003","toSide":"top"},
+		{"id":"edge010","fromNode":"principle001","fromSide":"bottom","toNode":"principle004","toSide":"top"},
+		{"id":"edge011","fromNode":"root001","fromSide":"left","toNode":"trap001","toSide":"right","label":"坑"},
+		{"id":"edge012","fromNode":"trap001","fromSide":"left","toNode":"trap002","toSide":"right"},
+		{"id":"edge013","fromNode":"trap001","fromSide":"bottom","toNode":"trap003","toSide":"top"},
+		{"id":"edge014","fromNode":"trap003","fromSide":"bottom","toNode":"trap004","toSide":"top"},
+		{"id":"edge015","fromNode":"root001","fromSide":"right","toNode":"compare001","toSide":"left","label":"对比"},
+		{"id":"edge016","fromNode":"compare001","fromSide":"right","toNode":"compare002","toSide":"left"},
+		{"id":"edge017","fromNode":"compare001","fromSide":"bottom","toNode":"compare003","toSide":"top"},
+		{"id":"edge018","fromNode":"root001","fromSide":"top","toNode":"link001","toSide":"bottom","label":"源笔记"}
+	]
+}

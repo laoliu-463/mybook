@@ -1,9 +1,11 @@
 ---
 title: "ThreadLocal 原理"
-aliases: ["ThreadLocal 八股", "ThreadLocal 面试"]
+type: interview
+domain: [编程语言, Java]
 tags: [java, 八股, 并发, ThreadLocal]
+source: notebooklm
 created: 2026-02-18
-level: interview
+status: review
 ---
 
 # ThreadLocal 原理
@@ -363,7 +365,9 @@ mindmap
 
 ---
 
-## 参考与建议（可选）
-- 官方/规范：JDK ThreadLocal 源码（java.lang.ThreadLocal）
-- 经典资料：《Java 并发编程实战》第 3 章 - 对象的共享
-- 高质量站点：JavaGuide ThreadLocal 详解、美团技术博客 ThreadLocal 内存泄漏分析
+## References
+
+1. [JDK ThreadLocal 源码](https://github.com/openjdk/jdk/blob/master/src/java.base/java/lang/ThreadLocal.java) - 官方源码
+2. 《Java 并发编程实战》- 书籍引用
+3. [美团技术博客：ThreadLocal 内存泄漏分析](https://tech.meituan.com/2019/09/05/java-memory-model.html) - 外部来源
+4. [JavaGuide ThreadLocal 详解](https://javaguide.cn/java/concurrent/threadlocal.html) - 高质量教程

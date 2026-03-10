@@ -1,0 +1,41 @@
+{
+	"nodes":[
+		{"id":"root001","type":"text","text":"# volatile 关键字\n\nJava 并发关键字，保证可见性和有序性","x":0,"y":0,"width":280,"height":120,"color":"6"},
+		{"id":"def001","type":"text","text":"## 定义","x":-500,"y":-200,"width":160,"height":80,"color":"5"},
+		{"id":"def002","type":"text","text":"保证可见性\n和有序性\n不保证原子性","x":-750,"y":-200,"width":180,"height":100,"color":"5"},
+		{"id":"scene001","type":"text","text":"## 应用场景","x":-500,"y":50,"width":160,"height":80,"color":"4"},
+		{"id":"scene002","type":"text","text":"状态标志位\n一写多读","x":-750,"y":50,"width":160,"height":80,"color":"4"},
+		{"id":"scene003","type":"text","text":"DCL 单例\n必须 volatile","x":-750,"y":160,"width":160,"height":80,"color":"4"},
+		{"id":"scene004","type":"text","text":"读多写少\n共享配置","x":-750,"y":270,"width":160,"height":80,"color":"4"},
+		{"id":"principle001","type":"text","text":"## 核心原理","x":300,"y":-200,"width":180,"height":80,"color":"6"},
+		{"id":"principle002","type":"text","text":"**可见性**\n\n写 volatile 刷新到主内存\n读 volatile 从主内存读取","x":550,"y":-250,"width":220,"height":100,"color":"6"},
+		{"id":"principle003","type":"text","text":"**有序性**\n\n通过内存屏障\n禁止指令重排序","x":550,"y":-100,"width":220,"height":100,"color":"6"},
+		{"id":"principle004","type":"text","text":"**happens-before**\n\n对 volatile 变量的写\nhappens-before 后续读","x":550,"y":50,"width":220,"height":100,"color":"6"},
+		{"id":"trap001","type":"text","text":"## 易错点","x":-150,"y":200,"width":160,"height":80,"color":"1"},
+		{"id":"trap002","type":"text","text":"**i++ 不安全**\n\nvolatile 不保证原子性\ni++ 是三步操作","x":-400,"y":200,"width":180,"height":100,"color":"1"},
+		{"id":"trap003","type":"text","text":"**DCL 必须加**\n\n防止半初始化对象\n禁止 new 重排序","x":-400,"y":320,"width":180,"height":100,"color":"1"},
+		{"id":"compare001","type":"text","text":"## 对比","x":300,"y":200,"width":160,"height":80,"color":"5"},
+		{"id":"compare002","type":"text","text":"**vs synchronized**\n\nvolatile: 变量\nsynchronized: 方法/代码块\nvolatile 不保证原子性","x":550,"y":200,"width":220,"height":120,"color":"5"},
+		{"id":"compare003","type":"text","text":"**vs AtomicInteger**\n\nvolatile: 不保证原子性\nAtomicInteger: CAS 保证","x":550,"y":350,"width":220,"height":100,"color":"5"},
+		{"id":"link001","type":"file","file":"20-知识库/编程语言/Java/volatile关键字.md","x":0,"y":-250,"width":280,"height":100}
+	],
+	"edges":[
+		{"id":"edge001","fromNode":"root001","fromSide":"left","toNode":"def001","toSide":"right","label":"定义"},
+		{"id":"edge002","fromNode":"def001","fromSide":"left","toNode":"def002","toSide":"right"},
+		{"id":"edge003","fromNode":"root001","fromSide":"left","toNode":"scene001","toSide":"right","label":"场景"},
+		{"id":"edge004","fromNode":"scene001","fromSide":"left","toNode":"scene002","toSide":"right"},
+		{"id":"edge005","fromNode":"scene001","fromSide":"bottom","toNode":"scene003","toSide":"top"},
+		{"id":"edge006","fromNode":"scene001","fromSide":"bottom","toNode":"scene004","toSide":"top"},
+		{"id":"edge007","fromNode":"root001","fromSide":"right","toNode":"principle001","toSide":"left","label":"原理"},
+		{"id":"edge008","fromNode":"principle001","fromSide":"right","toNode":"principle002","toSide":"left"},
+		{"id":"edge009","fromNode":"principle001","fromSide":"bottom","toNode":"principle003","toSide":"top"},
+		{"id":"edge010","fromNode":"principle001","fromSide":"bottom","toNode":"principle004","toSide":"top"},
+		{"id":"edge011","fromNode":"root001","fromSide":"left","toNode":"trap001","toSide":"right","label":"坑"},
+		{"id":"edge012","fromNode":"trap001","fromSide":"left","toNode":"trap002","toSide":"right"},
+		{"id":"edge013","fromNode":"trap001","fromSide":"bottom","toNode":"trap003","toSide":"top"},
+		{"id":"edge014","fromNode":"root001","fromSide":"right","toNode":"compare001","toSide":"left","label":"对比"},
+		{"id":"edge015","fromNode":"compare001","fromSide":"right","toNode":"compare002","toSide":"left"},
+		{"id":"edge016","fromNode":"compare001","fromSide":"bottom","toNode":"compare003","toSide":"top"},
+		{"id":"edge017","fromNode":"root001","fromSide":"top","toNode":"link001","toSide":"bottom","label":"源笔记"}
+	]
+}
