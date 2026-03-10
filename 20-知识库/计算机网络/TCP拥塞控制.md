@@ -154,6 +154,15 @@ stateDiagram-v2
 
 ---
 
+## Checklist
+
+- [ ] 掌握拥塞控制的四大算法（慢启动、拥塞避免、快重传、快恢复）
+- [ ] 理解 cwnd 和 ssthresh 的作用
+- [ ] 理解拥塞控制和流量控制的区别
+- [ ] 了解 CUBIC 和 BBR 的区别
+
+---
+
 ## References
 
 > [!warning] 来源缺失

@@ -118,6 +118,16 @@ echo "Session 1 started" > claude-progress.txt
 
 ---
 
+## Checklist
+
+- [ ] 理解长时运行 Agent 的挑战（上下文管理、检查点、错误恢复）
+- [ ] 掌握上下文管理策略（总结、压缩、清理）
+- [ ] 理解检查点机制的实现方法
+- [ ] 掌握错误恢复策略
+- [ ] 能设计基本的 Agent Harness
+
+---
+
 ## References
 
 - [Effective Harnesses for Long-Running Agents - Anthropic Engineering](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)

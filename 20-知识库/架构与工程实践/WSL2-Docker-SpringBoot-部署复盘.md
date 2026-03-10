@@ -131,6 +131,16 @@ services:
 - [ ] 添加 `init.sql` 建表脚本，一键初始化数据库
 - [ ] 考虑编写 Makefile 或 Shell 脚本封装部署命令
 
+---
+
+## Checklist
+
+- [ ] 掌握 WSL2 和 Docker 基本使用
+- [ ] 能独立部署 Spring Boot 应用
+- [ ] 理解 Docker Compose 多服务部署
+
+---
+
 ## References
 
 - Docker Compose 官方文档：https://docs.docker.com/compose/

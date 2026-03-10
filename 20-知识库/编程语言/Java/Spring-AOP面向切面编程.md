@@ -118,6 +118,18 @@ public class LogAspect {
 - **Spring AOP 和 AspectJ 区别**：Spring AOP基于代理（运行时），AspectJ编译时织入，功能更强大但侵入性高
 - **JDK代理 vs CGLIB代理**：接口用JDK动态代理，类用CGLIB（Spring默认）
 
+---
+
+## Checklist
+
+- [ ] 理解 AOP 核心概念（切面、通知、切入点、连接点）
+- [ ] 掌握 5 种通知类型（前置、后置、返回、异常、环绕）
+- [ ] 理解 Spring AOP 和 AspectJ 的区别
+- [ ] 掌握 JDK 动态代理和 CGLIB 的区别
+- [ ] 理解代理模式的实现原理
+
+---
+
 ## References
 
 - [Spring AOP - Spring Framework Docs](https://docs.spring.io/spring-framework/reference/core/aop.html)

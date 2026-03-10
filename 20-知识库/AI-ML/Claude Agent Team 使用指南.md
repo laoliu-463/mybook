@@ -264,6 +264,16 @@ TaskStop(task_id="abc123")
 
 ---
 
+## Checklist
+
+- [ ] 理解 Claude Agent Team 的核心概念
+- [ ] 掌握 Task 工具的使用方法
+- [ ] 理解多 Agent 协作模式
+- [ ] 能构建简单的 Agent 团队
+- [ ] 了解并行任务和串行任务的适用场景
+
+---
+
 ## References
 
 - Claude Code 官方文档: https://github.com/anthropics/claude-code

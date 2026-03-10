@@ -30,6 +30,15 @@ AI/ML 知识库索引。当前聚焦 LLM Agent 工程实践。
 
 ---
 
+## Checklist
+
+- [ ] 已掌握 Agent 工程核心概念
+- [ ] 能构建多 Agent 协作系统
+- [ ] 了解 Prompt Engineering 基础
+- [ ] 了解 RAG 基础
+
+---
+
 ## References
 
 - [[AI-ML/长时运行Agent的Harness设计|长时运行 Agent 的 Harness 设计]]

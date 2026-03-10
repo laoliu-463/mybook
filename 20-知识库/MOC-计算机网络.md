@@ -63,6 +63,15 @@ status: review
 
 ---
 
+## Checklist
+
+- [ ] 已掌握 TCP/IP 协议栈各层职责
+- [ ] 能解释三次握手和四次挥手
+- [ ] 理解滑动窗口和拥塞控制
+- [ ] 了解 HTTP/HTTPS 协议
+
+---
+
 ## References
 
 - 小林 coding: https://www.xiaolincoding.com

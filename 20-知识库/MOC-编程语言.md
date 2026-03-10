@@ -42,6 +42,14 @@ status: review
 
 ---
 
+## Checklist
+
+- [ ] 已掌握 HTML/CSS/JavaScript 基础
+- [ ] 了解前端开发整体知识体系
+- [ ] 了解 Java 并发编程核心概念
+
+---
+
 ## References
 
 - [[编程语言/HTML|HTML 核心概念]]
