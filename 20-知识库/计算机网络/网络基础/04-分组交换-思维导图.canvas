@@ -11,7 +11,6 @@
 		{"id":"leaf0202","type":"text","text":"2. 打包: 加序号+IP地址","x":550,"y":-370,"width":260,"height":60},
 		{"id":"leaf0203","type":"text","text":"3. 独立路由: 各包走不同路径","x":550,"y":-290,"width":280,"height":60},
 		{"id":"leaf0204","type":"text","text":"4. 重组: 按序号还原","x":820,"y":-450,"width":220,"height":60},
-		{"id":"branch03","type":"text","text":"## 关键组件","x":-80,"y":250,"width":220,"height":80,"color":"5"},
 		{"id":"leaf0301","type":"text","text":"路由器: 选择最优路径","x":-300,"y":400,"width":260,"height":60},
 		{"id":"leaf0302","type":"text","text":"TCP协议: 重组数据包","x":0,"y":400,"width":260,"height":60},
 		{"id":"leaf0303","type":"text","text":"IP地址: 收件地址","x":300,"y":400,"width":220,"height":60},
@@ -22,7 +21,8 @@
 		{"id":"branch05","type":"text","text":"## 缺点","x":-350,"y":150,"width":180,"height":80,"color":"1"},
 		{"id":"leaf0501","type":"text","text":"延迟不稳定","x":-550,"y":280,"width":180,"height":60},
 		{"id":"leaf0502","type":"text","text":"额外开销(包头)","x":-350,"y":280,"width":180,"height":60},
-		{"id":"leaf0503","type":"text","text":"可能丢包","x":-150,"y":280,"width":180,"height":60}
+		{"id":"leaf0503","type":"text","text":"可能丢包","x":-150,"y":280,"width":180,"height":60},
+		{"id":"branch03","type":"text","text":"## 关键组件","x":60,"y":200,"width":220,"height":80,"color":"5"}
 	],
 	"edges":[
 		{"id":"edge001","fromNode":"root001","fromSide":"left","toNode":"branch01","toSide":"right","label":"对比"},
