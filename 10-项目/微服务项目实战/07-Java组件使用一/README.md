@@ -27,7 +27,39 @@
 - Storage Server：存储节点
 - Nginx：提供HTTP访问
 
-### 1.3 文件存储流程
+### 1.3 FastDFS架构图
+
+```mermaid
+flowchart TB
+    subgraph Client["客户端"]
+        Browser["浏览器"]
+    end
+
+    subgraph FastDFS["FastDFS集群"]
+        Tracker["Tracker Server<br/>调度中心:22122"]
+        Storage1["Storage Server 1<br/>23001"]
+        Storage2["Storage Server 2<br/>23002"]
+        Nginx["Nginx代理<br/>8888"]
+    end
+
+    subgraph Business["业务服务器"]
+        App["Java应用"]
+        DB[(MySQL)]
+    end
+
+    Browser -->|"1.上传文件"| App
+    App -->|"2.请求存储"| Tracker
+    Tracker -->|"3.分配Storage"| App
+    App -->|"4.上传文件"| Storage1
+    Storage1 -->|"5.返回groupId+storageId"| App
+    App -->|"6.存储路径"| DB
+    Browser -->|"7.访问文件"| Nginx
+    Nginx -->|"8.转发请求"| Storage1
+    Storage1 -->|"9.返回文件"| Nginx
+    Nginx -->|"10.返回文件"| Browser
+```
+
+### 1.4 文件存储流程
 
 ```
 1. 前端上传文件 → 业务服务器
@@ -100,7 +132,27 @@ public JsonVO<Void> delete(String groupId, String storageId) {
 </dependency>
 ```
 
-### 2.2 实体类定义
+### 2.2 Excel导入导出流程
+
+```mermaid
+flowchart LR
+    subgraph Export["导出流程"]
+        DB[(数据库)] -->|"1.查询数据"| Service[Service层]
+        Service -->|"2.数据列表"| Controller
+        Controller -->|"3.写入Excel"| Disk1[磁盘文件]
+        Controller -->|"4.输出流"| Browser1[浏览器下载]
+        Controller -->|"5.上传FastDFS"| FastDFS[文件服务器]
+    end
+
+    subgraph Import["导入流程"]
+        Browser2[上传Excel] -->|"1.接收文件"| Controller2[Controller]
+        Controller2 -->|"2.解析Excel"| EasyExcel[EasyExcel解析]
+        EasyExcel -->|"3.数据列表"| Service2[Service层]
+        Service2 -->|"4.保存数据库"| DB2[(数据库)]
+    end
+```
+
+### 2.3 实体类定义
 
 ```java
 @Data
@@ -182,7 +234,30 @@ FileInfo info = dfs.upload(out.toByteArray(), "xlsx");
 
 声明式HTTP客户端，用于服务间调用。
 
-### 3.2 依赖引入
+### 3.2 OpenFeign调用流程
+
+```mermaid
+sequenceDiagram
+    participant A as 服务A(调用方)
+    participant B as 服务B(被调用方)
+    participant F as Feign
+    participant S as Sentinel
+    participant R as Ribbon负载均衡
+
+    A->>F: 1.调用接口方法
+    F->>S: 2.检查限流/熔断规则
+    alt 限流/熔断触发
+        S-->>A: 3a.返回降级响应
+    else 正常
+        F->>R: 3b.负载均衡选择实例
+        R->>B: 4.HTTP请求
+        B-->>R: 5.响应结果
+        R-->>F: 6.返回结果
+        F-->>A: 7.返回业务数据
+    end
+```
+
+### 3.3 依赖引入
 
 ```xml
 <dependency>
@@ -260,7 +335,35 @@ public class SimpleServiceFallbackFactory
 
 Sentinel提供流量控制、熔断降级功能，保护系统稳定性。
 
-### 4.2 依赖引入
+### 4.2 Sentinel工作原理
+
+```mermaid
+flowchart TB
+    subgraph Sentinel["Sentinel工作原理"]
+        start(["请求进入"]) --> Check1{是否限流?}
+        Check1 -->|是| Reject["直接拒绝<br/>返回限流提示"]
+        Check1 -->|否| Check2{是否熔断?}
+        Check2 -->|是| Fallback["执行降级逻辑<br/>返回降级响应"]
+        Check2 -->|否| Pass["正常通过<br/>执行业务逻辑"]
+        Pass --> Success["返回正常结果"]
+    end
+
+    subgraph Rules["规则配置"]
+        Flow["流控规则<br/>QPS/并发数"] -.-> Dashboard
+        Degrade["熔断规则<br/>异常比例/慢请求"] -.-> Dashboard
+        Param["热点规则<br/>参数限流"] -.-> Dashboard
+    end
+
+    subgraph Dashboard["Sentinel Dashboard"]
+        D[":8080控制台"]
+    end
+
+    Reject --> end1([结束])
+    Fallback --> end1
+    Success --> end1
+```
+
+### 4.3 依赖引入
 
 ```xml
 <dependency>
@@ -319,7 +422,60 @@ rule.setTimeWindow(10);  // 熔断10秒
 
 WebSocket实现双向通讯，解决HTTP轮询带宽占用问题。
 
-### 5.2 依赖引入
+### 5.2 WebSocket通讯流程
+
+```mermaid
+sequenceDiagram
+    participant U1 as 用户1
+    participant U2 as 用户2
+    participant WS as WebSocket服务器
+    participant DB as 数据库
+
+    Note over U1,WS: 1.建立连接(握手)
+    U1->>WS: GET /chat?token=xxx
+    WS->>WS: 验证token,获取用户ID
+    WS-->>U1: 101 Switching Protocols
+    WS->>DB: 存储Session(userId->Session)
+
+    Note over U1,WS: 2.发送消息
+    U1->>WS: "2:你好" (格式:receiverId:content)
+    WS->>WS: 解析消息
+
+    alt 群发
+        DB->>U2: 遍历所有Session群发
+    else 私发
+        DB->>U2: 查询receiverId对应Session
+        U2-->>U1: 收到消息
+    end
+
+    Note over U1,WS: 3.关闭连接
+    U1->>WS: Close
+    WS->>DB: 移除Session
+    DB-->>U1: 连接关闭
+```
+
+### 5.3 HTTP轮询 vs WebSocket
+
+```mermaid
+flowchart LR
+    subgraph HTTP["HTTP轮询(每30秒)"]
+        H1[客户端] -->|"1.请求"| HS[HTTP服务器]
+        HS -->|"2.无新消息"| H1
+        H1 -->|"3.请求"| HS
+        HS -->|"4.无新消息"| H1
+        H1 -->|"5.请求"| HS
+        HS -->|"6.有新消息"| H1
+    end
+
+    subgraph WS["WebSocket(长连接)"]
+        W1[客户端] -->|"1.建立连接"| WSrv[WebSocket服务器]
+        WSrv -->|"2.保持连接"| W1
+        WSrv -->|"3.推送:有新消息"| W1
+        W1 -->|"4.发送消息"| WSrv
+    end
+```
+
+### 5.4 依赖引入
 
 ```xml
 <dependency>
@@ -427,13 +583,64 @@ ws.send("all:大家好");  // 群发
 
 用于分布式系统间消息传递，实现服务解耦、异步通信。
 
-### 6.2 常见场景
+### 6.2 RocketMQ架构
+
+```mermaid
+flowchart TB
+    subgraph Producer["生产者"]
+        P1[服务A]
+        P2[服务B]
+    end
+
+    subgraph MQ["RocketMQ集群"]
+        Broker1["Broker Master 1<br/>:10911"]
+        Broker2["Broker Master 2<br/>:10911"]
+        NameServer["NameServer<br/>:9876"]
+    end
+
+    subgraph Consumer["消费者"]
+        C1[服务C]
+        C2[服务D]
+    end
+
+    P1 -->|"发送消息"| Broker1
+    P2 -->|"发送消息"| Broker2
+    Broker1 <-->|"同步信息"| NameServer
+    Broker2 <-->|"同步信息"| NameServer
+    C1 <-->|"订阅消息"| Broker1
+    C2 <-->|"订阅消息"| Broker2
+```
+
+### 6.3 消息流程
+
+```mermaid
+sequenceDiagram
+    participant P as 生产者
+    participant MQ as RocketMQ
+    participant C as 消费者
+
+    Note over P,MQ: 1.发送消息
+    P->>MQ: 发送消息到Topic
+    MQ-->>P: ACK确认
+
+    Note over MQ,C: 2.消息存储
+    MQ->>MQ: 消息持久化<br/>(CommitLog)
+
+    Note over MQ,C: 3.消息推送
+    MQ->>C: 推送给消费者
+    C-->>MQ: ACK确认
+
+    Note over C: 4.业务处理
+    C->>C: 处理业务逻辑
+```
+
+### 6.4 常见场景
 
 - 异步处理（如导出Excel后通知下载）
 - 消息推送（如WebSocket消息）
 - 数据同步（如多系统数据一致性）
 
-### 6.3 依赖引入
+### 6.5 依赖引入
 
 ```xml
 <dependency>
@@ -508,13 +715,84 @@ public class NotifyListener {
 
 Seata提供分布式事务解决方案，保证跨服务数据一致性。
 
-### 7.2 角色
+### 7.2 Seata架构
+
+```mermaid
+flowchart TB
+    subgraph Client["Seata Client"]
+        TM["TM<br/>事务管理器<br/>(发起方)"]
+        RM1["RM1<br/>资源管理器<br/>(服务A)"]
+        RM2["RM2<br/>资源管理器<br/>(服务B)"]
+    end
+
+    subgraph Server["Seata Server"]
+        TC["TC<br/>事务协调器<br/>:8091"]
+    end
+
+    subgraph DB["数据库"]
+        DB1[(服务A数据库)]
+        DB2[(服务B数据库)]
+        Undo["undo_log<br/>(回滚日志)]
+    end
+
+    TM -->|"1.开启全局事务"| TC
+    TC -->|"2.注册分支事务"| RM1
+    TC -->|"3.注册分支事务"| RM2
+    RM1 -->|"4.执行SQL<br/>记录undo_log"| DB1
+    RM2 -->|"5.执行SQL<br/>记录undo_log"| DB2
+    DB1 -->|"6.报告分支状态"| TC
+    DB2 -->|"7.报告分支状态"| TC
+    TC -->|"8.提交/回滚"| TM
+    Undo -.->|"回滚时使用"| RM1
+    Undo -.->|"回滚时使用"| RM2
+```
+
+### 7.3 AT模式流程
+
+```mermaid
+sequenceDiagram
+    participant TM as 事务管理器(TM)
+    participant TC as Seata Server(TC)
+    participant SvcA as 服务A(RM)
+    participant SvcB as 服务B(RM)
+    participant DB as 数据库
+
+    Note over TM,TC: 1.开启全局事务
+    TM->>TC: begin global transaction
+
+    Note over SvcA,DB: 2.执行分支事务
+    SvcA->>DB: INSERT INTO table_a
+    DB-->>SvcA: 执行成功
+    SvcA->>TC: register branch
+
+    Note over SvcB,DB: 3.执行分支事务
+    SvcB->>DB: INSERT INTO table_b
+    DB-->>SvcB: 执行成功
+    SvcB->>TC: register branch
+
+    Note over TC,TM: 4.提交全局事务
+    TM->>TC: commit global transaction
+
+    alt 全部成功
+        TC->>SvcA: commit branch
+        TC->>SvcB: commit branch
+        SvcA->>DB: 提交
+        SvcB->>DB: 提交
+    else 任意失败
+        TC->>SvcA: rollback branch
+        TC->>SvcB: rollback branch
+        SvcA->>DB: undo_log回滚
+        SvcB->>DB: undo_log回滚
+    end
+```
+
+### 7.4 角色
 
 - TC：事务协调器（Seata Server）
 - TM：事务管理器（发起方）
 - RM：资源管理器（参与方）
 
-### 7.3 依赖引入
+### 7.5 依赖引入
 
 ```xml
 <dependency>
