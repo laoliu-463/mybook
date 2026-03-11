@@ -15,7 +15,7 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: #1a1a2e;
             color: #fff;
-            overflow: hidden;
+            overflow-x: auto;
         }
         #fullscreen-btn {
             position: fixed;
@@ -36,143 +36,210 @@
             transform: scale(1.05);
         }
         .mermaid {
-            width: 100vw;
-            height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            min-width: fit-content;
+        }
+        .section {
+            margin: 40px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+        }
+        .section-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #4a90e2;
+            text-align: center;
+        }
+        .legend {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0,0,0,0.8);
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 12px;
+        }
+        .legend-item {
             display: flex;
             align-items: center;
-            justify-content: center;
+            margin: 5px 0;
+        }
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            border-radius: 4px;
         }
     </style>
 </head>
 <body>
     <button id="fullscreen-btn" onclick="toggleFullscreen()">全屏显示 (F11)</button>
-    <div class="mermaid">
-        flowchart TB
-            subgraph root["学员上课状态管理"]
-                direction TB
-                start1((开始))
-            end
 
-            subgraph list["获取列表 条件+分页"]
-                direction TB
-                list_api["GET /common/lessonStudent<br/>evaluateLog"]
-                list_check{"分页参数<br/>是否存在?"}
-                list_yes["getList<br/>分页查询"]
-                list_no["getAll<br/>查询全部"]
-                list_mapper["Mapper执行SQL<br/>WHERE条件查询"]
-                list_desensitize["markMobiles<br/>手机号脱敏"]
-                list_return["返回结果"]
-                list_end1([结束])
-            end
+    <div class="section">
+        <div class="mermaid">
+            flowchart TB
+                center("学员上课状态管理")
+                center --- list["获取列表<br/>条件+分页"]
+                center --- rollcall["点名<br/>批量签到"]
+                center --- stop["停课/复课"]
+                center --- rollback["还原<br/>消课返还"]
 
-            subgraph rollcall["点名 批量签到"]
-                direction TB
-                rollcall_api["POST /common/lesson<br/>rollCallBatch"]
-                rollcall_validate["校验DTO<br/>获取教师ID"]
-                rollcall_service["lessonService<br/>rollCallBatch"]
-                rollcall_check{"记录<br/>已存在?"}
-                rollcall_update["更新签到"]
-                rollcall_create["新建记录"]
-                rollcall_deduct{"需要<br/>消课?"}
-                rollcall_setting["系统设置<br/>旷课是否扣课时"]
-                rollcall_dec["decLessonCount<br/>扣减课时"]
-                rollcall_save["保存记录"]
-                rollcall_end1([结束])
-            end
-
-            subgraph stop["停课/复课"]
-                direction TB
-                stop_api{"POST /lesson<br/>stop | reopen"}
-                stop_ids["课次ID列表"]
-                stop_query["批量查询课次"]
-                stop_loop["遍历课次"]
-                stop_set["设置状态"]
-                stop_enum["STOPPED=0<br/>UNDERWAY=1"]
-                stop_notice["发送通知"]
-                stop_update["批量更新"]
-                stop_end1([结束])
-            end
-
-            subgraph rollback["还原 消课返还"]
-                direction TB
-                rollback_api["POST /lessonStudent<br/>rollbackCourseNum"]
-                rollback_loop["遍历校验ID"]
-                rollback_check{"存在?<br/>有课程ID?"}
-                rollback_process["处理列表"]
-                rollback_reset["重置状态<br/>signState=NONE<br/>decLessonCount=0"]
-                rollback_restore{"实扣>0?<br/>返还课时"}
-                rollback_log["记录日志<br/>更新记录"]
-                rollback_end1([结束])
-            end
-
-            %% 根节点连接
-            root --> list
-            root --> rollcall
-            root --> stop
-            root --> rollback
-
-            %% 获取列表流程
-            start1 --> list_api
-            list_api --> list_check
-            list_check -->|是| list_yes
-            list_check -->|否| list_no
-            list_yes --> list_mapper
-            list_no --> list_mapper
-            list_mapper --> list_desensitize
-            list_desensitize --> list_return
-            list_return --> list_end1
-
-            %% 点名流程
-            rollcall_api --> rollcall_validate
-            rollcall_validate --> rollcall_service
-            rollcall_service --> rollcall_check
-            rollcall_check -->|已存在| rollcall_update
-            rollcall_check -->|不存在| rollcall_create
-            rollcall_update --> rollcall_deduct
-            rollcall_create --> rollcall_deduct
-            rollcall_deduct -->|是| rollcall_setting
-            rollcall_deduct -->|否| rollcall_save
-            rollcall_setting -->|配置扣课时| rollcall_dec
-            rollcall_setting -->|配置不扣课时| rollcall_save
-            rollcall_dec --> rollcall_save
-            rollcall_save --> rollcall_end1
-
-            %% 停课/复课流程
-            stop_api --> stop_ids
-            stop_ids --> stop_query
-            stop_query --> stop_loop
-            stop_loop --> stop_set
-            stop_set --> stop_enum
-            stop_enum --> stop_notice
-            stop_notice --> stop_update
-            stop_update --> stop_end1
-
-            %% 还原流程
-            rollback_api --> rollback_loop
-            rollback_loop --> rollback_check
-            rollback_check -->|是| rollback_process
-            rollback_check -->|否| rollback_end1
-            rollback_process --> rollback_reset
-            rollback_reset --> rollback_restore
-            rollback_restore -->|是| rollback_log
-            rollback_restore -->|否| rollback_log
-            rollback_log --> rollback_end1
-
-            %% 样式定义
-            classDef startEnd fill:#d3f9d8,stroke:#2f9e44,color:#000
-            classDef api fill:#e7f5ff,stroke:#1971c2,color:#000
-            classDef process fill:#fff4e6,stroke:#e67700,color:#000
-            classDef decision fill:#ffe3e3,stroke:#c92a2a,color:#000
-            classDef action fill:#ffe8cc,stroke:#d9480f,color:#000
-            classDef module fill:#f3d9fa,stroke:#862e9c,color:#000
-
-            class start1,list_end1,rollcall_end1,stop_end1,rollback_end1 startEnd
-            class list_api,rollcall_api,rollback_api api
-            class list_desensitize,rollback_reset,stop_notice,list_mapper,rollcall_setting,stop_enum process
-            class list_check,rollcall_check,rollback_check,rollcall_deduct decision
-            class list_yes,list_no,rollcall_update,rollcall_create,rollcall_dec,stop_set,stop_update,rollback_log action
-            class list,rollcall,stop,rollback module
+                classDef center fill:#d3f9d8,stroke:#2f9e44,color:#000,rx:10,ry:10
+                classDef module fill:#f3d9fa,stroke:#862e9c,color:#000,rx:5,ry:5
+                class center center
+                class list,rollcall,stop,rollback module
+        </div>
     </div>
+
+    <div class="section">
+        <div class="section-title">1. 获取列表流程</div>
+        <div class="mermaid">
+            flowchart TB
+                start1([开始]) --> list_api["GET /common/lessonStudent<br/>evaluateLog"]
+                list_api --> list_check{分页参数<br/>是否存在?}
+                list_check -->|是| list_yes["getList<br/>分页查询"]
+                list_check -->|否| list_no["getAll<br/>查询全部"]
+                list_yes --> list_mapper["Mapper执行SQL<br/>WHERE条件查询"]
+                list_no --> list_mapper
+                list_mapper --> list_desensitize["markMobiles<br/>手机号脱敏"]
+                list_desensitize --> list_return["返回 PaginationVO<br/>或 List"]
+                list_return --> end1([结束])
+
+                classDef startEnd fill:#d3f9d8,stroke:#2f9e44,color:#000
+                classDef api fill:#e7f5ff,stroke:#1971c2,color:#000
+                classDef decision fill:#ffe3e3,stroke:#c92a2a,color:#000
+                classDef action fill:#ffe8cc,stroke:#d9480f,color:#000
+
+                class start1,end1 startEnd
+                class list_api api
+                class list_check decision
+                class list_yes,list_no,list_mapper,list_desensitize,list_return action
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">2. 点名流程（批量签到）</div>
+        <div class="mermaid">
+            flowchart TB
+                start2([开始]) --> rollcall_api["POST /common/lesson<br/>rollCallBatch"]
+                rollcall_api --> rollcall_dto["接收 List<br/>LessonSignSaveDTO"]
+                rollcall_dto --> rollcall_validate{状态枚举<br/>是否合法?}
+                rollcall_validate -->|否| rollcall_error["返回错误:<br/>点名状态有误"]
+                rollcall_error --> end2([结束])
+                rollcall_validate -->|是| rollcall_teacher["获取当前教师ID"]
+                rollcall_teacher --> rollcall_service["lessonService<br/>.rollCallBatch"]
+                rollcall_service --> rollcall_loop["遍历处理每个<br/>签到记录"]
+                rollcall_loop --> rollcall_check{学员记录<br/>是否已存在?}
+                rollcall_check -->|已存在| rollcall_update["addRecord<br/>更新签到状态"]
+                rollcall_check -->|不存在| rollcall_create["创建新<br/>LessonStudent记录"]
+                rollcall_update --> rollcall_deduct
+                rollcall_create --> rollcall_deduct
+                rollcall_deduct{签到状态<br/>需要消课?}
+                rollcall_deduct -->|是| rollcall_setting["系统设置<br/>旷课是否扣课时"]
+                rollcall_deduct -->|否| rollcall_save
+                rollcall_setting -->|配置扣| rollcall_dec["decLessonCount<br/>扣减学员课时"]
+                rollcall_setting -->|配置不扣| rollcall_save
+                rollcall_dec --> rollcall_save
+                rollcall_save["更新/新增<br/>签到记录"]
+                rollcall_save --> rollcall_return["返回成功"]
+                rollcall_return --> end2
+
+                classDef startEnd fill:#d3f9d8,stroke:#2f9e44,color:#000
+                classDef api fill:#e7f5ff,stroke:#1971c2,color:#000
+                classDef decision fill:#ffe3e3,stroke:#c92a2a,color:#000
+                classDef action fill:#ffe8cc,stroke:#d9480f,color:#000
+                classDef error fill:#ffe3e3,stroke:#c92a2a,color:#c92a2a,stroke-width:3px
+
+                class start2,end2 startEnd
+                class rollcall_api,rollcall_dto api
+                class rollcall_validate,rollcall_check,rollcall_deduct decision
+                class rollcall_error error
+                class rollcall_teacher,rollcall_loop,rollcall_setting,rollcall_update,rollcall_create,rollcall_dec,rollcall_save,rollcall_return,rollcall_service action
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">3. 停课/复课流程</div>
+        <div class="mermaid">
+            flowchart TB
+                start3([开始]) --> stop_choice{操作类型}
+                stop_choice -->|停课| stop_api1["POST /common/lesson/stop"]
+                stop_choice -->|复课| stop_api2["POST /common/lesson/reopen"]
+                stop_api1 --> stop_ids["接收课次ID列表<br/>List<Long>"]
+                stop_api2 --> stop_ids
+                stop_ids --> stop_query["lessonService<br/>批量查询课次"]
+                stop_query --> stop_loop["遍历每个课次"]
+                stop_loop --> stop_set{操作类型?}
+                stop_set -->|停课| stop_stopped["设置状态<br/>= STOPPED(0)"]
+                stop_set -->|复课| stop_underway["设置状态<br/>= UNDERWAY(1)"]
+                stop_stopped --> stop_notice["sendLessonStateChangeNotice<br/>发送通知"]
+                stop_underway --> stop_notice
+                stop_notice --> stop_batch["updateBatchById<br/>批量更新"]
+                stop_batch --> stop_return["返回成功/失败"]
+                stop_return --> end3([结束])
+
+                classDef startEnd fill:#d3f9d8,stroke:#2f9e44,color:#000
+                classDef api fill:#e7f5ff,stroke:#1971c2,color:#000
+                classDef decision fill:#ffe3e3,stroke:#c92a2a,color:#000
+                classDef action fill:#ffe8cc,stroke:#d9480f,color:#000
+
+                class start3,end3 startEnd
+                class stop_choice,stop_set decision
+                class stop_api1,stop_api2,stop_ids,stop_query,stop_loop,stop_stopped,stop_underway,stop_notice,stop_batch,stop_return action
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">4. 还原流程（消课返还）</div>
+        <div class="mermaid">
+            flowchart TB
+                start4([开始]) --> rollback_api["POST /common/lessonStudent<br/>/rollbackCourseNum"]
+                rollback_api --> rollback_ids["接收签到记录ID列表<br/>List<Long>"]
+                rollback_ids --> rollback_loop["遍历校验每个ID"]
+                rollback_loop --> rollback_exist{记录是否<br/>存在?}
+                rollback_exist -->|否| rollback_err1["抛出异常:<br/>无法还原无签到<br/>状态的记录"]
+                rollback_err1 --> end4_fail([失败])
+                rollback_exist -->|是| rollback_course{是否有消费<br/>课程ID?}
+                rollback_course -->|否| rollback_err2["抛出异常:<br/>无法还原未设置<br/>消费课程的记录"]
+                rollback_course -->|是| rollback_add["添加到处理列表"]
+                rollback_err2 --> end4_fail
+                rollback_add --> rollback_process["遍历处理列表"]
+                rollback_process --> rollback_count["获取实扣课次数<br/>decLessonCount"]
+                rollback_count --> rollback_none["设置 signState<br/>= NONE 未签到"]
+                rollback_none --> rollback_clear["设置 decLessonCount<br/>= 0 清零"]
+                rollback_clear --> rollback_gt0{实扣次数 > 0?}
+                rollback_gt0 -->|是| rollback_restore["rollcallCancel<br/>返还课时"]
+                rollback_gt0 -->|否| rollback_skip["不返还"]
+                rollback_restore --> rollback_log["记录课时变动日志<br/>handleAdd"]
+                rollback_skip --> rollback_log
+                rollback_log --> rollback_update["updateById<br/>更新记录"]
+                rollback_update --> rollback_return["返回成功/失败"]
+                rollback_return --> end4([结束])
+
+                classDef startEnd fill:#d3f9d8,stroke:#2f9e44,color:#000
+                classDef api fill:#e7f5ff,stroke:#1971c2,color:#000
+                classDef decision fill:#ffe3e3,stroke:#c92a2a,color:#000
+                classDef action fill:#ffe8cc,stroke:#d9480f,color:#000
+                classDef error fill:#ffe3e3,stroke:#c92a2a,color:#c92a2a,stroke-width:3px
+                classDef restore fill:#d3f9d8,stroke:#2f9e44,color:#000
+
+                class start4,end4,end4_fail startEnd
+                class rollback_api,rollback_ids,rollback_loop,rollback_exist,rollback_course,rollback_count,rollback_none,rollback_clear,rollback_gt0,rollback_restore,rollback_skip,rollback_log,rollback_update,rollback_return action
+                class rollback_err1,rollback_err2 error
+        </div>
+    </div>
+
+    <div class="legend">
+        <div class="legend-item"><div class="legend-color" style="background:#d3f9d8"></div>开始/结束</div>
+        <div class="legend-item"><div class="legend-color" style="background:#e7f5ff"></div>API入口</div>
+        <div class="legend-item"><div class="legend-color" style="background:#ffe3e3"></div>决策判断</div>
+        <div class="legend-item"><div class="legend-color" style="background:#ffe8cc"></div>处理操作</div>
+        <div class="legend-item"><div class="legend-color" style="border:2px solid #c92a2a;background:#ffe3e3"></div>异常错误</div>
+    </div>
+
     <script>
         mermaid.initialize({
             startOnLoad: true,
