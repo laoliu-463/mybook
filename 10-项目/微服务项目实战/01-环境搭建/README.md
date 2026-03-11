@@ -4,6 +4,34 @@
 
 开发环境需要配置 JDK 1.8、Maven 3.6+、IDEA 2022+，服务器环境需要 MySQL、Redis、Nacos（Docker部署）。
 
+### 开发工具关系图
+
+```mermaid
+flowchart LR
+    subgraph Local["本地开发环境"]
+        IDEA["IDEA 2022+"]
+        Maven["Maven 3.6+"]
+        JDK["JDK 1.8"]
+    end
+
+    subgraph Docker["Docker容器环境"]
+        MySQL["MySQL<br/>:3306"]
+        Redis["Redis<br/>:6379"]
+        Nacos["Nacos<br/>:8848"]
+    end
+
+    subgraph VM["虚拟机Linux"]
+        VM1["CentOS 8.6"]
+    end
+
+    JDK --> IDEA
+    Maven --> IDEA
+    IDEA -.->|"连接"| VM1
+    VM1 -->|"运行"| MySQL
+    VM1 -->|"运行"| Redis
+    VM1 -->|"运行"| Nacos
+```
+
 ---
 
 ## 一、开发环境
@@ -96,7 +124,32 @@ git checkout -b <分支名> origin/java-architecture
 
 在Nacos控制台创建命名空间，ID与名称保持一致，如：`eams-dev`
 
-### 4.2 创建配置文件
+### 4.2 Nacos工作流程
+
+```mermaid
+flowchart LR
+    subgraph Client["客户端(业务服务)"]
+        App["Java应用"]
+    end
+
+    subgraph NacosServer["Nacos服务端"]
+        Registry["注册中心<br/>:8848"]
+        Config["配置中心<br/>:8848"]
+    end
+
+    subgraph Console["Nacos控制台"]
+        ConsoleUI["Web界面<br/>:8848/nacos"]
+    end
+
+    App -->|"1.服务注册"| Registry
+    Registry -->|"2.心跳检测"| App
+    App -->|"3.获取配置"| Config
+    Config -->|"4.监听配置变更"| App
+    ConsoleUI -->|"5.管理服务"| Registry
+    ConsoleUI -->|"6.管理配置"| Config
+```
+
+### 4.3 创建配置文件
 
 创建以下配置文件：
 - `system.yml` - Spring基础配置

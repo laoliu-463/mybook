@@ -4,6 +4,30 @@
 
 使用Spring Validation + 全局异常处理实现参数校验，避免在业务代码中写大量if-else判断。
 
+### Validation校验流程
+
+```mermaid
+sequenceDiagram
+    participant Client as 客户端
+    participant Controller as Controller
+    participant Valid as @Valid校验
+    participant Handler as 全局异常处理
+    participant Service as Service
+
+    Client->>Controller: POST /user (JSON)
+    Controller->>Valid: @Valid校验DTO
+
+    alt 校验失败
+        Valid-->>Handler: MethodArgumentNotValidException
+        Handler->>Handler: 获取错误信息
+        Handler-->>Client: JsonVO.fail(错误信息)
+    else 校验成功
+        Valid->>Service: 业务处理
+        Service-->>Controller: 业务结果
+        Controller-->>Client: JsonVO.success(结果)
+    end
+```
+
 ---
 
 ## 一、Validation依赖
@@ -120,7 +144,34 @@ public JsonVO<UserVO> add(
 
 ## 五、全局异常处理
 
-### 5.1 GlobalExceptionHandler
+### 5.1 异常处理流程
+
+```mermaid
+flowchart TB
+    subgraph Exception["异常分类"]
+        Valid["参数校验异常<br/>@Valid失败"]
+        Biz["业务异常<br/>BusinessException"]
+        Sys["系统异常<br/>Exception"]
+    end
+
+    subgraph Handler["全局异常处理器"]
+        Catch["@RestControllerAdvice<br/>统一捕获"]
+        Process["异常处理"]
+        Return["返回统一格式<br/>JsonVO"]
+    end
+
+    Valid --> Catch
+    Biz --> Catch
+    Sys --> Catch
+
+    Catch --> Process
+    Process --> Return
+
+    style Catch fill:#f90,color:#fff
+    style Return fill:#09f,color:#fff
+```
+
+### 5.2 GlobalExceptionHandler
 
 ```java
 @RestControllerAdvice

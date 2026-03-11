@@ -4,6 +4,56 @@
 
 集成Captcha验证码插件，支持滑块验证、文字点选等多种验证方式，后端存储使用Redis。
 
+### 验证码验证流程
+
+```mermaid
+sequenceDiagram
+    participant User as 用户
+    participant Front as 前端
+    participant API as 后端API
+    participant Redis as Redis
+    participant Captcha as Captcha服务
+
+    Note over User,Front: 1.获取验证码
+    User->>Front: 访问页面
+    Front->>API: GET /captcha/get
+    API->>Captcha: 生成验证码
+    Captcha->>Redis: 存储验证码(captchaId:token)
+    Captcha-->>Front: 返回captchaId+图片base64
+    Front-->>User: 展示验证码图片
+
+    Note over User,Front: 2.提交验证(登录)
+    User->>Front: 拖动滑块/点选
+    Front->>API: POST /login (captchaId+token+凭证)
+    API->>Captcha: 验证(token)
+    alt 验证成功
+        Captcha-->>API: 验证通过
+        API->>API: 执行登录逻辑
+        API-->>Front: 登录成功
+    else 验证失败
+        Captcha-->>API: 验证失败
+        API-->>Front: 验证码错误
+    end
+    Front-->>User: 登录结果
+```
+
+### 滑块验证码示意
+
+```mermaid
+flowchart LR
+    subgraph Before["验证前"]
+        Img1["原始图片"]
+        Block1["滑块"]
+        Gap["缺口"]
+    end
+
+    subgraph After["验证后"]
+        Img2["拼合图片"]
+    end
+
+    Before -->|"拖动滑块填入缺口"| After
+```
+
 ---
 
 ## 一、Captcha插件

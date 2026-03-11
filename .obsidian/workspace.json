@@ -54,12 +54,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "10-项目/微服务项目实战/01-环境搭建/README.md",
+                "file": "Claude/常用命令.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "README"
+              "title": "常用命令"
             }
           }
         ],
@@ -247,12 +247,13 @@
   },
   "active": "6473809811eab9cf",
   "lastOpenFiles": [
-    "10-项目/微服务项目实战/02-分层领域模型/README.md",
+    "CLAUDE.md",
     "10-项目/微服务项目实战/07-Java组件使用一/README.md",
+    "10-项目/微服务项目实战/02-分层领域模型/README.md",
+    "10-项目/微服务项目实战/01-环境搭建/README.md",
     "10-项目/微服务项目实战/07-Java组件使用一",
     "10-项目/微服务项目实战/06-Swagger配置/README.md",
     "10-项目/微服务项目实战/06-Swagger配置",
-    "10-项目/微服务项目实战/01-环境搭建/README.md",
     "20-知识库/架构与工程实践/02-Java项目架构实战.md",
     "10-项目/微服务项目实战/05-验证码集成/README.md",
     "10-项目/微服务项目实战/05-验证码集成",
@@ -271,7 +272,6 @@
     "00-收集箱/学员上课状态管理流程.canvas",
     "00-收集箱/学员上课状态管理流程.html.tmp.21196.1773216407236",
     "Claude/常用命令.md",
-    "CLAUDE.md",
     "00-收集箱/未命名.canvas",
     "Claude/skills/obsidian-vault-workflow/SKILL.md",
     "20-知识库/AI-ML/Claude Agent Team 使用指南.md",

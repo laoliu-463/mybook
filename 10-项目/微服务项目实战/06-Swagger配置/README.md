@@ -4,6 +4,48 @@
 
 集成Spring Doc/OpenAPI生成API文档，通过Swagger3展示接口，支持分组、注解自定义。
 
+### Swagger文档访问流程
+
+```mermaid
+flowchart LR
+    subgraph Before["无聚合网关"]
+        Dev1["开发者"] -->|"访问:8080/doc.html"| Svc1["服务A"]
+        Dev1 -->|"访问:8081/doc.html"| Svc2["服务B"]
+        Dev1 -->|"访问:8082/doc.html"| Svc3["服务C"]
+    end
+
+    subgraph After["有聚合网关"]
+        Dev2["开发者"] -->|"访问:8888/doc.html"| Gateway["聚合网关<br/>Spring Doc"]
+        Gateway -->|"聚合各服务API"| SvcA["服务A"]
+        Gateway -->|"聚合各服务API"| SvcB["服务B"]
+        Gateway -->|"聚合各服务API"| SvcC["服务C"]
+    end
+```
+
+### OpenAPI注解对应关系
+
+```mermaid
+flowchart TB
+    subgraph Annotations["Swagger注解"]
+        Tag["@Tag<br/>接口分组"]
+        Op["@Operation<br/>接口描述"]
+        Param["@Parameter<br/>参数说明"]
+        Schema["@Schema<br/>模型属性"]
+    end
+
+    subgraph UI["Swagger UI展示"]
+        Group["接口分组<br/>Tags"]
+        Desc["接口详情<br/>Description"]
+        Req["请求参数<br/>Parameters"]
+        Model["模型定义<br/>Models"]
+    end
+
+    Tag --> Group
+    Op --> Desc
+    Param --> Req
+    Schema --> Model
+```
+
 ---
 
 ## 一、依赖引入

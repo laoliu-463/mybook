@@ -4,6 +4,34 @@
 
 使用MyBatis-Plus Generator逆向工程自动生成DO/Mapper/Service/Controller代码，大幅提升开发效率。
 
+### 代码生成流程
+
+```mermaid
+flowchart TB
+    subgraph Input["输入"]
+        DB[("数据库<br/>MySQL")]
+        Config["Generator配置<br/>pom.xml"]
+    end
+
+    subgraph Generator["代码生成器"]
+        Plugin["Maven插件<br/>mybatisplus-generator"]
+    end
+
+    subgraph Output["输出"]
+        DO["DO实体类<br/>entity"]
+        Mapper["Mapper接口<br/>mapper"]
+        Service["Service层<br/>service"]
+        Controller["Controller层<br/>controller"]
+    end
+
+    DB -->|"读取表结构"| Plugin
+    Config -->|"读取配置"| Plugin
+    Plugin -->|"生成"| DO
+    Plugin -->|"生成"| Mapper
+    Plugin -->|"生成"| Service
+    Plugin -->|"生成"| Controller
+```
+
 ---
 
 ## 一、MyBatis-Plus Generator
@@ -144,7 +172,25 @@ public SimpleDO getById(String id) {
 
 ## 五、MapStruct对象转换
 
-### 5.1 依赖引入
+### 5.1 MapStruct vs BeanUtils
+
+```mermaid
+flowchart LR
+    subgraph Reflection["BeanUtils(反射)"]
+        R1[源对象] -->|"反射获取属性"| Copy["PropertyUtils<br/>copyProperties"]
+        Copy -->|"反射设置属性"| R2[目标对象]
+    end
+
+    subgraph Compile["MapStruct(编译期)"]
+        M1[源对象] -->|"直接赋值"| Impl["生成的实现类<br/>XXXMapperImpl"]
+        Impl -->|"直接赋值"| M2[目标对象]
+    end
+
+    style Copy fill:#f9f,color:#333
+    style Impl fill:#9f9,color:#333
+```
+
+### 5.2 对象转换流程
 
 ```xml
 <dependency>

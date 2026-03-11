@@ -4,6 +4,48 @@
 
 基于 Spring Cloud Alibaba 的分布式微服务架构实战，教务管理系统（EAMS）。
 
+### 系统架构图
+
+```mermaid
+flowchart TB
+    subgraph Frontend["前端层"]
+        Web["管理端<br/>Vue3"]
+        App["移动端<br/>UniApp"]
+    end
+
+    subgraph Gateway["网关层"]
+        GW["Spring Cloud Gateway<br/>负载均衡+限流"]
+    end
+
+    subgraph Registry["服务治理"]
+        Nacos["Nacos<br/>注册中心+配置中心"]
+    end
+
+    subgraph Service["业务服务层"]
+        Auth["认证服务"]
+        Edu["教务服务"]
+        Order["订单服务"]
+    end
+
+    subgraph Data["数据层"]
+        MySQL["MySQL 8.0"]
+        Redis["Redis"]
+        MongoDB["MongoDB"]
+    end
+
+    subgraph Middleware["中间件"]
+        MQ["RocketMQ"]
+        FastDFS["FastDFS"]
+        Seata["Seata"]
+    end
+
+    Frontend --> GW
+    GW --> Nacos
+    GW --> Service
+    Service --> Data
+    Service --> Middleware
+```
+
 ## 技术栈
 
 | 分类 | 技术 |
