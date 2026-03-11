@@ -6,268 +6,131 @@
     <title>学员上课状态管理流程图</title>
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: #1a1a2e;
             color: #fff;
-            overflow-x: auto;
+            padding: 20px;
         }
         #fullscreen-btn {
             position: fixed;
             top: 20px;
             right: 20px;
-            z-index: 1000;
             padding: 12px 24px;
             background: #4a90e2;
             color: white;
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 14px;
-            transition: all 0.3s ease;
         }
-        #fullscreen-btn:hover {
-            background: #357abd;
-            transform: scale(1.05);
-        }
-        .mermaid {
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            min-width: fit-content;
-        }
-        .section {
-            margin: 40px 0;
-            padding: 20px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 12px;
-        }
-        .section-title {
-            font-size: 24px;
-            margin-bottom: 20px;
-            color: #4a90e2;
-            text-align: center;
-        }
-        .legend {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            background: rgba(0,0,0,0.8);
-            padding: 15px;
-            border-radius: 8px;
-            font-size: 12px;
-        }
-        .legend-item {
-            display: flex;
-            align-items: center;
-            margin: 5px 0;
-        }
-        .legend-color {
-            width: 20px;
-            height: 20px;
-            margin-right: 10px;
-            border-radius: 4px;
-        }
+        .section { margin: 30px 0; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 12px; }
+        .section-title { font-size: 18px; margin-bottom: 15px; color: #4a90e2; }
+        .mermaid { padding: 15px; display: flex; justify-content: center; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 13px; }
+        th, td { border: 1px solid #444; padding: 8px; text-align: left; }
+        th { background: #333; }
     </style>
 </head>
 <body>
-    <button id="fullscreen-btn" onclick="toggleFullscreen()">全屏显示 (F11)</button>
+    <button id="fullscreen-btn" onclick="toggleFullscreen()">全屏 (F11)</button>
 
     <div class="section">
+        <div class="section-title">总览</div>
         <div class="mermaid">
             flowchart TB
                 center("学员上课状态管理")
-                center --- list["获取列表<br/>条件+分页"]
-                center --- rollcall["点名<br/>批量签到"]
-                center --- stop["停课/复课"]
-                center --- rollback["还原<br/>消课返还"]
-
-                classDef center fill:#d3f9d8,stroke:#2f9e44,color:#000,rx:10,ry:10
-                classDef module fill:#f3d9fa,stroke:#862e9c,color:#000,rx:5,ry:5
-                class center center
-                class list,rollcall,stop,rollback module
+                center --> biz1["业务一：获取列表"]
+                center --> biz2["业务二：点名签到"]
+                center --> biz3["业务三：停课复课"]
+                center --> biz4["业务四：还原"]
         </div>
     </div>
 
     <div class="section">
-        <div class="section-title">1. 获取列表流程</div>
+        <div class="section-title">业务一：获取列表</div>
         <div class="mermaid">
             flowchart TB
-                start1([开始]) --> list_api["GET /common/lessonStudent<br/>evaluateLog"]
-                list_api --> list_check{分页参数<br/>是否存在?}
-                list_check -->|是| list_yes["getList<br/>分页查询"]
-                list_check -->|否| list_no["getAll<br/>查询全部"]
-                list_yes --> list_mapper["Mapper执行SQL<br/>WHERE条件查询"]
-                list_no --> list_mapper
-                list_mapper --> list_desensitize["markMobiles<br/>手机号脱敏"]
-                list_desensitize --> list_return["返回 PaginationVO<br/>或 List"]
-                list_return --> end1([结束])
-
-                classDef startEnd fill:#d3f9d8,stroke:#2f9e44,color:#000
-                classDef api fill:#e7f5ff,stroke:#1971c2,color:#000
-                classDef decision fill:#ffe3e3,stroke:#c92a2a,color:#000
-                classDef action fill:#ffe8cc,stroke:#d9480f,color:#000
-
-                class start1,end1 startEnd
-                class list_api api
-                class list_check decision
-                class list_yes,list_no,list_mapper,list_desensitize,list_return action
+                START1 --> A1["GET /evaluateLog"]
+                A1 --> B1["接收参数"] --> C1{page>0?}
+                C1 -->|是| D1["getList分页"]
+                C1 -->|否| D2["getAll查询"]
+                D1 --> E1["SQL查询"]
+                D2 --> E1
+                E1 --> F1["脱敏"] --> G1{分页?}
+                G1 -->|是| H1["PaginationVO"]
+                G1 -->|否| H2["List"]
+                H1 --> END1
+                H2 --> END1
         </div>
     </div>
 
     <div class="section">
-        <div class="section-title">2. 点名流程（批量签到）</div>
+        <div class="section-title">业务二：点名签到</div>
         <div class="mermaid">
             flowchart TB
-                start2([开始]) --> rollcall_api["POST /common/lesson<br/>rollCallBatch"]
-                rollcall_api --> rollcall_dto["接收 List<br/>LessonSignSaveDTO"]
-                rollcall_dto --> rollcall_validate{状态枚举<br/>是否合法?}
-                rollcall_validate -->|否| rollcall_error["返回错误:<br/>点名状态有误"]
-                rollcall_error --> end2([结束])
-                rollcall_validate -->|是| rollcall_teacher["获取当前教师ID"]
-                rollcall_teacher --> rollcall_service["lessonService<br/>.rollCallBatch"]
-                rollcall_service --> rollcall_loop["遍历处理每个<br/>签到记录"]
-                rollcall_loop --> rollcall_check{学员记录<br/>是否已存在?}
-                rollcall_check -->|已存在| rollcall_update["addRecord<br/>更新签到状态"]
-                rollcall_check -->|不存在| rollcall_create["创建新<br/>LessonStudent记录"]
-                rollcall_update --> rollcall_deduct
-                rollcall_create --> rollcall_deduct
-                rollcall_deduct{签到状态<br/>需要消课?}
-                rollcall_deduct -->|是| rollcall_setting["系统设置<br/>旷课是否扣课时"]
-                rollcall_deduct -->|否| rollcall_save
-                rollcall_setting -->|配置扣| rollcall_dec["decLessonCount<br/>扣减学员课时"]
-                rollcall_setting -->|配置不扣| rollcall_save
-                rollcall_dec --> rollcall_save
-                rollcall_save["更新/新增<br/>签到记录"]
-                rollcall_save --> rollcall_return["返回成功"]
-                rollcall_return --> end2
-
-                classDef startEnd fill:#d3f9d8,stroke:#2f9e44,color:#000
-                classDef api fill:#e7f5ff,stroke:#1971c2,color:#000
-                classDef decision fill:#ffe3e3,stroke:#c92a2a,color:#000
-                classDef action fill:#ffe8cc,stroke:#d9480f,color:#000
-                classDef error fill:#ffe3e3,stroke:#c92a2a,color:#c92a2a,stroke-width:3px
-
-                class start2,end2 startEnd
-                class rollcall_api,rollcall_dto api
-                class rollcall_validate,rollcall_check,rollcall_deduct decision
-                class rollcall_error error
-                class rollcall_teacher,rollcall_loop,rollcall_setting,rollcall_update,rollcall_create,rollcall_dec,rollcall_save,rollcall_return,rollcall_service action
+                START2 --> A2["POST /rollCallBatch"]
+                A2 --> B2["接收列表"] --> C2{校验枚举}
+                C2 -->|非法| D2[错误]
+                C2 -->|合法| E2["处理"] --> F2{记录存在?}
+                F2 -->|存在| G2["更新"]
+                F2 -->|不存在| G3["新建"]
+                G2 --> H2{消课?}
+                G3 --> H2
+                H2 -->|是| I2["扣课时"]
+                H2 -->|否| J2["不扣"]
+                I2 --> END2
+                J2 --> END2
+                D2 --> END2
         </div>
     </div>
 
     <div class="section">
-        <div class="section-title">3. 停课/复课流程</div>
+        <div class="section-title">业务三：停课复课</div>
         <div class="mermaid">
             flowchart TB
-                start3([开始]) --> stop_choice{操作类型}
-                stop_choice -->|停课| stop_api1["POST /common/lesson/stop"]
-                stop_choice -->|复课| stop_api2["POST /common/lesson/reopen"]
-                stop_api1 --> stop_ids["接收课次ID列表<br/>List<Long>"]
-                stop_api2 --> stop_ids
-                stop_ids --> stop_query["lessonService<br/>批量查询课次"]
-                stop_query --> stop_loop["遍历每个课次"]
-                stop_loop --> stop_set{操作类型?}
-                stop_set -->|停课| stop_stopped["设置状态<br/>= STOPPED(0)"]
-                stop_set -->|复课| stop_underway["设置状态<br/>= UNDERWAY(1)"]
-                stop_stopped --> stop_notice["sendLessonStateChangeNotice<br/>发送通知"]
-                stop_underway --> stop_notice
-                stop_notice --> stop_batch["updateBatchById<br/>批量更新"]
-                stop_batch --> stop_return["返回成功/失败"]
-                stop_return --> end3([结束])
-
-                classDef startEnd fill:#d3f9d8,stroke:#2f9e44,color:#000
-                classDef api fill:#e7f5ff,stroke:#1971c2,color:#000
-                classDef decision fill:#ffe3e3,stroke:#c92a2a,color:#000
-                classDef action fill:#ffe8cc,stroke:#d9480f,color:#000
-
-                class start3,end3 startEnd
-                class stop_choice,stop_set decision
-                class stop_api1,stop_api2,stop_ids,stop_query,stop_loop,stop_stopped,stop_underway,stop_notice,stop_batch,stop_return action
+                START3 --> A3{操作}
+                A3 -->|停课| B3["POST /stop"]
+                A3 -->|复课| C3["POST /reopen"]
+                B3 --> D3["接收ID"]
+                C3 --> D3
+                D3 --> E3["查询"] --> F3["遍历"] --> G3["设置状态"] --> H3["通知"] --> I3["批量更新"] --> END3
         </div>
     </div>
 
     <div class="section">
-        <div class="section-title">4. 还原流程（消课返还）</div>
+        <div class="section-title">业务四：还原</div>
         <div class="mermaid">
             flowchart TB
-                start4([开始]) --> rollback_api["POST /common/lessonStudent<br/>/rollbackCourseNum"]
-                rollback_api --> rollback_ids["接收签到记录ID列表<br/>List<Long>"]
-                rollback_ids --> rollback_loop["遍历校验每个ID"]
-                rollback_loop --> rollback_exist{记录是否<br/>存在?}
-                rollback_exist -->|否| rollback_err1["抛出异常:<br/>无法还原无签到<br/>状态的记录"]
-                rollback_err1 --> end4_fail([失败])
-                rollback_exist -->|是| rollback_course{是否有消费<br/>课程ID?}
-                rollback_course -->|否| rollback_err2["抛出异常:<br/>无法还原未设置<br/>消费课程的记录"]
-                rollback_course -->|是| rollback_add["添加到处理列表"]
-                rollback_err2 --> end4_fail
-                rollback_add --> rollback_process["遍历处理列表"]
-                rollback_process --> rollback_count["获取实扣课次数<br/>decLessonCount"]
-                rollback_count --> rollback_none["设置 signState<br/>= NONE 未签到"]
-                rollback_none --> rollback_clear["设置 decLessonCount<br/>= 0 清零"]
-                rollback_clear --> rollback_gt0{实扣次数 > 0?}
-                rollback_gt0 -->|是| rollback_restore["rollcallCancel<br/>返还课时"]
-                rollback_gt0 -->|否| rollback_skip["不返还"]
-                rollback_restore --> rollback_log["记录课时变动日志<br/>handleAdd"]
-                rollback_skip --> rollback_log
-                rollback_log --> rollback_update["updateById<br/>更新记录"]
-                rollback_update --> rollback_return["返回成功/失败"]
-                rollback_return --> end4([结束])
-
-                classDef startEnd fill:#d3f9d8,stroke:#2f9e44,color:#000
-                classDef api fill:#e7f5ff,stroke:#1971c2,color:#000
-                classDef decision fill:#ffe3e3,stroke:#c92a2a,color:#000
-                classDef action fill:#ffe8cc,stroke:#d9480f,color:#000
-                classDef error fill:#ffe3e3,stroke:#c92a2a,color:#c92a2a,stroke-width:3px
-                classDef restore fill:#d3f9d8,stroke:#2f9e44,color:#000
-
-                class start4,end4,end4_fail startEnd
-                class rollback_api,rollback_ids,rollback_loop,rollback_exist,rollback_course,rollback_count,rollback_none,rollback_clear,rollback_gt0,rollback_restore,rollback_skip,rollback_log,rollback_update,rollback_return action
-                class rollback_err1,rollback_err2 error
+                START4 --> A4["POST /rollbackCourseNum"]
+                A4 --> B4["接收ID"] --> C4["校验"] --> D4{有效?}
+                D4 -->|否| E4[异常]
+                D4 -->|是| F4["处理"] --> G4["重置"] --> H4{实扣>0?}
+                H4 -->|是| I4["返还"]
+                H4 -->|否| J4["日志"]
+                I4 --> END4
+                J4 --> END4
+                E4 --> FAIL4
         </div>
     </div>
 
-    <div class="legend">
-        <div class="legend-item"><div class="legend-color" style="background:#d3f9d8"></div>开始/结束</div>
-        <div class="legend-item"><div class="legend-color" style="background:#e7f5ff"></div>API入口</div>
-        <div class="legend-item"><div class="legend-color" style="background:#ffe3e3"></div>决策判断</div>
-        <div class="legend-item"><div class="legend-color" style="background:#ffe8cc"></div>处理操作</div>
-        <div class="legend-item"><div class="legend-color" style="border:2px solid #c92a2a;background:#ffe3e3"></div>异常错误</div>
+    <div class="section">
+        <table>
+            <tr><th>业务</th><th>API</th><th>核心操作</th><th>数据表</th></tr>
+            <tr><td>业务一</td><td>GET /evaluateLog</td><td>条件查询+分页</td><td>lesson_student</td></tr>
+            <tr><td>业务二</td><td>POST /rollCallBatch</td><td>批量签到+消课</td><td>lesson_student</td></tr>
+            <tr><td>业务三</td><td>POST /stop/reopen</td><td>状态变更+通知</td><td>lesson</td></tr>
+            <tr><td>业务四</td><td>POST /rollbackCourseNum</td><td>状态重置+返还</td><td>lesson_student</td></tr>
+        </table>
     </div>
 
     <script>
-        mermaid.initialize({
-            startOnLoad: true,
-            theme: 'dark',
-            flowchart: {
-                useMaxWidth: true,
-                htmlLabels: true,
-                curve: 'basis'
-            },
-            securityLevel: 'loose'
-        });
-
+        mermaid.initialize({ startOnLoad: true, theme: 'dark', flowchart: { useMaxWidth: true } });
         function toggleFullscreen() {
-            if (!document.fullscreenElement) {
-                document.documentElement.requestFullscreen();
-            } else {
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
-                }
-            }
+            if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+            else document.exitFullscreen();
         }
-
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'F11') {
-                e.preventDefault();
-                toggleFullscreen();
-            }
-        });
+        document.addEventListener('keydown', e => { if(e.key==='F11'){e.preventDefault();toggleFullscreen();} });
     </script>
 </body>
 </html>

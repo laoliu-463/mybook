@@ -120,8 +120,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "75b922fec596eb3e",
@@ -248,11 +247,12 @@
   },
   "active": "6473809811eab9cf",
   "lastOpenFiles": [
+    "00-收集箱/学员上课状态管理流程.html.tmp.21196.1773218158501",
+    "00-收集箱/学员上课状态管理流程.canvas",
+    "00-收集箱/学员上课状态管理流程.md",
+    "00-收集箱/未命名.md",
     "00-收集箱/学员上课状态管理流程.html.tmp.21196.1773216407236",
     "00-收集箱/学员上课状态管理流程.html",
-    "00-收集箱/学员上课状态管理流程.canvas",
-    "00-收集箱/未命名.md",
-    "00-收集箱/学员上课状态管理流程.md",
     "Claude/常用命令.md",
     "CLAUDE.md",
     "00-收集箱/未命名.canvas",
@@ -292,7 +292,6 @@
     "未命名",
     "Claude",
     "20-知识库/架构与工程实践",
-    "10-项目/内容创作-Agent-Team/content-progress.json",
-    "20-知识库/AI-ML"
+    "10-项目/内容创作-Agent-Team/content-progress.json"
   ]
 }
