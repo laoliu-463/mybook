@@ -17,7 +17,7 @@ AI/ML 知识库索引。当前聚焦 LLM Agent 工程实践。
 ## Agent 工程
 
 - [[AI-ML/长时运行Agent的Harness设计|长时运行 Agent 的 Harness 设计]] — 上下文管理、检查点、错误恢复
-- [[AI-ML/Claude Agent Team 使用指南|Claude Agent Team 使用指南]] — 多 Agent 协作、并行任务、Task 工具
+- [[Claude Agent Team 使用指南|Claude Agent Team 使用指南]] — 多 Agent 协作、并行任务、Task 工具
 
 ---
 
@@ -42,4 +42,4 @@ AI/ML 知识库索引。当前聚焦 LLM Agent 工程实践。
 ## References
 
 - [[AI-ML/长时运行Agent的Harness设计|长时运行 Agent 的 Harness 设计]]
-- [[AI-ML/Claude Agent Team 使用指南|Claude Agent Team 使用指南]]
+- [[Claude Agent Team 使用指南|Claude Agent Team 使用指南]]

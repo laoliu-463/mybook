@@ -54,12 +54,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Claude/常用命令.md",
+                "file": "Claude/Claude Agent Team 使用指南.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "常用命令"
+              "title": "Claude Agent Team 使用指南"
             }
           }
         ],
@@ -247,6 +247,9 @@
   },
   "active": "6473809811eab9cf",
   "lastOpenFiles": [
+    "Claude/常用命令.md",
+    "Claude/Claude Agent Team 使用指南.md",
+    "Claude/skills/obsidian-vault-workflow/SKILL.md",
     "CLAUDE.md",
     "10-项目/微服务项目实战/07-Java组件使用一/README.md",
     "10-项目/微服务项目实战/02-分层领域模型/README.md",
@@ -271,10 +274,7 @@
     "00-收集箱/学员上课状态管理流程.html.tmp.21196.1773218158501",
     "00-收集箱/学员上课状态管理流程.canvas",
     "00-收集箱/学员上课状态管理流程.html.tmp.21196.1773216407236",
-    "Claude/常用命令.md",
     "00-收集箱/未命名.canvas",
-    "Claude/skills/obsidian-vault-workflow/SKILL.md",
-    "20-知识库/AI-ML/Claude Agent Team 使用指南.md",
     "20-知识库/架构与工程实践/WSL2-Docker-SpringBoot-部署复盘.md",
     "20-知识库/计算机网络/TCP协议/00-overview.md",
     "20-知识库/计算机网络/网络基础/04-分组交换-思维导图.canvas",
