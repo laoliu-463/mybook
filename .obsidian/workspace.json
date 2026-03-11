@@ -54,12 +54,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "20-知识库/编程语言/Java/springIOC.md",
+                "file": "Claude/常用命令.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "springIOC"
+              "title": "常用命令"
             }
           }
         ],
@@ -247,9 +247,11 @@
   },
   "active": "6473809811eab9cf",
   "lastOpenFiles": [
+    "CLAUDE.md",
+    "Claude/skills/obsidian-vault-workflow/SKILL.md",
+    "20-知识库/编程语言/Java/springIOC.md",
     "20-知识库/编程语言/Java/ThreadLocal-思维导图.canvas",
     "20-知识库/编程语言/Java/ThreadLocal原理.md",
-    "20-知识库/编程语言/Java/springIOC.md",
     "20-知识库/编程语言/Java/Spring-AOP面向切面编程.md",
     "20-知识库/编程语言/Java/Spring-AOP-思维导图.canvas",
     "20-知识库/投资理财/2026-03-10-宏观经济学与心理学洞见.md",
@@ -282,7 +284,6 @@
     "20-知识库/编程语言/Java/volatile关键字.md",
     "20-知识库/AI-ML/长时运行Agent的Harness设计.md",
     "99-归档/HTML-原始.md",
-    "README.md",
     "Claude/skills/obsidian-vault-workflow",
     "Claude/skills",
     "20-知识库/计算机网络/TCP拥塞控制-思维导图.canvas",
