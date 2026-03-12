@@ -54,12 +54,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Claude/Claude Agent Team 使用指南.md",
+                "file": "Claude/常用命令.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Claude Agent Team 使用指南"
+              "title": "常用命令"
             }
           }
         ],
@@ -247,8 +247,8 @@
   },
   "active": "6473809811eab9cf",
   "lastOpenFiles": [
-    "Claude/常用命令.md",
     "Claude/Claude Agent Team 使用指南.md",
+    "Claude/常用命令.md",
     "Claude/skills/obsidian-vault-workflow/SKILL.md",
     "CLAUDE.md",
     "10-项目/微服务项目实战/07-Java组件使用一/README.md",
