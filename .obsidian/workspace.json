@@ -37,12 +37,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "10-项目/微服务项目实战/01-环境搭建/未命名.md",
+                "file": "Claude/常用命令.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "未命名"
+              "title": "常用命令"
             }
           }
         ],
@@ -230,10 +230,10 @@
   },
   "active": "974e3ceabb3d0f3e",
   "lastOpenFiles": [
+    "10-项目/微服务项目实战/01-环境搭建/未命名.md",
     "Claude/正确使用姿势.md",
     "Claude/常用命令.md",
     "Claude/SSH验证.md",
-    "10-项目/微服务项目实战/01-环境搭建/未命名.md",
     "10-项目/微服务项目实战/01-环境搭建/README.md",
     "Claude/Claude Agent Team 使用指南.md",
     "20-知识库/数据库/笔记管理系统数据库设计.md",
