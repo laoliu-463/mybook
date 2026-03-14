@@ -37,12 +37,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Claude/常用命令.md",
+                "file": "00-收集箱/未命名.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "常用命令"
+              "title": "未命名"
             }
           }
         ],
@@ -230,9 +230,11 @@
   },
   "active": "974e3ceabb3d0f3e",
   "lastOpenFiles": [
+    "10-项目/微服务项目实战/02-分层领域模型/README.md",
+    "00-收集箱/未命名.md",
     "10-项目/微服务项目实战/01-环境搭建/未命名.md",
-    "Claude/正确使用姿势.md",
     "Claude/常用命令.md",
+    "Claude/正确使用姿势.md",
     "Claude/SSH验证.md",
     "10-项目/微服务项目实战/01-环境搭建/README.md",
     "Claude/Claude Agent Team 使用指南.md",
@@ -241,11 +243,9 @@
     "20-知识库/工程实践/学员上课状态管理流程.md",
     "20-知识库/工程实践",
     "20-知识库/数据库",
-    "00-收集箱/未命名.md",
     "Claude/skills/obsidian-vault-workflow/SKILL.md",
     "未命名文件.png",
     "自增自减.md",
-    "10-项目/微服务项目实战/02-分层领域模型/README.md",
     "CLAUDE.md",
     "10-项目/微服务项目实战/07-Java组件使用一/README.md",
     "10-项目/微服务项目实战/07-Java组件使用一",
