@@ -37,12 +37,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "10-项目/微服务项目实战/01-环境搭建/未命名.md",
+                "file": "Claude/SSH验证.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "未命名"
+              "title": "SSH验证"
             }
           }
         ],
@@ -231,6 +231,7 @@
   "active": "974e3ceabb3d0f3e",
   "lastOpenFiles": [
     "Claude/常用命令.md",
+    "Claude/SSH验证.md",
     "10-项目/微服务项目实战/01-环境搭建/未命名.md",
     "10-项目/微服务项目实战/01-环境搭建/README.md",
     "Claude/Claude Agent Team 使用指南.md",
@@ -269,7 +270,6 @@
     "20-知识库/计算机网络/网络基础/04-分组交换.md",
     "20-知识库/计算机网络/网络基础/00-overview.md",
     "20-知识库/计算机网络/网络基础/01-TCP-IP协议栈.md",
-    "20-知识库/计算机网络/网络基础/02-子网划分.md",
     "30-资源/测试-自动化流程.canvas",
     "20-知识库/AI-ML/AI-ML-思维导图.canvas",
     "20-知识库/编程语言/Java/ThreadLocal-思维导图.canvas",
