@@ -1,6 +1,19 @@
 {
-  "queue": [],
+  "queue": [
+    {
+      "path": "00-收集箱/未命名.md",
+      "status": "pending",
+      "summary_generated": false,
+      "tags_generated": false,
+      "classified": false,
+      "skill": null,
+      "linked": false,
+      "moved": false,
+      "created_at": "2026-03-15T16:16:22",
+      "updated_at": "2026-03-15T16:16:22"
+    }
+  ],
   "processed": [],
   "failed": [],
-  "last_scan": null
+  "last_scan": "2026-03-15T16:16:22"
 }

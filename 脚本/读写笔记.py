@@ -1,324 +1,355 @@
-"""
-Obsidian 笔记 Frontmatter 读写工具
+from __future__ import annotations
 
-功能：
-1. 读取 Markdown 文件的 frontmatter
-2. 写入/更新 frontmatter
-3. 路径安全校验（确保在 vault 内）
-"""
-
-import os
-import re
-import yaml
+from dataclasses import dataclass
+import json
 from pathlib import Path
-from datetime import datetime
-from typing import Optional
-
-# Vault 根目录
-VAULT_PATH = Path(r"D:\Docs\Notes\ObsidianVault")
-
-# 支持的 frontmatter 字段
-FRONTMATTER_FIELDS = {
-    "title": str,
-    "type": str,  # concept | overview | interview | project | resource
-    "domain": list,
-    "tags": list,
-    "source": str,  # notebooklm | web | book | voice
-    "created": str,  # YYYY-MM-DD
-    "status": str,  # draft | review | done
-    "next_review": str,  # YYYY-MM-DD
-    "interval": int,
-    "ease": float,
-    "reps": int,
-}
-
-# type 字段的有效值
-VALID_TYPES = {"concept", "overview", "interview", "project", "resource"}
-
-# source 字段的有效值
-VALID_SOURCES = {"notebooklm", "web", "book", "voice"}
-
-# status 字段的有效值
-VALID_STATUSES = {"draft", "review", "done"}
+import re
+from typing import Any
 
 
-def validate_path(file_path: Path) -> bool:
-    """
-    校验路径是否在 vault 内
-
-    Args:
-        file_path: 要校验的文件路径
-
-    Returns:
-        True 如果路径安全（在 vault 内），否则 False
-    """
-    try:
-        resolved = file_path.resolve()
-        vault_resolved = VAULT_PATH.resolve()
-        return vault_resolved in resolved.parents or resolved == vault_resolved
-    except Exception:
-        return False
+REQUIRED_FRONTMATTER_ORDER = [
+    "title",
+    "type",
+    "domain",
+    "tags",
+    "source",
+    "created",
+    "status",
+]
 
 
-def read_frontmatter(file_path: str | Path) -> Optional[dict]:
-    """
-    读取 Markdown 文件的 frontmatter
+@dataclass(slots=True)
+class NoteDocument:
+    path: Path
+    frontmatter: dict[str, Any]
+    body: str
 
-    Args:
-        file_path: 笔记文件路径
 
-    Returns:
-        frontmatter 字典，如果不存在 frontmatter 则返回 None
+def get_vault_root() -> Path:
+    return Path(__file__).resolve().parent.parent
 
-    Raises:
-        ValueError: 路径不在 vault 内
-    """
-    file_path = Path(file_path)
 
-    if not validate_path(file_path):
-        raise ValueError(f"路径不安全: {file_path}，必须在 vault 内")
+def get_queue_file() -> Path:
+    return get_vault_root() / "系统" / "处理队列.json"
 
-    if not file_path.exists():
+
+def get_inbox_dir() -> Path:
+    return get_vault_root() / "00-收集箱"
+
+
+def relative_vault_path(path: Path) -> str:
+    return path.resolve().relative_to(get_vault_root()).as_posix()
+
+
+def ensure_parent_dir(path: Path) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+
+
+def read_note(path: Path) -> NoteDocument:
+    raw_text = path.read_text(encoding="utf-8")
+    frontmatter, body = parse_frontmatter(raw_text)
+    return NoteDocument(path=path, frontmatter=frontmatter, body=body)
+
+
+def write_note(document: NoteDocument) -> None:
+    ensure_parent_dir(document.path)
+    document.path.write_text(render_note(document.frontmatter, document.body), encoding="utf-8")
+
+
+def render_note(frontmatter: dict[str, Any], body: str) -> str:
+    cleaned_body = body.strip("\n")
+    if not frontmatter:
+        return f"{cleaned_body}\n"
+
+    yaml_lines = ["---"]
+    for key, value in ordered_frontmatter(frontmatter).items():
+        yaml_lines.append(f"{key}: {format_frontmatter_value(value)}")
+    yaml_lines.append("---")
+    yaml_lines.append("")
+    yaml_lines.append(cleaned_body)
+    return "\n".join(yaml_lines).rstrip() + "\n"
+
+
+def ordered_frontmatter(frontmatter: dict[str, Any]) -> dict[str, Any]:
+    ordered: dict[str, Any] = {}
+    for key in REQUIRED_FRONTMATTER_ORDER:
+        if key in frontmatter:
+            ordered[key] = frontmatter[key]
+    for key, value in frontmatter.items():
+        if key not in ordered:
+            ordered[key] = value
+    return ordered
+
+
+def parse_frontmatter(text: str) -> tuple[dict[str, Any], str]:
+    if text.startswith("\ufeff"):
+        text = text.removeprefix("\ufeff")
+
+    if not text.startswith("---"):
+        return {}, text.strip("\n")
+
+    lines = text.splitlines()
+    if not lines or lines[0].strip() != "---":
+        return {}, text.strip("\n")
+
+    end_index = None
+    for index in range(1, len(lines)):
+        if lines[index].strip() == "---":
+            end_index = index
+            break
+
+    if end_index is None:
+        return {}, text.strip("\n")
+
+    raw_frontmatter = lines[1:end_index]
+    parsed, success = parse_frontmatter_lines(raw_frontmatter)
+    if not success or not parsed:
+        return {}, text.strip("\n")
+
+    body = "\n".join(lines[end_index + 1 :]).strip("\n")
+    return parsed, body
+
+
+def parse_frontmatter_lines(lines: list[str]) -> tuple[dict[str, Any], bool]:
+    frontmatter: dict[str, Any] = {}
+    index = 0
+    parsed_keys = 0
+
+    while index < len(lines):
+        line = lines[index]
+        stripped = line.strip()
+
+        if not stripped or stripped.startswith("#"):
+            index += 1
+            continue
+
+        if ":" not in line:
+            return {}, False
+
+        key, raw_value = line.split(":", 1)
+        key = key.strip()
+        value = raw_value.strip()
+
+        if not re.fullmatch(r"[A-Za-z0-9_-]+", key):
+            return {}, False
+
+        if value:
+            frontmatter[key] = parse_frontmatter_value(value)
+            parsed_keys += 1
+            index += 1
+            continue
+
+        list_values: list[Any] = []
+        probe = index + 1
+        while probe < len(lines):
+            candidate = lines[probe]
+            candidate_stripped = candidate.strip()
+
+            if not candidate_stripped:
+                probe += 1
+                continue
+
+            if candidate.startswith("  - ") or candidate.startswith("- "):
+                item = candidate_stripped.removeprefix("- ").strip()
+                list_values.append(parse_frontmatter_value(item))
+                probe += 1
+                continue
+
+            break
+
+        frontmatter[key] = list_values if list_values else ""
+        parsed_keys += 1
+        index = probe
+
+    return frontmatter, parsed_keys > 0
+
+
+def parse_frontmatter_value(value: str) -> Any:
+    normalized = value.strip()
+    if normalized in {"[]", "[ ]"}:
+        return []
+    if normalized.startswith("[") and normalized.endswith("]"):
+        inner = normalized[1:-1].strip()
+        if not inner:
+            return []
+        return [parse_frontmatter_value(part.strip()) for part in split_inline_list(inner)]
+    if normalized in {"true", "false"}:
+        return normalized == "true"
+    if normalized == "null":
         return None
-
-    content = file_path.read_text(encoding="utf-8")
-
-    # 检查是否有 frontmatter
-    if not content.startswith("---"):
-        return None
-
-    # 提取 frontmatter
-    parts = content.split("---", 2)
-    if len(parts) < 3:
-        return None
-
-    frontmatter_text = parts[1]
-
-    try:
-        frontmatter = yaml.safe_load(frontmatter_text)
-        return frontmatter if frontmatter else None
-    except yaml.YAMLError:
-        return None
+    if re.fullmatch(r"-?\d+", normalized):
+        return int(normalized)
+    if (
+        (normalized.startswith('"') and normalized.endswith('"'))
+        or (normalized.startswith("'") and normalized.endswith("'"))
+    ):
+        return normalized[1:-1]
+    return normalized
 
 
-def write_frontmatter(
-    file_path: str | Path,
-    frontmatter: dict,
-    keep_existing: bool = True,
-) -> None:
-    """
-    写入/更新 frontmatter
+def split_inline_list(value: str) -> list[str]:
+    items: list[str] = []
+    current: list[str] = []
+    quote: str | None = None
 
-    Args:
-        file_path: 笔记文件路径
-        frontmatter: 要写入的 frontmatter 字典
-        keep_existing: True 保留现有 frontmatter（合并），False 完全覆盖
+    for char in value:
+        if char in {'"', "'"}:
+            if quote is None:
+                quote = char
+            elif quote == char:
+                quote = None
+            current.append(char)
+            continue
 
-    Raises:
-        ValueError: 路径不在 vault 内或字段值无效
-    """
-    file_path = Path(file_path)
+        if char == "," and quote is None:
+            items.append("".join(current).strip())
+            current = []
+            continue
 
-    if not validate_path(file_path):
-        raise ValueError(f"路径不安全: {file_path}，必须在 vault 内")
+        current.append(char)
 
-    # 校验字段值
-    _validate_frontmatter(frontmatter)
+    if current:
+        items.append("".join(current).strip())
+    return items
 
-    if not file_path.exists():
-        # 新建文件
-        content = _build_frontmatter_content(frontmatter)
-        file_path.write_text(content, encoding="utf-8")
-        return
 
-    existing_frontmatter = {}
-    body_content = ""
+def format_frontmatter_value(value: Any) -> str:
+    if isinstance(value, list):
+        return "[" + ", ".join(format_scalar(item) for item in value) + "]"
+    return format_scalar(value)
 
-    # 读取现有内容
-    original_content = file_path.read_text(encoding="utf-8")
 
-    if original_content.startswith("---"):
-        parts = original_content.split("---", 2)
-        if len(parts) >= 3:
-            # 解析现有 frontmatter
-            try:
-                existing_frontmatter = yaml.safe_load(parts[1]) or {}
-            except yaml.YAMLError:
-                existing_frontmatter = {}
-            body_content = parts[2] if len(parts) > 2 else ""
+def format_scalar(value: Any) -> str:
+    if value is None:
+        return "null"
+    if isinstance(value, bool):
+        return "true" if value else "false"
+    if isinstance(value, int):
+        return str(value)
+    if not isinstance(value, str):
+        return json.dumps(value, ensure_ascii=False)
 
-            # 确保 body_content 去除前导空白
-            body_content = body_content.lstrip("\n")
+    if not value:
+        return '""'
+
+    if re.search(r"[:#\[\]\{\},&*!?|>'\"%@`]", value) or value != value.strip():
+        return json.dumps(value, ensure_ascii=False)
+    return value
+
+
+def extract_title(document: NoteDocument) -> str:
+    title = document.frontmatter.get("title")
+    if isinstance(title, str) and title.strip():
+        return title.strip()
+
+    heading = re.search(r"(?m)^#\s+(.+?)\s*$", document.body)
+    if heading:
+        return heading.group(1).strip()
+
+    return document.path.stem
+
+
+def extract_tags(document: NoteDocument) -> list[str]:
+    tags: list[str] = []
+    frontmatter_tags = document.frontmatter.get("tags", [])
+    if isinstance(frontmatter_tags, str):
+        tags.append(frontmatter_tags.lstrip("#"))
+    elif isinstance(frontmatter_tags, list):
+        tags.extend(str(tag).lstrip("#") for tag in frontmatter_tags if str(tag).strip())
+
+    content_tags = re.findall(r"(?<!\w)#([\w\-/\u4e00-\u9fff]+)", document.body)
+    tags.extend(content_tags)
+    return dedupe_list(tags)
+
+
+def dedupe_list(items: list[str]) -> list[str]:
+    seen: set[str] = set()
+    result: list[str] = []
+    for item in items:
+        normalized = item.strip()
+        if not normalized:
+            continue
+        key = normalized.casefold()
+        if key in seen:
+            continue
+        seen.add(key)
+        result.append(normalized)
+    return result
+
+
+def ensure_title(body: str, title: str) -> str:
+    trimmed = body.strip("\n")
+    if re.search(r"(?m)^#\s+.+$", trimmed):
+        return trimmed
+    return f"# {title}\n\n{trimmed}".strip("\n")
+
+
+def upsert_markdown_section(
+    body: str,
+    heading: str,
+    content: str,
+    *,
+    insert_after_title: bool = False,
+) -> str:
+    trimmed = body.strip("\n")
+    section_block = f"## {heading}\n\n{content.strip()}"
+    pattern = re.compile(rf"(?ms)^##\s+{re.escape(heading)}\s*$")
+    match = pattern.search(trimmed)
+
+    if match:
+        next_heading = re.search(r"(?m)^##\s+.+$", trimmed[match.end() :])
+        if next_heading:
+            end = match.end() + next_heading.start()
+        else:
+            end = len(trimmed)
+        updated = trimmed[: match.start()].rstrip("\n") + "\n\n" + section_block
+        suffix = trimmed[end:].lstrip("\n")
+        if suffix:
+            updated += "\n\n" + suffix
+        return updated.strip("\n")
+
+    if insert_after_title:
+        title_match = re.search(r"(?m)^#\s+.+$", trimmed)
+        if title_match:
+            insert_position = title_match.end()
+            prefix = trimmed[:insert_position].rstrip("\n")
+            suffix = trimmed[insert_position:].lstrip("\n")
+            combined = prefix + "\n\n" + section_block
+            if suffix:
+                combined += "\n\n" + suffix
+            return combined.strip("\n")
+
+    return (trimmed + "\n\n" + section_block).strip("\n")
+
+
+def has_markdown_section(body: str, heading: str) -> bool:
+    trimmed = body.strip("\n")
+    return re.search(rf"(?m)^##\s+{re.escape(heading)}\s*$", trimmed) is not None
+
+
+def append_to_markdown_section(body: str, heading: str, item: str) -> str:
+    trimmed = body.strip("\n")
+    pattern = re.compile(rf"(?ms)^##\s+{re.escape(heading)}\s*$")
+    match = pattern.search(trimmed)
+
+    if not match:
+        return upsert_markdown_section(trimmed, heading, item)
+
+    next_heading = re.search(r"(?m)^##\s+.+$", trimmed[match.end() :])
+    if next_heading:
+        end = match.end() + next_heading.start()
     else:
-        body_content = original_content
+        end = len(trimmed)
 
-    # 合并 frontmatter
-    if keep_existing:
-        merged = {**existing_frontmatter, **frontmatter}
-    else:
-        merged = frontmatter
+    section_content = trimmed[match.end() : end].strip("\n")
+    lines = [line for line in section_content.splitlines() if line.strip()]
+    if item in lines:
+        return trimmed
 
-    # 写入文件
-    new_content = _build_frontmatter_content(merged, body_content)
-    file_path.write_text(new_content, encoding="utf-8")
-
-
-def _validate_frontmatter(frontmatter: dict) -> None:
-    """
-    校验 frontmatter 字段值
-
-    Raises:
-        ValueError: 字段值无效
-    """
-    # 校验 type
-    if "type" in frontmatter:
-        if frontmatter["type"] not in VALID_TYPES:
-            raise ValueError(
-                f"type 无效: {frontmatter['type']}，有效值: {VALID_TYPES}"
-            )
-
-    # 校验 source
-    if "source" in frontmatter:
-        if frontmatter["source"] not in VALID_SOURCES:
-            raise ValueError(
-                f"source 无效: {frontmatter['source']}，有效值: {VALID_SOURCES}"
-            )
-
-    # 校验 status
-    if "status" in frontmatter:
-        if frontmatter["status"] not in VALID_STATUSES:
-            raise ValueError(
-                f"status 无效: {frontmatter['status']}，有效值: {VALID_STATUSES}"
-            )
-
-    # 校验 created 日期格式
-    if "created" in frontmatter:
-        _validate_date(frontmatter["created"], "created")
-
-    # 校验 next_review 日期格式
-    if "next_review" in frontmatter:
-        _validate_date(frontmatter["next_review"], "next_review")
-
-
-def _validate_date(date_str: str, field_name: str) -> None:
-    """校验日期格式 YYYY-MM-DD"""
-    if not re.match(r"^\d{4}-\d{2}-\d{2}$", date_str):
-        raise ValueError(
-            f"{field_name} 格式无效: {date_str}，应为 YYYY-MM-DD"
-        )
-
-
-def _build_frontmatter_content(frontmatter: dict, body: str = "") -> str:
-    """构建 frontmatter 和正文内容"""
-    # 移除 None 值
-    clean_frontmatter = {k: v for k, v in frontmatter.items() if v is not None}
-
-    # 按字段顺序排序
-    field_order = [
-        "title", "type", "domain", "tags", "source",
-        "created", "status", "next_review", "interval", "ease", "reps"
-    ]
-
-    sorted_frontmatter = {}
-    for field in field_order:
-        if field in clean_frontmatter:
-            sorted_frontmatter[field] = clean_frontmatter[field]
-    # 添加其他字段
-    for field in clean_frontmatter:
-        if field not in sorted_frontmatter:
-            sorted_frontmatter[field] = clean_frontmatter[field]
-
-    # 转换为 YAML
-    yaml_content = yaml.dump(
-        sorted_frontmatter,
-        allow_unicode=True,
-        default_flow_style=False,
-        sort_keys=False,
-    )
-
-    # 确保 YAML 块格式
-    if yaml_content.strip():
-        content = f"---\n{yaml_content}---\n"
-    else:
-        content = "---\n---\n"
-
-    if body:
-        content += "\n" + body
-
-    return content
-
-
-def get_or_create_note(file_path: str | Path) -> dict:
-    """
-    获取笔记的 frontmatter，如果不存在则创建默认 frontmatter
-
-    Args:
-        file_path: 笔记文件路径
-
-    Returns:
-        frontmatter 字典
-    """
-    fm = read_frontmatter(file_path)
-    if fm is None:
-        # 从文件名生成默认 title
-        title = Path(file_path).stem
-        fm = {
-            "title": title,
-            "created": datetime.now().strftime("%Y-%m-%d"),
-            "status": "draft",
-        }
-        write_frontmatter(file_path, fm)
-    return fm
-
-
-def update_field(
-    file_path: str | Path,
-    field: str,
-    value,
-) -> None:
-    """
-    更新单个字段
-
-    Args:
-        file_path: 笔记文件路径
-        field: 字段名
-        value: 字段值
-
-    Raises:
-        ValueError: 字段无效或值无效
-    """
-    if field not in FRONTMATTER_FIELDS:
-        raise ValueError(f"未知字段: {field}，支持: {list(FRONTMATTER_FIELDS.keys())}")
-
-    frontmatter = read_frontmatter(file_path) or {}
-    frontmatter[field] = value
-    write_frontmatter(file_path, frontmatter)
-
-
-if __name__ == "__main__":
-    # 测试
-    test_file = VAULT_PATH / "00-收集箱" / "test-note.md"
-
-    # 写入测试
-    write_frontmatter(test_file, {
-        "title": "测试笔记",
-        "type": "concept",
-        "domain": ["编程语言", "Python"],
-        "tags": ["test", "demo"],
-        "source": "notebooklm",
-        "created": "2026-03-15",
-        "status": "draft",
-    })
-
-    # 读取测试
-    fm = read_frontmatter(test_file)
-    print("读取 frontmatter:", fm)
-
-    # 更新测试
-    update_field(test_file, "status", "review")
-    fm = read_frontmatter(test_file)
-    print("更新后 frontmatter:", fm)
-
-    # 清理测试文件
-    if test_file.exists():
-        test_file.unlink()
+    lines.append(item)
+    merged_content = "\n".join(lines)
+    updated = trimmed[: match.start()].rstrip("\n") + "\n\n" + f"## {heading}\n\n{merged_content}"
+    suffix = trimmed[end:].lstrip("\n")
+    if suffix:
+        updated += "\n\n" + suffix
+    return updated.strip("\n")

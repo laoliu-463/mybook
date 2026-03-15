@@ -1,0 +1,44 @@
+{
+  "project": "Obsidian 第二大脑自动化",
+  "harness_version": "1.0",
+  "features": [
+    {
+      "name": "scan_inbox",
+      "description": "扫描收件箱新笔记",
+      "status": "completed",
+      "priority": "high"
+    },
+    {
+      "name": "process_note",
+      "description": "单笔记处理：摘要/标签/分类",
+      "status": "completed",
+      "priority": "high"
+    },
+    {
+      "name": "skill_routing",
+      "description": "语义路由调用子Agent",
+      "status": "completed",
+      "priority": "high"
+    },
+    {
+      "name": "build_links",
+      "description": "自动双链",
+      "status": "completed",
+      "priority": "high"
+    },
+    {
+      "name": "move_note",
+      "description": "按分类移动文件",
+      "status": "completed",
+      "priority": "high"
+    },
+    {
+      "name": "generate_moc",
+      "description": "自动主题地图",
+      "status": "completed",
+      "priority": "high"
+    }
+  ],
+  "current_task": "process_inbox_batch",
+  "last_updated": "2026-03-15T16:30:00"
+}

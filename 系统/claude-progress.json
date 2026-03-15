@@ -1,0 +1,60 @@
+{
+  "version": "1.0.0",
+  "created": "2026-03-15",
+  "last_session": null,
+  "features": {
+    "scan": {
+      "status": "passing",
+      "description": "扫描收件箱"
+    },
+    "read_write": {
+      "status": "passing",
+      "description": "Frontmatter 读写"
+    },
+    "summarize": {
+      "status": "passing",
+      "description": "生成摘要"
+    },
+    "tagging": {
+      "status": "passing",
+      "description": "生成标签"
+    },
+    "classification": {
+      "status": "passing",
+      "description": "关键词分类"
+    },
+    "routing": {
+      "status": "passing",
+      "description": "语义路由"
+    },
+    "security_check": {
+      "status": "passing",
+      "description": "安全检查"
+    },
+    "file_move": {
+      "status": "passing",
+      "description": "文件移动"
+    },
+    "moc_update": {
+      "status": "failing",
+      "description": "MOC 索引更新"
+    },
+    "bidirectional_links": {
+      "status": "failing",
+      "description": "双向链接建立"
+    },
+    "git_integration": {
+      "status": "failing",
+      "description": "Git 提交集成"
+    },
+    "e2e_test": {
+      "status": "failing",
+      "description": "端到端测试"
+    }
+  },
+  "stats": {
+    "total_processed": 0,
+    "total_failed": 0,
+    "last_processed": null
+  }
+}

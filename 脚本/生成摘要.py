@@ -1,153 +1,63 @@
-"""
-Obsidian 笔记摘要生成脚本
-
-功能：
-- 读取笔记内容
-- 提取标题（第一行 # 开头）
-- 提取前 2-3 段作为摘要（跳过 frontmatter）
-- 生成 TL;DR 格式：不超过 5 行
-- 返回结构化结果 {title, summary, original_title}
-"""
+from __future__ import annotations
 
 import re
-from pathlib import Path
-from typing import Optional
 
 
-def read_note(file_path: str) -> str:
-    """读取笔记文件内容"""
-    with open(file_path, 'r', encoding='utf-8') as f:
-        return f.read()
+def generate_summary(title: str, body: str, limit: int = 3) -> list[str]:
+    cleaned = clean_markdown(body)
+    paragraphs = [paragraph.strip() for paragraph in cleaned.split("\n\n") if paragraph.strip()]
 
-
-def extract_title(content: str) -> Optional[str]:
-    """
-    提取标题
-    规则：第一行以 # 开头的内容
-    """
-    lines = content.strip().split('\n')
-    for line in lines:
-        line = line.strip()
-        if line.startswith('#'):
-            # 去掉 # 和多余空格
-            return line.lstrip('#').strip()
-    return None
-
-
-def skip_frontmatter(content: str) -> str:
-    """
-    跳过 frontmatter
-    frontmatter 格式：以 --- 包围的 YAML
-    """
-    # 检查是否包含 frontmatter
-    if content.startswith('---'):
-        # 找到第二个 --- 的位置
-        parts = content.split('---', 2)
-        if len(parts) >= 3:
-            return parts[2].strip()
-    return content
-
-
-def extract_paragraphs(content: str, max_paragraphs: int = 3) -> list[str]:
-    """
-    提取前 N 段
-    段落定义：以空行分隔的非空行组
-    """
-    content = skip_frontmatter(content)
-
-    # 按空行分割段落
-    paragraphs = []
-    current_para = []
-
-    for line in content.split('\n'):
-        line = line.strip()
-        # 跳过 frontmatter 分隔线和 wikilink 等
-        if not line or line == '---':
-            if current_para:
-                paragraphs.append(' '.join(current_para))
-                current_para = []
+    bullets: list[str] = []
+    for paragraph in paragraphs:
+        sentence = first_sentence(paragraph)
+        if not sentence:
             continue
-
-        # 跳过仅包含 [[]] 或图片的行
-        if re.match(r'^\[\[.*\]\]$', line) or line.startswith('!'):
+        if looks_like_heading(sentence):
             continue
-
-        current_para.append(line)
-
-    # 处理最后一段
-    if current_para:
-        paragraphs.append(' '.join(current_para))
-
-    return paragraphs[:max_paragraphs]
-
-
-def generate_summary(paragraphs: list[str]) -> str:
-    """
-    生成 TL;DR 摘要
-    规则：不超过 5 行
-    """
-    if not paragraphs:
-        return ""
-
-    # 取前 3 段，每段作为一行
-    summary_lines = []
-    for para in paragraphs[:3]:
-        # 截断过长的段落
-        if len(para) > 200:
-            para = para[:197] + "..."
-        summary_lines.append(para)
-
-    return '\n'.join(summary_lines[:5])
-
-
-def generate_summary_for_note(file_path: str) -> dict:
-    """
-    为指定笔记生成摘要
-
-    返回结构化结果：
-    {
-        "title": str,        # 提取的标题
-        "summary": str,      # TL;DR 摘要
-        "original_title": str  # 原始标题（含 #）
-    }
-    """
-    content = read_note(file_path)
-
-    # 提取原始标题（含 #）
-    lines = content.strip().split('\n')
-    original_title = None
-    for line in lines:
-        line = line.strip()
-        if line.startswith('#'):
-            original_title = line
+        bullets.append(sentence)
+        if len(bullets) >= limit:
             break
 
-    # 提取标题（不含 #）
-    title = extract_title(content)
+    if not bullets:
+        bullets.append(f"{title} 的核心内容需要人工补充摘要。")
 
-    # 提取段落
-    paragraphs = extract_paragraphs(content)
-
-    # 生成摘要
-    summary = generate_summary(paragraphs)
-
-    return {
-        "title": title,
-        "summary": summary,
-        "original_title": original_title
-    }
+    return [truncate(item) for item in bullets]
 
 
-if __name__ == "__main__":
-    import sys
-    import json
+def clean_markdown(body: str) -> str:
+    text = re.sub(r"```[\s\S]*?```", " ", body)
+    text = re.sub(r"`([^`]+)`", r"\1", text)
+    text = re.sub(r"!\[[^\]]*\]\([^)]+\)", " ", text)
+    text = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", text)
+    text = re.sub(r"(?m)^\s*[-*_]{3,}\s*$", " ", text)
+    text = re.sub(r"(?m)^\s*>+\s?", "", text)
+    text = re.sub(r"(?m)^#{1,6}\s+", "", text)
+    text = re.sub(r"(?m)^\|.+\|$", " ", text)
+    text = re.sub(r"(?m)^[-*]\s+", "", text)
+    text = re.sub(r"\n{3,}", "\n\n", text)
+    return text.strip()
 
-    if len(sys.argv) < 2:
-        print("用法: python 生成摘要.py <笔记文件路径>")
-        sys.exit(1)
 
-    file_path = sys.argv[1]
-    result = generate_summary_for_note(file_path)
+def first_sentence(paragraph: str) -> str:
+    compact = " ".join(paragraph.split())
+    if not compact:
+        return ""
 
-    # 输出 JSON 格式，避免编码问题
-    print(json.dumps(result, ensure_ascii=False, indent=2))
+    match = re.split(r"(?<=[。！？!?；;])\s+", compact, maxsplit=1)
+    candidate = match[0].strip()
+    if len(candidate) < 12 and len(match) > 1:
+        candidate = f"{candidate} {match[1].split('。', 1)[0]}".strip()
+    return candidate
+
+
+def truncate(text: str, max_length: int = 90) -> str:
+    if len(text) <= max_length:
+        return text
+    return text[: max_length - 1].rstrip() + "…"
+
+
+def looks_like_heading(text: str) -> bool:
+    compact = text.strip()
+    if re.fullmatch(r"\d+(?:\.\d+)*\s+.+", compact) and len(compact) <= 20:
+        return True
+    return len(compact) <= 8 and all(char.isdigit() or char in ".- " for char in compact)
