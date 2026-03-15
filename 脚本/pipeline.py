@@ -366,6 +366,9 @@ def verify_workspace(*, changed_only: bool = False, smoke: bool = False) -> dict
         ("process-inbox skill", note_io.get_vault_root() / ".claude" / "skills" / "process-inbox" / "SKILL.md"),
         ("主流程脚本", note_io.get_vault_root() / "脚本" / "主流程.py"),
         ("初始化脚本", note_io.get_vault_root() / "脚本" / "初始化环境.sh"),
+        ("Windows 初始化脚本", note_io.get_vault_root() / "脚本" / "初始化环境.ps1"),
+        ("自动调度器", note_io.get_vault_root() / "脚本" / "自动调度器.py"),
+        ("Hooks 配置", note_io.get_vault_root() / ".claude" / "settings.local.json"),
     ]:
         checks.append({"name": label, "passed": path.exists(), "detail": note_io.relative_vault_path(path) if path.exists() else f"缺失: {path.name}"})
 

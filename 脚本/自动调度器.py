@@ -1,95 +1,100 @@
-#!/usr/bin/env python3
-"""
-Obsidian Harness 自动调度器
-
-用法:
-    python 自动调度器.py --daemon      # 守护进程模式（每30分钟检查一次）
-    python 自动调度器.py --interval 60 # 每60分钟运行一次
-    python 自动调度器.py --once        # 运行一次就退出
-"""
-
 from __future__ import annotations
 
 import argparse
-import importlib.util
 import json
 import time
 from datetime import datetime
 from pathlib import Path
 import sys
 
-# 动态导入 pipeline
-script_dir = Path(__file__).resolve().parent
-pipeline_spec = importlib.util.spec_from_file_location("pipeline", script_dir / "pipeline.py")
-pipeline = importlib.util.module_from_spec(pipeline_spec)
-pipeline_spec.loader.exec_module(pipeline)
+
+if __package__ in {None, ""}:
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+import pipeline
 
 
-def log(msg: str) -> None:
-    """带时间戳的日志输出"""
+def log(message: str) -> None:
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    print(f"[{timestamp}] {msg}")
+    print(f"[{timestamp}] {message}")
 
 
-def run_once() -> dict:
-    """运行一次完整流程"""
+def run_once() -> dict[str, object]:
     log("=" * 40)
-    log("开始自动处理...")
+    log("开始自动处理")
 
-    # 1. 扫描收件箱
+    init_result = pipeline.init_environment()
+    log(f"初始化完成: feature_count={init_result.get('feature_count', 0)}")
+
     scan_result = pipeline.scan_inbox()
-    log(f"扫描收件箱: 添加 {len(scan_result.get('added', []))} 篇")
+    log(f"扫描完成: 新增 {len(scan_result.get('added', []))} 篇，队列 {scan_result.get('queue_count', 0)} 篇")
 
     if scan_result.get("queue_count", 0) == 0:
-        log("队列为空，跳过处理")
-        return {"status": "skipped", "reason": "no new notes"}
+        verify_result = pipeline.verify_workspace(changed_only=True, smoke=True)
+        result = {
+            "status": "skipped",
+            "reason": "no pending notes",
+            "init": init_result,
+            "scan": scan_result,
+            "verify": verify_result,
+        }
+        log("没有待处理笔记，跳过本轮")
+        return result
 
-    # 2. 处理笔记（默认最多3篇）
     process_result = pipeline.process_batch(dry_run=False, limit=3)
+    processed_count = process_result.get("processed_count", 0)
+    failed_count = sum(1 for item in process_result.get("results", []) if item.get("status") == "failed")
+    log(f"处理完成: success={processed_count}, failed={failed_count}")
 
-    log(f"处理完成: {process_result.get('processed_count', 0)} 篇")
-    log(f"失败: {process_result.get('failed_count', 0)} 篇")
-
-    return {
-        "status": "ok",
+    verify_result = pipeline.verify_workspace(changed_only=True, smoke=False)
+    result = {
+        "status": "ok" if verify_result.get("status") == "ok" else "failed",
+        "init": init_result,
         "scan": scan_result,
         "process": process_result,
+        "verify": verify_result,
     }
+    log(f"自检结果: {verify_result.get('status')}")
+    return result
 
 
-def daemon_mode(interval_minutes: int = 30) -> None:
-    """守护进程模式：定期运行"""
+def daemon_mode(interval_minutes: int) -> None:
     log(f"启动守护进程模式，间隔 {interval_minutes} 分钟")
     log("按 Ctrl+C 停止")
 
     try:
         while True:
-            run_once()
-            log(f"等待 {interval_minutes} 分钟...")
+            result = run_once()
+            print(json.dumps(result, ensure_ascii=False, indent=2))
+            log(f"等待 {interval_minutes} 分钟")
             time.sleep(interval_minutes * 60)
     except KeyboardInterrupt:
         log("守护进程已停止")
 
 
-def main() -> int:
+def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Obsidian Harness 自动调度器")
     parser.add_argument("--daemon", action="store_true", help="守护进程模式")
-    parser.add_argument("--interval", type=int, default=30, help="运行间隔（分钟，默认30）")
-    parser.add_argument("--once", action="store_true", help="运行一次就退出")
+    parser.add_argument("--interval", type=int, default=30, help="守护模式检查间隔，单位分钟")
+    parser.add_argument("--once", action="store_true", help="只运行一轮")
+    return parser
 
-    args = parser.parse_args()
+
+def main() -> int:
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")
+    if hasattr(sys.stderr, "reconfigure"):
+        sys.stderr.reconfigure(encoding="utf-8")
+
+    args = build_parser().parse_args()
 
     if args.daemon:
         daemon_mode(args.interval)
-    elif args.once:
-        result = run_once()
-        print(json.dumps(result, ensure_ascii=False, indent=2))
-    else:
-        # 默认运行一次
-        result = run_once()
-        print(json.dumps(result, ensure_ascii=False, indent=2))
+        return 0
 
-    return 0
+    result = run_once()
+    print(json.dumps(result, ensure_ascii=False, indent=2))
+    return 0 if result.get("status") != "failed" else 1
 
 
 if __name__ == "__main__":

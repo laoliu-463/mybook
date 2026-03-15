@@ -9,8 +9,7 @@ allowed-tools: Bash
 在 `D:\Docs\Notes\ObsidianVault` 下执行：
 
 ```bash
-bash 脚本/初始化环境.sh
-
+python 脚本/cli.py init
 python 脚本/cli.py $ARGUMENTS
 ```
 

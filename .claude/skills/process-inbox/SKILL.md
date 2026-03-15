@@ -24,7 +24,7 @@
 1. 读取 `系统/运行进度.md`
 2. 读取 `系统/功能清单.json`
 3. 读取 `系统/处理队列.json`
-4. 运行 `bash 脚本/初始化环境.sh`
+4. 运行 `python 脚本/cli.py init`；如用户明确要求脚本方式，在 Windows 用 `powershell -ExecutionPolicy Bypass -File 脚本/初始化环境.ps1`
 5. 若用户显式要求扫描，则运行 `python 脚本/cli.py scan`
 6. 否则运行 `python 脚本/主流程.py --limit 1`
 7. 最后运行 `python 脚本/自检.py --changed-only`
