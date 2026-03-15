@@ -37,12 +37,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "00-收集箱/未命名.md",
+                "file": "Claude/2026-02-05-Metaprompt元提示词方法论.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "未命名"
+              "title": "2026-02-05-Metaprompt元提示词方法论"
             }
           }
         ],
@@ -230,15 +230,16 @@
   },
   "active": "974e3ceabb3d0f3e",
   "lastOpenFiles": [
-    "00-收集箱/学员上课状态管理流程.canvas",
+    "20-知识库/AI-ML/2026-02-15-Prompt设计指南.md",
     "00-收集箱/未命名.md",
+    "00-收集箱/学员上课状态管理流程.canvas",
     "10-项目/微服务项目实战/01-环境搭建/README.md",
     "10-项目/微服务项目实战/README.md",
     "10-项目/微服务项目实战/07-Java组件使用一/README.md",
     "10-项目/微服务项目实战/06-Swagger配置/README.md",
     "10-项目/微服务项目实战/02-分层领域模型/README.md",
     "Claude/常用命令.md",
-    "30-资源/2026-02-05-Metaprompt元提示词方法论.md",
+    "Claude/2026-02-05-Metaprompt元提示词方法论.md",
     "30-资源/2026-02-05-Metaprompt元提示词方法论.canvas",
     "10-项目/微服务项目实战/07-Java组件使用一/2026-03-15-内训测试全过程纪要.md",
     "20-知识库/数据库/笔记管理系统数据库设计.md",
@@ -247,7 +248,6 @@
     "10-项目/微服务项目实战/01-环境搭建/未命名.md",
     "10-项目/微服务项目实战/03-代码生成/README.md",
     "00-收集箱/未命名 1.md",
-    "20-知识库/AI-ML/2026-02-15-Prompt设计指南.md",
     "80-模板/提示词入门搭建.md",
     "Claude/SSH验证.md",
     "Claude/正确使用姿势.md",
