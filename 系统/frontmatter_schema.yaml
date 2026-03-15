@@ -1,0 +1,30 @@
+required:
+  - title
+  - type
+  - domain
+  - tags
+  - source
+  - created
+  - status
+
+enum:
+  type:
+    - concept
+    - overview
+    - interview
+    - project
+    - resource
+  source:
+    - notebooklm
+    - web
+    - book
+    - voice
+  status:
+    - draft
+    - review
+    - done
+
+optional:
+  - summary
+  - skill
+  - processed_at

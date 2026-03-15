@@ -43,3 +43,7 @@ AI/ML 知识库索引。当前聚焦 LLM Agent 工程实践。
 
 - [[AI-ML/长时运行Agent的Harness设计|长时运行 Agent 的 Harness 设计]]
 - [[Claude Agent Team 使用指南|Claude Agent Team 使用指南]]
+
+## 索引
+
+- [[20-知识库/AI-ML/2026-03-15-SSH验证|SSH验证]]

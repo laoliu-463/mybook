@@ -1,0 +1,11 @@
+title: 示例标题
+type: concept
+domain: [编程语言]
+tags: [java, springboot]
+source: web
+created: 2026-03-15
+status: review
+# 可选字段
+# summary: 1-2 句摘要
+# skill: process-code-snippet
+# processed_at: 2026-03-15T16:00:00

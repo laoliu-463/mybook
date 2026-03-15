@@ -1,18 +1,18 @@
 ---
 title: Claude Agent Team 使用指南
 type: overview
-domain: [AI-ML]
-tags: [Claude, Agent, AI, 协作]
+domain: [项目]
+tags: [Claude, Agent, AI, 协作, api, 业务设计, 安全, 项目]
 source: web
 created: 2026-02-24
-status: draft
+status: review
 ---
 
 ## TL;DR
 
-Claude Agent Team 是 Claude Code 的实验性功能,允许多个 AI Agent 协作完成复杂任务。通过设置环境变量启用,使用 Task 工具创建专门化的子 Agent,实现并行处理和任务分工。
-
----
+- TL;DR
+- Claude Agent Team 是 Claude Code 的实验性功能,允许多个 AI Agent 协作完成复杂任务。通过设置环境变量启用,使用 Task 工具创建专门化的…
+- 在处理复杂软件工程任务时,单个 Agent 可能面临: 上下文窗口限制 任务复杂度过高 需要并行处理多个独立子任务 需要专门化能力(如代码探索、测试、构建验证等)
 
 ## 背景与问题定义
 
@@ -288,3 +288,9 @@ TaskStop(task_id="abc123")
 - 不同 Agent 类型的详细工具列表(需查阅最新文档)
 - 最大并行 Agent 数量限制
 - Agent 间通信机制的底层实现
+
+## 相关笔记
+
+- [[10-项目/自动归档/2026-03-15-学生上课状态管理接口设计与模型设计文档|学生上课状态管理接口设计与模型设计文档]]
+- [[20-知识库/编程语言/2026-02-05-Metaprompt 元提示词方法论|Metaprompt 元提示词方法论]]
+- [[10-项目/内容创作-Agent-Team/01-Agent分工|Agent Team 分工]]

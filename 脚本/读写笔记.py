@@ -37,6 +37,26 @@ def get_inbox_dir() -> Path:
     return get_vault_root() / "00-收集箱"
 
 
+def get_system_dir() -> Path:
+    return get_vault_root() / "系统"
+
+
+def get_feature_list_file() -> Path:
+    return get_system_dir() / "功能清单.json"
+
+
+def get_progress_file() -> Path:
+    return get_system_dir() / "运行进度.md"
+
+
+def get_run_log_file() -> Path:
+    return get_system_dir() / "运行日志.md"
+
+
+def get_frontmatter_schema_file() -> Path:
+    return get_system_dir() / "frontmatter_schema.yaml"
+
+
 def relative_vault_path(path: Path) -> str:
     return path.resolve().relative_to(get_vault_root()).as_posix()
 

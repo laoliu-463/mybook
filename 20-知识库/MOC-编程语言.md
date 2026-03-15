@@ -58,3 +58,8 @@ status: review
 - [[编程语言/Java/volatile关键字|volatile 关键字]]
 - [[编程语言/Java/ThreadLocal原理|ThreadLocal 原理]]
 - [[编程语言/Java/Java网络编程|Java 网络编程]]
+
+## 索引
+
+- [[20-知识库/编程语言/2026-03-15-测试笔记 - Python 装饰器|测试笔记 - Python 装饰器]]
+- [[20-知识库/编程语言/2026-02-05-Metaprompt 元提示词方法论|Metaprompt 元提示词方法论]]

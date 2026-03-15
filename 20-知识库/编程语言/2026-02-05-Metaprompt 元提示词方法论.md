@@ -1,22 +1,20 @@
 ---
 title: Metaprompt 元提示词方法论
 type: resource
-domain: [AI-ML, 工程实践]
-tags: [prompt-engineering, metaprompt, AI]
-source: note
+domain: [编程语言]
+tags: [prompt-engineering, metaprompt, AI, 业务设计, 项目, 编程语言]
+source: notebooklm
 created: 2026-02-05
-status: done
+status: review
 ---
 
+# Metaprompt 元提示词方法论
 
+## TL;DR
 
-
-
-
-
-
-
-
+- Metaprompt / 元提示词（中英文对照）
+- You are a Prompt Generator, specializing in creating well-structured, verifiable, and low…
+- Your role is to understand user requirements, break down complex tasks, and coordinate “e…
 
 Metaprompt / 元提示词（中英文对照）
 
@@ -245,3 +243,17 @@ Await user response. Ask clarifying questions if needed, then produce the final 
 ---
 *提取时间：2026-02-05*
 *状态：已提取*
+
+## 相关笔记
+
+- [[10-项目/自动归档/2026-03-15-学生上课状态管理接口设计与模型设计文档|学生上课状态管理接口设计与模型设计文档]]
+- [[20-知识库/编程语言/2026-03-15-测试笔记 - Python 装饰器|测试笔记 - Python 装饰器]]
+- [[20-知识库/AI-ML/2026-02-15-Prompt设计指南|Prompt 设计指南]]
+
+## References
+
+- 待补充来源或外部引用。
+
+## 【需要人工复核】
+
+- 自动生成的摘要、标签、分类和相关链接需要人工确认。

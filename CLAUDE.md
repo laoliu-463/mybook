@@ -155,3 +155,47 @@ reps: 0
 | 读写 Obsidian 笔记 | Claude Code 内置 `Read`/`Write`/`Edit` |
 | 查阅 NotebookLM 资料 | NotebookLM MCP `ask_question` |
 | 创建 Canvas | 内置 `Write` + JSON Canvas 格式 |
+
+---
+
+## 13) 自动化处理规则（Anthropic Harness）
+
+### 开发态 vs 运行态
+
+- **开发态循环**：增强系统能力，修改 `系统/功能清单.json`
+- **运行态循环**：处理笔记，修改 `系统/处理队列.json`
+
+### 自动化约束
+
+- **只处理 `00-收集箱/`** 目录下的笔记
+- **每次最多处理 1-3 篇**
+- **处理前先读取状态**：`系统/运行进度.md` 和 `系统/处理队列.json`
+- **处理后必须更新状态**
+- **不允许删除笔记**
+- **不允许批量修改历史笔记正文**
+
+### 启动命令
+
+```bash
+/process-inbox scan       # 扫描收件箱
+/process-inbox process   # 处理笔记
+/process-inbox status    # 查看状态
+/process-inbox verify   # E2E 验证
+```
+
+### 状态文件
+
+| 文件 | 用途 |
+|------|------|
+| `系统/功能清单.json` | 系统能力清单（开发态） |
+| `系统/处理队列.json` | 待处理笔记队列（运行态） |
+| `系统/运行进度.md` | 运行进度日志 |
+| `系统/运行日志.md` | 执行审计日志 |
+
+### 子代理路由规则
+
+| 关键词 | 路由到 |
+|--------|--------|
+| Abstract / Introduction / Conclusion / DOI / arXiv | process-paper |
+| def / import / 代码块 / function / class | process-code-snippet |
+| 会议 / Agenda / Action Item / TODO | process-meeting-notes |

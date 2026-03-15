@@ -1,0 +1,62 @@
+[
+  {
+    "id": "scan-inbox",
+    "description": "扫描收件箱并把新笔记写入处理队列",
+    "checks": [
+      "只扫描 00-收集箱/ 下的 Markdown 文件",
+      "重复路径不会重复入队",
+      "运行结果落盘到 系统/处理队列.json"
+    ],
+    "passes": true
+  },
+  {
+    "id": "summary-basic",
+    "description": "为收件箱笔记生成 TL;DR 摘要",
+    "checks": [
+      "抽取正文高信息段落",
+      "写入 TL;DR 正文分区",
+      "不删除原始正文"
+    ],
+    "passes": true
+  },
+  {
+    "id": "classify-and-move",
+    "description": "按 PARA 目录规则分类并移动笔记",
+    "checks": [
+      "生成目标目录",
+      "文件名符合日期前缀规则",
+      "不写入受保护目录"
+    ],
+    "passes": true
+  },
+  {
+    "id": "route-subagent",
+    "description": "基于规则路由到专用子代理",
+    "checks": [
+      "识别论文类笔记",
+      "识别代码片段类笔记",
+      "识别会议纪要类笔记"
+    ],
+    "passes": true
+  },
+  {
+    "id": "link-and-moc",
+    "description": "建立相关双链并增量更新 MOC",
+    "checks": [
+      "只生成高置信度相关链接",
+      "MOC 仅对 20-知识库 笔记更新",
+      "不覆盖既有 MOC 内容"
+    ],
+    "passes": true
+  },
+  {
+    "id": "hooks-bootstrap",
+    "description": "提供 SessionStart/Stop hook 和本地 settings 模板",
+    "checks": [
+      "存在 .claude/settings.local.json",
+      "存在 会话启动hook.py",
+      "存在 停止前检查.py"
+    ],
+    "passes": true
+  }
+]

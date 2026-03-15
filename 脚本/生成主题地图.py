@@ -1,0 +1,34 @@
+from __future__ import annotations
+
+import json
+from pathlib import Path
+import sys
+
+
+if __package__ in {None, ""}:
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+import pipeline
+import 读写笔记 as note_io
+
+
+def main() -> int:
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")
+
+    if len(sys.argv) < 2:
+        print(json.dumps({"status": "failed", "error": "需要提供笔记路径"}, ensure_ascii=False, indent=2))
+        return 1
+
+    relative_path = sys.argv[1]
+    path = note_io.get_vault_root() / relative_path
+    document = note_io.read_note(path)
+    title = note_io.extract_title(document)
+    domains = [str(item) for item in document.frontmatter.get("domain", []) if str(item).strip()]
+    result = pipeline.update_moc(path, title, domains)
+    print(json.dumps(result, ensure_ascii=False, indent=2))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
