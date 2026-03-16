@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 import json
+import os
 from pathlib import Path
 import re
 from typing import Any
@@ -26,6 +27,9 @@ class NoteDocument:
 
 
 def get_vault_root() -> Path:
+    override = os.environ.get("OBSIDIAN_VAULT_ROOT")
+    if override:
+        return Path(override).resolve()
     return Path(__file__).resolve().parent.parent
 
 

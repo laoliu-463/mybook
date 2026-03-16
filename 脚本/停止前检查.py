@@ -16,13 +16,16 @@ def main() -> int:
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
 
-    verification = pipeline.verify_workspace(changed_only=True, smoke=True)
+    verification = pipeline.verify_workspace(changed_only=True, smoke=True, record=False)
     progress_file = note_io.get_progress_file()
+    run_log_file = note_io.get_run_log_file()
     progress_updated = progress_file.exists() and progress_file.stat().st_size > 0
+    run_log_updated = run_log_file.exists() and run_log_file.stat().st_size > 0
     result = {
-        "status": "ok" if verification.get("status") == "ok" and progress_updated else "failed",
+        "status": "ok" if verification.get("status") == "ok" and progress_updated and run_log_updated else "failed",
         "verify": verification,
         "progress_updated": progress_updated,
+        "run_log_updated": run_log_updated,
     }
     print(json.dumps(result, ensure_ascii=False, indent=2))
     return 0 if result["status"] == "ok" else 1

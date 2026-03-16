@@ -1,0 +1,8 @@
+﻿{
+  "expected_type": "concept",
+  "expected_target_dir": "20-知识库/编程语言",
+  "expected_agent": "process-code-snippet",
+  "must_have_frontmatter": ["title", "type", "tags", "status"],
+  "must_have_sections": ["TL;DR", "References", "【需要人工复核】", "示例说明"],
+  "must_not_fail": true
+}

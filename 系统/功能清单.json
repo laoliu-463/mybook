@@ -3,9 +3,9 @@
     "id": "scan-inbox",
     "description": "扫描收件箱并把新笔记写入处理队列",
     "checks": [
-      "只扫描 00-收集箱/ 下的 Markdown 文件",
+      "只扫描 00-收集箱 下的 Markdown 文件",
       "重复路径不会重复入队",
-      "运行结果落盘到 系统/处理队列.json"
+      "结果会落盘到 系统/处理队列.json"
     ],
     "passes": true
   },
@@ -13,7 +13,7 @@
     "id": "summary-basic",
     "description": "为收件箱笔记生成 TL;DR 摘要",
     "checks": [
-      "抽取正文高信息段落",
+      "抽取正文高信息密度段落",
       "写入 TL;DR 正文分区",
       "不删除原始正文"
     ],
@@ -31,7 +31,7 @@
   },
   {
     "id": "route-subagent",
-    "description": "基于规则路由到专用子代理",
+    "description": "基于规则识别应由哪个子代理接手并生成提示",
     "checks": [
       "识别论文类笔记",
       "识别代码片段类笔记",
@@ -45,7 +45,7 @@
     "checks": [
       "只生成高置信度相关链接",
       "MOC 仅对 20-知识库 笔记更新",
-      "不覆盖既有 MOC 内容"
+      "保留人工编辑内容"
     ],
     "passes": true
   },
@@ -56,6 +56,46 @@
       "存在 .claude/settings.local.json",
       "存在 会话启动hook.py",
       "存在 停止前检查.py"
+    ],
+    "passes": true
+  },
+  {
+    "id": "development-session-bootstrap",
+    "description": "提供开发态恢复入口并返回下一个未完成能力点",
+    "checks": [
+      "提供 cli develop 入口",
+      "恢复运行进度、功能清单和处理队列摘要",
+      "开发态恢复会写回运行进度"
+    ],
+    "passes": true
+  },
+  {
+    "id": "git-context-recovery",
+    "description": "开发态和会话启动时恢复 git 上下文",
+    "checks": [
+      "输出当前分支",
+      "输出最近一次提交",
+      "输出工作区脏文件摘要"
+    ],
+    "passes": true
+  },
+  {
+    "id": "subagent-execution",
+    "description": "提供 Claude 子代理执行适配层，失败时安全降级到本地增强",
+    "checks": [
+      "命中子代理后优先尝试 Claude agent",
+      "失败时降级为本地结构化增强",
+      "执行结果与 fallback 原因写回状态和日志"
+    ],
+    "passes": true
+  },
+  {
+    "id": "fixture-e2e-verification",
+    "description": "提供固定样例和失败回归样例的端到端验证",
+    "checks": [
+      "存在最小样例笔记",
+      "存在固定回归样例与 expected 文件",
+      "断言 frontmatter、目标目录、队列状态和子代理路由"
     ],
     "passes": true
   }

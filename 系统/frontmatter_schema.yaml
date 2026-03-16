@@ -28,3 +28,9 @@ optional:
   - summary
   - skill
   - processed_at
+  - updated
+
+required_sections:
+  - TL;DR
+  - References
+  - 【需要人工复核】

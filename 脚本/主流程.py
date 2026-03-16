@@ -28,14 +28,18 @@ def main() -> int:
 
     args = build_parser().parse_args()
 
-    bootstrap = pipeline.init_environment()
+    bootstrap = None if args.dry_run else pipeline.init_environment()
     payload: dict[str, object] = {"init": bootstrap}
 
     if args.scan_first:
-        payload["scan"] = pipeline.scan_inbox()
+        payload["scan"] = pipeline.scan_inbox(dry_run=args.dry_run)
 
     payload["process"] = pipeline.process_batch(limit=args.limit, dry_run=args.dry_run)
-    payload["verify"] = pipeline.verify_workspace(changed_only=not args.dry_run, smoke=False)
+    payload["verify"] = pipeline.verify_workspace(
+        changed_only=not args.dry_run,
+        smoke=args.dry_run,
+        record=not args.dry_run,
+    )
     print(json.dumps(payload, ensure_ascii=False, indent=2))
 
     process_status = payload["process"]

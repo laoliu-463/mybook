@@ -16,3 +16,4 @@ description: 处理论文、研究综述、含 Abstract/Introduction/Conclusion 
 - 推荐 `type: resource` 或 `type: overview`
 - 提取 3-8 个高价值标签
 - 标记需要人工复核的事实或结论
+- 如果由 `脚本/主流程.py` 调用，优先返回结构化 JSON 增强结果，而不是直接改文件

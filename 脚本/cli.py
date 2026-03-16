@@ -19,6 +19,8 @@ def build_parser() -> argparse.ArgumentParser:
 
     subparsers.add_parser("init", help="初始化 harness 环境和状态文件")
     subparsers.add_parser("scan", help="扫描收件箱并写入处理队列")
+    subparsers.add_parser("develop", help="恢复开发态上下文并给出下一个未完成能力点")
+    subparsers.add_parser("e2e", help="运行隔离样例的端到端验证")
 
     process_parser = subparsers.add_parser("process", help="处理队列中的下一条笔记")
     process_parser.add_argument("--dry-run", action="store_true", help="仅预览处理结果，不落盘")
@@ -44,6 +46,10 @@ def main() -> int:
         result = pipeline.init_environment()
     elif args.command == "scan":
         result = pipeline.scan_inbox()
+    elif args.command == "develop":
+        result = pipeline.prepare_development_cycle(run_verify=True, record=True)
+    elif args.command == "e2e":
+        result = pipeline.run_e2e_suite(include_fixture=True, record=True)
     elif args.command == "process":
         result = pipeline.process_batch(dry_run=args.dry_run, limit=args.limit)
     elif args.command == "status":
