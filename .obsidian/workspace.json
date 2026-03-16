@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "30-资源/待分类/2026-03-15-常用命令.md",
+                "file": "00-收集箱/投资入门.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2026-03-15-常用命令"
+              "title": "投资入门"
             }
           }
         ]
@@ -78,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "75b922fec596eb3e",
@@ -205,6 +206,8 @@
   },
   "active": "207e4dd2c0a97409",
   "lastOpenFiles": [
+    "30-资源/待分类/2026-03-15-常用命令.md",
+    "00-收集箱/投资入门.md",
     "10-项目/微服务项目实战/07-Java组件使用一/2026-03-15-内训测试全过程纪要.md",
     "10-项目/自动归档/2026-03-15-正确使用姿势.md",
     "10-项目/自动归档/2026-02-24-Claude Agent Team 使用指南.md",
@@ -231,13 +234,11 @@
     "20-知识库/编程语言/2026-03-16-Java基础常见面试题总结 - 静态方法.md",
     "20-知识库/编程语言/2026-03-16-Java基础常见面试题总结（上）.md",
     "20-知识库/编程语言/2026-03-16-测试代码 - Redis 分布式锁实现.md",
-    "30-资源/待分类/2026-03-15-常用命令.md",
     "autorun_scheduler.py",
     "00-收集箱/2026-03-16-Java静态方法面试题.md",
     "脚本/scheduler_runner.py",
     "脚本/注册计划任务.ps1",
     "10-项目/自动归档/2026-03-16-Python 异步编程学习笔记.md",
-    "00-收集箱/2026-03-16-Python异步编程测试.md",
     "未命名文件.png",
     "测试/regressions/failed_case_001.expected.json",
     "测试/regressions",
