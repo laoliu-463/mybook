@@ -75,3 +75,7 @@ status: review
 ## References
 
 - 小林 coding: https://www.xiaolincoding.com
+
+## 索引
+
+- [[20-知识库/计算机网络/2026-03-16-测试笔记 - HTTP 缓存机制|测试笔记 - HTTP 缓存机制]]

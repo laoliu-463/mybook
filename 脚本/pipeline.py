@@ -12,6 +12,7 @@ import 生成标签 as tagger
 import 移动笔记 as mover
 import 语义路由 as router
 import 读写笔记 as note_io
+import 子代理路由 as subagent_router
 
 
 MAX_PROCESS_LIMIT = 3
@@ -225,6 +226,24 @@ def process_next(*, dry_run: bool = False) -> dict[str, Any]:
         tags = note_io.dedupe_list(tags + classification.domains)
         summary = summarizer.generate_summary(title, document.body)
         recommended_skill = router.select_skill(f"{title}\n{document.body}")
+
+        # Subagent 路由
+        subagent_route = subagent_router.route_to_subagent(f"{title}\n{document.body}")
+        subagent_result = {
+            "agent": None,
+            "invoked": False,
+            "confidence": 0.0,
+            "reason": None,
+        }
+        if subagent_route and subagent_router.should_invoke_subagent(subagent_route, threshold=0.15):
+            subagent_result = {
+                "agent": subagent_route.agent,
+                "invoked": True,
+                "confidence": subagent_route.confidence,
+                "reason": subagent_route.reason,
+                "prompt": subagent_router.get_subagent_prompt(subagent_route.agent),
+            }
+
         related_notes = suggest_related_notes(
             tags=tags,
             domains=classification.domains,
@@ -261,6 +280,12 @@ def process_next(*, dry_run: bool = False) -> dict[str, Any]:
                 "name": recommended_skill.skill,
                 "score": recommended_skill.score,
                 "reason": recommended_skill.reason,
+            },
+            "subagent": {
+                "agent": subagent_result["agent"],
+                "invoked": subagent_result["invoked"],
+                "confidence": subagent_result["confidence"],
+                "reason": subagent_result["reason"],
             },
             "related_links": [item["wikilink"] for item in related_notes],
             "steps": {
@@ -300,7 +325,9 @@ def process_next(*, dry_run: bool = False) -> dict[str, Any]:
                 "skill": recommended_skill.skill,
                 "linked": bool(related_notes),
                 "moved": True,
-                "applied_agent": recommended_skill.skill,
+                "applied_agent": subagent_result["agent"] or recommended_skill.skill,
+                "subagent_invoked": subagent_result["invoked"],
+                "subagent_confidence": subagent_result["confidence"],
                 "error": None,
                 "moc": moc_result,
                 "processed_at": current_timestamp(),
