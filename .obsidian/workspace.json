@@ -11,14 +11,17 @@
             "id": "207e4dd2c0a97409",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "canvas",
               "state": {
-                "file": "00-收集箱/投资入门.md",
-                "mode": "source",
-                "source": false
+                "file": "40-交付物/Canvas-投资新手入门思维导图.canvas",
+                "viewState": {
+                  "x": 660,
+                  "y": 600.1847133757963,
+                  "zoom": -0.5910756244477683
+                }
               },
-              "icon": "lucide-file",
-              "title": "投资入门"
+              "icon": "lucide-layout-dashboard",
+              "title": "Canvas-投资新手入门思维导图"
             }
           }
         ]
@@ -78,8 +81,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "75b922fec596eb3e",
@@ -206,39 +208,41 @@
   },
   "active": "207e4dd2c0a97409",
   "lastOpenFiles": [
-    "30-资源/待分类/2026-03-15-常用命令.md",
-    "00-收集箱/投资入门.md",
-    "10-项目/微服务项目实战/07-Java组件使用一/2026-03-15-内训测试全过程纪要.md",
-    "10-项目/自动归档/2026-03-15-正确使用姿势.md",
-    "10-项目/自动归档/2026-02-24-Claude Agent Team 使用指南.md",
-    "20-知识库/AI-ML/2026-03-15-SSH验证.md",
-    "20-知识库/架构与工程实践/02-Java项目架构实战.md",
-    "20-知识库/数据库/2026-03-15-测试笔记 - Redis 缓存策略.md",
-    "20-知识库/编程语言/2026-03-16-测试笔记 - 算法与数据结构.md",
-    "测试/temp-technical-note.md",
+    "40-交付物/Mermaid-投资新手思维导图.md",
+    "40-交付物/Canvas-投资新手入门思维导图.canvas",
+    "系统/健康度报告.md",
     "系统/技术类笔记规范.md",
-    "80-模板/Distill-模板.md",
+    "30-资源/量化交易/gRPC vs Redis 技术选型.md",
+    "30-资源/量化交易/A股自动化交易系统-概览.md",
+    "20-知识库/AI-ML/AI-ML-思维导图.canvas",
+    "20-知识库/投资理财/investool投资辅助工具使用指南.md",
+    "20-知识库/架构与工程实践/WSL2-Docker-SpringBoot-部署复盘.md",
+    "20-知识库/计算机网络/2026-03-16-测试笔记 - HTTP 缓存机制.md",
+    "20-知识库/编程语言/编程语言-思维导图.canvas",
+    "20-知识库/编程语言/2026-03-16-Python 日志模块详解.md",
+    "20-知识库/投资理财/投资新手入门.md",
+    "20-知识库/架构与工程实践/02-Java项目架构实战.md",
+    "Canvas-投资新手入门思维导图.md",
+    "20-知识库/数据库/笔记管理系统数据库设计.md",
+    "20-知识库/投资理财/股票入门.md",
+    "20-知识库/投资理财/2026-03-10-宏观经济学与心理学洞见.md",
+    "10-项目/自动归档/2026-03-16-investool 投资辅助工具使用指南.md",
+    "00-收集箱/investool投资辅助工具使用指南.md",
+    "30-资源/待分类/2026-03-16-投资入门.md",
+    "Claude/skills/obsidian-vault-workflow/SKILL.md",
     "CLAUDE.md",
-    "系统/frontmatter_schema.yaml",
-    "20-知识库/编程语言/2026-03-16-测试笔记 - 机器学习模型训练.md",
-    "20-知识库/编程语言/2026-03-15-测试笔记 - Python 装饰器.md",
+    "00-收集箱/投资入门.md",
+    "10-项目/自动归档/2026-03-15-角色设定.md",
     "20-知识库/编程语言/2026-02-05-Metaprompt 元提示词方法论.md",
-    "20-知识库/编程语言/Java/volatile关键字.md",
+    "10-项目/自动归档/2026-03-15-正确使用姿势.md",
+    "10-项目/微服务项目实战/07-Java组件使用一/2026-03-15-内训测试全过程纪要.md",
+    "系统/frontmatter_schema.yaml",
     "20-知识库/编程语言/Java/volatile-思维导图.canvas",
-    "20-知识库/编程语言/Java/ThreadLocal原理.md",
     "20-知识库/编程语言/Java/ThreadLocal-思维导图.canvas",
-    "20-知识库/编程语言/Java/springIOC.md",
-    "20-知识库/编程语言/Java/Spring-AOP面向切面编程.md",
     "20-知识库/编程语言/Java/Spring-AOP-思维导图.canvas",
-    "20-知识库/编程语言/Java/Java网络编程.md",
-    "20-知识库/编程语言/2026-03-16-Java基础常见面试题总结 - 静态方法.md",
-    "20-知识库/编程语言/2026-03-16-Java基础常见面试题总结（上）.md",
-    "20-知识库/编程语言/2026-03-16-测试代码 - Redis 分布式锁实现.md",
     "autorun_scheduler.py",
-    "00-收集箱/2026-03-16-Java静态方法面试题.md",
     "脚本/scheduler_runner.py",
     "脚本/注册计划任务.ps1",
-    "10-项目/自动归档/2026-03-16-Python 异步编程学习笔记.md",
     "未命名文件.png",
     "测试/regressions/failed_case_001.expected.json",
     "测试/regressions",
@@ -249,9 +253,6 @@
     "00-收集箱/学员上课状态管理流程.canvas",
     "30-资源/2026-02-05-Metaprompt元提示词方法论.canvas",
     "30-资源/2026-02-05-NotebookLM高级提示词模板.canvas",
-    "30-资源/测试-自动化流程.canvas",
-    "00-收集箱/未命名.canvas",
-    "20-知识库/计算机网络/网络基础/04-分组交换-思维导图.canvas",
-    "20-知识库/AI-ML/AI-ML-思维导图.canvas"
+    "30-资源/测试-自动化流程.canvas"
   ]
 }

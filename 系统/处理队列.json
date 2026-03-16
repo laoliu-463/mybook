@@ -680,9 +680,83 @@
       "max_retries": 2,
       "last_failed_at": null,
       "created_at": "2026-03-16T09:17:23"
+    },
+    {
+      "path": "00-收集箱/投资入门.md",
+      "destination": "30-资源/待分类/2026-03-16-投资入门.md",
+      "status": "done",
+      "steps": {
+        "summary": true,
+        "tags": true,
+        "classified": true,
+        "enhanced": true,
+        "linked": true,
+        "moved": true
+      },
+      "summary_generated": true,
+      "tags_generated": true,
+      "classified": true,
+      "skill": "obsidian-note-organizer",
+      "linked": true,
+      "moved": true,
+      "applied_agent": "obsidian-note-organizer",
+      "subagent_invoked": false,
+      "subagent_confidence": 0.0,
+      "subagent_mode": "none",
+      "subagent_error": null,
+      "fallback_used": false,
+      "fallback_reason": null,
+      "error": null,
+      "moc": {
+        "updated": false,
+        "reason": "当前笔记不属于 20-知识库，跳过 MOC 更新。"
+      },
+      "processed_at": "2026-03-16T19:43:15",
+      "updated_at": "2026-03-16T19:43:15",
+      "retry_count": 0,
+      "max_retries": 2,
+      "last_failed_at": null,
+      "created_at": "2026-03-16T19:43:15"
+    },
+    {
+      "path": "00-收集箱/investool投资辅助工具使用指南.md",
+      "destination": "10-项目/自动归档/2026-03-16-investool 投资辅助工具使用指南.md",
+      "status": "done",
+      "steps": {
+        "summary": true,
+        "tags": true,
+        "classified": true,
+        "enhanced": true,
+        "linked": true,
+        "moved": true
+      },
+      "summary_generated": true,
+      "tags_generated": true,
+      "classified": true,
+      "skill": "mermaid-visualizer",
+      "linked": true,
+      "moved": true,
+      "applied_agent": "process-paper",
+      "subagent_invoked": true,
+      "subagent_confidence": 0.25,
+      "subagent_mode": "fallback",
+      "subagent_error": "Error: Input must be provided either through stdin or as a prompt argument when using --print",
+      "fallback_used": true,
+      "fallback_reason": "subagent error",
+      "error": null,
+      "moc": {
+        "updated": false,
+        "reason": "当前笔记不属于 20-知识库，跳过 MOC 更新。"
+      },
+      "processed_at": "2026-03-16T19:48:00",
+      "updated_at": "2026-03-16T19:48:00",
+      "retry_count": 0,
+      "max_retries": 2,
+      "last_failed_at": null,
+      "created_at": "2026-03-16T19:48:00"
     }
   ],
   "failed": [],
   "needs_review": [],
-  "last_scan": "2026-03-16T09:17:56"
+  "last_scan": "2026-03-16T19:47:54"
 }
