@@ -1,289 +1,192 @@
-# CLAUDE.md — ObsidianVault 行政命令（全领域 PARA）
-
-工作区根目录：D:\Docs\Notes\ObsidianVault
-你必须把所有读写限制在该目录内，禁止越界路径。
-
----
-
-## 1) 语言
-- 所有笔记中文输出（代码/术语除外）。
-- 禁止空话；优先结构化、可核验、可复习。
-
----
-
-## 2) PARA 目录职责
-
-| 目录 | 用途 | 示例 |
-|------|------|------|
-| `00-收集箱/` | 临时摘录、未分类草稿 | 待处理输入 |
-| `10-项目/` | 项目推进/设计/复盘/TODO | 求职准备、课程作业 |
-| `20-知识库/` | 体系化概念（可复用、可链接、可面试） | 技术知识 |
-| `30-资源/` | 外部资料与技术点沉淀（偏"素材库"） | 学习资料 |
-| `40-交付物/` | 博客/PPT/可公开文档 | 博客文章 |
-| `70-NotebookLM导入/` | NotebookLM 导出文件暂存 | - |
-| `80-模板/` | 笔记模板 | Capture/Distill 模板 |
-| `99-归档/` | 已完成或不再活跃的内容 | - |
-
----
-
-## 3) 领域分类目录（全领域统一）
-
-在 10-项目 / 20-知识库 / 30-资源 下按领域建子目录：
-
-| 领域 | 示例子目录 |
-|------|-----------|
-| 编程语言 | Java, Python, Go, C++, Rust, JS-TS |
-| 数据结构与算法 | - |
-| 操作系统 | Linux, Windows |
-| 计算机网络 | TCP, HTTP, DNS |
-| 数据库 | MySQL, PostgreSQL, Redis, ES |
-| 中间件 | Kafka, RabbitMQ, MQ |
-| 分布式与微服务 | - |
-| 云原生 | Docker, K8s, Service Mesh |
-| 安全 | Web安全, 密码学, 攻防 |
-| 编译原理 | - |
-| 架构与工程实践 | 性能, 测试, 可观测性, DevOps |
-| AI-ML | - |
-
-若领域不确定，先放 00-收集箱，后续迁移。
-
----
-
-## 4) 文件命名规范
-
-- 日期前缀格式：`YYYY-MM-DD-标题.md`
-- 技术笔记：`20-知识库/{{领域}}/{{主题}}.md`
-- 面试笔记：`20-知识库/Interview/{{技术栈}}/{{主题}}.md`
-- 博客文章：`40-交付物/Blog/{{主题}}.md`
-- 同名冲突：`<主题> - <YYYYMMDD>.md`
-
----
-
-## 5) Frontmatter 规范（强制）
-
-```yaml
----
-title: Java - 静态方法和实例方法有什么不同
-aliases:
-  - 静态方法和实例方法区别
-tags:
-  - Java
-  - Java/基础
-  - 面试题
-type: note
-domain: java
-topic: 基础
-question: 静态方法和实例方法有什么不同
-source: https://javaguide.cn/java/basis/...
-source_title: Java基础常见面试题总结(上)
-source_section: 基础概念与常识
-created: 2026-03-16
-updated: 2026-03-16
-status: evergreen
----
-```
-
-### 必填字段
-
-- `title`：笔记标题，格式：`领域 - 问题`
-- `tags`：分类标签，格式：`领域/子主题`
-- `type`：固定为 `note`
-- `domain`：技术领域，如 `java`、`python`、`网络`
-- `topic`：子主题，如 `基础`、`集合`、`并发`
-- `question`：当前笔记回答的问题（一句话）
-- `created`：创建日期
-- `updated`：更新日期
-- `status`：`evergreen`（常青笔记）
-
-### 可选字段
-
-- `aliases`：便于搜索的别名
-- `source`：原文链接
-- `source_title`：原文标题
-- `source_section`：原文大章节名
+# CLAUDE.md
 
----
+工作区根目录：`D:\Docs\Notes\ObsidianVault`
 
-## 6) 笔记正文规范（技术类笔记模板）
+所有读写必须限制在当前仓库内。禁止越界路径、禁止删除笔记、禁止批量改写历史正文。
 
-### 一篇笔记只讲一个问题
+## 1. 输出约束
 
-- 标题格式：`领域 - 问题`
-- 示例：
-  - `Java - 静态方法和实例方法有什么不同`
-  - `Java - ArrayList 和 LinkedList 有什么区别`
-  - `Java 并发 - synchronized 和 ReentrantLock 有什么区别`
+- 默认中文输出，代码、命令、路径保留原文。
+- 优先给出可执行结果、明确结论和可核验信息。
+- 讨论自动化时，区分“开发态 harness”与“运行态 pipeline”。
 
-### 正文固定结构
+## 2. 当前目录约定
 
-```md
-# {{title}}
+| 路径 | 用途 |
+|---|---|
+| `00-收集箱/` | 自动化唯一默认输入目录 |
+| `10-项目/` | 项目类笔记与行动项 |
+| `20-知识库/` | 概念、总结、代码类知识笔记 |
+| `30-资源/` | 资料、论文、课程、素材 |
+| `40-交付物/` | 可发布内容、图表、交付稿 |
+| `70-NotebookLM提示词使用/` | NotebookLM 相关资料与提示词 |
+| `80-模板/` | 模板目录，禁止删除 |
+| `99-归档/` | 归档内容，禁止自动批量改写 |
+| `系统/` | 状态文件、schema、日志、测试样例 |
+| `脚本/` | Python/PowerShell 自动化入口 |
 
-## 一句话结论
-用 1 到 2 句话直接回答问题。
+## 3. Source Of Truth
 
-## 标准回答
-- 点 1
-- 点 2
-- 点 3
-- 点 4
+自动化相关规则以当前实现为准，优先级如下：
 
-## 为什么
-解释底层原因、设计逻辑或适用场景。
+1. `脚本/` 中的真实执行逻辑
+2. `系统/frontmatter_schema.yaml`
+3. `.claude/skills/`
+4. 本文件
 
-## 对比
-| 维度 | A | B |
-|---|---|---|
-| 定义 |  |  |
-| 调用方式 |  |  |
-| 使用场景 |  |  |
+如果本文件和代码不一致，以代码与 schema 为准，并应同步修正本文件。
 
-## 代码示例
-```java
-// 示例标题：说明这段代码要展示什么
-class Example {
-    // 这里写关键成员
-}
-````
+## 4. 双循环模型
 
-### 代码说明
-* 这段代码演示了什么
-* 哪一行体现了核心知识点
+### 开发态
 
-## 易错点
-* 易错点 1
-* 易错点 2
+目标：改进 Obsidian 自动化系统本身。
 
-## 延伸链接
-* [[相关知识点1]]
-* [[相关知识点2]]
+- 读取：`系统/运行进度.md`、`系统/功能清单.json`
+- 入口：`/develop-harness` 或 `python 脚本/cli.py develop`
+- 规则：每轮只推进一个未完成能力点
 
-## 参考来源
-* 原文：xxx
-* 补充资料：xxx
-```
+### 运行态
 
-### 必须包含的部分
+目标：处理收集箱中的笔记。
 
-- ✅ 一句话结论
-- ✅ 标准回答
-- ✅ 为什么
-- ✅ 易错点（技术笔记必备）
-- ✅ 参考来源
+- 读取：`系统/运行进度.md`、`系统/处理队列.json`
+- 入口：`/process-inbox` 或 `python 脚本/主流程.py --scan-first --limit 1`
+- 规则：每轮只处理 `1-3` 篇，默认 `1`
 
-### 代码示例规范
-
-- 代码控制在 10–25 行
-- 代码块内必须有**行内注释**
-- 代码块外必须有**代码说明**
-- 示例只展示一个知识点
-
-### 对比类问题规范
-
-标题含以下关键词必须加对比表格：
-- 区别 / 不同 / 对比 / compare
-
----
-
-## 7) 去幻觉校验（必须）
-
-- 所有事实性结论必须有来源支撑（NotebookLM 引用标识必须进入 References）。
-- 没有来源：必须标记【需要人工复核】，不得当作确定事实。
-- 允许推断：必须标注"推断"，并给出核验关键词。
-
----
-
-## 8) Obsidian 语法规范
-
-- 使用 `[[wikilink]]` 建立双向链接
-- 使用 `> [!tip]` `> [!warning]` `> [!danger]` 创建 Callout
-- 使用 Mermaid 代码块创建图表
-- 引用标注格式：`^[1,2,3]`
-
----
-
-## 9) 双向链接与索引（推荐）
-
-重要概念尽量使用 [[双向链接]] 指向相关笔记。建议维护 MOC：
-- 20-知识库/MOC-计算机网络.md
-- 20-知识库/MOC-操作系统.md
-- 20-知识库/MOC-数据库.md
-- 20-知识库/MOC-分布式.md
-- 20-知识库/MOC-安全.md
-- 20-知识库/MOC-编译原理.md
-- 20-知识库/MOC-编程语言.md
-- 20-知识库/MOC-工程实践.md
-
----
-
-## 10) 禁止事项
-
-- ❌ 不要在根目录创建笔记文件
-- ❌ 不要使用绝对路径的图片链接
-- ❌ 不要删除 `80-模板/` 中的模板文件
-- ❌ 不要在 Frontmatter 中使用中文冒号
-- ❌ 不要写入任何 API Key、Cookie、隐私信息到笔记
-
----
-
-## 11) 技能调用
-
-| 技能 | 用途 |
-|------|------|
-| `/pkm sync <主题>` | NotebookLM → Obsidian 全领域同步 |
-| `/pkm status` | 检查 NotebookLM 连接状态 |
-| `/transform` | NotebookLM → Obsidian 结构化笔记 |
-
----
-
-## 12) 工具选择
-
-| 场景 | 推荐工具 |
-|------|----------|
-| 读写 Obsidian 笔记 | Claude Code 内置 `Read`/`Write`/`Edit` |
-| 查阅 NotebookLM 资料 | NotebookLM MCP `ask_question` |
-| 创建 Canvas | 内置 `Write` + JSON Canvas 格式 |
-
----
-
-## 13) 自动化处理规则（Anthropic Harness）
-
-### 开发态 vs 运行态
-
-- **开发态循环**：增强系统能力，修改 `系统/功能清单.json`
-- **运行态循环**：处理笔记，修改 `系统/处理队列.json`
-
-### 自动化约束
-
-- **只处理 `00-收集箱/`** 目录下的笔记
-- **每次最多处理 1-3 篇**
-- **处理前先读取状态**：`系统/运行进度.md` 和 `系统/处理队列.json`
-- **处理后必须更新状态**
-- **不允许删除笔记**
-- **不允许批量修改历史笔记正文**
-
-### 启动命令
-
-```bash
-/process-inbox scan       # 扫描收件箱
-/process-inbox process   # 处理笔记
-/process-inbox status    # 查看状态
-/process-inbox verify   # E2E 验证
-```
-
-### 状态文件
+## 5. 当前状态文件
 
 | 文件 | 用途 |
-|------|------|
-| `系统/功能清单.json` | 系统能力清单（开发态） |
-| `系统/处理队列.json` | 待处理笔记队列（运行态） |
-| `系统/运行进度.md` | 运行进度日志 |
-| `系统/运行日志.md` | 执行审计日志 |
+|---|---|
+| `系统/功能清单.json` | 开发态能力清单 |
+| `系统/处理队列.json` | 运行态任务队列 |
+| `系统/运行进度.md` | 开发态与运行态进度摘要 |
+| `系统/运行日志.md` | 每轮处理审计日志 |
+| `系统/健康度报告.md` | 运行健康度统计 |
+| `系统/frontmatter_schema.yaml` | frontmatter 与正文分区校验规则 |
 
-### 子代理路由规则
+说明：仓库里可能还存在 `feature_list.json`、`progress.md`、`task_queue.json`、`run_log.md` 等旧文件；当前主流程以中文状态文件为准。
 
-| 关键词 | 路由到 |
-|--------|--------|
-| Abstract / Introduction / Conclusion / DOI / arXiv | process-paper |
-| def / import / 代码块 / function / class | process-code-snippet |
-| 会议 / Agenda / Action Item / TODO | process-meeting-notes |
+## 6. 可用入口
+
+### Claude Code
+
+- `/process-inbox`
+- `/develop-harness`
+
+### CLI
+
+```bash
+python 脚本/cli.py init
+python 脚本/cli.py scan
+python 脚本/cli.py process --dry-run --limit 1
+python 脚本/cli.py process --limit 1
+python 脚本/cli.py status
+python 脚本/cli.py verify --changed-only
+python 脚本/cli.py develop
+python 脚本/cli.py e2e
+```
+
+### 主流程
+
+```bash
+python 脚本/主流程.py --scan-first --limit 1
+python 脚本/主流程.py --dry-run --scan-first --limit 1
+```
+
+### 持续运行入口
+
+```bash
+python autorun_scheduler.py --once
+python 脚本/自动调度器.py --daemon --interval 30
+powershell -ExecutionPolicy Bypass -File 脚本/注册计划任务.ps1
+```
+
+## 7. 运行态硬约束
+
+- 只自动处理 `00-收集箱/` 下的 Markdown 笔记。
+- `--dry-run` 只允许扫描、分类、预测路由和目标路径；禁止写文件、移动文件、更新 MOC。
+- 不允许删除笔记。
+- 不允许批量改写 `99-归档/` 或历史正文。
+- 每轮结束后必须更新 `系统/处理队列.json`、`系统/运行日志.md`、`系统/运行进度.md`。
+- 失败任务必须留痕，不能静默吞掉。
+
+## 8. Frontmatter 与正文契约
+
+自动化笔记以当前 pipeline 为准，不再使用旧版“固定技术问答模板”作为唯一标准。
+
+### Frontmatter
+
+至少保证这些字段与当前流水线一致：
+
+- `title`
+- `type`
+- `domain`
+- `tags`
+- `source`
+- `created`
+- `status`
+
+自动化通常会补充：
+
+- `summary`
+- `skill`
+- `processed_at`
+
+说明：
+
+- `domain` 当前按列表处理，不应假设为单值字符串。
+- `status` 由自动化默认写为 `review`，人工整理后再提升状态。
+- 字段合法性最终以 `系统/frontmatter_schema.yaml` 和 `脚本/校验frontmatter.py` 为准。
+
+### 正文
+
+自动化写入后的正文至少应兼容这些分区：
+
+- `TL;DR`
+- `References`
+- `【需要人工复核】`
+
+如有子代理增强，还可能追加：
+
+- `示例说明`
+- `关键技术点`
+- `常见坑与边界`
+- `相关笔记`
+
+## 9. 子代理路由
+
+当前运行时内容子代理为：
+
+- `process-paper`
+- `process-code-snippet`
+- `process-meeting-notes`
+
+规则路由示例：
+
+- `Abstract / Introduction / Conclusion / DOI / arXiv` -> `process-paper`
+- `def / import / class / function / 代码块` -> `process-code-snippet`
+- `会议 / Agenda / Action Item / TODO` -> `process-meeting-notes`
+
+说明：`.claude/agents/initializer.md`、`.claude/agents/pipeline-agent.md`、`.claude/agents/reviewer.md` 当前主要用于 harness 说明，不是运行态自动编排入口。
+
+## 10. 验证要求
+
+修改自动化相关文件后，至少执行以下之一：
+
+```bash
+python 脚本/cli.py verify --changed-only
+python 脚本/cli.py e2e
+```
+
+涉及主流程、队列、frontmatter、subagent、MOC 的修改，优先跑 `e2e`。
+
+## 11. 禁止继续沿用的旧约定
+
+以下内容不再作为当前主入口：
+
+- `/pkm sync`
+- `/pkm status`
+- `/transform`
+- “只允许 `type: note` 且 `status: evergreen`” 这类旧版 frontmatter 假设
+- “所有笔记必须固定输出一套技术问答模板” 这类旧版正文模板假设

@@ -1,133 +1,77 @@
 ---
-title: 长时运行 Agent 的 Harness 设计
-type: concept
-domain: [AI-ML]
-tags: [Agent, LLM, 工程实践, 上下文管理]
-source: web
+title: Agent - 长时运行 Agent 的 Harness 设计
+aliases:
+  - Agent 状态持久化
+  - 上下文管理
+tags:
+  - AI-ML
+  - AI-ML/Agent
+  - 工程实践
+type: note
+domain: AI-ML
+topic: Agent
+question: 长时运行 Agent 如何设计 Harness
+source:
+source_title:
 created: 2026-02-23
-status: done
+updated: 2026-02-23
+status: evergreen
 ---
 
-## TL;DR
+# Agent - 长时运行 Agent 的 Harness 设计
 
-长时运行 Agent 的核心问题是跨上下文窗口无记忆。解决方案是用"初始化 Agent + 编码 Agent"双角色分工，配合结构化进度文件和 Git 提交，实现跨 session 的状态持久化。
+## 一句话结论
+长时运行 Agent 的核心问题是跨上下文窗口无记忆，解决方案是双 Agent 分工（Initializer + Coding）配合 Git 提交和进度文件实现状态持久化。
 
----
+## 标准回答
+- **问题**：每个新 session Agent 没有前序记忆
+- **失败模式**：一次性做太多超出上下文 / 过早宣布完成
+- **方案**：双 Agent 分工 + 结构化进度文件 + Git 提交
 
-## 背景与问题定义
+## 为什么
+Claude Code 等 Agent 基于上下文窗口运行，无法记住跨 session 的信息。需要外部存储实现：
+- 进度追踪
+- 上下文恢复
+- 增量开发
 
-每个新 session 开始时 Agent 没有任何前序记忆，导致两种典型失败：
-1. 一次性尝试做太多 → 超出上下文崩溃
-2. 过早宣布项目完成 → 实际功能未实现
+## 双 Agent 分工
+| Agent | 职责 | 产出 |
+|---|---|---|
+| Initializer | 首次 session | init.sh、进度文件、Git commit |
+| Coding | 后续 session | 增量功能、测试、commit |
 
----
-
-## 核心机制拆解
-
-### 双 Agent 分工
-
-**Initializer Agent（首次 session）**
+### Initializer 工作
 - 创建 `init.sh`：环境初始化脚本
 - 创建 `claude-progress.txt`：进度追踪日志
 - 建立初始 Git commit
-- 生成完整功能列表（200+ 条）
+- 生成完整功能列表
 
-**Coding Agent（后续 session）**
+### Coding Agent 工作
 - 每次只做一个功能（增量）
 - 完成后 commit + 更新进度文档
 - 标记完成前必须做端到端测试
 
-### Session 启动例程
+## Session 启动例程
+```bash
+# 1. 读取进度文件
+cat claude-progress.txt
 
-每次新 session 开始时 Agent 必须：
-1. 读取工作目录
-2. 查看 git log
-3. 读取功能列表
-4. 验证基础功能可用
-5. 再开始实现新功能
+# 2. 读取功能列表
+cat 功能清单.json
 
----
-
-## 关键设计决策
-
-### 功能列表用 JSON 而非 Markdown
-
-> [!tip] 为什么用 JSON？
-> 模型更不容易"不小心覆盖或修改" JSON 文件。Markdown 格式容易被 Agent 当作普通文本随意改写。
-
-```json
-{
-  "features": [
-    { "id": "auth-login", "status": "done", "description": "用户登录" },
-    { "id": "auth-register", "status": "pending", "description": "用户注册" }
-  ]
-}
+# 3. 选择下一个功能
+# 4. 实现并测试
+# 5. 提交并更新进度
 ```
 
-### 测试策略
+## 易错点
+- 不要一次做太多功能
+- 每次 commit 要有清晰 message
+- 进度文件要及时更新
+- 端到端测试是必须的
 
-- 仅验证代码语法 ≠ 测试
-- 必须用浏览器自动化工具（如 Puppeteer MCP）做用户视角的端到端测试
-- 需要在 prompt 中明确要求 Agent "像用户一样测试"
+## 延伸链接
+- [[Claude - 使用技巧]]
+- [[Git - 工作流]]
 
----
-
-## 失败模式与对策
-
-| 失败模式 | 对策 |
-|----------|------|
-| 过早宣布完成 | 维护完整功能 checklist，未全部通过不算完成 |
-| 进度未记录 | 强制每个功能完成后 Git commit + 更新进度文件 |
-| 功能测试不完整 | 要求端到端用户级验证，不接受仅语法检查 |
-| 环境配置混乱 | 提供可执行的 `init.sh` 脚本 |
-
----
-
-## 核心类比
-
-> [!tip] 把 Agent 当作轮班工程师团队
-> - 每班交接需要清晰的文档
-> - 用结构化任务列表防止范围蔓延
-> - 标记完成前必须通过质量门控
-
----
-
-## 示例（伪代码）
-
-```
-# init.sh
-git init
-echo "[]" > features.json
-echo "Session 1 started" > claude-progress.txt
-
-# Coding Agent session 启动 prompt
-1. 读取 features.json，找到第一个 status=pending 的功能
-2. 实现该功能
-3. 用 Puppeteer 做端到端测试
-4. 测试通过后：更新 features.json status=done，git commit，更新 progress.txt
-5. 停止，等待下一个 session
-```
-
----
-
-## 常见坑与边界
-
-- Agent 倾向于"一次做完所有事"——必须在 prompt 中强制限制每次只做一个功能
-- 进度文件必须在 Agent 可读路径内，且格式机器可解析
-- 测试工具（Puppeteer 等）需要提前在环境中配置好，不能依赖 Agent 自行安装
-
----
-
-## Checklist
-
-- [ ] 理解长时运行 Agent 的挑战（上下文管理、检查点、错误恢复）
-- [ ] 掌握上下文管理策略（总结、压缩、清理）
-- [ ] 理解检查点机制的实现方法
-- [ ] 掌握错误恢复策略
-- [ ] 能设计基本的 Agent Harness
-
----
-
-## References
-
-- [Effective Harnesses for Long-Running Agents - Anthropic Engineering](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
+## 参考来源
