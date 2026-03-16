@@ -16,25 +16,26 @@
 |---|---|
 | `00-收集箱/` | 自动化唯一默认输入目录 |
 | `10-项目/` | 项目类笔记与行动项 |
-| `20-知识库/` | 概念、总结、代码类知识笔记 |
+| `20-知识库/` | 技术知识、概念总结、结构化问答笔记 |
 | `30-资源/` | 资料、论文、课程、素材 |
 | `40-交付物/` | 可发布内容、图表、交付稿 |
 | `70-NotebookLM提示词使用/` | NotebookLM 相关资料与提示词 |
 | `80-模板/` | 模板目录，禁止删除 |
 | `99-归档/` | 归档内容，禁止自动批量改写 |
-| `系统/` | 状态文件、schema、日志、测试样例 |
+| `系统/` | 状态文件、schema、规范文档、日志、测试样例 |
 | `脚本/` | Python/PowerShell 自动化入口 |
 
 ## 3. Source Of Truth
 
-自动化相关规则以当前实现为准，优先级如下：
+自动化相关规则优先级如下：
 
 1. `脚本/` 中的真实执行逻辑
 2. `系统/frontmatter_schema.yaml`
-3. `.claude/skills/`
-4. 本文件
+3. `系统/技术类笔记规范.md`
+4. `.claude/skills/`
+5. 本文件
 
-如果本文件和代码不一致，以代码与 schema 为准，并应同步修正本文件。
+如果本文件和代码不一致，以代码与 schema 为准，并同步修正本文件。
 
 ## 4. 双循环模型
 
@@ -63,7 +64,8 @@
 | `系统/运行进度.md` | 开发态与运行态进度摘要 |
 | `系统/运行日志.md` | 每轮处理审计日志 |
 | `系统/健康度报告.md` | 运行健康度统计 |
-| `系统/frontmatter_schema.yaml` | frontmatter 与正文分区校验规则 |
+| `系统/frontmatter_schema.yaml` | 自动化输出校验规则 |
+| `系统/技术类笔记规范.md` | 技术类文章/知识笔记整理规范 |
 
 说明：仓库里可能还存在 `feature_list.json`、`progress.md`、`task_queue.json`、`run_log.md` 等旧文件；当前主流程以中文状态文件为准。
 
@@ -111,13 +113,13 @@ powershell -ExecutionPolicy Bypass -File 脚本/注册计划任务.ps1
 - 每轮结束后必须更新 `系统/处理队列.json`、`系统/运行日志.md`、`系统/运行进度.md`。
 - 失败任务必须留痕，不能静默吞掉。
 
-## 8. Frontmatter 与正文契约
+## 8. 自动化粗整理契约
 
-自动化笔记以当前 pipeline 为准，不再使用旧版“固定技术问答模板”作为唯一标准。
+自动化当前输出的是“可继续精整理”的中间产物，不强制等于最终技术问答笔记。
 
 ### Frontmatter
 
-至少保证这些字段与当前流水线一致：
+自动化输出至少保证这些字段：
 
 - `title`
 - `type`
@@ -126,17 +128,22 @@ powershell -ExecutionPolicy Bypass -File 脚本/注册计划任务.ps1
 - `source`
 - `created`
 - `status`
-
-自动化通常会补充：
-
 - `summary`
-- `skill`
 - `processed_at`
+
+自动化通常还会补充：
+
+- `skill`
+- `topic`
+- `question`
+- `source_title`
+- `source_section`
+- `updated`
 
 说明：
 
-- `domain` 当前按列表处理，不应假设为单值字符串。
-- `status` 由自动化默认写为 `review`，人工整理后再提升状态。
+- `domain` 当前允许字符串或列表。
+- `status` 自动化默认常见值为 `review`。
 - 字段合法性最终以 `系统/frontmatter_schema.yaml` 和 `脚本/校验frontmatter.py` 为准。
 
 ### 正文
@@ -154,7 +161,39 @@ powershell -ExecutionPolicy Bypass -File 脚本/注册计划任务.ps1
 - `常见坑与边界`
 - `相关笔记`
 
-## 9. 子代理路由
+## 9. 技术类文章/知识笔记精整理规范
+
+适用场景：
+
+- 整理 JavaGuide、技术博客、面试题
+- 一篇笔记回答一个问题
+- 需要代码示例、代码注释、易错点、延伸链接
+
+详细规范见 [技术类笔记规范.md](/D:/Docs/Notes/ObsidianVault/系统/技术类笔记规范.md)。
+
+核心要求：
+
+- 一篇笔记只讲一个问题
+- 标题格式：`领域 - 问题`
+- 区别类问题必须有 `## 对比` 表格
+- 代码示例控制在 `10-25` 行，并同时具备行内注释与代码说明
+- 技术笔记至少包含：
+  - `一句话结论`
+  - `标准回答`
+  - `为什么`
+  - `易错点`
+  - `参考来源`
+
+推荐模板：
+
+- [Distill-模板.md](/D:/Docs/Notes/ObsidianVault/80-模板/Distill-模板.md)
+
+说明：
+
+- 自动化粗整理完成后，如要沉淀成长期知识笔记，应按上述模板进行精整理。
+- `脚本/校验frontmatter.py` 已兼容自动化产物与这套技术类笔记模板。
+
+## 10. 子代理路由
 
 当前运行时内容子代理为：
 
@@ -170,7 +209,7 @@ powershell -ExecutionPolicy Bypass -File 脚本/注册计划任务.ps1
 
 说明：`.claude/agents/initializer.md`、`.claude/agents/pipeline-agent.md`、`.claude/agents/reviewer.md` 当前主要用于 harness 说明，不是运行态自动编排入口。
 
-## 10. 验证要求
+## 11. 验证要求
 
 修改自动化相关文件后，至少执行以下之一：
 
@@ -181,12 +220,12 @@ python 脚本/cli.py e2e
 
 涉及主流程、队列、frontmatter、subagent、MOC 的修改，优先跑 `e2e`。
 
-## 11. 禁止继续沿用的旧约定
+## 12. 不再使用的旧约定
 
 以下内容不再作为当前主入口：
 
 - `/pkm sync`
 - `/pkm status`
 - `/transform`
-- “只允许 `type: note` 且 `status: evergreen`” 这类旧版 frontmatter 假设
-- “所有笔记必须固定输出一套技术问答模板” 这类旧版正文模板假设
+- “所有笔记都必须只有自动化中间产物格式” 这种假设
+- “技术类知识笔记必须完全等于自动化粗整理结构” 这种假设

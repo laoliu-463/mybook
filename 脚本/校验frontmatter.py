@@ -11,6 +11,10 @@ if __package__ in {None, ""}:
 
 import 读写笔记 as note_io
 
+AUTOMATION_REQUIRED_SECTIONS = {"TL;DR", "References", "【需要人工复核】"}
+TECHNICAL_NOTE_REQUIRED_SECTIONS = {"一句话结论", "标准回答", "为什么", "易错点", "参考来源"}
+TECHNICAL_NOTE_REQUIRED_FIELDS = {"title", "tags", "type", "domain", "topic", "question", "created", "updated", "status"}
+
 
 def load_schema() -> dict[str, Any]:
     schema_path = note_io.get_frontmatter_schema_file()
@@ -58,11 +62,21 @@ def load_schema() -> dict[str, Any]:
 def validate_frontmatter(frontmatter: dict[str, Any]) -> list[str]:
     schema = load_schema()
     errors: list[str] = []
+    missing_required: list[str] = []
+    missing_technical_required: list[str] = []
 
     for field in schema["required"]:
         value = frontmatter.get(field)
         if value is None or value == "" or (isinstance(value, list) and len(value) == 0):
-            errors.append(f"缺少必填字段: {field}")
+            missing_required.append(field)
+
+    for field in TECHNICAL_NOTE_REQUIRED_FIELDS:
+        value = frontmatter.get(field)
+        if value is None or value == "" or (isinstance(value, list) and len(value) == 0):
+            missing_technical_required.append(field)
+
+    if missing_required and missing_technical_required:
+        errors.extend(f"缺少必填字段: {field}" for field in missing_required)
 
     for field, allowed in schema["enum"].items():
         if field not in frontmatter or not allowed:
@@ -79,8 +93,8 @@ def validate_frontmatter(frontmatter: dict[str, Any]) -> list[str]:
         errors.append("字段 tags 必须是数组")
 
     domains = frontmatter.get("domain")
-    if domains is not None and not isinstance(domains, list):
-        errors.append("字段 domain 必须是数组")
+    if domains is not None and not isinstance(domains, (list, str)):
+        errors.append("字段 domain 必须是字符串或数组")
 
     return errors
 
@@ -88,9 +102,26 @@ def validate_frontmatter(frontmatter: dict[str, Any]) -> list[str]:
 def validate_document(document: note_io.NoteDocument) -> list[str]:
     errors = validate_frontmatter(document.frontmatter)
     schema = load_schema()
-    for heading in schema.get("required_sections", []):
-        if not note_io.has_markdown_section(document.body, heading):
-            errors.append(f"缺少必需分区: {heading}")
+    schema_required_sections = set(schema.get("required_sections", []))
+    automation_valid = all(note_io.has_markdown_section(document.body, heading) for heading in schema_required_sections)
+    technical_valid = all(
+        note_io.has_markdown_section(document.body, heading) for heading in TECHNICAL_NOTE_REQUIRED_SECTIONS
+    )
+    technical_candidate = any(document.frontmatter.get(field) for field in ("question", "topic"))
+
+    if not automation_valid and not technical_valid:
+        expected = (
+            sorted(TECHNICAL_NOTE_REQUIRED_SECTIONS)
+            if technical_candidate
+            else sorted(schema_required_sections or AUTOMATION_REQUIRED_SECTIONS)
+        )
+        for heading in expected:
+            if not note_io.has_markdown_section(document.body, heading):
+                errors.append(f"缺少必需分区: {heading}")
+        if not technical_candidate and not schema_required_sections:
+            for heading in sorted(AUTOMATION_REQUIRED_SECTIONS):
+                if not note_io.has_markdown_section(document.body, heading):
+                    errors.append(f"缺少必需分区: {heading}")
     return errors
 
 
