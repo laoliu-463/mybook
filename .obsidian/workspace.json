@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "20-知识库/编程语言/2026-03-16-测试笔记 - 算法与数据结构.md",
+                "file": "20-知识库/AI-ML/2026-03-15-SSH验证.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2026-03-16-测试笔记 - 算法与数据结构"
+              "title": "2026-03-15-SSH验证"
             }
           }
         ]
@@ -205,11 +205,13 @@
   },
   "active": "207e4dd2c0a97409",
   "lastOpenFiles": [
+    "20-知识库/架构与工程实践/02-Java项目架构实战.md",
+    "20-知识库/数据库/2026-03-15-测试笔记 - Redis 缓存策略.md",
+    "20-知识库/编程语言/2026-03-16-测试笔记 - 算法与数据结构.md",
     "测试/temp-technical-note.md",
     "系统/技术类笔记规范.md",
     "80-模板/Distill-模板.md",
     "CLAUDE.md",
-    "20-知识库/编程语言/2026-03-16-测试笔记 - 算法与数据结构.md",
     "系统/frontmatter_schema.yaml",
     "20-知识库/编程语言/2026-03-16-测试笔记 - 机器学习模型训练.md",
     "20-知识库/编程语言/2026-03-15-测试笔记 - Python 装饰器.md",
@@ -234,10 +236,8 @@
     "00-收集箱/2026-03-16-Python异步编程测试.md",
     "20-知识库/AI-ML/长时运行Agent的Harness设计.md",
     "20-知识库/AI-ML/2026-02-15-Prompt设计指南.md",
-    "20-知识库/架构与工程实践/02-Java项目架构实战.md",
     "20-知识库/工程实践/学员上课状态管理流程.md",
     "20-知识库/操作系统/Linux/LINUX.md",
-    "20-知识库/编程语言/JavaScript.md",
     "未命名文件.png",
     "测试/regressions/failed_case_001.expected.json",
     "测试/regressions",
