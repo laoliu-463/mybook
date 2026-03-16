@@ -63,37 +63,125 @@
 
 ```yaml
 ---
-title: xxx
-type: concept | overview | interview | project | resource
-domain: [领域1, 领域2]
-tags: [标签1, 标签2]
-source: notebooklm | web | book | voice
-created: YYYY-MM-DD
-status: draft | review | done
+title: Java - 静态方法和实例方法有什么不同
+aliases:
+  - 静态方法和实例方法区别
+tags:
+  - Java
+  - Java/基础
+  - 面试题
+type: note
+domain: java
+topic: 基础
+question: 静态方法和实例方法有什么不同
+source: https://javaguide.cn/java/basis/...
+source_title: Java基础常见面试题总结(上)
+source_section: 基础概念与常识
+created: 2026-03-16
+updated: 2026-03-16
+status: evergreen
 ---
 ```
 
-### 可选字段（复习系统）
+### 必填字段
 
-```yaml
-next_review: YYYY-MM-DD
-interval: 1
-ease: 2.5
-reps: 0
-```
+- `title`：笔记标题，格式：`领域 - 问题`
+- `tags`：分类标签，格式：`领域/子主题`
+- `type`：固定为 `note`
+- `domain`：技术领域，如 `java`、`python`、`网络`
+- `topic`：子主题，如 `基础`、`集合`、`并发`
+- `question`：当前笔记回答的问题（一句话）
+- `created`：创建日期
+- `updated`：更新日期
+- `status`：`evergreen`（常青笔记）
+
+### 可选字段
+
+- `aliases`：便于搜索的别名
+- `source`：原文链接
+- `source_title`：原文标题
+- `source_section`：原文大章节名
 
 ---
 
-## 6) 笔记正文规范（必须）
+## 6) 笔记正文规范（技术类笔记模板）
 
-每篇笔记正文必须包含：
-- TL;DR（<=5 行）
-- 背景与问题定义（为什么重要）
-- 核心机制拆解（分步骤/流程）
-- 示例（代码/配置/命令/伪代码/流程）
-- 常见坑与边界
-- References（逐条引用/来源）
-- 【需要人工复核】（如有）
+### 一篇笔记只讲一个问题
+
+- 标题格式：`领域 - 问题`
+- 示例：
+  - `Java - 静态方法和实例方法有什么不同`
+  - `Java - ArrayList 和 LinkedList 有什么区别`
+  - `Java 并发 - synchronized 和 ReentrantLock 有什么区别`
+
+### 正文固定结构
+
+```md
+# {{title}}
+
+## 一句话结论
+用 1 到 2 句话直接回答问题。
+
+## 标准回答
+- 点 1
+- 点 2
+- 点 3
+- 点 4
+
+## 为什么
+解释底层原因、设计逻辑或适用场景。
+
+## 对比
+| 维度 | A | B |
+|---|---|---|
+| 定义 |  |  |
+| 调用方式 |  |  |
+| 使用场景 |  |  |
+
+## 代码示例
+```java
+// 示例标题：说明这段代码要展示什么
+class Example {
+    // 这里写关键成员
+}
+````
+
+### 代码说明
+* 这段代码演示了什么
+* 哪一行体现了核心知识点
+
+## 易错点
+* 易错点 1
+* 易错点 2
+
+## 延伸链接
+* [[相关知识点1]]
+* [[相关知识点2]]
+
+## 参考来源
+* 原文：xxx
+* 补充资料：xxx
+```
+
+### 必须包含的部分
+
+- ✅ 一句话结论
+- ✅ 标准回答
+- ✅ 为什么
+- ✅ 易错点（技术笔记必备）
+- ✅ 参考来源
+
+### 代码示例规范
+
+- 代码控制在 10–25 行
+- 代码块内必须有**行内注释**
+- 代码块外必须有**代码说明**
+- 示例只展示一个知识点
+
+### 对比类问题规范
+
+标题含以下关键词必须加对比表格：
+- 区别 / 不同 / 对比 / compare
 
 ---
 

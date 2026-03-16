@@ -1,36 +1,61 @@
+# Frontmatter Schema - 技术类笔记规范
+
 required:
   - title
   - type
   - domain
+  - topic
+  - question
   - tags
   - source
+  - source_title
   - created
+  - updated
   - status
 
 enum:
   type:
-    - concept
-    - overview
-    - interview
-    - project
-    - resource
-  source:
-    - notebooklm
-    - web
-    - book
-    - voice
+    - note
+  domain:
+    - java
+    - python
+    - go
+    - javascript
+    - 数据库
+    - 计算机网络
+    - 操作系统
+    - 分布式
+    - 云原生
+    - 安全
+  topic:
+    - 基础
+    - 集合
+    - 并发
+    - JVM
+    - Spring
+    - MySQL
+    - Redis
+    - Docker
+    - K8s
   status:
+    - evergreen
     - draft
     - review
-    - done
 
 optional:
+  - aliases
+  - source_section
   - summary
   - skill
   - processed_at
-  - updated
+  - next_review
+  - interval
+  - ease
+  - reps
 
 required_sections:
-  - TL;DR
-  - References
-  - 【需要人工复核】
+  - 一句话结论
+  - 标准回答
+  - 为什么
+  - 易错点
+  - 参考来源
